@@ -1,10 +1,19 @@
-.linksClass{
+.links_Class{
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.linksClass a{
+.links_Class a{
   padding-left: 2rem;
   padding-right: 2rem;
+}
+
+
+.connectionButton_Class{
+  border-radius: 10px;
+  cursor: pointer;
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
 }
