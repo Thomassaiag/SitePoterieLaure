@@ -3,13 +3,26 @@
   align-items: center;
   justify-content: center;
   font-family: "Questrial";
+  font-size: 12px;
 }
 
 .links_Class a{
   padding-left: 2rem;
   padding-right: 2rem;
+  
 }
 
+.nameTitle_Class{
+  font-family: "Questrial";
+  font-size: 25px;
+}
+
+
+.subTitle_Class{
+  font-family: "Questrial";
+  font-weight: bold;
+  font-size: 16px;
+}
 
 .connectionButton_Class{
   border-radius: 10px;

@@ -4,7 +4,8 @@ export const Header = () => {
   return (
     <div>
       <button className='connectionButton_Class'>Se Connecter</button>
-      <p className='NameTitle_Class'>Laure Videau</p>
+      <p className='nameTitle_Class'>Laure Videau</p>
+      <p className='subTitle_Class'>céramique</p>
       <img src="" alt='webSiteLogo'/>
       <span className='links_Class'>
         <a href=''>Collections</a>
