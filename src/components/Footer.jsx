@@ -4,7 +4,7 @@ let copyrightYear=2023
 
 export const Footer = () => {
   return (
-    <footer className='footerClass'>
+    <footer className='footer_Class'>
         <span className='footerImageSpan_Class'>
             <img href="" alt="instagram"></img>
             <img href="" alt="facebook"></img>

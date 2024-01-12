@@ -6,10 +6,10 @@ import {nanoid} from 'nanoid'
 export const Collections = () => {
   return (
     <div>
-        <p className='collectionsClass'>Ici vous trouverez mes collections passées et actuelles</p>
+        <p className='collectionsTitleClass'>Ici vous trouverez mes collections passées et actuelles</p>
         <br/>
         <p>Certaines ne sont plus en vente mais vous donneront un aperçu de mon approche artistique, mon univers. </p>
-        <div className='collectionsClassName'>
+        <div className='collectionsClass'>
             {
                 collections.map((collection)=>
                     {
