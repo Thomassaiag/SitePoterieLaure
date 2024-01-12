@@ -75,3 +75,16 @@
   padding-left: 2rem;
 
 }
+
+.collectionContainer_Class{
+  font-family: "Questrial";
+}
+
+.collections_Class{
+  display: flex;
+
+}
+
+.collection_Class{
+  margin-right: 1rem;
+}

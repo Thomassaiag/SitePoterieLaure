@@ -5,11 +5,11 @@ import {nanoid} from 'nanoid'
 
 export const Collections = () => {
   return (
-    <div>
-        <p className='collectionsTitleClass'>Ici vous trouverez mes collections passées et actuelles</p>
+    <div className='collectionContainer_Class'>
+        <p className='collectionsTitle_Class'>Ici vous trouverez mes collections passées et actuelles</p>
         <br/>
         <p>Certaines ne sont plus en vente mais vous donneront un aperçu de mon approche artistique, mon univers. </p>
-        <div className='collectionsClass'>
+        <div className='collections_Class'>
             {
                 collections.map((collection)=>
                     {
