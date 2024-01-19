@@ -1,14 +1,17 @@
 import React from 'react'
 
 let copyrightYear=2023
+let instagramLogo="../../public/images/instagramLogo.jpg"
+let facebookLogo="../../public/images/facebookLogo.jpg"
+let mailLogo="../../public/images/mailLogo.jpg"
 
 export const Footer = () => {
   return (
     <footer className='footer_Class'>
         <span className='footerImageSpan_Class'>
-            <img href="" alt="instagram"></img>
-            <img href="" alt="facebook"></img>
-            <img href="" alt="instagram"></img>
+            <img className='instagramLogo_Class'src={instagramLogo} alt="instagram"></img>
+            <img className='facebookLogo_Class'src={facebookLogo} alt="facebook"></img>
+            <img className='mailLogo_Class'src={mailLogo} alt="mail"></img>
         </span>
         <span className='footerTextSpan_Class'>
             <p>Condition Générales de Vente</p>

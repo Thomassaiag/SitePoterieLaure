@@ -1,7 +1,8 @@
 import React from 'react'
 import { Collection } from './Collection'
 import {collections} from '../data/collections'
-import {nanoid} from 'nanoid'
+import { Link } from 'react-router-dom'
+
 
 export const Collections = () => {
   return (
@@ -13,11 +14,13 @@ export const Collections = () => {
             {
                 collections.map((collection)=>
                     {
-                        return <Collection
-                            key={nanoid()} 
-                            imageUrl={collection.imageUrl} 
-                            title={collection.title} 
-                            imageAlt={collection.imageAlt}/>
+                        return (
+                          <Link to='/collections/{collection.id}' key={collection.id}>
+                            <Collection
+                                imageUrl={collection.imageUrl} 
+                                title={collection.title} 
+                                imageAlt={collection.imageAlt}/>
+                          </Link>)
                     })
             }
         </div>   

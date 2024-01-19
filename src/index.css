@@ -108,3 +108,18 @@
   object-fit: cover;
   z-index: -1;
 }
+
+
+.footerImageSpan_Class img{
+  width: 2rem;
+  height: 2rem;
+}
+
+.galerieSpan_Class{
+  width: 80%;
+  margin: 0 auto;
+}
+
+.galerieSpan_Class img{
+  margin: 2rem 2rem 2rem 2rem;
+}

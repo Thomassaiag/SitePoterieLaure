@@ -1,5 +1,5 @@
 
-export const collections =[
+export const imagesGalerie =[
     {
         id:1,
         imageUrl: "/images/poterie1.jpeg",
