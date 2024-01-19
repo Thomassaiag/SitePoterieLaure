@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export const Header = () => {
   return (
@@ -12,11 +13,11 @@ export const Header = () => {
         <img className='webSiteLogo_Class'src="" alt='webSiteLogo'/>
       </div>
       <span className='links_Class'>
-        <a href=''>Collections</a>
-        <a href=''>Boutique</a>
-        <a href=''>Galerie</a>
-        <a href=''>Blog</a>
-        <a href=''>Contact</a>
+        <Link to='/collections'>Collections</Link>
+        <Link to='/boutique'>Boutique</Link>
+        <Link to=''>Galerie</Link>
+        <Link to=''>Blog</Link>
+        <Link to=''>Contact</Link>
       </span>
 
 
