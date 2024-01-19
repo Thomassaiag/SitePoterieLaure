@@ -10,7 +10,6 @@ export const HomePage = () => {
         <Header/>
         <Presentation/>
         <Footer/>
-
     </div>
   )
 }

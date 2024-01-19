@@ -1,18 +1,16 @@
 
 import './App.css'
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import { Footer } from './components/Footer'
-import { Header } from './components/Header'
-import { Collections } from './components/Collections'
-import { Presentation } from './components/Presentation'
+import {Routes, Route} from 'react-router-dom'
+import { HomePage } from './pages/HomePage'
+import { CollectionsPage } from './pages/CollectionsPage'
 
 function App() {
   return (
     <>
-      <Header/>
-      <Presentation/>
-      <Collections/>
-      <Footer/>
+      <Routes>
+        <Route path='/' element={<HomePage/>}/>
+        <Route path='/collections' element={<CollectionsPage/>}/>
+      </Routes>
     </>
   )
   }
