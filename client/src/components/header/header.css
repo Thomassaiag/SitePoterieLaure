@@ -1,0 +1,63 @@
+.headerLogoDiv_Class{
+  margin-top:3rem;
+  margin-bottom:3rem;
+}
+
+
+.headerLinks_Class{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Questrial";
+  font-size: 15px;
+}
+
+.links_Class :link{
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+}
+
+.nameTitle_Class{
+  font-family: "Questrial";
+  font-size: 25px;
+}
+
+
+.subTitle_Class{
+  font-family: "Questrial";
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.textImageContainer_class{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* width: 50%; */
+}
+
+.titleDiv_Class{
+  position: relative;
+  z-index: 1;
+}
+
+.webSiteLogo_Class{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.connectionButton_Class{
+  border-radius: 10px;
+  cursor: pointer;
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+}
+
+

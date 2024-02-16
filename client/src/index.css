@@ -1,0 +1,138 @@
+.headerLogoDiv_Class{
+  margin-top:3rem;
+  margin-bottom:3rem;
+}
+
+
+.links_Class{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Questrial";
+  font-size: 12px;
+}
+
+.links_Class :link{
+  padding-left: 2rem;
+  padding-right: 2rem;
+  font-size: 15px;
+  
+}
+
+.nameTitle_Class{
+  font-family: "Questrial";
+  font-size: 25px;
+}
+
+
+.subTitle_Class{
+  font-family: "Questrial";
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.textImageContainer_class{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* width: 50%; */
+}
+
+.titleDiv_Class{
+  position: relative;
+  z-index: 1;
+}
+
+.webSiteLogo_Class{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.connectionButton_Class{
+  border-radius: 10px;
+  cursor: pointer;
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+}
+
+
+.footer_Class{
+  align-items: center;
+  justify-content: center;
+  background-color: #E4DCD1;
+  font-family: "Questrial";
+  font-size: 12px;
+  
+}
+
+
+.footerTextSpan_Class{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footerTextSpan_Class p{
+  padding-left: 2rem;
+
+}
+
+.collectionContainer_Class{
+  font-family: "Questrial";
+}
+
+.collections_Class{
+  display: flex;
+
+}
+
+.collection_Class{
+  margin-right: 1rem;
+}
+
+.presentation_Class{
+  position: relative;
+  height: 20rem;
+  font-family: 'Questrial';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+.PresentationText_Class{
+  font-size: 30px;
+}
+.presentation_Class img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+
+.footerImageSpan_Class img{
+  width: 2rem;
+  height: 2rem;
+  margin: 3px 3px 3px 3px;
+}
+
+.galerieSpan_Class{
+  width: 80%;
+  margin: 0 auto;
+}
+
+.galerieSpan_Class img{
+  margin: 2rem 2rem 2rem 2rem;
+}
