@@ -1,9 +1,3 @@
-.headerLogoDiv_Class{
-  margin-top:3rem;
-  margin-bottom:3rem;
-}
-
-
 .links_Class{
   display: flex;
   align-items: center;
@@ -61,28 +55,6 @@
   right: 2rem;
 }
 
-
-.footer_Class{
-  align-items: center;
-  justify-content: center;
-  background-color: #E4DCD1;
-  font-family: "Questrial";
-  font-size: 12px;
-  
-}
-
-
-.footerTextSpan_Class{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.footerTextSpan_Class p{
-  padding-left: 2rem;
-
-}
-
 .collectionContainer_Class{
   font-family: "Questrial";
 }
@@ -122,11 +94,6 @@
 }
 
 
-.footerImageSpan_Class img{
-  width: 2rem;
-  height: 2rem;
-  margin: 3px 3px 3px 3px;
-}
 
 .galerieSpan_Class{
   width: 80%;

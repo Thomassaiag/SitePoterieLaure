@@ -1,0 +1,29 @@
+.footer_Class{
+    align-items: center;
+    justify-content: center;
+    background-color: #E4DCD1;
+    font-family: "Questrial";
+    font-size: 12px;
+}
+  
+.footerTextSpan_Class{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.footerTextSpan_Class p{
+    padding-left: 2rem;
+}
+
+.footerImageSpan_Class{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footerImageSpan_Class img{
+    width: 2rem;
+    height: 2rem;
+    margin: 4px 4px 4px 4px;
+}

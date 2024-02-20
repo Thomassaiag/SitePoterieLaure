@@ -1,4 +1,6 @@
 import React from 'react'
+import "./footer.css"
+
 
 let copyrightYear=2023
 let instagramLogo="../../images/logoInstagram.jpg"
