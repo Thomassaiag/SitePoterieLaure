@@ -34,16 +34,16 @@ export const Collections =()=>{
       <div className='collections_Class'>
         {
           collectionData ? (
-
             collectionData.map((collection)=>
             {
-              console.log(collection.collection_picture_url)
+              const {collection_picture_url,collection_title, collection_picture_alt, collection_uid}=collection
+              console.log(collection_uid)
               return (
-                <Link to='/collections/{collection.id}' key={collection.id}>
+                <Link to={`/collections/:${collection_uid}`} key={collection_uid}>
                   <Collection
-                      imageUrl={collection.collection_picture_url} 
-                      title={collection.collection_title} 
-                      imageAlt={collection.collection_picture_alt}/>
+                      imageUrl={collection_picture_url} 
+                      title={collection_title} 
+                      imageAlt={collection_picture_alt}/>
                 </Link>)
             }) 
             ) : (
