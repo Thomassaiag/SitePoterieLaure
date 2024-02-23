@@ -28,6 +28,23 @@ app.get('/collections', async (req, res, next)=>{
 })
 
 
+
+//Get 1 collection Element
+
+app.get('/collections/:id', async (req, res, next)=>{
+    try {
+        const {id}=req.params
+        const {rows} = await pool.query(
+            `SELECT * FROM collection_element WHERE collection_UID=$1`,[id]
+        )
+        res.json(rows) 
+    }
+    catch (err) {
+        console.error('Error executing query',err)
+        res.status(500).json({error:'something went wrong'})
+    }
+})
+
 app.listen(5000,()=>{
     console.log("Server started on port 5000")
 })

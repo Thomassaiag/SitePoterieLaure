@@ -1,0 +1,39 @@
+.collection_elementContainer{
+    font-family: "Questrial";
+}
+
+
+.collection_elementPicturesContainer img{
+    height: 15rem;
+    width: 15rem;
+}
+
+.collection_elementTitleContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+}
+
+
+.collection_elementInformationContainer{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.collection_elementInformationContainer h2{
+    font-size: 17px;
+}
+
+.collection_elementInformationContainer p{
+    font-size: 14px;
+}
+
+.collection_elementLeftContainer{
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.collection_elementRightContainer{
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
