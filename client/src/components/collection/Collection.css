@@ -1,0 +1,15 @@
+.collectionContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.collectionContainer img{
+    height:15rem;
+}
+
+.collectionContainer p{
+    font-size: 28.8;
+
+}

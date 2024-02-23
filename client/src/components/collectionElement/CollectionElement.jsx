@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
+import { CollectionElementPictures } from '../collectionElementPictures/CollectionElementPictures'
+import { CollectionElementInformations } from '../collectionElementInformations/CollectionElementInformations'
 import './CollectionElement.css'
 
 export const CollectionElement = () => {
@@ -24,24 +26,24 @@ export const CollectionElement = () => {
   let {collection_element_name, collection_element_picture_url, collection_element_picture_alt, collection_element_description, collection_element_information}=collectionElement
 
     return (
-    <div>
+    <div classeName='collectionElement'>
       {
         collectionElement ? (
-              <div className='collection_elementContainer'>
-                <div className='collection_elementTitleContainer'>
-                  <h1 className='collection_elementTitle'>Collection {collection_element_name}</h1>
+              <div className='collectionElementContainer'>
+                <div className='collectionElementTitleContainer'>
+                  <h1 className='collectionElementTitle'>Collection {collection_element_name}</h1>
                 </div>
-                <div className='collection_elementPicturesContainer'>
-                  <img src={collection_element_picture_url} alt={collection_element_picture_alt}/>
+                <div className='collectionElementPicturesContainer'>
+                  <CollectionElementPictures/>
                 </div>
-                <div className='collection_elementInformationContainer'>
-                  <div className='collection_elementLeftContainer'>
+                <div className='collectionElementInformationContainer'>
+                  <div className='collectionElementLeftContainer'>
                     <h2>En Quelques Mots</h2>
                     <p>{collection_element_description}</p>
                   </div>
-                  <div className='collection_elementRightContainer'>
+                  <div className='collectionElementRightContainer'>
                     <h2 >Informations techniques</h2>
-                    <p>{collection_element_information}</p>
+                    <CollectionElementInformations/>
                   </div>
                 </div>
               </div>

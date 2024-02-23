@@ -1,0 +1,35 @@
+.collectionsContainer{
+    font-family: "Questrial";
+    color:black
+}
+
+
+.collectionsTitleContainer{
+    text-align: center;
+    font-size: 16px;
+    padding: 5px 5rem 5px 5rem;
+}
+
+.collectionItemsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.collectionItem{
+    width: calc(33.33% - 20px);
+    margin-left:10px;
+    margin-right:10px;
+}
+
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:focus,
+a:active{
+    outline: none; /* Remove outline on focus */
+    text-decoration: none !important; /* Remove underline */
+    color: inherit !important; /* Use inherited color */  
+}

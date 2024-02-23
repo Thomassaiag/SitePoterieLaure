@@ -1,7 +1,7 @@
 import React from 'react'
 import { Header } from '../components/header/Header'
 import { Footer } from '../components/footer/Footer'
-import { Collections } from '../components/Collections'
+import { Collections } from '../components/collections/Collections'
 
 export const CollectionsPage = () => {
   return (

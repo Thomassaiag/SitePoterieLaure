@@ -11,6 +11,11 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((req, res, next) => {
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  next();
+});
+
 
 //Get All collections
 
@@ -29,13 +34,43 @@ app.get('/collections', async (req, res, next)=>{
 
 
 
-//Get 1 collection Element
+//Get 1 collection Element description
 
 app.get('/collections/:id', async (req, res, next)=>{
     try {
         const {id}=req.params
         const {rows} = await pool.query(
             `SELECT * FROM collection_element WHERE collection_UID=$1`,[id]
+        )
+        res.json(rows) 
+    }
+    catch (err) {
+        console.error('Error executing query',err)
+        res.status(500).json({error:'something went wrong'})
+    }
+})
+// get 1 collection Element pictures
+app.get('/collections/:id/pictures', async (req, res, next)=>{
+    try {
+        const {id}=req.params
+        const {rows} = await pool.query(
+            `SELECT * FROM collection_element_pictures WHERE collection_UID=$1`,[id]
+        )
+        res.json(rows) 
+    }
+    catch (err) {
+        console.error('Error executing query',err)
+        res.status(500).json({error:'something went wrong'})
+    }
+})
+
+
+// get 1 collection Element pictures
+app.get('/collections/:id/information', async (req, res, next)=>{
+    try {
+        const {id}=req.params
+        const {rows} = await pool.query(
+            `SELECT * FROM collection_element_informations WHERE collection_UID=$1`,[id]
         )
         res.json(rows) 
     }

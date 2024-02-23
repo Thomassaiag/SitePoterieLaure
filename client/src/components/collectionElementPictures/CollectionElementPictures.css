@@ -1,0 +1,11 @@
+.collectionElementPicturesContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.collectionElementPicture{
+    width: calc(25% -20px);
+    margin-left:30px;
+    margin-right:30px;
+}
