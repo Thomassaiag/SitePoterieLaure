@@ -23,7 +23,7 @@ export const CollectionElement = () => {
     fetchCollectionElement()
   },[])
 
-  let {collection_element_name, collection_element_picture_url, collection_element_picture_alt, collection_element_description, collection_element_information}=collectionElement
+  let {collection_element_name, collection_element_description, collection_element_email, collection_element_cooking, collection_element_recommandation }=collectionElement
 
     return (
     <div classeName='collectionElement'>
@@ -44,6 +44,9 @@ export const CollectionElement = () => {
                   <div className='collectionElementRightContainer'>
                     <h2 >Informations techniques</h2>
                     <CollectionElementInformations/>
+                    <p>{collection_element_email}</p>
+                    <p>{collection_element_cooking}</p>
+                    <p>{collection_element_recommandation}</p>
                   </div>
                 </div>
               </div>

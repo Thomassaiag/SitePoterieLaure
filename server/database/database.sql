@@ -37,14 +37,9 @@ VALUES
 ('Description Porcelaine'),
 ('Description Collection 4');
 
-UPDATE collection
-SET collection_picture_url = CASE
-                    WHEN collection_title = 'Terremoto' THEN '/images/Collections/terremoto.jpg'
-                    WHEN collection_title = 'Lucie' THEN '/images/Collections/lucie.jpg'
-                    WHEN collection_title = 'Terracota' THEN '/images/Collections/terracota.jpg'
-                    WHEN collection_title = 'Porcelaine' THEN '/images/Collections/porcelaine.jpg'
-                    WHEN collection_title = 'Collection 4' THEN '/images/Collections/collection4.jpg'
-                    ELSE collection_picture_alt
+UPDATE collection_element
+SET collection_element_description = CASE
+                    WHEN collection_element_uid = 1 THEN 'collection_element_uid'
                  END
 WHERE collection_title IN ('Terremoto', 'Lucie', 'Terracota', 'Porcelaine', 'Collection 4');
 
