@@ -1,0 +1,24 @@
+.portraitContainer{
+    font-family: "Questrial";
+}
+
+.titleContainer{
+    text-align: center;
+    font-size: 21.3;
+}
+
+.presentationContainer{
+    display: flex;
+}
+
+.presentationContainer img{
+    height: 5rem;
+}
+
+.presentationContainerRight img{
+    height: 10rem;
+}
+
+.presentationContainerRight p{
+    font-size: 2;
+}
