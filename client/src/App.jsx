@@ -6,6 +6,7 @@ import { CollectionsPage } from './pages/CollectionsPage'
 import { GaleriePage } from './pages/GaleriePage'
 import { PortraitPage } from './pages/PortraitPage'
 import { CollectionElementPage } from './pages/CollectionElementPage'
+import { AdminPage } from './pages/AdminPage'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/galerie' element={<GaleriePage/>}/>
         <Route path='/portrait' element={<PortraitPage/>}/>
         <Route path='/collections/:id' element={<CollectionElementPage/>}/>
+        <Route path='/admin' element={<AdminPage/>}/>
       </Routes>
     </>
   )
