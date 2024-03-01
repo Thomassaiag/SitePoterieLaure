@@ -69,11 +69,11 @@ export const CollectionElement = () => {
         )
       }
       <div className='navigationElementContainer'>
-        <button onclick={handleLeftClick}>
+        <button onClick={handleLeftClick}>
           Go Left
         </button>
         <ScrollToTop/>
-        <button onclick={handleRightClick}>
+        <button onClick={handleRightClick}>
           Go Right
         </button>
       </div>
