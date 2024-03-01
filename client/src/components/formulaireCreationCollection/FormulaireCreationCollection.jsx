@@ -1,51 +1,55 @@
 import React,{useState} from 'react'
 
 export const FormulaireCreationCollection = () => {
-    const [collectionName, setCollectionName]=useState([null])
+    const [collectionTitle, setCollectionTitle]=useState([null])
     const [collectionDescription, setCollectionDescription]=useState([null])
 
 
     const handleSubmit=async(event)=>{
-        event.preventDefault()
+        event.preventDefault();
         try {
-            const response=await fetch('/admin',{
-                method:'POST',
-                headers:{
+            const response=await fetch('http://localhost:5000/admin',{
+                method: 'POST',
+                headers: {
                     'Content-Type': 'application/json'
                 },
-                body:JSON.stringify({collectionName})
+                body: JSON.stringify({collectionTitle, collectionDescription})
             })
             if(!response.ok){
                 throw new Error('Network response was not OK')
             }
             else console.log('New Entry Created Successfuly')
-        } catch (error) { 
+        } catch (err) {
+            console.error('Error adding New Collection', err)
         }
     }
-  return (
+
+    return (
     <div>
-         <h1>Créer une nouvelle Collection</h1>
+        <h1>Créer une nouvelle Collection</h1>
         <form onSubmit={handleSubmit}>
             <div>
                 <label>Nom de la Collection</label> 
                 <input
                     type="text"
-                    id="collectionName"
-                    value={collectionName}
-                    onChange={(e)=>setCollectionName(e.target.value)}
+                    name="collectionTitle"
+                    value={collectionTitle}
+                    onChange={(e)=>setCollectionTitle(e.target.value)}
+                    required
                 />
             </div>
             <div>
                 <label>Description de la Collection</label> 
                 <input
                     type='text'
-                    id='collectionDescription'
+                    name='collectionDescription'
                     value={collectionDescription}
                     onChange={(e)=>setCollectionDescription(e.target.value)}
+                    required
                 />
             </div>
             <button type='submit'>Créer Collection</button>
         </form>
     </div>
-  )
+    )
 }
