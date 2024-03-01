@@ -32,9 +32,11 @@ export const CollectionElementPictures = () => {
             {
                 currentPictures ? (
                     currentPictures.map((currentPicture)=>{
-                        let {collection_element_picture_url,  collection_element_picture_alt, collection_element_picture_uid}=currentPicture
+                        let {collection_element_picture_url, collection_element_picture_alt, collection_element_picture_uid}=currentPicture
                         return(
-                            <CollectionElementPicture className='collectionElementPicture' collection_element_picture_url={collection_element_picture_url} collection_element_picture_alt={collection_element_picture_alt} key={collection_element_picture_uid}/>
+                            <div className='collectionElementPictureContainer'key={collection_element_picture_uid}>
+                                <CollectionElementPicture className='collectionElementPicture'  collection_element_picture_url={collection_element_picture_url} collection_element_picture_alt={collection_element_picture_alt} />
+                            </div>    
                         )
                     })
                 ):(

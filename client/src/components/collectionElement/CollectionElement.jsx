@@ -26,7 +26,7 @@ export const CollectionElement = () => {
   let {collection_element_name, collection_element_description, collection_element_email, collection_element_cooking, collection_element_recommandation }=collectionElement
 
     return (
-    <div classeName='collectionElement'>
+    <div className='collectionElement'>
       {
         collectionElement ? (
               <div className='collectionElementContainer'>

@@ -44,11 +44,21 @@ SET collection_element_description = CASE
 WHERE collection_title IN ('Terremoto', 'Lucie', 'Terracota', 'Porcelaine', 'Collection 4');
 
 
-ALTER TABLE collection_element
-ALTER COLUMN  collection_element_information TYPE varchar(2000);
+ALTER TABLE collection_element_pictures
+RENAME COLUMN collection_element_pictures_UID TO collection_element_picture_UID;
 
 collection_element_description, collection_element_information)
 
 
-UPDATE collection_element
+UPDATE collection_element_
 SET collection_element_picture_url = '/images/Collection terracotta/terracotta1.jpg';
+
+
+INSERT INTO collection (collection_title, collection_description, collection_picture_url, collection_picture_alt)
+VALUES
+('Terremoto', 'Description Terremoto', '/images/Collections/terremoto.jpg', 'Image terremoto'),
+('Lucie', 'Description Lucie', '/images/Collections/lucie.jpg', 'Image Lucie'),
+('Terracota', 'Description Terracota', '/images/Collections/terracota.jpg', 'Image terracota'),
+('Porcelaine', 'Description Porcelaine', '/images/Collections/orcelaine.jpg', 'Image Porcelaine'),
+('Collection 4', 'Description Collection 4', '/images/Collections/Collection4.jpg', 'Image Collection 4');
+

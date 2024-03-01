@@ -1,6 +1,10 @@
 const express =require('express')
 const app=express()
 const pool=require('./database/db')
+const multer=require('multer')
+const path=require('path')
+
+const collectionPath="C:/Users/Moi/OneDrive/Documents/Ada/ProjetsPerso/SiteWebLaure/client/public/images/Collections"
 
 app.use(express.json())
 
@@ -84,15 +88,26 @@ app.get('/collections/:id/information', async (req, res, next)=>{
 
 //Post 1 new Collection ID in Collection Table
 
+// const storage=multer.diskStorage({
+//     destination: function(req, file, cb){
+//         cb(null, collectionPath);
+//     },
+//     filename:function(req, file, cb){
+//         cb(null, file.fieldname)
+//     }
+// })
 
-app.post('/admin', async(req, res, next)=>{
+// const upload=multer({storage})
+
+app.post('/admin/uploadCollection', async(req, res, next)=>{
     const {collectionTitle, collectionDescription}=req.body
     const collectionPictureAlt=`${collectionTitle} Alt`
+    // const collectionPictureUrl=req.file.path
 
     try{
         const newCollection=await pool.query(
-            'INSERT INTO collection (collection_title, collection_description, collection_picture_alt) VALUES ($1, $2, $3) RETURNING *',
-            [collectionTitle, collectionDescription, collectionPictureAlt]
+            'INSERT INTO collection (collection_title, collection_description, collection_picture_url, collection_picture_alt) VALUES ($1, $2, $3, $4) RETURNING *',
+            [collectionTitle, collectionDescription, 'pictureURL', collectionPictureAlt]
         )
         res.json(newCollection.rows[0])
     }
