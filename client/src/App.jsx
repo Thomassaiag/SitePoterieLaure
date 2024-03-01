@@ -18,6 +18,7 @@ function App() {
         <Route path='/portrait' element={<PortraitPage/>}/>
         <Route path='/collections/:id' element={<CollectionElementPage/>}/>
         <Route path='/admin' element={<AdminPage/>}/>
+        <Route path='/admin/creationcollection' element={<AdminPage/>}/>
       </Routes>
     </>
   )
