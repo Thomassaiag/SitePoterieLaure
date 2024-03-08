@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 app.get('/collections', async (req, res, next)=>{
     try {
         const {rows} = await pool.query(
-            "SELECT * FROM collection"
+            "SELECT * FROM collection ORDER BY collection_uid ASC"
         )
         res.json(rows) 
     }

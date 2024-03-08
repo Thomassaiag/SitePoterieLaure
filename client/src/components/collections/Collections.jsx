@@ -45,7 +45,8 @@ export const Collections =()=>{
                   <Collection 
                       imageUrl={collection_picture_url} 
                       title={collection_title} 
-                      imageAlt={collection_picture_alt}/>
+                      imageAlt={collection_picture_alt}
+                      />
                 </Link>)
             }) 
             ) : (
