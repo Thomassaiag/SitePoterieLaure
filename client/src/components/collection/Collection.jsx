@@ -1,13 +1,14 @@
 import React from 'react'
 import './Collection.css'
-import { CollectionMainPicture } from '../collectionMainPicture/collectionMainPicture'
+import { TestCompoToDelete } from '../TestCompoToDelete'
 
 export const Collection = ({imageUrl, imageAlt, title}) => {
   return (
     <div className='collectionContainer'>
         <img src={imageUrl} alt={imageAlt}/>
-        {/* <CollectionMainPicture className='collectionPicture' imageUrlPicture={imageUrl} imageAltPicture={imageAlt}/> */}
         <p>{title}</p>
+        <p>test</p>
+        <TestCompoToDelete/>
     </div>
   )
 }
