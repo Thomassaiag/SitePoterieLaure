@@ -4,6 +4,8 @@ import { CollectionElementPictures } from '../collectionElementPictures/Collecti
 import { CollectionElementInformations } from '../collectionElementInformations/CollectionElementInformations'
 import { ScrollToTop } from '../scrollToTop/ScrollToTop'
 import './CollectionElement.css'
+import { CollectionMainPic } from '../collectionMainPic/CollectionMainPic'
+
 
 export const CollectionElement = () => {
   let navigate=useNavigate()
@@ -13,6 +15,8 @@ export const CollectionElement = () => {
   const [newId, setNewId]=useState(id)
 
   const [collectionElement, setCollectionElement]=useState([])
+  const [previousCollectionPicture, setPreviousCollectionPicture]=useState([])
+  const [nextCollectionPicture, setNextCollectionPicture]=useState([])
   
   useEffect(()=>{
     fetchCollectionElement()
@@ -29,6 +33,17 @@ export const CollectionElement = () => {
     }
   }
   
+  const fetchCollection=async()=>{
+    try {
+      let response= await fetch(`http://localhost:5000/collections/${newId}/collection`)
+      let jsonData= await response.json()
+      setPreviousCollectionPicture(jsonData[0])
+      setNextCollectionPicture(jsonData[1])
+    } catch (error) {
+      
+    }
+  }
+
   const handleLeftClick=()=>{
     setNewId(prevID=>parseInt(prevID)-1)
   }
@@ -43,8 +58,14 @@ export const CollectionElement = () => {
     navigate(`/collections/${newId}`)
     fetchCollectionElement()
   },[newId])
+
+  useEffect(()=>{
+    fetchCollection()
+  },[previousCollectionPicture, nextCollectionPicture])
   
   let {collection_element_name, collection_element_description, collection_element_email, collection_element_cooking, collection_element_recommandation }=collectionElement
+  let {collection_picture_url: previousCollectionPictureUrl, collection_picture_alt: previousCollectionPictureAlt}=previousCollectionPicture
+  let {collection_picture_url: nextCollectionPictureUrl, collection_picture_alt: nextCollectionPictureAlt}=nextCollectionPicture
   
     return (
     <div className='collectionElement'>
@@ -76,18 +97,19 @@ export const CollectionElement = () => {
         )
       }
       <div className='navigationElementContainer'>
-        <div>
-        <img src='' alt=''/>
-        <button onClick={handleLeftClick}>
-          Collection précédente
-        </button>
-
+        <div className='navigationElementButtonContainer'>
+          <img onClick={handleLeftClick} src='/images/leftChevron.jpg' alt='previousCollection'/>
+          <div className='navigationElementCollectionPicture'>
+            <CollectionMainPic imageUrl={previousCollectionPictureUrl} imageAlt={previousCollectionPictureAlt}/>
+          </div>
         </div>
-          
         <ScrollToTop/>
-        <button onClick={handleRightClick}>
-          Collection suivante
-        </button>
+        <div className='navigationElementButtonContainer'>
+          <div className='navigationElementCollectionPicture'>
+            <CollectionMainPic  imageUrl={nextCollectionPictureUrl} imageAlt={nextCollectionPictureAlt}/>
+          </div>
+          <img onClick={handleRightClick} src='/images/rightChevron.jpg' alt='nextCollection'/>
+        </div>
       </div>
     </div>
   )

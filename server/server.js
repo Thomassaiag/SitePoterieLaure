@@ -40,6 +40,23 @@ app.get('/collections', async (req, res, next)=>{
     }
 })
 
+app.get('/collections/:id/collection', async (req, res, next)=>{
+    try {
+        const {id}=req.params
+        const nextId=parseInt(id)+1
+        const previousId=parseInt(id)-1
+        const {rows} = await pool.query(
+            `SELECT collection_picture_url, collection_picture_alt FROM collection WHERE collection_uid in ($1, $2)`,[previousId, nextId]
+        )
+        res.json(rows) 
+    }
+    catch (err) {
+        console.error('Error executing query',err)
+        res.status(500).json({error:'something went wrong'})
+    }
+})
+
+
 
 
 //Get 1 collection Element description

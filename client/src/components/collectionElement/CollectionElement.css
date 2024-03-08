@@ -46,3 +46,13 @@
     margin-left: 2rem;
     margin-right: 2rem;
 }
+
+.navigationElementButtonContainer{
+    display: flex;
+    align-items: center;
+}
+
+.navigationElementCollectionPicture img{
+    height: 50px;
+    width: 50px;
+}
