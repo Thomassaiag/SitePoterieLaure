@@ -54,7 +54,7 @@ UPDATE collection_element_
 SET collection_element_picture_url = '/images/Collection terracotta/terracotta1.jpg';
 
 
-INSERT INTO collection (collection_title, collection_description, collection_picture_url, collection_picture_alt)
+INSERT INTO collection_element_information (collection_title, collection_description, collection_picture_url, collection_picture_alt)
 VALUES
 ('Terremoto', 'Description Terremoto', '/images/Collections/terremoto.jpg', 'Image terremoto'),
 ('Lucie', 'Description Lucie', '/images/Collections/lucie.jpg', 'Image Lucie'),

@@ -1,19 +1,19 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 
-export const CollectionElementInformations = () => {
+export const CollectionElementInformations = ({collection_uid}) => {
 
 const [currentInformations, setCurrentInformations]=useState([])
-let {id}=useParams()
+
 const fetchElementInformations=async()=>{
-    let response=await fetch(`http://localhost:5000/collections/${id}/information`)
+    let response=await fetch(`http://localhost:5000/collections/${collection_uid}/information`)
     let jsonData=await response.json()
     setCurrentInformations(jsonData)
 }
 
 useEffect(()=>{
     fetchElementInformations()
-},[])
+},[collection_uid])
 
   return (
     <ul className='collectionElementInformationsContainer'>

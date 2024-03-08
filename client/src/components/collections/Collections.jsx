@@ -5,7 +5,7 @@ import './Collections.css'
 
 
 export const Collections =()=>{
-
+  
   const [collectionData, setCollectionData]=useState(null)
 
   const fetchCollections=async ()=>{

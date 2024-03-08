@@ -87,17 +87,6 @@ export const FormulaireCreationCollection = () => {
                 />
             </div>
 
-                        <div>
-                <label>Description de la Collection</label> 
-                <input
-                    type='text'
-                    name='collectionDescription'
-                    onChange={handleTextChange}
-                    required
-                />
-            </div>
-
-
             <button type='submit'>Créer Collection</button>
         </form>
     </div>

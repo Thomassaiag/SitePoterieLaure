@@ -1,18 +1,27 @@
 import React, {useState, useEffect} from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { CollectionElementPictures } from '../collectionElementPictures/CollectionElementPictures'
 import { CollectionElementInformations } from '../collectionElementInformations/CollectionElementInformations'
 import { ScrollToTop } from '../scrollToTop/ScrollToTop'
 import './CollectionElement.css'
 
 export const CollectionElement = () => {
-  const [collectionElement, setCollectionElement]=useState([])
+  let navigate=useNavigate()
   let params=useParams()
   let {id}=params
+ 
+  const [newId, setNewId]=useState(id)
+
+  const [collectionElement, setCollectionElement]=useState([])
   
+  useEffect(()=>{
+    fetchCollectionElement()
+  },[])
+  
+
   const fetchCollectionElement=async()=>{
     try {
-      let response= await fetch(`http://localhost:5000/collections/${id}`)
+      let response= await fetch(`http://localhost:5000/collections/${newId}`)
       let jsonData= await response.json()
       setCollectionElement(jsonData[0])
     } catch (error) {
@@ -21,24 +30,22 @@ export const CollectionElement = () => {
   }
   
   const handleLeftClick=()=>{
-    return
+    setNewId(prevID=>parseInt(prevID)-1)
   }
-
-   const handleRightClick=()=>{
-    return
+  
+  const handleRightClick=()=>{
+    setNewId(prevID=>parseInt(prevID)+1)
   }
-
-
-   const handleUpClick=()=>{
-    return
-  }
-
+  
   useEffect(()=>{
+    console.log(`Rerender id => ${id}`)
+    console.log(`Rerender newId => ${newId}`)
+    navigate(`/collections/${newId}`)
     fetchCollectionElement()
-  },[])
-
+  },[newId])
+  
   let {collection_element_name, collection_element_description, collection_element_email, collection_element_cooking, collection_element_recommandation }=collectionElement
-
+  
     return (
     <div className='collectionElement'>
       {
@@ -48,7 +55,7 @@ export const CollectionElement = () => {
               <h1 className='collectionElementTitle'>Collection {collection_element_name}</h1>
             </div>
             <div className='collectionElementPicturesContainer'>
-              <CollectionElementPictures/>
+              <CollectionElementPictures collection_uid={newId}/>
             </div>
             <div className='collectionElementInformationContainer'>
               <div className='collectionElementLeftContainer'>
@@ -57,7 +64,7 @@ export const CollectionElement = () => {
               </div>
               <div className='collectionElementRightContainer'>
                 <h2 >Informations techniques</h2>
-                <CollectionElementInformations/>
+                <CollectionElementInformations collection_uid={newId}/>
                 <p>{collection_element_email}</p>
                 <p>{collection_element_cooking}</p>
                 <p>{collection_element_recommandation}</p>
@@ -69,12 +76,17 @@ export const CollectionElement = () => {
         )
       }
       <div className='navigationElementContainer'>
+        <div>
+        <img src='' alt=''/>
         <button onClick={handleLeftClick}>
-          Go Left
+          Collection précédente
         </button>
+
+        </div>
+          
         <ScrollToTop/>
         <button onClick={handleRightClick}>
-          Go Right
+          Collection suivante
         </button>
       </div>
     </div>

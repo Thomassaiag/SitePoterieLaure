@@ -6,25 +6,28 @@ import { useParams } from 'react-router-dom'
 
 
 
-export const CollectionElementPictures = () => {
+export const CollectionElementPictures = ({collection_uid}) => {
     const [currentPictures, setCurrentPictures]=useState([])
-    let {id}=useParams()
+    // let {id}=useParams
+    
 
 
     const fetchCurrentPictures=async()=>{
         try {
-            const response = await fetch(`http://localhost:5000/collections/${id}/pictures`)
+            const response = await fetch(`http://localhost:5000/collections/${collection_uid}/pictures`)
             const JsonData=await response.json()
             setCurrentPictures(JsonData)
     }
         catch (error) {
+            console.log('it didn t work')
             console.log(error.message)
         }
     }
 
     useEffect(()=>{
+        console.log(`collection_uid=>${collection_uid}`)
         fetchCurrentPictures()
-    },[])
+    },[collection_uid])
 
 
     return (
