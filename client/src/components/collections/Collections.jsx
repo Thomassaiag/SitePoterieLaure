@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react'
 import { Collection } from '../collection/Collection'
 import { Link } from 'react-router-dom'
 import './Collections.css'
+import { ScrollToTop } from '../scrollToTop/ScrollToTop'
 
 
 export const Collections =()=>{
@@ -54,7 +55,10 @@ export const Collections =()=>{
             )
 
           }
-          </div>   
+          </div>
+          <div className='scrollToTopContainer'>
+            <ScrollToTop/>
+          </div>
     </div>
   )
 }

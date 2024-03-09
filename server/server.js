@@ -40,6 +40,18 @@ app.get('/collections', async (req, res, next)=>{
     }
 })
 
+app.get(`/numberOfCollections`, async(req, res, next)=>{
+    try {
+        const {rows}= await pool.query(
+            `SELECT count(*) FROM collection`
+        )
+        res.json(rows)
+    } catch (error) {
+        
+    }
+
+})
+
 app.get('/collections/:id/collection', async (req, res, next)=>{
     try {
         const {id}=req.params

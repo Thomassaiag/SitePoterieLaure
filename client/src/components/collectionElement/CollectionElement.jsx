@@ -17,9 +17,11 @@ export const CollectionElement = () => {
   const [collectionElement, setCollectionElement]=useState([])
   const [previousCollectionPicture, setPreviousCollectionPicture]=useState([])
   const [nextCollectionPicture, setNextCollectionPicture]=useState([])
+  const [numberOfCollections, setNumberOfCollections]=useState()
   
   useEffect(()=>{
     fetchCollectionElement()
+    fetchNumberOfCollections()
   },[])
   
 
@@ -33,7 +35,17 @@ export const CollectionElement = () => {
     }
   }
   
-  const fetchCollection=async()=>{
+  const fetchNumberOfCollections=async()=>{
+    try {
+      let response=await fetch(`http://localhost:5000/numberOfCollections`)
+      let jsonData= await response.json()
+      setNumberOfCollections(jsonData[0].count)
+    } catch (error) {
+      
+    }
+  }
+
+  const fetchNextPreviousCollection=async()=>{
     try {
       let response= await fetch(`http://localhost:5000/collections/${newId}/collection`)
       let jsonData= await response.json()
@@ -45,7 +57,14 @@ export const CollectionElement = () => {
   }
 
   const handleLeftClick=()=>{
-    setNewId(prevID=>parseInt(prevID)-1)
+    setNewId((prevId)=>{
+      if(prevId!=1){
+        return parseInt(prevId)-1
+      }
+      else{
+        return numberOfCollections
+      }
+    })
   }
   
   const handleRightClick=()=>{
@@ -58,9 +77,10 @@ export const CollectionElement = () => {
     navigate(`/collections/${newId}`)
     fetchCollectionElement()
   },[newId])
-
+  
   useEffect(()=>{
-    fetchCollection()
+    fetchNextPreviousCollection()
+    // console.log(`numberOfCollections => ${numberOfCollections}`)
   },[previousCollectionPicture, nextCollectionPicture])
   
   let {collection_element_name, collection_element_description, collection_element_email, collection_element_cooking, collection_element_recommandation }=collectionElement
