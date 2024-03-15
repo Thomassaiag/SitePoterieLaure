@@ -40,10 +40,13 @@ app.get('/collections', async (req, res, next)=>{
     }
 })
 
-app.get(`/numberOfCollections`, async(req, res, next)=>{
+app.get(`/allCollectionsUids`, async(req, res, next)=>{
     try {
         const {rows}= await pool.query(
-            `SELECT count(*) FROM collection`
+            `SELECT collection_uid
+            FROM collection
+            ORDER BY collection_uid ASC
+            `
         )
         res.json(rows)
     } catch (error) {
@@ -55,10 +58,55 @@ app.get(`/numberOfCollections`, async(req, res, next)=>{
 app.get('/collections/:id/collection', async (req, res, next)=>{
     try {
         const {id}=req.params
-        const nextId=parseInt(id)+1
-        const previousId=parseInt(id)-1
         const {rows} = await pool.query(
-            `SELECT collection_picture_url, collection_picture_alt FROM collection WHERE collection_uid in ($1, $2)`,[previousId, nextId]
+            `WITH NextRow AS (
+            SELECT collection_picture_url, collection_picture_alt, collection_uid
+            FROM collection
+            WHERE collection_uid > $1
+            ORDER BY collection_uid ASC
+            LIMIT 1
+            ),
+            PrevRow AS (
+                SELECT collection_picture_url, collection_picture_alt, collection_uid
+                FROM collection
+                WHERE collection_uid < $1
+                ORDER BY collection_uid DESC
+                LIMIT 1
+            ),
+            FirstRow AS (
+                SELECT collection_picture_url, collection_picture_alt, collection_uid
+                FROM collection
+                ORDER BY collection_uid ASC
+                LIMIT 1
+            ),
+            LastRow AS (
+                SELECT collection_picture_url, collection_picture_alt, collection_uid
+                FROM collection
+                ORDER BY collection_uid DESC
+                LIMIT 1
+            )
+            Select *
+            FROM
+            (
+                SELECT * FROM NextRow
+                UNION ALL
+                SELECT * FROM PrevRow
+                UNION ALL
+                SELECT * FROM FirstRow
+                WHERE NOT EXISTS (SELECT 1 FROM NextRow)
+                UNION ALL
+                SELECT * FROM LastRow
+                WHERE NOT EXISTS (SELECT 1 FROM PrevRow)
+                
+            )
+            ORDER BY
+				CASE 
+					WHEN 1 =(SELECT MIN (collection_uid) FROM collection)
+					OR 1 = (SELECT MAX (collection_uid) FROM collection)
+					THEN collection_uid*-1
+					ELSE collection_uid
+			END
+            `,[id]
         )
         res.json(rows) 
     }

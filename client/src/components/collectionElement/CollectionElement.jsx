@@ -14,14 +14,16 @@ export const CollectionElement = () => {
  
   const [newId, setNewId]=useState(id)
 
-  const [collectionElement, setCollectionElement]=useState([])
+  const [collectionElement, setCollectionElement]=useState({})
   const [previousCollectionPicture, setPreviousCollectionPicture]=useState([])
   const [nextCollectionPicture, setNextCollectionPicture]=useState([])
-  const [numberOfCollections, setNumberOfCollections]=useState()
+  const [collectionUids, setCollectionUids]=useState([])
   
   useEffect(()=>{
     fetchCollectionElement()
-    fetchNumberOfCollections()
+    fetchAllCollectionUids()
+    console.log(`collectionUids => ${collectionUids}`)
+    console.log(`collectionElement => ${collectionElement}`)
   },[])
   
 
@@ -35,11 +37,12 @@ export const CollectionElement = () => {
     }
   }
   
-  const fetchNumberOfCollections=async()=>{
+  const fetchAllCollectionUids=async()=>{
     try {
-      let response=await fetch(`http://localhost:5000/numberOfCollections`)
+      let response=await fetch(`http://localhost:5000/allCollectionsUids`)
       let jsonData= await response.json()
-      setNumberOfCollections(jsonData[0].count)
+      jsonData=jsonData.map(element=>element.collection_uid)
+      setCollectionUids(jsonData)
     } catch (error) {
       
     }
@@ -58,17 +61,24 @@ export const CollectionElement = () => {
 
   const handleLeftClick=()=>{
     setNewId((prevId)=>{
-      if(prevId!=1){
-        return parseInt(prevId)-1
+      if(collectionUids.indexOf(parseInt(prevId))!=0){
+        return parseInt(collectionUids[collectionUids.indexOf(parseInt(prevId))-1])
       }
       else{
-        return numberOfCollections
+        return parseInt(collectionUids[collectionUids.length-1])
       }
     })
   }
   
   const handleRightClick=()=>{
-    setNewId(prevID=>parseInt(prevID)+1)
+    setNewId((prevId)=>{
+      if(collectionUids.indexOf(parseInt(prevId))!=collectionUids.length-1){
+        return parseInt(collectionUids[collectionUids.indexOf(parseInt(prevId))+1])
+      }
+      else{
+        return parseInt(collectionUids[0])
+      }
+    })
   }
   
   useEffect(()=>{
