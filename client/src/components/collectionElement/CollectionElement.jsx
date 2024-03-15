@@ -82,15 +82,12 @@ export const CollectionElement = () => {
   }
   
   useEffect(()=>{
-    console.log(`Rerender id => ${id}`)
-    console.log(`Rerender newId => ${newId}`)
     navigate(`/collections/${newId}`)
     fetchCollectionElement()
   },[newId])
   
   useEffect(()=>{
     fetchNextPreviousCollection()
-    // console.log(`numberOfCollections => ${numberOfCollections}`)
   },[previousCollectionPicture, nextCollectionPicture])
   
   let {collection_element_name, collection_element_description, collection_element_email, collection_element_cooking, collection_element_recommandation }=collectionElement

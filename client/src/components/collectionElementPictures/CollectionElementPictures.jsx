@@ -25,7 +25,6 @@ export const CollectionElementPictures = ({collection_uid}) => {
     }
 
     useEffect(()=>{
-        console.log(`collection_uid=>${collection_uid}`)
         fetchCurrentPictures()
     },[collection_uid])
 
@@ -37,7 +36,7 @@ export const CollectionElementPictures = ({collection_uid}) => {
                     currentPictures.map((currentPicture)=>{
                         let {collection_element_picture_url, collection_element_picture_alt, collection_element_picture_uid}=currentPicture
                         return(
-                            <div className='collectionElementPictureContainer'key={collection_element_picture_uid}>
+                            <div className='collectionElementSinglePictureContainer'key={collection_element_picture_uid}>
                                 <CollectionElementPicture className='collectionElementPicture'  collection_element_picture_url={collection_element_picture_url} collection_element_picture_alt={collection_element_picture_alt} />
                             </div>    
                         )
