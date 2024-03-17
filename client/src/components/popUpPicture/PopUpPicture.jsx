@@ -1,28 +1,40 @@
-import React, {useEffect} from 'react'
-import { useParams } from 'react-router-dom'
+import React, {useEffect, useState} from 'react'
 import './PopUpPicture.css'
 
-export const PopUpPicture = ({imageUrl, imageAlt, onClose}) => {
-  let {id}=useParams
-
-  const [newPictureID, setNewPictureID]=useEffect(id)
-  const [pictureIDs, setPicturesID]=useEffect([])
+export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose}) => {
+  
+  const [newPictureUid, setNewPictureUid]=useState(imageUid)
+  const [newImageUrl, setNewImageUrl]=useState(imageUrl)
+  const [newImageAlt, setNewImageAlt]=useState(imageAlt)
+  const [pictureUids, setPicturesUids]=useState([])
   
 
   const displayPreviousPicture=()=>{
-    setNewPictureID((prevId)=>{
-      if(pictureIDs.indexOf(parseInt(prevId))!=0){
-        return parseInt(pictureIDs[pictureIDs.indexOf(parseInt(prevId))-1])
+    setNewPictureUid((prevId)=>{
+      if(pictureUids.indexOf(parseInt(prevId))!=0){
+        return parseInt(pictureUids[pictureUids.indexOf(parseInt(prevId))-1])
       }
       else{
-        return parseInt(pictureIDs[pictureIDs.length-1])
+        return parseInt(pictureUids[pictureUids.length-1])
       }
     })
   }
+  const fetchAllPicturesUID= async () =>{
+    let response=await fetch(`http://localhost:5000/collections/${collection_uid}/pictures`)
+    let jsonData = await response.json()
+    setPicturesUids=jsonData.map((element)=>{
+      return element.collection_element_picture_uid
+    })
+  }
+  useEffect(()=>{
+    fetchAllPicturesUID()
+    console.log(`picture UIDs => ${pictureUids}`)
+  },[])
+
 
   const displayNextPicture=()=>{
     setNewPictureID((prevId)=>{
-      if(pictureIDs.indexOf(parseInt(prevId))!=picturesIDs.length-1){
+      if(pictureIDs.indexOf(parseInt(prevId))!=pictureIDs.length-1){
         return parseInt(pictureIDs[pictureIDs.indexOf(parseInt(prevId))+1])
       }
       else{
@@ -40,7 +52,7 @@ export const PopUpPicture = ({imageUrl, imageAlt, onClose}) => {
           <div className='chevronPictureContainer'>
             <img src='/images/leftChevron.jpg' alt='previous picture' onClick={displayPreviousPicture}/>
           </div>
-          <img className='popUpPicture' src={imageUrl} alt={imageAlt}/>
+          <img className='popUpPicture' src={newImageUrl} alt={newImageAlt}/>
           <div className='chevronPictureContainer'>
             <img src='/images/rightChevron.jpg' alt='next picture' onClick={displayNextPicture}/>
           </div>
