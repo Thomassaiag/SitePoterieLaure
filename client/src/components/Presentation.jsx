@@ -7,7 +7,7 @@ export const Presentation = () => {
       <div className="PresentationText_Class">
         <p>Créations céramiques utilitaires et décoratives</p>
         <br/>
-        <p>Fabriquée main en Normandie</p>
+        <p>Fabriquées main en Normandie</p>
       </div>
     </div>
   )
