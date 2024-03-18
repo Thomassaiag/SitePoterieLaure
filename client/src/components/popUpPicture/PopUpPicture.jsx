@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import './PopUpPicture.css'
 
-export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose}) => {
+export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose, collection_uid}) => {
   
   const [newPictureUid, setNewPictureUid]=useState(imageUid)
   const [newImageUrl, setNewImageUrl]=useState(imageUrl)
@@ -20,12 +20,23 @@ export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose}) => {
     })
   }
   const fetchAllPicturesUID= async () =>{
-    let response=await fetch(`http://localhost:5000/collections/${collection_uid}/pictures`)
+    let response=await fetch(`http://localhost:5000/collections/${collection_uid}/pictures/${newPictureUid}`)
     let jsonData = await response.json()
-    setPicturesUids=jsonData.map((element)=>{
+    jsonData=jsonData.map((element)=>{
       return element.collection_element_picture_uid
     })
+    setPicturesUids(jsonData)
   }
+
+  const fetchPicture= async () =>{
+    let response=await fetch(`http://localhost:5000/collections/${collection_uid}/pictures/`)
+    let jsonData = await response.json()
+    jsonData=jsonData.map((element)=>{
+      return element.collection_element_picture_uid
+    })
+    setPicturesUids(jsonData)
+  }
+
   useEffect(()=>{
     fetchAllPicturesUID()
     console.log(`picture UIDs => ${pictureUids}`)
@@ -33,12 +44,12 @@ export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose}) => {
 
 
   const displayNextPicture=()=>{
-    setNewPictureID((prevId)=>{
-      if(pictureIDs.indexOf(parseInt(prevId))!=pictureIDs.length-1){
-        return parseInt(pictureIDs[pictureIDs.indexOf(parseInt(prevId))+1])
+    setNewPictureUid((prevId)=>{
+      if(pictureUids.indexOf(parseInt(prevId))!=pictureUids.length-1){
+        return parseInt(pictureUids[pictureUids.indexOf(parseInt(prevId))+1])
       }
       else{
-        return parseInt(pictureIDs[0])
+        return parseInt(pictureUids[0])
       }
     })
     return
