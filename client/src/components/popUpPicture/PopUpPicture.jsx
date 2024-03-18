@@ -7,10 +7,12 @@ export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose, collection_
   const [newImageUrl, setNewImageUrl]=useState(imageUrl)
   const [newImageAlt, setNewImageAlt]=useState(imageAlt)
   const [pictureUids, setPicturesUids]=useState([])
+  const [newPicture, setNewPicture]=useState([])
   
 
   const displayPreviousPicture=()=>{
     setNewPictureUid((prevId)=>{
+      console.log(`prevId =>${prevId}`)
       if(pictureUids.indexOf(parseInt(prevId))!=0){
         return parseInt(pictureUids[pictureUids.indexOf(parseInt(prevId))-1])
       }
@@ -18,28 +20,32 @@ export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose, collection_
         return parseInt(pictureUids[pictureUids.length-1])
       }
     })
+    console.log(`newPictureUid => ${newPictureUid}`)
+    fetchPicture()
+    let {collection_element_picture_url, collection_element_picture_alt}=newPicture
+    setNewImageUrl(collection_element_picture_url)
+    setNewImageAlt(collection_element_picture_alt)
   }
+
   const fetchAllPicturesUID= async () =>{
-    let response=await fetch(`http://localhost:5000/collections/${collection_uid}/pictures/${newPictureUid}`)
+    let response=await fetch(`http://localhost:5000/collections/${collection_uid}/pictures`)
     let jsonData = await response.json()
     jsonData=jsonData.map((element)=>{
       return element.collection_element_picture_uid
     })
+    console.log(`jsonData => ${jsonData}`)
     setPicturesUids(jsonData)
   }
 
   const fetchPicture= async () =>{
-    let response=await fetch(`http://localhost:5000/collections/${collection_uid}/pictures/`)
+    let response=await fetch(`http://localhost:5000/collections/${collection_uid}/pictures/${newPictureUid}`)
     let jsonData = await response.json()
-    jsonData=jsonData.map((element)=>{
-      return element.collection_element_picture_uid
-    })
-    setPicturesUids(jsonData)
+    setNewPicture(jsonData[0])
   }
 
   useEffect(()=>{
-    fetchAllPicturesUID()
-    console.log(`picture UIDs => ${pictureUids}`)
+     fetchAllPicturesUID()
+     console.log(`picture UIDs => ${pictureUids}`)
   },[])
 
 
@@ -52,18 +58,21 @@ export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose, collection_
         return parseInt(pictureUids[0])
       }
     })
-    return
+    fetchPicture()
+    let {collection_element_picture_url, collection_element_picture_alt}=newPicture
+    setNewImageUrl(collection_element_picture_url)
+    setNewImageAlt(collection_element_picture_alt)
   }
 
 
   return (
     
-      <div className='overlay' onClick={onClose}>
+      <div className='overlay'>
         <div className='popup'>
           <div className='chevronPictureContainer'>
             <img src='/images/leftChevron.jpg' alt='previous picture' onClick={displayPreviousPicture}/>
           </div>
-          <img className='popUpPicture' src={newImageUrl} alt={newImageAlt}/>
+          <img className='popUpPicture' src={newImageUrl} alt={newImageAlt} onClick={onClose}/>
           <div className='chevronPictureContainer'>
             <img src='/images/rightChevron.jpg' alt='next picture' onClick={displayNextPicture}/>
           </div>

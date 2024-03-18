@@ -134,6 +134,7 @@ app.get('/collections/:id', async (req, res, next)=>{
         res.status(500).json({error:'something went wrong'})
     }
 })
+
 // get 1 collection Element pictures
 app.get('/collections/:id/pictures', async (req, res, next)=>{
     try {
@@ -149,8 +150,23 @@ app.get('/collections/:id/pictures', async (req, res, next)=>{
     }
 })
 
+// get 1 collection Element 1 selected picture
+app.get('/collections/:id/pictures/:pictureId', async (req, res, next)=>{
+    try {
+        const {id, pictureId}=req.params
+        const {rows} = await pool.query(
+            `SELECT * FROM collection_element_pictures WHERE collection_UID=$1 AND collection_element_picture_uid=$2`,[id, pictureId]
+        )
+        res.json(rows) 
+    }
+    catch (err) {
+        console.error('Error executing query',err)
+        res.status(500).json({error:'something went wrong'})
+    }
+})
 
-// get 1 collection Element pictures
+
+// get 1 collection Element information
 app.get('/collections/:id/information', async (req, res, next)=>{
     try {
         const {id}=req.params
