@@ -4,19 +4,31 @@
 
 .titleContainer{
     text-align: center;
-    font-size: 21.3;
+}
+
+.titleText{
+    font-size: 30px;
+    font-weight: bold;
 }
 
 .presentationContainer{
     display: flex;
+    align-items: top;
+
+}
+
+.presentationContainerRight{
+    padding-left: 5rem;
+    padding-right: 5rem;
 }
 
 .presentationContainer img{
-    height: 5rem;
+    height: 15rem;
+    width: auto;
 }
 
 .presentationContainerRight img{
-    height: 10rem;
+    height: 5rem;
 }
 
 .presentationContainerRight p{

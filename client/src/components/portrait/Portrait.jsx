@@ -1,5 +1,5 @@
 import React from 'react'
-import { Description } from '../Description'
+import { Description } from '../description/Description'
 import { portraitText } from '../../data/portraitText'
 import './Portrait.css'
 const logo  ='../../images/logoLaureSansNom.jpg'
@@ -9,14 +9,15 @@ export const Portrait= () => {
   return (
     <div className="portraitContainer">
       <div className='titleContainer'>
-        <p className='TextTitle'>VL Céramique - Hand made by Laure</p>
+        <p className='titleText'>VL Céramique - Hand made by Laure</p>
       </div>
         <div className='presentationContainer'>
-          <div>
+          <div className='presentationPictureContainer'>
             <img className='presentationPicture' src={imageLeft} alt="image" />
           </div>
           <div className='presentationContainerRight'>
-            <p><Description descriptionText={portraitText}/></p>
+            <Description descriptionText={portraitText}/>
+            <br/>
             <img src={logo} alt="logo"/>
           </div>
         </div>
