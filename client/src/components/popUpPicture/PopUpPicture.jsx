@@ -10,22 +10,7 @@ export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose, collection_
   const [newPicture, setNewPicture]=useState([])
   
 
-  const displayPreviousPicture=()=>{
-    setNewPictureUid((prevId)=>{
-      console.log(`prevId =>${prevId}`)
-      if(pictureUids.indexOf(parseInt(prevId))!=0){
-        return parseInt(pictureUids[pictureUids.indexOf(parseInt(prevId))-1])
-      }
-      else{
-        return parseInt(pictureUids[pictureUids.length-1])
-      }
-    })
-    console.log(`newPictureUid => ${newPictureUid}`)
-    fetchPicture()
-    let {collection_element_picture_url, collection_element_picture_alt}=newPicture
-    setNewImageUrl(collection_element_picture_url)
-    setNewImageAlt(collection_element_picture_alt)
-  }
+ 
 
   const fetchAllPicturesUID= async () =>{
     let response=await fetch(`http://localhost:5000/collections/${collection_uid}/pictures`)
@@ -35,6 +20,7 @@ export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose, collection_
     })
     console.log(`jsonData => ${jsonData}`)
     setPicturesUids(jsonData)
+    console.log(`picture UIDs => ${pictureUids}`)
   }
 
   const fetchPicture= async () =>{
@@ -44,9 +30,35 @@ export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose, collection_
   }
 
   useEffect(()=>{
-     fetchAllPicturesUID()
-     console.log(`picture UIDs => ${pictureUids}`)
+    const fetchData = async ()=>{
+      await fetchAllPicturesUID()
+      console.log(`picture UIDs => ${pictureUids}`)
+    }
+    fetchData()
   },[])
+
+
+  const displayPreviousPicture=()=>{
+    setNewPictureUid((prevId)=>{
+      console.log(`prevId =>${prevId}`)
+      console.log(`pictureUids =>${pictureUids}`)
+      console.log(`prevId index => ${pictureUids.indexOf(parseInt(prevId))}`)
+      console.log(`previous Element => ${parseInt(pictureUids[pictureUids.indexOf(parseInt(prevId))-1])}`)
+
+      if(pictureUids.indexOf(parseInt(prevId))!=0){
+        return parseInt(pictureUids[pictureUids.indexOf(parseInt(prevId))-1])
+      }
+      else{
+        return parseInt(pictureUids[pictureUids.length-1])
+      }
+    })
+    console.log(`newPictureUid Previous Picture=> ${newPictureUid}`)
+    fetchPicture()
+    console.log(`newPicture => ${newPicture}`)
+    let {collection_element_picture_url, collection_element_picture_alt}=newPicture
+    setNewImageUrl(collection_element_picture_url)
+    setNewImageAlt(collection_element_picture_alt)
+  }
 
 
   const displayNextPicture=()=>{
