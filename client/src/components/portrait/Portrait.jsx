@@ -17,7 +17,6 @@ export const Portrait= () => {
           </div>
           <div className='presentationContainerRight'>
             <Description descriptionText={portraitText}/>
-            <br/>
             <img src={logo} alt="logo"/>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { useParams } from 'react-router-dom'
+import './CollectionElementInformations.css'
 
 export const CollectionElementInformations = ({collection_uid}) => {
 

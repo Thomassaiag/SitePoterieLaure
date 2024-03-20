@@ -17,13 +17,8 @@
     grid-template-columns: 2fr 1fr;
 }
 
-.collectionElementInformationContainer h2{
-    font-size: 17px;
-}
 
-.collectionElementInformationContainer p{
-    font-size: 14px;
-}
+
 
 .collectionElementLeftContainer{
     padding-left: 1rem;

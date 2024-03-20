@@ -14,16 +14,34 @@ export const CollectionElement = () => {
  
   const [newId, setNewId]=useState(id)
 
-  const [collectionElement, setCollectionElement]=useState([])
+  const [collectionElement, setCollectionElement]=useState({})
   const [previousCollectionPicture, setPreviousCollectionPicture]=useState([])
   const [nextCollectionPicture, setNextCollectionPicture]=useState([])
   const [collectionUids, setCollectionUids]=useState([])
+  const [collectionElementDescription, setCollectionElementDescription]=useState('')
+  const [collectionElementName, setCollectionElementName]=useState()
+  const [collectionElementEmail, setCollectionElementEmail]=useState()
+  const [collectionElementCooking, setCollectionElementCooking]=useState()
+  const [collectionElementRecommandation, setCollectionElementRecommandation]=useState()
+
   
   useEffect(()=>{
-    fetchCollectionElement()
     fetchAllCollectionUids()
   },[])
 
+  useEffect(()=>{
+    fetchCollectionElement()
+  },[])
+
+  useEffect(()=>{
+    console.log('UseEffect')
+    let {collection_element_name, collection_element_description, collection_element_email, collection_element_cooking, collection_element_recommandation }=collectionElement
+    setCollectionElementDescription(collection_element_description)
+    setCollectionElementName(collection_element_name)
+    setCollectionElementEmail(collection_element_email)
+    setCollectionElementCooking(collection_element_cooking)
+    setCollectionElementRecommandation(collection_element_recommandation)
+  },[collectionElement])
 
   const fetchCollectionElement=async()=>{
     try {
@@ -88,17 +106,18 @@ export const CollectionElement = () => {
     fetchNextPreviousCollection()
   },[previousCollectionPicture, nextCollectionPicture])
   
-  let {collection_element_name, collection_element_description, collection_element_email, collection_element_cooking, collection_element_recommandation }=collectionElement
+  
   let {collection_picture_url: previousCollectionPictureUrl, collection_picture_alt: previousCollectionPictureAlt}=previousCollectionPicture
   let {collection_picture_url: nextCollectionPictureUrl, collection_picture_alt: nextCollectionPictureAlt}=nextCollectionPicture
+  
   
     return (
     <div className='collectionElement'>
       {
-        collectionElement ? (
+        (collectionElement && collectionElementDescription) ? (
           <div className='collectionElementContainer'>
             <div className='collectionElementTitleContainer'>
-              <h1 className='collectionElementTitle'>Collection {collection_element_name}</h1>
+              <h1 className='collectionElementTitle'>Collection {collectionElementName}</h1>
             </div>
             <div className='collectionElementPicturesContainer'>
               <CollectionElementPictures collection_uid={newId}/>
@@ -106,14 +125,23 @@ export const CollectionElement = () => {
             <div className='collectionElementInformationContainer'>
               <div className='collectionElementLeftContainer'>
                 <h2>En Quelques Mots</h2>
-                <p>{collection_element_description}</p>
+                <p>
+                  {collectionElementDescription.replace(/\\n/g,'\n').split('\n').map((line, index)=>{
+                    return(
+                      <React.Fragment key={index}>
+                        {line}<br/><br/>
+                      </React.Fragment>
+                    )
+                  })}
+                  {/* {collectionElementDescription} */}
+                </p>
               </div>
               <div className='collectionElementRightContainer'>
                 <h2 >Informations techniques</h2>
                 <CollectionElementInformations collection_uid={newId}/>
-                <p>{collection_element_email}</p>
-                <p>{collection_element_cooking}</p>
-                <p>{collection_element_recommandation}</p>
+                <p>{collectionElementEmail}</p>
+                <p>{collectionElementCooking}</p>
+                <p>{collectionElementRecommandation}</p>
               </div>
             </div>
           </div>

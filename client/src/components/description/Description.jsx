@@ -7,10 +7,11 @@ export const Description = ({descriptionText}) => {
         {descriptionText.split('\n').map((line, index)=>{
           return(
             <React.Fragment key={index}>
-              {line}<br/><br/>
+              {line}<br/>
             </React.Fragment>
           )
         })}
+
     </p>
   )
 }
