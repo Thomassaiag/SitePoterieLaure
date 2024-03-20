@@ -11,9 +11,11 @@ export const CollectionElementPicture = ({collection_uid, collection_element_pic
 
 
   return (
+    <>
     <div className='collectionPictureContainer'>
       <img src={collection_element_picture_url} alt={collection_element_picture_alt} onClick={togglePopUpPicture}/>
-      {showPopUpPicture && <PopUpPicture imageUrl={collection_element_picture_url} imageAlt={collection_element_picture_alt} imageUid={collection_element_picture_uid} collection_uid={collection_uid} onClose={togglePopUpPicture}/>}
     </div>
+    {showPopUpPicture && <PopUpPicture imageUrl={collection_element_picture_url} imageAlt={collection_element_picture_alt} imageUid={collection_element_picture_uid} collection_uid={collection_uid} onClose={togglePopUpPicture}/>}
+    </>
   )
 }

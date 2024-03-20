@@ -7,11 +7,9 @@
   background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
   display: flex;
   justify-content: center;
-  
 }
 
 .popup{
-  
   top: 50%;
   left: 50%;
   padding: 5px;
@@ -19,14 +17,11 @@
   display: flex;
   align-items: center;
   max-width: 100%;
-  
- 
 }
 
 .popUpPicture{
-  
-  max-width: calc(400%);
-  max-height: auto;
+  height: 35rem;
+  width: auto;
 }
 
 .chevronPictureContainer img{
