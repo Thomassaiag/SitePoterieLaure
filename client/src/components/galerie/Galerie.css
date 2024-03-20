@@ -1,0 +1,13 @@
+.picturesContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+
+.picturesContainer img{
+    height: auto;
+    width: 30rem;
+    width: calc(25% -20px);
+    margin:10px 10px 10px 10px;
+}
