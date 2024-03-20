@@ -25,7 +25,7 @@ export const Header = () => {
         <Link to='/galerie'>Galerie</Link>
         <Link to='/portrait'>Portrait</Link>
         <Link to=''>Blog</Link>
-        <Link to=''>Contact</Link>
+        <Link to='/contact'>Contact</Link>
         <Link to='/admin'>Admin</Link>
       </div>
       <hr className='collectionsSeparator'></hr>

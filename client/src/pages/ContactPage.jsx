@@ -1,13 +1,13 @@
 import React from 'react'
 import { Header } from '../components/header/Header'
 import { Footer } from '../components/footer/Footer'
-import {Portrait} from '../components/portrait/Portrait'
+import { Contact } from '../components/contact/Contact'
 
-export const PortraitPage = () => {
+export const ContactPage = () => {
   return (
-    <div className="portraitPage_Class">
+    <div className='contactPageContainer'>
         <Header/>
-        <Portrait/>
+        <Contact/>
         <Footer className='footer'/>
     </div>
   )

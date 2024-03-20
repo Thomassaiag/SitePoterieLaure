@@ -11,7 +11,7 @@ export const AdminPage = () => {
         <Header/>
         <AdminHeader/>
         <FormulaireCreationCollection/>
-        <Footer/>
+        <Footer className='footer'/>
     </div>
   )
 }

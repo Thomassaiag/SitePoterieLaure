@@ -8,7 +8,7 @@ export const CollectionElementPage = () => {
     <div>
         <Header/>
         <CollectionElement/>
-        <Footer/>
+        <Footer className='footer'/>
     </div>
   )
 }

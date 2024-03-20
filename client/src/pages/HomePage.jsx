@@ -9,7 +9,7 @@ export const HomePage = () => {
     <div>
         <Header/>
         <Presentation/>
-        <Footer/>
+        <Footer className='footer'/>
     </div>
   )
 }
