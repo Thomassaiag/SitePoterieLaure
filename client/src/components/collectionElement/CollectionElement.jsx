@@ -14,7 +14,7 @@ export const CollectionElement = () => {
  
   const [newId, setNewId]=useState(id)
 
-  const [collectionElement, setCollectionElement]=useState({})
+  const [collectionElement, setCollectionElement]=useState([])
   const [previousCollectionPicture, setPreviousCollectionPicture]=useState([])
   const [nextCollectionPicture, setNextCollectionPicture]=useState([])
   const [collectionUids, setCollectionUids]=useState([])
@@ -22,10 +22,8 @@ export const CollectionElement = () => {
   useEffect(()=>{
     fetchCollectionElement()
     fetchAllCollectionUids()
-    console.log(`collectionUids => ${collectionUids}`)
-    console.log(`collectionElement => ${collectionElement}`)
   },[])
-  
+
 
   const fetchCollectionElement=async()=>{
     try {
@@ -41,7 +39,7 @@ export const CollectionElement = () => {
     try {
       let response=await fetch(`http://localhost:5000/allCollectionsUids`)
       let jsonData= await response.json()
-      jsonData=jsonData.map(element=>element.collection_uid)
+      jsonData= await jsonData.map(element=>element.collection_uid)
       setCollectionUids(jsonData)
     } catch (error) {
       
