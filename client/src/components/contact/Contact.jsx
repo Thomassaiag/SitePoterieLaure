@@ -1,6 +1,7 @@
 import React from 'react'
 import './Contact.css'
 import { Newsletter } from '../newsletter/Newsletter'
+import { ContactMessage } from '../contactMessage/ContactMessage'
 
 
 const logoInstragram='/images/logoInstagram.jpg'
@@ -24,6 +25,7 @@ export const Contact = () => {
         </div>
       </div>
       <Newsletter/>
+      <ContactMessage/>
 
 
     </div>

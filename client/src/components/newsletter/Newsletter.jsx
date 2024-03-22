@@ -4,6 +4,7 @@ import './Newsletter.css'
 export const Newsletter = () => {
 
     const[email, setEmail]=useState('')
+    
 
     const postEmail=async (e)=>{
         e.preventDefault()
@@ -26,6 +27,8 @@ export const Newsletter = () => {
                 alert('ce mail existe déjà dans notre base, veuillez en renseigner un autre')
                 
             }
+            setEmail('')
+            
             
         } catch (err) {
             console.error('probleme', err)
@@ -40,18 +43,19 @@ export const Newsletter = () => {
     
     return (
         <div className='newsLetterContainer'>
-            <h1>NewsLetter</h1>
+            <h1>Newsletter</h1>
             <p>Pour recevoir la newsletter renseignez votre e-mail ci-dessous.</p>
             <p>La newsletter vous informera de l'ouverture de la boutique, de ma participation aux marchés etc. Elle n'a pas pour vocation d'être un envoi régulier.</p>
             <form className='newsletterForm' onSubmit={postEmail}>
                 <input 
+                    
                     type='email'
                     className='emailField'
                     placeholder={email ? "":"Entrer votre email"}
                     name='email'
                     value={email}
                     onChange={handleChange}
-                    // onClick={(e)=>e.target.value=''}
+                    
                 />
                 <button className='newsletterButton'>Envoyer</button>
             </form>
