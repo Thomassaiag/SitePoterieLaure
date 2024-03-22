@@ -1,0 +1,30 @@
+.contactContainer{
+    margin-left: 5rem;
+    margin-right: 5rem;
+    font-family: "Questrial";
+}
+
+h1 p{
+    text-align: center;
+}
+.socialMediaContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color:  #E4DCD1;
+    margin-bottom: 2rem;
+    padding: 1rem 2rem 2rem 2rem;
+}
+
+.socialMediaLogosContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.socialMediaLogosContainer img{
+    height:5rem;
+    width: auto;
+    margin: 1px 100px 10px 100px;
+}

@@ -1,0 +1,25 @@
+.newsLetterContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color:  #E4DCD1;
+    margin-bottom: 2rem;
+    padding: 1rem 2rem 2rem 2rem;
+}
+
+.newsletterButton{
+    font-family: "Questrial";
+    font-size: 19px;
+    background-color: #E4DCD1;
+    margin-left: 5rem;
+    border-color: black;
+    border-style: solid;
+    width: 10rem;
+    height: 4rem;
+}
+
+.emailField{
+    height: 2rem;
+}
+

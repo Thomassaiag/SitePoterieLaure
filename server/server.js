@@ -10,6 +10,7 @@ const collectionPath="C:/Users/Moi/OneDrive/Documents/Ada/ProjetsPerso/SiteWebLa
 
 app.use(express.json())
 
+
 app.use(cors())
 
 // app.use((req, res, next) => {
@@ -194,6 +195,35 @@ const storage=multer.diskStorage({
     }
 })
 
+
+//Post contact email to emailtable
+
+app.post('/contact',async(req,res, next)=>{
+    const {email}=req.body
+    console.log(`contactEmail=>${email}`)
+    // console.log(`contactEmail keys=>${Object.keys(email)}`)
+    try{
+        const existingEmail= await pool.query(
+            'SELECT * FROM newsletter_contact WHERE email=$1',[email]
+        )
+        console.log(existingEmail.rowCount)
+        if (existingEmail.rowCount>0){
+            console.log('email présent')
+            return res.status(400).json({message:'email already exists'})
+        }
+        else{
+            console.log('email absent')
+            await pool.query(
+                'INSERT INTO newsletter_contact (email) VALUES($1)',[email]
+                )
+            return res.status(200).json({message:'Email submitted successfully'})
+        }
+    }
+    catch(err){
+        console.error('Error adding newCollection', err)
+        res.status(500).json({message:'Server Error'})
+    }
+})
 
 
 const upload=multer({storage:storage})

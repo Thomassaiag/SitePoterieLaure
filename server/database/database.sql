@@ -62,3 +62,13 @@ VALUES
 ('Porcelaine', 'Description Porcelaine', '/images/Collections/orcelaine.jpg', 'Image Porcelaine'),
 ('Collection 4', 'Description Collection 4', '/images/Collections/Collection4.jpg', 'Image Collection 4');
 
+
+INSERT INTO newsletter_contact email
+VALUES(
+    
+)
+
+CREATE TABLE newsletter_contact(
+    contactuid SERIAL PRIMARY KEY,
+    email VARCHAR(255)
+);
