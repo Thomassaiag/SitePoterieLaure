@@ -11,7 +11,16 @@ export const ContactMessage = () => {
             </div>
             <div className='concactFormContainer'>
                 <form>
-                    
+                    <div className='NameFirstNameContainer'>
+                        <label for=''></label>
+                        <input
+                            className=''
+                            name=''
+                            value=''
+                            onChange={()=>}
+                        
+                        />
+                    </div>
                 </form>
             </div>
         </div>
