@@ -20,13 +20,13 @@ export const Header = () => {
         </Link>
       </div>
       <div className='headerLinks_Class'>
-        <Link to='/collections'>Collections</Link>
-        <Link to=''>Boutique</Link>
-        <Link to='/galerie'>Galerie</Link>
-        <Link to='/portrait'>Portrait</Link>
-        <Link to=''>Blog</Link>
-        <Link to='/contact'>Contact</Link>
-        <Link to='/admin'>Admin</Link>
+        <Link to='/collections'>collections</Link>
+        <Link to=''>boutique</Link>
+        <Link to='/galerie'>galerie</Link>
+        <Link to='/portrait'>portrait</Link>
+        <Link to=''>blog</Link>
+        <Link to='/contact'>contact</Link>
+        <Link to='/admin'>admin</Link>
       </div>
       <hr className='collectionsSeparator'></hr>
     </div>

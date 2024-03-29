@@ -8,10 +8,10 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-server/database/db.js
+db.js
 server/database/database.sql
 
-
+.env
 dist
 dist-ssr
 *.local

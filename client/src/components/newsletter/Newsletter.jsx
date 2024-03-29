@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import './Newsletter.css'
+import { ContactButton } from '../contactButton/ContactButton'
 
 export const Newsletter = () => {
 
@@ -46,19 +47,24 @@ export const Newsletter = () => {
             <h1>Newsletter</h1>
             <p>Pour recevoir la newsletter renseignez votre e-mail ci-dessous.</p>
             <p>La newsletter vous informera de l'ouverture de la boutique, de ma participation aux marchés etc. Elle n'a pas pour vocation d'être un envoi régulier.</p>
-            <form className='newsletterForm' onSubmit={postEmail}>
-                <input 
-                    
-                    type='email'
-                    className='emailField'
-                    placeholder={email ? "":"Entrer votre email"}
-                    name='email'
-                    value={email}
-                    onChange={handleChange}
-                    
-                />
-                <button className='newsletterButton'>Envoyer</button>
+
+            <form onSubmit={postEmail}>
+                <div className='newsletterForm'>
+                    <div className="emailInputContainer">
+                        <input className="emailInput"
+                            type="email"
+                            placeholder={email ? "":"Entrer votre email"}
+                            name='email'
+                            value={email}
+                            onChange={handleChange}
+                            />
+                    </div>
+                    <div className="buttonContainer">
+                        <ContactButton/>
+                    </div>
+                </div>
             </form>
+
         </div>
     )
 }

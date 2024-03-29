@@ -24,12 +24,12 @@ export const FormulaireCreationCollection = () => {
     const handleSubmit=async(event)=>{
         event.preventDefault();
 
-        const newCollectionData= new FormData();
+        let newCollectionData= new FormData();
         newCollectionData.append('file', collectionPicture)
         newCollectionData.append('collectionTitle', collectionText.collectionTitle)
         newCollectionData.append('collectionDescription', collectionText.collectionDescription)
 
-        console.log(newCollectionData)
+        console.log(newCollectionData.get('collectionTitle'))
 
         if(!collectionPicture){
             alert('Merci de sélectionner une image')

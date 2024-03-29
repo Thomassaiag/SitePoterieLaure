@@ -8,18 +8,22 @@
     padding: 1rem 2rem 2rem 2rem;
 }
 
-.newsletterButton{
-    font-family: "Questrial";
-    font-size: 19px;
-    background-color: #E4DCD1;
-    margin-left: 5rem;
-    border-color: black;
-    border-style: solid;
+.newsletterForm{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.emailInputContainer{
+    margin-right: 2rem;
     width: 10rem;
-    height: 4rem;
+    height: 3rem;
 }
-
-.emailField{
-    height: 2rem;
+.emailInput{
+    width: 100%;
+    height: 100%;
 }
-
+.buttonContainer{
+    width: 10rem;
+    height: 3rem;
+}

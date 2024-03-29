@@ -3,6 +3,7 @@ const app=express()
 const pool=require('./database/db')
 const multer=require('multer')
 const path=require('path')
+const nodemailer =require('nodemailer')
 
 const cors= require('cors')
 
@@ -19,6 +20,8 @@ app.use(cors())
 //   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
 //   next();
 // });
+
+console.log(typeof process.env.DBPASSWORD, process.env.DBPASSWORD)
 
 app.use((req, res, next) => {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
@@ -226,12 +229,48 @@ app.post('/contact',async(req,res, next)=>{
 })
 
 
+//Send message to site admin
+
+
+app.post('/contact/message', async (req, res,next)=>{
+    const {firstName,lastName,object,senderEmail,senderMessage}=req.body
+    console.log(`firstName => ${firstName}`)
+    const transporter=nodemailer.createTransport({
+        service:'gmail',
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false,
+        auth:{
+            user:process.env.MAILUSER,
+            pass:process.env.MAILPASSWORD
+        }
+    })
+
+    const mailOptions={
+        from: 'thomas.saiag@gmail.com',
+        to: 'thomas.saiag@gmail.com',
+        subject:object,
+        text: `message from ${firstName} ${lastName} : ${senderMessage}`
+    }
+
+    try
+    {  await transporter.sendMail(mailOptions)
+        res.status(200).send({message: 'Email sent successfuly'})
+    }
+
+    catch(error){
+        console.error('Error sending email',error)
+        res.status(400).send({message: 'Email not sent'})
+    }
+    
+})
+
 const upload=multer({storage:storage})
 
 app.post('/admin/uploadCollection', upload.single('file'), async(req, res, next)=>{
 
-    // console.log(storage.destination)
     const {collectionTitle, collectionDescription}=req.body
+    console.log(collectionTitle)
     const collectionPictureAlt=`Image ${collectionTitle}`
     const collectionPictureUrl=`/images/Collections/${req.file.originalname}`
 
