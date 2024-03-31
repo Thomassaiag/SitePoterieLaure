@@ -1,7 +1,77 @@
 .contactMessageContainer{
     background-color:  #E4DCD1;
+    margin-bottom: 5rem;
+    padding: 1rem 2rem 2rem 2rem;
 }
 
 .contactezMoiContainer{
     text-align: center;
+}
+
+
+.contactFormContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contactFormContainer label{
+    margin-right: 1rem;
+}
+
+.contactFormContainer input{
+    margin-right: 1rem;
+}
+
+.NameFirstNameContainer{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
+
+.emailContainer{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    
+}
+
+.objectContainer{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
+.messageContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
+.messageLabel{
+    align-self: flex-start;
+    margin-bottom: 1rem;
+}
+
+.senderMessage{
+    align-self: flex-start;
+    width: 100%;
+    height: 20rem;
+    font-family: "Questrial";
+    padding-top: 1rem;
+    padding-left: 1rem;
+}
+
+.buttonContainer{
+    align-self: flex-end;
+    padding-top: 1rem;
 }

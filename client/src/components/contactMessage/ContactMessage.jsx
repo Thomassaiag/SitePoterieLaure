@@ -72,16 +72,16 @@ export const ContactMessage = () => {
             <div className='contactFormContainer'>
                 <form className='contactForm' onSubmit={sendMessage}>
                     <div className='NameFirstNameContainer'>
-                        <label for='firstName'>Prénom</label>
+                        <label className="nameLabel" for='firstName'>Prénom</label>
                         <input
-                            className='firstName'
+                            className='name'
                             name='firstName'
                             placeholder='Votre Prénom'
                             onChange={handleTextChange}
                         />
-                        <label for='lastName'>Nom</label>
+                        <label className="nameLabel" for='lastName'>Nom</label>
                         <input
-                            className='lastName'
+                            className='name'
                             name='lastName'
                             placeholder='Votre Nom'
                             onChange={handleTextChange}
@@ -106,7 +106,7 @@ export const ContactMessage = () => {
                         />
                     </div>
                     <div className='messageContainer'>
-                        <label for='senderMessage'>Message</label>
+                        <label className= "messageLabel"for='senderMessage'>Message</label>
                         <textarea
                             value={emailData.senderMessage}
                             className='senderMessage'
@@ -115,9 +115,9 @@ export const ContactMessage = () => {
                             onChange={handleTextChange}
                             onKeyDown={handleKeyDown}
                         />
-                    </div>
                     <div className='buttonContainer'>
                         <ContactButton/>
+                    </div>
                     </div>
                 </form>
             </div>
