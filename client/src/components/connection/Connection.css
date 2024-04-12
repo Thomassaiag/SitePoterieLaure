@@ -25,10 +25,12 @@
 
 .loginButton{
     left: 0;
-    width: auto;
     margin-top: 1rem;
     font-family: "Questrial";
     font-size: 20px;
     border: none;
     border-radius: 30px;
+    background-color: #E4DCD1;
+    width: 6rem;
+    height: 2rem;
 }

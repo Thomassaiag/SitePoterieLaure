@@ -4,8 +4,8 @@ import './Connection.css'
 
 export const Connection = () => {
     const [credentials, setCredentials]=useState({
-        email:'',
-        password:'',
+        userEmail:'',
+        userPassword:'',
     })
 
     const handleChange=(e)=>{
@@ -18,14 +18,14 @@ export const Connection = () => {
 
     const handleClick=async ()=>{
         try {
-            let response= await fetch(`http://connection`,{
+            let response= await fetch(`http://localhost:5000/connection`,{
                 method:'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(
-                    email=credentials.email,
-                    password=credentials.password
+                    userEmail=credentials.userEmail,
+                    userPassword=credentials.userPassword
                 )
             })
             const data=response.json()
@@ -46,23 +46,23 @@ export const Connection = () => {
                 <form className='credentialForm'>
                     <div className='formInput'>
                         <div className='labelContainer'>
-                            <label htmlFor='email'>Votre Email</label>
+                            <label htmlFor='userEmail'>Votre Email :</label>
                         </div>
                         <input
-                            id='email'
+                            id='userEmail'
                             type='email'
-                            name='email'
+                            name='userEmail'
                             onChange={handleChange}
                         />
                     </div>
                     <div className='formInput'>
                         <div className='labelContainer'>
-                            <label htmlFor='password'>Mot de Passe</label>
+                            <label htmlFor='userPassword'>Mot de Passe :</label>
                         </div>
                         <input
-                            id='password'
+                            id='userPassword'
                             type='text'
-                            name='password'
+                            name='userPassword'
                             onChange={handleChange}
                         />
                     </div>

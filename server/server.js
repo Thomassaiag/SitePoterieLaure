@@ -229,6 +229,47 @@ app.post('/contact',async(req,res, next)=>{
 })
 
 
+//Login
+
+
+app.post('/connection', async(req, res, next)=>{
+    const{userEmail, userPassword}=req.body
+
+    try {
+        const userEmailDB= await pool.query(
+            'SELECT user_email FROM user_account WHERE user_email=$1;',[userEmail]
+        )
+        if(userEmailDB.rowCount>0){
+            console.log("user exists", userEmailDB)
+            const userPasswordDB= await pool.query(
+                'SELECT user_password FROM user_account WHERE user_Password=$1',[userPassword]
+            )
+            if(userPasswordDB.rowCount>0){
+                console.log("password matches")
+                res.status(200).json({message: "password matches"})
+            }
+            else{
+                console.log("password doesn't match")
+                res.status(400).json({message: "password doesn't match"})
+            }
+        }    
+        else{
+            console.log("user doesn't exist", userEmailDB)
+            res.status(400).json({message: "no mail in DB"})
+        }
+        
+        // await pool.query(
+        //     'INSERT INTO user_account (user_email, user_password) VALUES ($1,$2))',[userEmail, userPassword]
+        // )
+    } catch (error) {
+        
+    }
+
+
+
+})
+
+
 //Send message to site admin
 
 
