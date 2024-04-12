@@ -23,7 +23,7 @@ function App() {
         <Route path='/contact/' element={<ContactPage/>}/>
         <Route path='/admin' element={<AdminPage/>}/>
         <Route path='/admin/creationcollection' element={<AdminPage/>}/>
-        <Route path='/connection' element={<ConnectionPage/>}/>
+        <Route path='connection/' element={<ConnectionPage/>}/>
         <Route path='/accountCreation' element={<AccountCreationPage/>}/>
       </Routes>
     </>

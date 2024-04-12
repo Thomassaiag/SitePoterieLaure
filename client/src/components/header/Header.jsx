@@ -1,15 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import "./header.css"
-
 
 const logoLaureSansNom = '../../images/logoLaureSansNom.jpg'
 
 export const Header = () => {
+  let navigate=useNavigate()
+
+  const navigateToConnection=()=>{
+    navigate('/connection')
+  }
+
   return (
     <div className='headerContainer'>
       <div className='buttonContainer'>
-        <button className='connectionButton'>Se Connecter</button>
+        <button className='connectionButton' onClick={navigateToConnection}>Se Connecter</button>
       </div>
       <Link className='logoAndTitleContainer'to='/'>
           <img className='logo'src={logoLaureSansNom} alt='webSiteLogo'/>
@@ -26,7 +31,9 @@ export const Header = () => {
         <Link to='/contact'>contact</Link>
         <Link to='/admin'>admin</Link>
       </div>
-      <hr className='collectionsSeparator'></hr>
+      <div className='collectionsSeparatorContainer'>
+        <hr className='collectionsSeparator'></hr>
+      </div>
     </div>
   )
 }
