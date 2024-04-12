@@ -231,10 +231,10 @@ app.post('/contact',async(req,res, next)=>{
 
 //Login
 
-
 app.post('/connection', async(req, res, next)=>{
     const{userEmail, userPassword}=req.body
-
+    console.log(userEmail)
+    console.log(userPassword)
     try {
         const userEmailDB= await pool.query(
             'SELECT user_email FROM user_account WHERE user_email=$1;',[userEmail]

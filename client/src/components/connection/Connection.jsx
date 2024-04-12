@@ -8,6 +8,10 @@ export const Connection = () => {
         userPassword:'',
     })
 
+    useEffect(()=>{
+        console.log(credentials)
+    },[credentials])
+
     const handleChange=(e)=>{
         e.preventDefault()
         setCredentials({...credentials,
@@ -16,21 +20,24 @@ export const Connection = () => {
         )
     }
 
-    const handleClick=async ()=>{
+    const handleClick=async (e)=>{
+        e.preventDefault()
         try {
-            let response= await fetch(`http://localhost:5000/connection`,{
+            console.log(credentials.userEmail)
+            console.log(credentials.userPassword)
+            let response= await fetch('http://localhost:5000/connection',{
                 method:'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(
-                    userEmail=credentials.userEmail,
-                    userPassword=credentials.userPassword
-                )
+                body: JSON.stringify({
+                    userEmail:credentials.userEmail,
+                    userPassword:credentials.userPassword
+                }                )
             })
-            const data=response.json()
+            let data= await response.json()
             if(!response){
-
+                console.log("something went wrong")
             }
             else console.log(data)
             
@@ -43,7 +50,7 @@ export const Connection = () => {
     return (
         <div className='connectionContainer'>
             <div className='credentialContainer'>
-                <form className='credentialForm'>
+                <form className='credentialForm' onSubmit={handleClick}>
                     <div className='formInput'>
                         <div className='labelContainer'>
                             <label htmlFor='userEmail'>Votre Email :</label>
@@ -67,7 +74,7 @@ export const Connection = () => {
                         />
                     </div>
                     <div>
-                        <button className='loginButton' onClick={handleClick}>Login</button>
+                        <button className='loginButton' >Login</button>
                     </div>
                 </form>
             </div>
