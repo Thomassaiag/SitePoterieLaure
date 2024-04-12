@@ -7,19 +7,17 @@ const logoLaureSansNom = '../../images/logoLaureSansNom.jpg'
 
 export const Header = () => {
   return (
-    <div className='headerDiv_Class'>
-      <div className='headerButtonDiv_Class'>
-        <button className='connectionButton_Class'>Se Connecter</button>
+    <div className='headerContainer'>
+      <div className='buttonContainer'>
+        <button className='connectionButton'>Se Connecter</button>
       </div>
-      <div className='headerLogoDiv_Class'>  
-        <Link to='/'>
-            <span className='headerNameTitle_Class'>Laure Videau</span>
-            <div className='headerTitleDiv_Class'>
-              <img className='headerWebSiteLogo_Class'src={logoLaureSansNom} alt='webSiteLogo'/>
-            </div>
-        </Link>
-      </div>
-      <div className='headerLinks_Class'>
+      <Link className='logoAndTitleContainer'to='/'>
+          <img className='logo'src={logoLaureSansNom} alt='webSiteLogo'/>
+          <div className='titleContainer'>
+            <p>Laure Videau</p>
+          </div>
+      </Link>
+      <div className='headerLinks'>
         <Link to='/collections'>collections</Link>
         <Link to=''>boutique</Link>
         <Link to='/galerie'>galerie</Link>
