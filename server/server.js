@@ -240,7 +240,7 @@ app.post('/connection', async(req, res, next)=>{
             'SELECT user_email FROM user_account WHERE user_email=$1;',[userEmail]
         )
         if(userEmailDB.rowCount>0){
-            console.log("user exists", userEmailDB)
+            console.log("user exists")
             const userPasswordDB= await pool.query(
                 'SELECT user_password FROM user_account WHERE user_Password=$1',[userPassword]
             )
@@ -265,8 +265,40 @@ app.post('/connection', async(req, res, next)=>{
         
     }
 
+})
 
 
+
+// Add new user account
+
+app.post('/accountCreation',async (req, res, next)=>{
+    const{userFirstName, userLastName, userEmail, userPassword}=req.body
+    console.log(userFirstName, userLastName, userEmail, userPassword)
+    try{
+        const userEmailDB=await pool.query(
+            'SELECT user_email FROM user_account WHERE user_email=$1',[userEmail]
+        )
+        if(userEmailDB.rowCount>0){
+            console.log("this account already exists")
+            res.status(400).json({message: "this account already exists"})
+        }
+        else{
+            const newUser=await pool.query(
+                'INSERT INTO user_account(user_email, user_password, user_firstName, user_lastName) VALUEs($1,$2,$3,$4)',[userEmail, userPassword,userFirstName, userLastName]
+            )
+            const newUserEmailDB= await pool.query(
+                'SELECT user_email FROM user_account WHERE user_email=$1',[userEmail]
+            )
+            console.log(newUserEmailDB)    
+            if(newUserEmailDB.rowCount==1){
+                res.status(200).json({message: "account successfuly created"})
+            }
+            else res.status(400).json({message : "account not created"})
+        }
+    }
+    catch (error){
+
+    }
 })
 
 

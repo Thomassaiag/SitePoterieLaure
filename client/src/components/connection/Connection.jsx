@@ -8,6 +8,8 @@ export const Connection = () => {
         userPassword:'',
     })
 
+    const [invalidConnection, setInvalidConnection]=useState(false)
+
     useEffect(()=>{
         console.log(credentials)
     },[credentials])
@@ -39,7 +41,11 @@ export const Connection = () => {
             if(!response){
                 console.log("something went wrong")
             }
-            else console.log(data)
+            else if(response.status==400){
+                setInvalidConnection(true)
+            }
+            else setInvalidConnection(false)
+            console.log(data)
             
         } catch (error) {
             
@@ -78,10 +84,9 @@ export const Connection = () => {
                     </div>
                 </form>
             </div>
+            {invalidConnection && <p>Compte Inconnu ou password Incorrect, veuillez réessayer ou créer un comte</p>}
             <div>
                 <p>Si vous n'avez pas de compte, vous pouvez en créer un : <a href='/accountCreation' style={{fontSize:20, fontWeight: "bold"}}>Créer un compte</a></p>
-                
-
             </div>
             
         </div>

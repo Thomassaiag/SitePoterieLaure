@@ -66,3 +66,9 @@ CREATE TABLE newsletter_contact(
     contactuid SERIAL PRIMARY KEY,
     email VARCHAR(255)
 );
+
+
+
+ALTER TABLE user_account
+ADD COLUMN user_firstName VARCHAR (255),
+ADD COLUMN user_lastName VARCHAR (255);
