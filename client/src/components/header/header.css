@@ -81,7 +81,11 @@ a:hover{
   color: inherit;
 }
 
-
+.collectionsSeparatorContainer{
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
 .collectionsSeparator{
     border:none;
     height: 1px;
