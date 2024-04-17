@@ -99,7 +99,7 @@ const [credentials, setCredentials]=useState({
                         </div>
                         <input
                             id='userPassword'
-                            type='text'
+                            type='password'
                             name='userPassword'
                             onChange={handleChange}
                         />
@@ -110,7 +110,7 @@ const [credentials, setCredentials]=useState({
                         </div>
                         <input
                             id='userPasswordConfirmation'
-                            type='text'
+                            type='password'
                             name='userPasswordConfirmation'
                             onChange={handleChange}
                         />
