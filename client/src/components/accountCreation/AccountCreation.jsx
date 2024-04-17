@@ -7,7 +7,12 @@ const [credentials, setCredentials]=useState({
         userLastName:'',
         userEmail:'',
         userPassword:'',
+        userPasswordConfirmation:''
+
     })
+
+
+    const checkPassword=((a,b)=>a===b)
 
     const [invalidCreation, setInvalidCreation]=useState(false)
 
@@ -19,39 +24,49 @@ const [credentials, setCredentials]=useState({
         e.preventDefault()
         setCredentials({...credentials,
             [e.target.name]:e.target.value
-        }
-        )
+        })
     }
 
     const handleClick=async (e)=>{
         e.preventDefault()
-        try {
-            console.log(credentials.userEmail)
-            console.log(credentials.userPassword)
-            let response= await fetch('http://localhost:5000/accountCreation',{
-                method:'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                  userFirstName:credentials.userFirstName,
-                  userLastName:credentials.userLastName,
-                  userEmail:credentials.userEmail,
-                  userPassword:credentials.userPassword
-                })
+
+        if(checkPassword){
+            setCredentials({...credentials,
+                userPassword:"",
+                userPasswordConfirmation:""
             })
-            let data= await response.json()
-            if(!response){
-                console.log("something went wrong")
+            alert("Vos Mots de passe ne sont pas identiques")
+
+        }
+        else{
+            try {
+                console.log(credentials.userEmail)
+                console.log(credentials.userPassword)
+                let response= await fetch('http://localhost:5000/accountCreation',{
+                    method:'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        userFirstName:credentials.userFirstName,
+                        userLastName:credentials.userLastName,
+                        userEmail:credentials.userEmail,
+                        userPassword:credentials.userPassword
+                    })
+                })
+                let data= await response.json()
+                if(!response){
+                    console.log("something went wrong")
+                }
+                else if(response.status==400){
+                    setInvalidCreation(true)
+                }
+                else setInvalidCreation(false)
+                console.log(data)
+                
+            } catch (error) {
+                
             }
-            else if(response.status==400){
-                setInvalidCreation(true)
-            }
-            else setInvalidCreation(false)
-            console.log(data)
-            
-        } catch (error) {
-            
         }
 
     }

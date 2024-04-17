@@ -15,6 +15,7 @@ export const Connection = () => {
     },[credentials])
 
     const handleChange=(e)=>{
+        setInvalidConnection(false)
         e.preventDefault()
         setCredentials({...credentials,
             [e.target.name]:e.target.value
