@@ -6,15 +6,12 @@ CREATE TABLE collection (
     PRIMARY KEY (collection_uid)
 );
 
-CREATE TABLE collection_element_informationTechnique (
-    collection_element_information_uid SERIAL NOT NULL,
-    collection_uid int,
+CREATE TABLE user_account (
+    user_uid SERIAL NOT NULL,
+    user_email VARCHAR(255),
+    user_password VARCHAR(255),
     collection_element_information_text VARCHAR(255) NOT NULL,
-    PRIMARY KEY (collection_element_information_uid),
-    CONSTRAINT fk_collection
-        FOREIGN KEY (collection_uid)
-            REFERENCES collection(collection_uid)
-            ON DELETE SET NULL
+    PRIMARY KEY (user_uid)
 );
 
 
@@ -54,13 +51,10 @@ UPDATE collection_element_
 SET collection_element_picture_url = '/images/Collection terracotta/terracotta1.jpg';
 
 
-INSERT INTO collection_element_information (collection_title, collection_description, collection_picture_url, collection_picture_alt)
+INSERT INTO user_account (user_email, user_password)
 VALUES
-('Terremoto', 'Description Terremoto', '/images/Collections/terremoto.jpg', 'Image terremoto'),
-('Lucie', 'Description Lucie', '/images/Collections/lucie.jpg', 'Image Lucie'),
-('Terracota', 'Description Terracota', '/images/Collections/terracota.jpg', 'Image terracota'),
-('Porcelaine', 'Description Porcelaine', '/images/Collections/orcelaine.jpg', 'Image Porcelaine'),
-('Collection 4', 'Description Collection 4', '/images/Collections/Collection4.jpg', 'Image Collection 4');
+('test@test.com', '1234')
+
 
 
 INSERT INTO newsletter_contact email
@@ -72,3 +66,9 @@ CREATE TABLE newsletter_contact(
     contactuid SERIAL PRIMARY KEY,
     email VARCHAR(255)
 );
+
+
+
+ALTER TABLE user_account
+ADD COLUMN user_firstName VARCHAR (255),
+ADD COLUMN user_lastName VARCHAR (255);

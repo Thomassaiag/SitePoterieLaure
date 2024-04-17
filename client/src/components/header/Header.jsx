@@ -2,22 +2,19 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import "./header.css"
 
-
 const logoLaureSansNom = '../../images/logoLaureSansNom.jpg'
 
 export const Header = () => {
-
   let navigate=useNavigate()
 
-  const handleClick=()=>{
-    navigate(`/connection`)
+  const navigateToConnection=()=>{
+    navigate('/connection')
   }
-
 
   return (
     <div className='headerContainer'>
       <div className='buttonContainer'>
-        <button className='connectionButton' onClick={handleClick}>Se Connecter</button>
+        <button className='connectionButton' onClick={navigateToConnection}>Se Connecter</button>
       </div>
       <Link className='logoAndTitleContainer'to='/'>
           <img className='logo'src={logoLaureSansNom} alt='webSiteLogo'/>

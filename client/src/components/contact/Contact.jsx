@@ -2,6 +2,7 @@ import React from 'react'
 import './Contact.css'
 import { Newsletter } from '../newsletter/Newsletter'
 import { ContactMessage } from '../contactMessage/ContactMessage'
+import { ScrollToTop } from '../scrollToTop/ScrollToTop'
 
 
 const logoInstragram='/images/logoInstagram.jpg'
@@ -26,8 +27,9 @@ export const Contact = () => {
       </div>
       <Newsletter/>
       <ContactMessage/>
-
-
+      <div className='scrollToTopContainer'>
+        <ScrollToTop/>
+      </div>
     </div>
   )
 }

@@ -9,6 +9,7 @@ import { CollectionElementPage } from './pages/CollectionElementPage'
 import { AdminPage } from './pages/AdminPage'
 import { ContactPage } from './pages/ContactPage'
 import { ConnectionPage } from './pages/ConnectionPage'
+import { AccountCreationPage } from './pages/AccountCreationPage'
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
         <Route path='/contact/' element={<ContactPage/>}/>
         <Route path='/admin' element={<AdminPage/>}/>
         <Route path='/admin/creationcollection' element={<AdminPage/>}/>
-        <Route path='/connection' element={<ConnectionPage/>}/>
+        <Route path='connection/' element={<ConnectionPage/>}/>
+        <Route path='/accountCreation' element={<AccountCreationPage/>}/>
       </Routes>
     </>
   )
