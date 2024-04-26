@@ -12,9 +12,8 @@ export const Header = () => {
   const {adminConnection}=useAdminConnection()
 
   useEffect(() => {
-    console.log(adminConnection)
-
-  })
+    console.log(`header adminConnection => ${adminConnection}`)
+  },[adminConnection])
   
 
 

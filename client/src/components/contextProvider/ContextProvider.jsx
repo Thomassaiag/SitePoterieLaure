@@ -4,10 +4,10 @@ const AdminConnectionStatus=createContext()
 
 export const ContextProvider = ({children}) => {
 
-    const [adminConnection, setAdminConnectionConnection]=useState(false)
+    const [adminConnection, setAdminConnection]=useState(false)
 
     return (
-    <AdminConnectionStatus.Provider value={{adminConnection, setAdminConnectionConnection}}>
+    <AdminConnectionStatus.Provider value={{adminConnection, setAdminConnection}}>
         {children}
     </AdminConnectionStatus.Provider>
     )

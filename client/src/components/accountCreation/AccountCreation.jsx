@@ -133,7 +133,7 @@ const [credentials, setCredentials]=useState({
                     </div>
                 </form>
             </div>
-            {invalidCreation && <p>Ce compte existe déjà</p>}
+            {buttonClicked && invalidCreation && <p>Ce compte existe déjà</p>}
             {buttonClicked && !invalidCreation && <p>Compte créé avec succès !</p>}
             
         </div>

@@ -11,15 +11,12 @@ export const Connection = () => {
 
     const {adminConnection, setAdminConnection}=useAdminConnection()
     const [invalidConnection, setInvalidConnection]=useState(false)
+    const [loginClicked, setLoginClicked]=useState(false)
 
     useEffect(()=>{
         console.log(credentials)
     },[credentials])
 
-
-        useEffect(()=>{
-        console.log(invalidConnection)
-    })
 
     const handleChange=(e)=>{
         setInvalidConnection(false)
@@ -33,6 +30,7 @@ export const Connection = () => {
     const handleFocus=(e)=>{
         e.preventDefault()
         if(invalidConnection){
+            setLoginClicked(false)
             setInvalidConnection(false)
             e.target.value=""
         }
@@ -40,6 +38,7 @@ export const Connection = () => {
 
     const handleClick=async (e)=>{
         e.preventDefault()
+        setLoginClicked(true)
         try {
             console.log(credentials.userEmail)
             console.log(credentials.userPassword)
@@ -60,8 +59,14 @@ export const Connection = () => {
             else if(response.status==400){
                 setInvalidConnection(true)
             }
-            else setInvalidConnection(false)
-            console.log(data)
+            else {
+                setInvalidConnection(false)
+                if(data.adminStatus){
+                    console.log(`data.adminStatus => ${data.adminStatus}`)
+                    setAdminConnection(true) 
+                } 
+            console.log(`adminConnection => ${adminConnection}`)
+            }
             
         } catch (error) {
             
@@ -102,7 +107,9 @@ export const Connection = () => {
                     </div>
                 </form>
             </div>
-            {invalidConnection && <p>Compte Inconnu ou password Incorrect, veuillez réessayer ou créer un comte</p>}
+            {loginClicked && invalidConnection && <p>Compte Inconnu ou password Incorrect, veuillez réessayer ou créer un comte</p>}
+            {loginClicked && !invalidConnection && !adminConnection && <p>Vous êtes Connecté.e</p>}
+            {loginClicked && adminConnection && <p>Vous êtes Connecté.e en tant qu'administrateur</p>}
             <div>
                 <p>Si vous n'avez pas de compte, vous pouvez en créer un : <a href='/accountCreation' style={{fontSize:20, fontWeight: "bold"}}>Créer un compte</a></p>
             </div>
