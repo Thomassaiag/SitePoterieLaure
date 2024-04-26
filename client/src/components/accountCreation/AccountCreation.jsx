@@ -8,17 +8,12 @@ const [credentials, setCredentials]=useState({
         userEmail:'',
         userPassword:'',
         userPasswordConfirmation:''
-
     })
 
 
     const checkPassword=((a,b)=>a===b)
 
     const [invalidCreation, setInvalidCreation]=useState(false)
-
-    useEffect(()=>{
-        console.log(credentials)
-    },[credentials])
 
     const handleChange=(e)=>{
         e.preventDefault()
@@ -29,14 +24,10 @@ const [credentials, setCredentials]=useState({
 
     const handleClick=async (e)=>{
         e.preventDefault()
-
-        if(checkPassword){
-            setCredentials({...credentials,
-                userPassword:"",
-                userPasswordConfirmation:""
-            })
+        if(!checkPassword(credentials.userPassword, credentials.userPasswordConfirmation)){ 
+            userPassword.value=""
+            userPasswordConfirmation.value=""
             alert("Vos Mots de passe ne sont pas identiques")
-
         }
         else{
             try {
@@ -76,26 +67,26 @@ const [credentials, setCredentials]=useState({
             <div className='credentialContainer'>
                 <form className='credentialForm' onSubmit={handleClick}>
                     <div className='formInput'>
-                      <div className='labelContainer'>
-                        <label htmlFor='userFirstName'>Votre Prénom :</label>
-                      </div>
-                      <input
+                        <div className='labelContainer'>
+                            <label htmlFor='userFirstName'>Votre Prénom :</label>
+                        </div>
+                        <input
                         id='userFirstName'
                         type='text'
                         name='userFirstName'
-                        onChange={handleChange}
-                      />
-                    </div>
-                    <div className='formInput'>
-                      <div className='labelContainer'>
-                        <label htmlFor='userLastName'>Votre Nom de Famille :</label>
-                      </div>
-                      <input
-                        id='userLastName'
-                        type='text'
-                        name='userLastName'
-                        onChange={handleChange}
-                      />
+                            onChange={handleChange}
+                        />
+                        </div>
+                        <div className='formInput'>
+                        <div className='labelContainer'>
+                            <label htmlFor='userLastName'>Votre Nom de Famille :</label>
+                        </div>
+                        <input
+                            id='userLastName'
+                            type='text'
+                            name='userLastName'
+                            onChange={handleChange}
+                        />
                     </div>                    
                     <div className='formInput'>
                         <div className='labelContainer'>
