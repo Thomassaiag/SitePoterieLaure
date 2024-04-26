@@ -1,5 +1,9 @@
-import {React, useState, useEffect} from 'react'
+import {React, useState, useEffect, createContext} from 'react'
 import './AccountCreation.css'
+
+export const ConnectionStatus=createContext()
+
+console.log(ConnectionStatus.Provider)
 
 export const AccountCreation = () => {
 const [credentials, setCredentials]=useState({
@@ -14,6 +18,7 @@ const [credentials, setCredentials]=useState({
     const checkPassword=((a,b)=>a===b)
 
     const [invalidCreation, setInvalidCreation]=useState(false)
+    const [buttonClicked, setButtonClicked]=useState(false)
 
     const handleChange=(e)=>{
         e.preventDefault()
@@ -51,9 +56,13 @@ const [credentials, setCredentials]=useState({
                 }
                 else if(response.status==400){
                     setInvalidCreation(true)
+                    userEmail.value=""
                 }
-                else setInvalidCreation(false)
-                console.log(data)
+                else {
+                    setInvalidCreation(false)
+                    setButtonClicked(true)
+                    console.log(data)
+                }
                 
             } catch (error) {
                 
@@ -126,7 +135,8 @@ const [credentials, setCredentials]=useState({
                     </div>
                 </form>
             </div>
-            {invalidCreation && <p>Ce Compte existe déjà</p>}
+            {invalidCreation && <p>Ce compte existe déjà</p>}
+            {buttonClicked && !invalidCreation && <p>Compte créé avec succès !</p>}
             
         </div>
     )
