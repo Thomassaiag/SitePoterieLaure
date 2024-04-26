@@ -1,9 +1,7 @@
-import {React, useState, useEffect, createContext} from 'react'
+import {React, useState} from 'react'
 import './AccountCreation.css'
 
-export const ConnectionStatus=createContext()
 
-console.log(ConnectionStatus.Provider)
 
 export const AccountCreation = () => {
 const [credentials, setCredentials]=useState({

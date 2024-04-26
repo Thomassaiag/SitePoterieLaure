@@ -1,11 +1,22 @@
-import React from 'react'
+import {React, useEffect} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import "./header.css"
+import { useAdminConnection } from '../contextProvider/ContextProvider'
 
 const logoLaureSansNom = '../../images/logoLaureSansNom.jpg'
 
 export const Header = () => {
   let navigate=useNavigate()
+  
+  
+  const {adminConnection}=useAdminConnection()
+
+  useEffect(() => {
+    console.log(adminConnection)
+
+  })
+  
+
 
   const navigateToConnection=()=>{
     navigate('/connection')
@@ -29,7 +40,7 @@ export const Header = () => {
         <Link to='/portrait'>portrait</Link>
         <Link to=''>blog</Link>
         <Link to='/contact'>contact</Link>
-        <Link to='/admin'>admin</Link>
+        {adminConnection && <Link to='/admin'>admin</Link>}
       </div>
       <div className='collectionsSeparatorContainer'>
         <hr className='collectionsSeparator'></hr>

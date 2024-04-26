@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useAdminConnection } from '../contextProvider/ContextProvider'
 
 import './Connection.css'
 
@@ -8,11 +9,17 @@ export const Connection = () => {
         userPassword:'',
     })
 
+    const {adminConnection, setAdminConnection}=useAdminConnection()
     const [invalidConnection, setInvalidConnection]=useState(false)
 
     useEffect(()=>{
         console.log(credentials)
     },[credentials])
+
+
+        useEffect(()=>{
+        console.log(invalidConnection)
+    })
 
     const handleChange=(e)=>{
         setInvalidConnection(false)
@@ -21,6 +28,14 @@ export const Connection = () => {
             [e.target.name]:e.target.value
         }
         )
+    }
+
+    const handleFocus=(e)=>{
+        e.preventDefault()
+        if(invalidConnection){
+            setInvalidConnection(false)
+            e.target.value=""
+        }
     }
 
     const handleClick=async (e)=>{
@@ -67,6 +82,7 @@ export const Connection = () => {
                             type='email'
                             name='userEmail'
                             onChange={handleChange}
+                            onFocus={handleFocus}
                         />
                     </div>
                     <div className='formInput'>
@@ -75,9 +91,10 @@ export const Connection = () => {
                         </div>
                         <input
                             id='userPassword'
-                            type='text'
+                            type='password'
                             name='userPassword'
                             onChange={handleChange}
+                            onFocus={handleFocus}
                         />
                     </div>
                     <div>
