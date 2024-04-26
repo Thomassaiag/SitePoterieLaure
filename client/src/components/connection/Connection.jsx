@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useAdminConnection } from '../contextProvider/ContextProvider'
+import { useAdminConnection } from '../contextProvider/AdminConnectionStatusContextProvider'
+import { useConnectedUserFirstName } from '../contextProvider/ConnectedUserFirstNameContextProvider'
 
 import './Connection.css'
 
@@ -10,6 +11,7 @@ export const Connection = () => {
     })
 
     const {adminConnection, setAdminConnection}=useAdminConnection()
+    const {connectedUserFirstName, setConnectedUserFirstName}=useConnectedUserFirstName()
     const [invalidConnection, setInvalidConnection]=useState(false)
     const [loginClicked, setLoginClicked]=useState(false)
 
@@ -63,7 +65,8 @@ export const Connection = () => {
                 setInvalidConnection(false)
                 if(data.adminStatus){
                     console.log(`data.adminStatus => ${data.adminStatus}`)
-                    setAdminConnection(true) 
+                    setAdminConnection(true)
+                    setConnectedUserFirstName(data.userFirstName)
                 } 
             console.log(`adminConnection => ${adminConnection}`)
             }

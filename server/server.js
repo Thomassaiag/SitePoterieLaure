@@ -237,18 +237,19 @@ app.post('/connection', async(req, res, next)=>{
     console.log(userPassword)
     try {
         const userEmailDB= await pool.query(
-            'SELECT user_email, admin_status FROM user_account WHERE user_email=$1;',[userEmail]
+            'SELECT user_email, admin_status, user_firstname FROM user_account WHERE user_email=$1;',[userEmail]
         )
         if(userEmailDB.rowCount>0){
             console.log("user exists")
             let adminStatus=userEmailDB.rows[0].admin_status
-            console.log(adminStatus)
+            let userFirstName=userEmailDB.rows[0].user_firstname
+            console.log(userEmailDB)
             const userPasswordDB= await pool.query(
                 'SELECT user_password FROM user_account WHERE user_Password=$1',[userPassword]
             )
             if(userPasswordDB.rowCount>0){
                 console.log("password matches")
-                res.status(200).json({message: "password matches", adminStatus})
+                res.status(200).json({message: "password matches", adminStatus, userFirstName})
             }
             else{
                 console.log("password doesn't match")

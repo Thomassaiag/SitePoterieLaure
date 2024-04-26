@@ -1,7 +1,8 @@
 import {React, useEffect} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import "./header.css"
-import { useAdminConnection } from '../contextProvider/ContextProvider'
+import { useAdminConnection } from '../contextProvider/AdminConnectionStatusContextProvider'
+import { useConnectedUserFirstName } from '../contextProvider/ConnectedUserFirstNameContextProvider'
 
 const logoLaureSansNom = '../../images/logoLaureSansNom.jpg'
 
@@ -10,10 +11,11 @@ export const Header = () => {
   
   
   const {adminConnection}=useAdminConnection()
+  const {connectedUserFirstName}=useConnectedUserFirstName()
 
   useEffect(() => {
-    console.log(`header adminConnection => ${adminConnection}`)
-  },[adminConnection])
+    console.log(`header connectedUserFirstName => ${connectedUserFirstName}`)
+  },[connectedUserFirstName])
   
 
 
@@ -24,7 +26,8 @@ export const Header = () => {
   return (
     <div className='headerContainer'>
       <div className='buttonContainer'>
-        <button className='connectionButton' onClick={navigateToConnection}>Se Connecter</button>
+        {!adminConnection && <button className='connectionButton' onClick={navigateToConnection}>Se Connecter</button>}
+        {adminConnection && <p>Bonjour, {connectedUserFirstName}</p>}
       </div>
       <Link className='logoAndTitleContainer'to='/'>
           <img className='logo'src={logoLaureSansNom} alt='webSiteLogo'/>
