@@ -1,8 +1,8 @@
 import {React, useEffect} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import "./header.css"
-import { useAdminConnection } from '../contextProvider/AdminConnectionStatusContextProvider'
-import { useConnectedUserFirstName } from '../contextProvider/ConnectedUserFirstNameContextProvider'
+import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
+
 
 const logoLaureSansNom = '../../images/logoLaureSansNom.jpg'
 
@@ -10,12 +10,14 @@ export const Header = () => {
   let navigate=useNavigate()
   
   
-  const {adminConnection}=useAdminConnection()
-  const {connectedUserFirstName}=useConnectedUserFirstName()
+  const {connectionAttributes}=useConnectionStatus()
+
 
   useEffect(() => {
-    console.log(`header connectedUserFirstName => ${connectedUserFirstName}`)
-  },[connectedUserFirstName])
+    console.log(`header connectedUserFirstName => ${connectionAttributes.connectedUserFirstName}`)
+    console.log(`header adminConnection => ${connectionAttributes.adminConnection}`)
+    console.log(`header invalidConnection => ${connectionAttributes.invalidConnection}`)
+  },[connectionAttributes])
   
 
 
@@ -26,8 +28,8 @@ export const Header = () => {
   return (
     <div className='headerContainer'>
       <div className='buttonContainer'>
-        {!adminConnection && <button className='connectionButton' onClick={navigateToConnection}>Se Connecter</button>}
-        {adminConnection && <p>Bonjour, {connectedUserFirstName}</p>}
+        {connectionAttributes.invalidConnection && <button className='connectionButton' onClick={navigateToConnection}>Se Connecter</button>}
+        {!connectionAttributes.invalidConnection && <p>Bonjour, {connectionAttributes.connectedUserFirstName}</p>}
       </div>
       <Link className='logoAndTitleContainer'to='/'>
           <img className='logo'src={logoLaureSansNom} alt='webSiteLogo'/>
@@ -42,7 +44,7 @@ export const Header = () => {
         <Link to='/portrait'>portrait</Link>
         <Link to=''>blog</Link>
         <Link to='/contact'>contact</Link>
-        {adminConnection && <Link to='/admin'>admin</Link>}
+        {connectionAttributes.adminConnection && <Link to='/admin'>admin</Link>}
       </div>
       <div className='collectionsSeparatorContainer'>
         <hr className='collectionsSeparator'></hr>

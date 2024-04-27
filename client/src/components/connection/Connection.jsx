@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useAdminConnection } from '../contextProvider/AdminConnectionStatusContextProvider'
-import { useConnectedUserFirstName } from '../contextProvider/ConnectedUserFirstNameContextProvider'
-
+import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
 import './Connection.css'
 
 export const Connection = () => {
@@ -10,30 +8,35 @@ export const Connection = () => {
         userPassword:'',
     })
 
-    const {adminConnection, setAdminConnection}=useAdminConnection()
-    const {connectedUserFirstName, setConnectedUserFirstName}=useConnectedUserFirstName()
-    const [invalidConnection, setInvalidConnection]=useState(false)
+    const {connectionAttributes, setConnectionAttributes}=useConnectionStatus()
     const [loginClicked, setLoginClicked]=useState(false)
 
     useEffect(()=>{
         console.log(credentials)
     },[credentials])
 
+    useEffect(()=>{
+        console.log(`adminConnection Connection=>${connectionAttributes.adminConnection}`)
+        console.log(`connectedUserFirstName Connection=>${connectionAttributes.connectedUserFirstName}`)
+        console.log(`invalidConnection Connection=>${connectionAttributes.invalidConnection}`)
+    },[connectionAttributes])
+
 
     const handleChange=(e)=>{
-        setInvalidConnection(false)
+        setConnectionAttributes(prevConnectionAttributes=>({
+            ...prevConnectionAttributes,
+            invalidConnection:true
+        }))
         e.preventDefault()
         setCredentials({...credentials,
             [e.target.name]:e.target.value
-        }
-        )
+        })
     }
 
     const handleFocus=(e)=>{
         e.preventDefault()
-        if(invalidConnection){
+        if(connectionAttributes.invalidConnection){
             setLoginClicked(false)
-            setInvalidConnection(false)
             e.target.value=""
         }
     }
@@ -52,23 +55,35 @@ export const Connection = () => {
                 body: JSON.stringify({
                     userEmail:credentials.userEmail,
                     userPassword:credentials.userPassword
-                }                )
+            })
             })
             let data= await response.json()
             if(!response){
                 console.log("something went wrong")
             }
             else if(response.status==400){
-                setInvalidConnection(true)
+                console.log("Invalid Connection")
+                setConnectionAttributes(prevConnectionAttributes=>({
+                    ...prevConnectionAttributes,
+                    invalidConnection:true
+                }))
             }
             else {
-                setInvalidConnection(false)
+                setConnectionAttributes(prevConnectionAttributes=>({
+                    ...prevConnectionAttributes,
+                    invalidConnection:false,
+                    connectedUserFirstName: data.userFirstName
+                }))
                 if(data.adminStatus){
                     console.log(`data.adminStatus => ${data.adminStatus}`)
-                    setAdminConnection(true)
-                    setConnectedUserFirstName(data.userFirstName)
+                    setConnectionAttributes(prevConnectionAttributes=>({
+                        ...prevConnectionAttributes,
+                        adminConnection:true,
+                        connectedUserFirstName: data.userFirstName,
+                    }))
+
                 } 
-            console.log(`adminConnection => ${adminConnection}`)
+                console.log(`adminConnection => ${connectionAttributes.adminConnection}`)
             }
             
         } catch (error) {
@@ -110,9 +125,9 @@ export const Connection = () => {
                     </div>
                 </form>
             </div>
-            {loginClicked && invalidConnection && <p>Compte Inconnu ou password Incorrect, veuillez réessayer ou créer un comte</p>}
-            {loginClicked && !invalidConnection && !adminConnection && <p>Vous êtes Connecté.e</p>}
-            {loginClicked && adminConnection && <p>Vous êtes Connecté.e en tant qu'administrateur</p>}
+            {loginClicked && connectionAttributes.invalidConnection && <p>Compte Inconnu ou password Incorrect, veuillez réessayer ou créer un comte</p>}
+            {loginClicked && !connectionAttributes.invalidConnection && !connectionAttributes.adminConnection && <p>Vous êtes Connecté.e</p>}
+            {loginClicked && connectionAttributes.adminConnection && <p>Vous êtes Connecté.e en tant qu'administrateur</p>}
             <div>
                 <p>Si vous n'avez pas de compte, vous pouvez en créer un : <a href='/accountCreation' style={{fontSize:20, fontWeight: "bold"}}>Créer un compte</a></p>
             </div>

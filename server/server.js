@@ -245,7 +245,7 @@ app.post('/connection', async(req, res, next)=>{
             let userFirstName=userEmailDB.rows[0].user_firstname
             console.log(userEmailDB)
             const userPasswordDB= await pool.query(
-                'SELECT user_password FROM user_account WHERE user_Password=$1',[userPassword]
+                'SELECT user_password FROM user_account WHERE user_Password=$1 AND user_email=$2 ',[userPassword, userEmail]
             )
             if(userPasswordDB.rowCount>0){
                 console.log("password matches")
