@@ -5,6 +5,10 @@ const multer=require('multer')
 const path=require('path')
 const nodemailer =require('nodemailer')
 
+const bcrypt=require('bcrypt')
+const {hashPassword}=require('./passwordEncryption')
+
+
 const cors= require('cors')
 
 const collectionPath="C:/Users/Moi/OneDrive/Documents/Ada/ProjetsPerso/SiteWebLaure/client/public/images/Collections/"
@@ -58,6 +62,8 @@ app.get(`/allCollectionsUids`, async(req, res, next)=>{
     }
 
 })
+
+//Get 1 collection
 
 app.get('/collections/:id/collection', async (req, res, next)=>{
     try {
@@ -228,13 +234,16 @@ app.post('/contact',async(req,res, next)=>{
     }
 })
 
+//----------------------------------------------------------------------
 
 //Login
 
 app.post('/connection', async(req, res, next)=>{
     const{userEmail, userPassword}=req.body
+
     console.log(userEmail)
     console.log(userPassword)
+
     try {
         const userEmailDB= await pool.query(
             'SELECT user_email, admin_status, user_firstname FROM user_account WHERE user_email=$1;',[userEmail]
@@ -243,10 +252,17 @@ app.post('/connection', async(req, res, next)=>{
             console.log("user exists")
             let adminStatus=userEmailDB.rows[0].admin_status
             let userFirstName=userEmailDB.rows[0].user_firstname
-            console.log(userEmailDB)
-            const userPasswordDB= await pool.query(
-                'SELECT user_password FROM user_account WHERE user_Password=$1 AND user_email=$2 ',[userPassword, userEmail]
+            // console.log(userEmailDB)
+            // const userPasswordDB= await pool.query(
+            //     'SELECT user_password FROM user_account WHERE user_Password=$1 AND user_email=$2 ',[hashedPassword, userEmail]
+            // )
+            const hashedPasswordDB= await pool.query(
+                'SELECT user_password FROM user_account WHERE user_email=$1 ',[userEmail]
             )
+            let hashedPassword=hashedPasswordDB.rows[0].user_password
+
+            console.log(`hashedPassword=> ${hashedPassword}`)
+            console.log("test bcrypt "+ await bcrypt.compare(userPassword,hashedPassword))
             if(userPasswordDB.rowCount>0){
                 console.log("password matches")
                 res.status(200).json({message: "password matches", adminStatus, userFirstName})
@@ -277,6 +293,8 @@ app.post('/connection', async(req, res, next)=>{
 app.post('/accountCreation',async (req, res, next)=>{
     const{userFirstName, userLastName, userEmail, userPassword}=req.body
     console.log(userFirstName, userLastName, userEmail, userPassword)
+    let hashedPassword=await hashPassword(userPassword)
+    console.log(hashedPassword)
     try{
         const userEmailDB=await pool.query(
             'SELECT user_email FROM user_account WHERE user_email=$1',[userEmail]
@@ -287,7 +305,7 @@ app.post('/accountCreation',async (req, res, next)=>{
         }
         else{
             const newUser=await pool.query(
-                'INSERT INTO user_account(user_email, user_password, user_firstName, user_lastName) VALUEs($1,$2,$3,$4)',[userEmail, userPassword,userFirstName, userLastName]
+                'INSERT INTO user_account(user_email, user_password, user_firstName, user_lastName, admin_status) VALUEs($1,$2,$3,$4, $5)',[userEmail, hashedPassword,userFirstName, userLastName, false]
             )
             const newUserEmailDB= await pool.query(
                 'SELECT user_email FROM user_account WHERE user_email=$1',[userEmail]
