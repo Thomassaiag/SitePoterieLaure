@@ -262,8 +262,9 @@ app.post('/connection', async(req, res, next)=>{
             let hashedPassword=hashedPasswordDB.rows[0].user_password
 
             console.log(`hashedPassword=> ${hashedPassword}`)
-            console.log("test bcrypt "+ await bcrypt.compare(userPassword,hashedPassword))
-            if(userPasswordDB.rowCount>0){
+            let doesPasswordMatch=await bcrypt.compare(userPassword,hashedPassword)
+            console.log("test bcrypt "+ doesPasswordMatch)
+            if(doesPasswordMatch){
                 console.log("password matches")
                 res.status(200).json({message: "password matches", adminStatus, userFirstName})
             }
