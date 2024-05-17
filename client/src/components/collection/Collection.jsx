@@ -2,6 +2,7 @@ import React from 'react'
 import './Collection.css'
 import { CollectionMainPic } from '../collectionMainPic/CollectionMainPic'
 import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
+import { Link } from 'react-router-dom'
 // import {deleteCollection} from '../../../public/images/deleteCollection.jpg'
 
 export const Collection = ({imageUrl, imageAlt, title, collectionUid}) => {
@@ -26,9 +27,11 @@ export const Collection = ({imageUrl, imageAlt, title, collectionUid}) => {
 
   return (
     <div className='collectionContainer'>
+      <Link className='collectionItem' to={`/collections/${collectionUid}`}>
         <CollectionMainPic imageUrl={imageUrl} imageAlt={imageAlt}/>
+      </Link>
         <p>{title}</p>
-        {connectionAttributes.adminConnection && <img className='deleteCollectionButton' src="../../../images/deleteCollection.jpg" alt="Delete Collection" onClick={deleteCollection(collectionUid)}/>}
+        <img className='deleteCollectionButton' src="../../../images/deleteCollection.jpg" alt="Delete Collection" onClick={()=>deleteCollection(collectionUid)}/>
         
     </div>
   )

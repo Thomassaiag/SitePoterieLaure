@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import { Collection } from '../collection/Collection'
-import { Link } from 'react-router-dom'
+
 import './Collections.css'
 import { ScrollToTop } from '../scrollToTop/ScrollToTop'
 
@@ -42,14 +42,13 @@ export const Collections =()=>{
             {
               const {collection_picture_url,collection_title, collection_picture_alt, collection_uid}=collection
               return (
-                <Link className='collectionItem' to={`/collections/${collection_uid}`} key={collection_uid}>
-                  <Collection 
-                      imageUrl={collection_picture_url} 
-                      title={collection_title} 
-                      imageAlt={collection_picture_alt}
-                      collectionUid={collection_uid}
-                      />
-                </Link>)
+                <Collection className='collectionItem' key={collection_uid}
+                  imageUrl={collection_picture_url} 
+                  title={collection_title} 
+                  imageAlt={collection_picture_alt}
+                  collectionUid={collection_uid}
+                />
+              )
             }) 
             ) : (
               <p>Loading...</p>
