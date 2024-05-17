@@ -44,7 +44,8 @@ export const Header = () => {
         <Link to='/portrait'>portrait</Link>
         <Link to=''>blog</Link>
         <Link to='/contact'>contact</Link>
-        {connectionAttributes.adminConnection && <Link to='/admin'>admin</Link>}
+        {/* {connectionAttributes.adminConnection && <Link to='/admin'>admin</Link>} */}
+        <Link to='/admin'>admin</Link>
       </div>
       <div className='collectionsSeparatorContainer'>
         <hr className='collectionsSeparator'></hr>

@@ -15,6 +15,11 @@
 }
 
 
+/* .deleteCollectionButtonContainer{
+    width: 5px;
+} */
+
 .deleteCollectionButton{
-    width: 2rem;
+    width: auto;
+    height: 10px;
 }

@@ -7,7 +7,7 @@ export const AdminHeader = () => {
   return (
     <div className='adminHeaderContainer'>
         <Link to='/admin/creationcollection'>Création Collecton</Link>
-        <Link to='admin/creationelementcollection'>Creation Element de collection</Link>
+        <Link to='/collections'>Effacer/Mettre à jour Une collection</Link>
     </div>
   )
 }

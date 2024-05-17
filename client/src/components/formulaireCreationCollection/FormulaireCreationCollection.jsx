@@ -20,7 +20,7 @@ export const FormulaireCreationCollection = () => {
             [e.target.name]: e.target.value
         })
     }
-
+    
     const handleSubmit=async(event)=>{
         event.preventDefault();
 
