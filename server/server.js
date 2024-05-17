@@ -152,7 +152,7 @@ app.get('/collections/:id/pictures', async (req, res, next)=>{
     try {
         const {id}=req.params
         const {rows} = await pool.query(
-            `SELECT * FROM collection_element_pictures WHERE collection_UID=$1`,[id]
+            `SELECT * FROM collection_element_pictures WHERE collection_UID=$1 AND collection_element_pictures_deletionFlag=false`,[id]
         )
         res.json(rows) 
     }
@@ -167,7 +167,7 @@ app.get('/collections/:id/pictures/:pictureId', async (req, res, next)=>{
     try {
         const {id, pictureId}=req.params
         const {rows} = await pool.query(
-            `SELECT * FROM collection_element_pictures WHERE collection_UID=$1 AND collection_element_picture_uid=$2`,[id, pictureId]
+            `SELECT * FROM collection_element_pictures WHERE collection_UID=$1 AND collection_element_picture_uid=$ AND collection_element_pictures_deletionFlag=false`,[id, pictureId]
         )
         res.json(rows) 
     }
@@ -265,6 +265,33 @@ app.put('/admin/deleteCollection/',async(req, res, next)=>{
 
 
 })
+
+
+//Delete 1 picture from 1 collection
+app.put('/admin/deleteElementPicture/',async(req, res, next)=>{
+    try {
+        const {collectionElementPictureToDeleteID}=req.body
+        console.log(`collectionElementPictureToDeleteID => ${collectionElementPictureToDeleteID}`)
+        let collectionElementPictureToDelete=await pool.query(
+            `UPDATE collection_element_pictures
+            SET collection_element_pictures_deletionflag=true
+            WHERE collection_element_picture_uid=$1`,[collectionElementPictureToDeleteID]
+        )
+        if(collectionElementPictureToDelete){
+            return res.status(200).json({message:"Picture deleted"})
+        }
+        else {
+            return res.status(201).json({message:"Picture didn't deleted"})
+        }
+    } catch (err) {
+        console.error('error deleting collection =>',err )
+        return res.status(400).json({message:"Deletion wasn't completed due to an error"})
+    }
+
+
+})
+
+
 
 //----------------------------------------------------------------------
 
