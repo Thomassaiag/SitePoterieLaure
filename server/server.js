@@ -241,9 +241,9 @@ app.post('/contact',async(req,res, next)=>{
 //Delete 1 collection
 
 
-app.put('/collections/admin/deleteCollection/${id}',async(req, res, next)=>{
+app.put('/admin/deleteCollection/',async(req, res, next)=>{
     try {
-        let {collectionUID}=req.body
+        const {collectionUID}=req.body
         console.log(`collectionUID => ${collectionUID}`)
         let collectionToDelete=await pool.query(
             `UPDATE collection

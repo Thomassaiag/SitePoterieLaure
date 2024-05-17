@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Collection.css'
 import { CollectionMainPic } from '../collectionMainPic/CollectionMainPic'
 import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
@@ -8,19 +8,26 @@ import { Link } from 'react-router-dom'
 export const Collection = ({imageUrl, imageAlt, title, collectionUid}) => {
 
   const {connectionAttributes}=useConnectionStatus()
+  const [collectionToDelete, setCollectionToDelete]=useState(collectionUid)
+
+
 
   const deleteCollection=async(id)=>{
+    setCollectionToDelete(id)  
     try {
       const response=await fetch(`http://localhost:5000/admin/deleteCollection/`,{
-        method: 'UPDATE',
-        // headers: {
-        //     'Content-Type': 'application/json'
-        // },
-        body: id
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          collectionUID:collectionToDelete,
+        })
       })
-      const data=response.json()
+      const data=await response.json()
+      console.log(data)
     } catch (error) {
-      
+      console.log(error)
     }
   }
 
