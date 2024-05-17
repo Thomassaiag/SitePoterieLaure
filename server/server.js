@@ -38,7 +38,9 @@ app.use((req, res, next) => {
 app.get('/collections', async (req, res, next)=>{
     try {
         const {rows} = await pool.query(
-            "SELECT * FROM collection ORDER BY collection_uid ASC"
+            `SELECT * FROM collection
+            WHERE collection_deletionflag=false
+            ORDER BY collection_uid ASC`
         )
         res.json(rows) 
     }
@@ -53,8 +55,8 @@ app.get(`/allCollectionsUids`, async(req, res, next)=>{
         const {rows}= await pool.query(
             `SELECT collection_uid
             FROM collection
-            ORDER BY collection_uid ASC
-            `
+            WHERE collection_deletionflag=false
+            ORDER BY collection_uid ASC`
         )
         res.json(rows)
     } catch (error) {
@@ -232,6 +234,36 @@ app.post('/contact',async(req,res, next)=>{
         console.error('Error adding newCollection', err)
         res.status(500).json({message:'Server Error'})
     }
+})
+
+
+
+//Delete 1 collection
+
+
+app.put('/collections/admin/deleteCollection/${id}',async(req, res, next)=>{
+    try {
+        let {collectionUID}=req.body
+        console.log(`collectionUID => ${collectionUID}`)
+        let collectionToDelete=await pool.query(
+            `UPDATE collection
+            SET collection_deletionflag=true
+            WHERE collection_uid=$1`,[collectionUID]
+        )
+        if(collectionToDelete){
+            return res.status(200).json({message:"collection deleted"})
+            console.log("collection deleted")
+        }
+        else {
+            return res.status(201).json({message:"collection didn't deleted"})
+            console.log("the collection didn't get deleted")
+        }
+    } catch (err) {
+        console.error('error deleting collection =>',err )
+        return res.status(400).json({message:"Deletion wasn't completed due to an error"})
+    }
+
+
 })
 
 //----------------------------------------------------------------------

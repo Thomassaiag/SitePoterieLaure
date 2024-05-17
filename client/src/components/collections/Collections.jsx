@@ -47,6 +47,7 @@ export const Collections =()=>{
                       imageUrl={collection_picture_url} 
                       title={collection_title} 
                       imageAlt={collection_picture_alt}
+                      collectionUid={collection_uid}
                       />
                 </Link>)
             }) 

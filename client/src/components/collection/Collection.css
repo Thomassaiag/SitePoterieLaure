@@ -13,3 +13,8 @@
 .collectionContainer p{
     font-size: 28.8;
 }
+
+
+.deleteCollectionButton{
+    width: 2rem;
+}
