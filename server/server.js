@@ -1,4 +1,4 @@
-const express =require('express')
+const express=require('express')
 const app=express()
 const pool=require('./database/db')
 const multer=require('multer')
@@ -12,7 +12,7 @@ const {hashPassword}=require('./passwordEncryption')
 const cors= require('cors')
 
 const collectionPath="C:/Users/Moi/OneDrive/Documents/Ada/ProjetsPerso/SiteWebLaure/client/public/images/Collections/"
-
+const collectionElementPath="C:/Users/Moi/OneDrive/Documents/Ada/ProjetsPerso/SiteWebLaure/client/public/images/Test/"
 app.use(express.json())
 
 
@@ -205,6 +205,72 @@ const storage=multer.diskStorage({
         cb(null, file.originalname)
     }
 })
+
+
+const upload=multer({storage:storage})
+
+app.post('/admin/uploadCollection', upload.single('file'), async(req, res, next)=>{
+
+    const {collectionTitle, collectionDescription}=req.body
+    console.log(collectionTitle)
+    const collectionPictureAlt=`Image ${collectionTitle}`
+    const collectionPictureUrl=`/images/Collections/${req.file.originalname}`
+
+    try{
+        const newCollection=await pool.query(
+            'INSERT INTO collection (collection_title, collection_description, collection_picture_url, collection_picture_alt, collection_deletionflag) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+            [collectionTitle, collectionDescription, collectionPictureUrl, collectionPictureAlt, false]
+        )
+        res.json(newCollection.rows[0])
+    }
+    catch(err){
+        console.error('Error adding newCollection', err)
+        res.status(500).send('Server Error')
+    }
+})
+
+
+
+//Post 1 new Collection Element Picture
+
+
+const storageCollectionElementPicture=multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null, collectionElementPath);
+    },
+    filename:function(req, file, cb){
+        cb(null, file.originalname)
+    }
+})
+
+
+const uploadCollectionElementPicture=multer({storage:storageCollectionElementPicture})
+
+app.post('/admin/editElement/addNewPicture', uploadCollectionElementPicture.single('file'), async(req, res, next)=>{
+
+    const {file, collectionUID}=req.body
+    console.log(file)
+    console.log(collectionUID)
+    const collectionElementPictureAlt=`Image ${file}`
+    const collectionElementPictureUrl=`/images/Collections/${req.file.originalname}`
+
+    try{
+        const newCollectionElementPicture=await pool.query(
+            'INSERT INTO collection_element_pictures (collection_uid, collection_element_picture_url, collection_element_picture_alt, collection_element_pictures_deletionflag) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+            [collectionUID, collectionElementPictureUrl, collectionElementPictureAlt, false]
+        )
+        if(newCollectionElementPicture){
+            res.status(200).json({message:newCollection.rows[0]})
+        }
+        else res.status(201).json({message:"picture not added"})
+    }
+    catch(err){
+        console.error('Error adding newCollection', err)
+        res.status(500).send('Server Error')
+    }
+})
+
+
 
 
 //Post contact email to emailtable
@@ -419,27 +485,7 @@ app.post('/contact/message', async (req, res,next)=>{
     
 })
 
-const upload=multer({storage:storage})
 
-app.post('/admin/uploadCollection', upload.single('file'), async(req, res, next)=>{
-
-    const {collectionTitle, collectionDescription}=req.body
-    console.log(collectionTitle)
-    const collectionPictureAlt=`Image ${collectionTitle}`
-    const collectionPictureUrl=`/images/Collections/${req.file.originalname}`
-
-    try{
-        const newCollection=await pool.query(
-            'INSERT INTO collection (collection_title, collection_description, collection_picture_url, collection_picture_alt) VALUES ($1, $2, $3, $4) RETURNING *',
-            [collectionTitle, collectionDescription, collectionPictureUrl, collectionPictureAlt]
-        )
-        res.json(newCollection.rows[0])
-    }
-    catch(err){
-        console.error('Error adding newCollection', err)
-        res.status(500).send('Server Error')
-    }
-})
 
 app.listen(5000,()=>{
     console.log("Server started on port 5000")
