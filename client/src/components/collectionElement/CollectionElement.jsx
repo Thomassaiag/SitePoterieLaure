@@ -5,6 +5,7 @@ import { CollectionElementInformations } from '../collectionElementInformations/
 import { ScrollToTop } from '../scrollToTop/ScrollToTop'
 import './CollectionElement.css'
 import { CollectionMainPic } from '../collectionMainPic/CollectionMainPic'
+import { UpdateElementInformation } from '../updateElementInformation/UpdateElementInformation'
 
 
 export const CollectionElement = () => {
@@ -149,6 +150,9 @@ export const CollectionElement = () => {
           <p>Loading Data</p>
         )
       }
+
+      <UpdateElementInformation collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation}/>
+
       <div className='navigationElementContainer'>
         <div className='navigationElementButtonContainer'>
           <img onClick={handleLeftClick} src='/images/leftChevron.jpg' alt='previousCollection'/>
