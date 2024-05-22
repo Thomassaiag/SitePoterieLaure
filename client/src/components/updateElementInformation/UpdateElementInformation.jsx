@@ -1,16 +1,33 @@
 import React, {useEffect, useState} from 'react'
+import './UpdateElementInformation.css'
 
-export const UpdateElementInformation = ({collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation}) => {
+export const UpdateElementInformation = ({collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID}) => {
 
     const[collectionInformationToUpdate, SetcollectionInformationToUpdate]=useState({
       collectionElementDescriptionToUpdate:collectionElementDescription,
       collectionElementEmailToUpdate: collectionElementEmail,
       collectionElementCookingToUpdate: collectionElementCooking,
-      collectionElementRecommandationToUpdate: collectionElementRecommandation
+      collectionElementRecommandationToUpdate: collectionElementRecommandation,
+      collectionElementToUpdateID: collectionUID
     })
 
-    const handleSubmit=()=>{
-      return
+    const handleSubmit=async()=>{
+      try {
+        let response = await fetch('http://admin/updateCollectionElementInformation',{
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body:JSON.stringify({
+            
+          })
+        })
+        let data=response.json()
+        console.log(data)
+        
+      } catch (error) {
+        console.error({message: error})
+      }
     }
 
 

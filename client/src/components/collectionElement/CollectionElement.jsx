@@ -151,7 +151,7 @@ export const CollectionElement = () => {
         )
       }
 
-      <UpdateElementInformation collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation}/>
+      <UpdateElementInformation collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation} collectionUID={newId}/>
 
       <div className='navigationElementContainer'>
         <div className='navigationElementButtonContainer'>
