@@ -11,6 +11,19 @@ export const UpdateElementInformation = ({collectionElementDescription, collecti
       collectionElementToUpdateID: collectionUID
     })
 
+
+    useEffect(()=>{
+      SetcollectionElementInformationToUpdate({
+        collectionElementDescriptionToUpdate:collectionElementDescription,
+        collectionElementEmailToUpdate: collectionElementEmail,
+        collectionElementCookingToUpdate: collectionElementCooking,
+        collectionElementRecommandationToUpdate: collectionElementRecommandation,
+        collectionElementToUpdateID: collectionUID
+
+      })
+    },[collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID])
+
+
     const handleSubmit=async()=>{
       try {
         let response = await fetch('http://admin/updateCollectionElementInformation',{
@@ -32,11 +45,12 @@ export const UpdateElementInformation = ({collectionElementDescription, collecti
       } catch (error) {
         console.error({message: error})
       }
+      return
     }
 
-    // useEffect(()=>{
-      
-    // },[collectionElementInformationToUpdate])
+    useEffect(()=>{
+      console.log(collectionElementInformationToUpdate)
+    },[collectionElementInformationToUpdate])
 
     const updateCollectionElementInformation=(e)=>{
       e.preventDefault()
@@ -45,9 +59,7 @@ export const UpdateElementInformation = ({collectionElementDescription, collecti
       })
     }
 
-    // useEffect(()=>{
-    //   console.log(collectionElementInformationToUpdate)
-    // },[collectionElementInformationToUpdate])
+
 
     return (
       <div>UpdateElementInformation

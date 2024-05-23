@@ -25,9 +25,6 @@ export const CollectionElement = () => {
   const [collectionElementCooking, setCollectionElementCooking]=useState()
   const [collectionElementRecommandation, setCollectionElementRecommandation]=useState()
 
-  // useEffect(()=>{
-  //   console.log(collectionElement)
-  // },[collectionElement])
 
   useEffect(()=>{
     fetchAllCollectionUids()
@@ -38,14 +35,16 @@ export const CollectionElement = () => {
   },[])
 
   useEffect(()=>{
-    console.log('UseEffect')
+
     let {collection_element_name, collection_element_description, collection_element_email, collection_element_cooking, collection_element_recommandation }=collectionElement
     setCollectionElementDescription(collection_element_description)
     setCollectionElementName(collection_element_name)
     setCollectionElementEmail(collection_element_email)
     setCollectionElementCooking(collection_element_cooking)
     setCollectionElementRecommandation(collection_element_recommandation)
+
   },[collectionElement])
+
 
   const fetchCollectionElement=async()=>{
     try {
@@ -148,13 +147,13 @@ export const CollectionElement = () => {
                 <p>{collectionElementRecommandation}</p>
               </div>
             </div>
+            <UpdateElementInformation collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation} collectionUID={newId}/>
           </div>
         ) : (
           <p>Loading Data</p>
         )
       }
 
-      <UpdateElementInformation collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation} collectionUID={newId}/>
 
       <div className='navigationElementContainer'>
         <div className='navigationElementButtonContainer'>
