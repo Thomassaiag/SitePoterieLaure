@@ -3,7 +3,7 @@ import './UpdateElementInformation.css'
 
 export const UpdateElementInformation = ({collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID}) => {
 
-    const[collectionInformationToUpdate, SetcollectionInformationToUpdate]=useState({
+    const[collectionElementInformationToUpdate, SetcollectionElementInformationToUpdate]=useState({
       collectionElementDescriptionToUpdate:collectionElementDescription,
       collectionElementEmailToUpdate: collectionElementEmail,
       collectionElementCookingToUpdate: collectionElementCooking,
@@ -19,7 +19,11 @@ export const UpdateElementInformation = ({collectionElementDescription, collecti
             'Content-Type': 'application/json'
           },
           body:JSON.stringify({
-            
+            descriptionToUpdate:collectionElementInformationToUpdate.collectionElementDescriptionToUpdate,
+            emailToUpdate:collectionElementInformationToUpdate.collectionElementEmailToUpdate,
+            cookingToUpdate:collectionElementInformationToUpdate.collectionElementCookingToUpdate,
+            recommandationToUpdate:collectionElementInformationToUpdate.collectionElementRecommandationToUpdate,
+            IDToUpdate:collectionElementInformationToUpdate.collectionElementToUpdateID
           })
         })
         let data=response.json()
@@ -30,17 +34,20 @@ export const UpdateElementInformation = ({collectionElementDescription, collecti
       }
     }
 
+    // useEffect(()=>{
+      
+    // },[collectionElementInformationToUpdate])
 
     const updateCollectionElementInformation=(e)=>{
       e.preventDefault()
-      SetcollectionInformationToUpdate({...collectionInformationToUpdate,
+      SetcollectionElementInformationToUpdate({...collectionElementInformationToUpdate,
         [e.target.name]:e.target.value
       })
     }
 
-    useEffect(()=>{
-      console.log(collectionInformationToUpdate)
-    },[collectionInformationToUpdate])
+    // useEffect(()=>{
+    //   console.log(collectionElementInformationToUpdate)
+    // },[collectionElementInformationToUpdate])
 
     return (
       <div>UpdateElementInformation
@@ -49,7 +56,8 @@ export const UpdateElementInformation = ({collectionElementDescription, collecti
             htmlFor='collectionElementDescription'>Collection Description  
           </label>
           <input id='collectionElementDescription'
-            placeholder={collectionElementDescription}
+            type='text'
+            value={collectionElementInformationToUpdate.collectionElementDescriptionToUpdate}
             onChange={updateCollectionElementInformation}
             name='collectionElementDescriptionToUpdate'        
           />
@@ -57,17 +65,20 @@ export const UpdateElementInformation = ({collectionElementDescription, collecti
             htmlFor='collectionElementEmail'>Informations techniques  
           </label>
           <input id='collectionElementEmail'
-            value={collectionElementEmail}
+            type='text'
+            value={collectionElementInformationToUpdate.collectionElementEmailToUpdate}
             onChange={updateCollectionElementInformation}
             name='collectionElementEmailToUpdate'    
           />
           <input id='collectionElementCooking'
-            placeholder={collectionElementCooking}
+            type='text'
+            value={collectionElementInformationToUpdate.collectionElementCookingToUpdate}
             onChange={updateCollectionElementInformation}
             name='collectionElementCookingToUpdate'        
           />
           <input id='collectionElementRecommandation'
-            placeholder={collectionElementRecommandation}
+            type='text'
+            value={collectionElementInformationToUpdate.collectionElementRecommandationToUpdate}
             onChange={updateCollectionElementInformation}
             name='collectionElementRecommandationToUpdate'        
           />

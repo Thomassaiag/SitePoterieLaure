@@ -25,7 +25,10 @@ export const CollectionElement = () => {
   const [collectionElementCooking, setCollectionElementCooking]=useState()
   const [collectionElementRecommandation, setCollectionElementRecommandation]=useState()
 
-  
+  // useEffect(()=>{
+  //   console.log(collectionElement)
+  // },[collectionElement])
+
   useEffect(()=>{
     fetchAllCollectionUids()
   },[])
