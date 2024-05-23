@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import './CollectionElementInformations.css'
 
-export const CollectionElementInformations = ({collection_uid}) => {
+export const CollectionElementInformationsToUpdate = ({collection_uid}) => {
 
 const [currentInformations, setCurrentInformations]=useState([])
 
@@ -15,24 +15,20 @@ useEffect(()=>{
     fetchElementInformations()
 },[collection_uid])
 
-useEffect(()=>{
-    console.log('currentInformations =>',currentInformations)
-},[currentInformations])
-
   return (
-    <ul className='collectionElementInformationsContainer'>
+    <di className='collectionElementInformationsContainer'>
     {
         currentInformations ?(
             currentInformations.map((currentInformation)=>{
                 let {collection_element_information_text, collection_element_information_uid}=currentInformation
                 return(
-                    <li key={collection_element_information_uid}>{collection_element_information_text}</li>
+                    <input key={collection_element_information_uid}>{collection_element_information_text}</input>
                 )
             })
         ):(
             <p>Loading...</p>
         )
     }
-    </ul>
+    </di>
   )
 }

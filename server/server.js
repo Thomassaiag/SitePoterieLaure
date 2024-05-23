@@ -359,6 +359,33 @@ app.put('/admin/deleteElementPicture/',async(req, res, next)=>{
 
 
 
+//update collection Element information
+
+app.put('/admin/updateCollectionElementInformation',async(req, res,next)=>{
+    try {
+        const {descriptionToUpdate, emailToUpdate, cookingToUpdate, recommandationToUpdate, collectionUID}=req.body
+        let collectionElementInformationToUpdate=await pool.query(
+            `UPDATE collection_element
+            SET collection_element_description=$1,
+                collection_element_email=$2,
+                collection_element_recommandation=$3,
+                collection_element_cooking=$4
+            WHERE collection_UID=$5
+            `,[descriptionToUpdate,emailToUpdate, recommandationToUpdate,cookingToUpdate, collectionUID]
+        )
+        if (collectionElementInformationToUpdate){
+            res.status(200).json({message: `collection ${collectionUID} updated` })        
+        }
+        else res.status(201).json({message: `collection ${collectionUID} NOT updated` })
+    } catch (error) {
+        console.error(`error updating collection ${collectionUID}=> ${err} `)
+        return res.status(400).json({message:"Deletion wasn't completed due to an error"})
+    }
+
+
+})
+
+
 //----------------------------------------------------------------------
 
 //Login

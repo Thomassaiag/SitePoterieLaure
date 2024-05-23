@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react'
-import './UpdateElementInformation.css'
+import React, {Fragment, useEffect, useState} from 'react'
+
+import '../collectionElement/CollectionElement.css'
 
 export const UpdateElementInformation = ({collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID}) => {
 
@@ -8,7 +9,7 @@ export const UpdateElementInformation = ({collectionElementDescription, collecti
       collectionElementEmailToUpdate: collectionElementEmail,
       collectionElementCookingToUpdate: collectionElementCooking,
       collectionElementRecommandationToUpdate: collectionElementRecommandation,
-      collectionElementToUpdateID: collectionUID
+      collectionUID: collectionUID
     })
 
 
@@ -18,7 +19,7 @@ export const UpdateElementInformation = ({collectionElementDescription, collecti
         collectionElementEmailToUpdate: collectionElementEmail,
         collectionElementCookingToUpdate: collectionElementCooking,
         collectionElementRecommandationToUpdate: collectionElementRecommandation,
-        collectionElementToUpdateID: collectionUID
+        collectionUID: collectionUID
 
       })
     },[collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID])
@@ -26,7 +27,7 @@ export const UpdateElementInformation = ({collectionElementDescription, collecti
 
     const handleSubmit=async()=>{
       try {
-        let response = await fetch('http://admin/updateCollectionElementInformation',{
+        let response = await fetch('http://localhost:5000/admin/updateCollectionElementInformation',{
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
@@ -36,7 +37,7 @@ export const UpdateElementInformation = ({collectionElementDescription, collecti
             emailToUpdate:collectionElementInformationToUpdate.collectionElementEmailToUpdate,
             cookingToUpdate:collectionElementInformationToUpdate.collectionElementCookingToUpdate,
             recommandationToUpdate:collectionElementInformationToUpdate.collectionElementRecommandationToUpdate,
-            IDToUpdate:collectionElementInformationToUpdate.collectionElementToUpdateID
+            collectionUID:collectionElementInformationToUpdate.collectionUID
           })
         })
         let data=response.json()
@@ -62,48 +63,45 @@ export const UpdateElementInformation = ({collectionElementDescription, collecti
 
 
     return (
-      <div>UpdateElementInformation
-        <form onSubmit={handleSubmit}>
-          <label
-            htmlFor='collectionElementDescription'>Collection Description  
-          </label>
-          <input id='collectionElementDescription'
-            type='text'
-            value={collectionElementInformationToUpdate.collectionElementDescriptionToUpdate}
-            onChange={updateCollectionElementInformation}
-            name='collectionElementDescriptionToUpdate'        
-          />
-          <label
-            htmlFor='collectionElementEmail'>Informations techniques  
-          </label>
-          <input id='collectionElementEmail'
-            type='text'
-            value={collectionElementInformationToUpdate.collectionElementEmailToUpdate}
-            onChange={updateCollectionElementInformation}
-            name='collectionElementEmailToUpdate'    
-          />
-          <input id='collectionElementCooking'
-            type='text'
-            value={collectionElementInformationToUpdate.collectionElementCookingToUpdate}
-            onChange={updateCollectionElementInformation}
-            name='collectionElementCookingToUpdate'        
-          />
-          <input id='collectionElementRecommandation'
-            type='text'
-            value={collectionElementInformationToUpdate.collectionElementRecommandationToUpdate}
-            onChange={updateCollectionElementInformation}
-            name='collectionElementRecommandationToUpdate'        
-          />
+
+        <form className='collectionElementInformationContainer' onSubmit={handleSubmit}>
+          <div className='collectionElementLeftContainer'>
+            <label
+              htmlFor='collectionElementDescription'>Collection Description  
+            </label>
+            <input id='collectionElementDescription'
+              type='text'
+              value={collectionElementInformationToUpdate.collectionElementDescriptionToUpdate}
+              onChange={updateCollectionElementInformation}
+              name='collectionElementDescriptionToUpdate'        
+            />
+          </div >
+          <div div className='collectionElementRightContainer'>
+            <label
+              htmlFor='collectionElementEmail'>Informations techniques  
+            </label>
+            <input id='collectionElementEmail'
+              type='text'
+              value={collectionElementInformationToUpdate.collectionElementEmailToUpdate}
+              onChange={updateCollectionElementInformation}
+              name='collectionElementEmailToUpdate'    
+            />
+            <input id='collectionElementCooking'
+              type='text'
+              value={collectionElementInformationToUpdate.collectionElementCookingToUpdate}
+              onChange={updateCollectionElementInformation}
+              name='collectionElementCookingToUpdate'        
+            />
+            <input id='collectionElementRecommandation'
+              type='text'
+              value={collectionElementInformationToUpdate.collectionElementRecommandationToUpdate}
+              onChange={updateCollectionElementInformation}
+              name='collectionElementRecommandationToUpdate'        
+            />
+          </div>
           <button>Update Collection</button>
 
-
-            
-
-
-          
         </form>
 
-
-      </div>
     )
 }
