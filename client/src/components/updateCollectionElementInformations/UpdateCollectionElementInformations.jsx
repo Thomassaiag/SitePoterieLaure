@@ -9,7 +9,7 @@ export const UpdateCollectionElementInformations = ({collection_uid}) => {
     const [currentInformationsToUpdate, setCurrentInformationToUpdate]=useState(currentInformations)
     // const [currentInformationToUpdateText,setCurrentInformationToUpdateText]=useState()
 
-    const updateCollectionElementInformations=(e, informationId)=>{
+    const updateCollectionElementInformations=(e)=>{
         e.preventDefault()
         // console.log(e.target.name)
         setCurrentInformationToUpdate((prevInformations)=>{
@@ -70,9 +70,8 @@ export const UpdateCollectionElementInformations = ({collection_uid}) => {
                     <input
                         name={collection_element_information_uid}
                         key={collection_element_information_uid}
-                        // value={(e)=>findInformationTextForInformationUID(e,collection_element_information_uid, collection_element_information_text)}
                         value={collection_element_information_text}
-                        onChange={(e)=>updateCollectionElementInformations(e,collection_element_information_uid)}
+                        onChange={(e)=>updateCollectionElementInformations(e)}
                     />
                 )
             })

@@ -14,7 +14,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
       collectionElementCookingToUpdate: collectionElementCooking,
       collectionElementRecommandationToUpdate: collectionElementRecommandation,
       collectionUID: collectionUID,
-      // collectionInformations:currentInformations
+      collectionInformations:currentInformations
 
     })
 
@@ -26,7 +26,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
         collectionElementCookingToUpdate: collectionElementCooking,
         collectionElementRecommandationToUpdate: collectionElementRecommandation,
         collectionUID: collectionUID,
-        // collectionInformations:currentInformations
+        collectionInformations:currentInformations
       })
     },[collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID, currentInformations])
 
