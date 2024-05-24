@@ -2,17 +2,19 @@ import React, {useEffect, useState} from 'react'
 
 
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
+import { useCollectionElementInformationsToUpdate } from '../contextProvider/CollectionElementInformationsToUpdateContextProvider'
 
-export const UpdateCollectionElementInformations = ({collection_uid}) => {
+export const UpdateCollectionElementInformations = () => {
 
     const {currentInformations}=useCollectionElementInformations()
-    const [currentInformationsToUpdate, setCurrentInformationToUpdate]=useState(currentInformations)
-    // const [currentInformationToUpdateText,setCurrentInformationToUpdateText]=useState()
+    // const [currentInformationsToUpdate, setCurrentInformationToUpdate]=useState(currentInformations)
+    const {currentInformationsToUpdate, setCurrentInformationsToUpdate}=useCollectionElementInformationsToUpdate()
+
 
     const updateCollectionElementInformations=(e)=>{
         e.preventDefault()
         // console.log(e.target.name)
-        setCurrentInformationToUpdate((prevInformations)=>{
+        setCurrentInformationsToUpdate((prevInformations)=>{
             // console.log("prevInformations =>",prevInformations)
             // console.log(e.target.value)
             return prevInformations.map((prevInformation)=>{
@@ -39,7 +41,7 @@ export const UpdateCollectionElementInformations = ({collection_uid}) => {
 
     useEffect(()=>{
         if(currentInformations.length>0){
-            setCurrentInformationToUpdate(currentInformations)
+            setCurrentInformationsToUpdate(currentInformations)
         }
     },[currentInformations])
 

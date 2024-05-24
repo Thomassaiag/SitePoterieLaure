@@ -4,11 +4,11 @@ const CollectionElementInformationsToUpdate=createContext()
 
 export const CollectionElementInformationsToUpdateContextProvider = ({children}) => {
 
-    const [elementInformationToUpdate, setElementInformationToUpdate]=useState([])
+    const [currentInformationsToUpdate, setCurrentInformationsToUpdate]=useState([])
 
     return (
     <>
-        <CollectionElementInformationsToUpdate.Provider value={{elementInformationToUpdate, setElementInformationToUpdate}}>
+        <CollectionElementInformationsToUpdate.Provider value={{currentInformationsToUpdate, setCurrentInformationsToUpdate}}>
             {children}
         </CollectionElementInformationsToUpdate.Provider>
     </>
