@@ -25,7 +25,6 @@ app.use(cors())
 //   next();
 // });
 
-console.log(typeof process.env.DBPASSWORD, process.env.DBPASSWORD)
 
 app.use((req, res, next) => {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
@@ -363,8 +362,12 @@ app.put('/admin/deleteElementPicture/',async(req, res, next)=>{
 
 app.put('/admin/updateCollectionElementInformation',async(req, res,next)=>{
     try {
-        const {descriptionToUpdate, emailToUpdate, cookingToUpdate, recommandationToUpdate, collectionUID}=req.body
-        let collectionElementInformationToUpdate=await pool.query(
+        let {descriptionToUpdate, emailToUpdate, cookingToUpdate, recommandationToUpdate, collectionUID, informationsToUpdate}=req.body
+        console.log(informationsToUpdate)
+
+        await pool.query('BEGIN')
+
+        let collectionElementAttributesToUpdate=await pool.query(
             `UPDATE collection_element
             SET collection_element_description=$1,
                 collection_element_email=$2,
@@ -373,13 +376,34 @@ app.put('/admin/updateCollectionElementInformation',async(req, res,next)=>{
             WHERE collection_UID=$5
             `,[descriptionToUpdate,emailToUpdate, recommandationToUpdate,cookingToUpdate, collectionUID]
         )
-        if (collectionElementInformationToUpdate){
-            res.status(200).json({message: `collection ${collectionUID} updated` })        
+
+        // const updatedInformations = informationsToUpdate.map((information)=>{
+        //     let {collection_element_information_uid, collection_element_information_text}=information
+        //     console.log('uid => ',collection_element_information_uid)
+        //     console.log('text => ',collection_element_information_text)
+        //     return pool.query(
+        //         `UPDATE collection_element_informations
+        //         SET collection_element_information_text=$1
+        //         WHERE collection_element_information_uid=$2
+        //             AND collection_element_information_text<>$1;
+        //         `,[collection_element_information_text,collection_element_information_uid]
+        //     )
+        // })
+
+        // await Promise.all(updatedInformations)
+
+        await pool.query('COMMIT')
+
+
+        // if (collectionElementAttributesToUpdate && updatedInformations){
+        if (collectionElementAttributesToUpdate){
+            res.status(200).json({message: `collection ${collectionUID} updated and collection_element updated` })        
         }
-        else res.status(201).json({message: `collection ${collectionUID} NOT updated` })
+        else res.status(201).json({message: `collection ${collectionUID} or collection_element NOT updated` })
     } catch (error) {
-        console.error(`error updating collection ${collectionUID}=> ${err} `)
-        return res.status(400).json({message:"Deletion wasn't completed due to an error"})
+        await pool.query('ROLLBACK')
+        console.error(`error updating collection => ${error} `)
+        return res.status(400).json({message:"Update wasn't completed due to an error"})
     }
 
 

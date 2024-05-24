@@ -7,7 +7,6 @@ import { useCollectionElementInformationsToUpdate } from '../contextProvider/Col
 export const UpdateCollectionElementInformations = () => {
 
     const {currentInformations}=useCollectionElementInformations()
-    // const [currentInformationsToUpdate, setCurrentInformationToUpdate]=useState(currentInformations)
     const {currentInformationsToUpdate, setCurrentInformationsToUpdate}=useCollectionElementInformationsToUpdate()
 
 
@@ -27,15 +26,6 @@ export const UpdateCollectionElementInformations = () => {
                 }  
             }) 
         })
-        // setCurrentInformationToUpdateText((prevCurrentInformationsToUpdate)=>{
-        //     if (prevCurrentInformationsToUpdate){
-
-        //         let elementInformation = prevCurrentInformationsToUpdate.find((collectionElementInformation)=>collectionElementInformation.collection_element_information_uid===informationId)
-        //         console.log(elementInformation)
-        //         return elementInformation!==undefined ? elementInformation.collection_element_information_text : undefined
-        //     }
-        // })
-        // e.target.value=currentInformationToUpdateText
     }
 
 
@@ -49,18 +39,6 @@ export const UpdateCollectionElementInformations = () => {
         console.log(currentInformationsToUpdate)
     },[currentInformationsToUpdate])
 
-
-    // const findInformationTextForInformationUID=(e,id, defaultValue)=>{
-    //     e.preventDefault()
-    //     if(currentInformationsToUpdate){
-    //         let informationElement=currentInformationsToUpdate.find((currentInformation)=>currentInformation.collection_element_information_uid==id)
-    //         console.log(informationElement.collection_element_information_text)
-    //         return informationElement.collection_element_information_text
-    //     } else {
-    //         console.log(defaultValue)
-    //         return defaultValue
-    //     } 
-    // }
 
   return (
     <div className='collectionElementInformationsContainer'>

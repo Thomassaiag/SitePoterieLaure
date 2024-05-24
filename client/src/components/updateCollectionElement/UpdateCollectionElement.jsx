@@ -1,37 +1,40 @@
 import React, {Fragment, useEffect, useState} from 'react'
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
 import { UpdateCollectionElementInformations } from '../updateCollectionElementInformations/UpdateCollectionElementInformations'
+import { useCollectionElementInformationsToUpdate } from '../contextProvider/CollectionElementInformationsToUpdateContextProvider'
 import '../collectionElement/CollectionElement.css'
 
-export const UpdateCollectionElement = ({collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID}) => {
+export const UpdateCollectionElement = ({collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID, fetchCollectionElement}) => {
 
 
-    const {currentInformations, setCurrentInformations}=useCollectionElementInformations()
+    const {currentInformations}=useCollectionElementInformations()
+    const {currentInformationsToUpdate}=useCollectionElementInformationsToUpdate()
 
-    const[collectionElementInformationToUpdate, SetcollectionElementInformationToUpdate]=useState({
+    const[collectionElementAttributesToUpdate, setCollectionElementAttributesToUpdate]=useState({
       collectionElementDescriptionToUpdate:collectionElementDescription,
       collectionElementEmailToUpdate: collectionElementEmail,
       collectionElementCookingToUpdate: collectionElementCooking,
       collectionElementRecommandationToUpdate: collectionElementRecommandation,
       collectionUID: collectionUID,
-      collectionInformations:currentInformations
+      collectionElementInformationsToUpdate:currentInformations
 
     })
 
 
     useEffect(()=>{
-      SetcollectionElementInformationToUpdate({
+      setCollectionElementAttributesToUpdate({
         collectionElementDescriptionToUpdate:collectionElementDescription,
         collectionElementEmailToUpdate: collectionElementEmail,
         collectionElementCookingToUpdate: collectionElementCooking,
         collectionElementRecommandationToUpdate: collectionElementRecommandation,
         collectionUID: collectionUID,
-        collectionInformations:currentInformations
+        collectionElementInformationsToUpdate:currentInformationsToUpdate
       })
-    },[collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID, currentInformations])
+    },[collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID, currentInformationsToUpdate])
 
 
-    const handleSubmit=async()=>{
+    const handleSubmit=async(e)=>{
+      e.preventDefault()
       try {
         let response = await fetch('http://localhost:5000/admin/updateCollectionElementInformation',{
           method: 'PUT',
@@ -39,15 +42,17 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
             'Content-Type': 'application/json'
           },
           body:JSON.stringify({
-            descriptionToUpdate:collectionElementInformationToUpdate.collectionElementDescriptionToUpdate,
-            emailToUpdate:collectionElementInformationToUpdate.collectionElementEmailToUpdate,
-            cookingToUpdate:collectionElementInformationToUpdate.collectionElementCookingToUpdate,
-            recommandationToUpdate:collectionElementInformationToUpdate.collectionElementRecommandationToUpdate,
-            collectionUID:collectionElementInformationToUpdate.collectionUID
+            descriptionToUpdate:collectionElementAttributesToUpdate.collectionElementDescriptionToUpdate,
+            emailToUpdate:collectionElementAttributesToUpdate.collectionElementEmailToUpdate,
+            cookingToUpdate:collectionElementAttributesToUpdate.collectionElementCookingToUpdate,
+            recommandationToUpdate:collectionElementAttributesToUpdate.collectionElementRecommandationToUpdate,
+            collectionUID:collectionElementAttributesToUpdate.collectionUID,
+            informationsToUpdate:collectionElementAttributesToUpdate.collectionElementInformationsToUpdate
           })
         })
-        let data=response.json()
+        let data= await response.json()
         console.log(data)
+        fetchCollectionElement()
         
       } catch (error) {
         console.error({message: error})
@@ -56,12 +61,12 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
     }
 
     // useEffect(()=>{
-    //   console.log(collectionElementInformationToUpdate)
-    // },[collectionElementInformationToUpdate])
+    //   console.log(collectionElementAttributesToUpdate)
+    // },[collectionElementAttributesToUpdate])
 
     const updateCollectionElement=(e)=>{
       e.preventDefault()
-      SetcollectionElementInformationToUpdate({...collectionElementInformationToUpdate,
+      setCollectionElementAttributesToUpdate({...collectionElementAttributesToUpdate,
         [e.target.name]:e.target.value
       })
     }
@@ -77,7 +82,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
             </label>
             <input id='collectionElementDescription'
               type='text'
-              value={collectionElementInformationToUpdate.collectionElementDescriptionToUpdate}
+              value={collectionElementAttributesToUpdate.collectionElementDescriptionToUpdate}
               onChange={updateCollectionElement}
               name='collectionElementDescriptionToUpdate'        
             />
@@ -90,19 +95,19 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
             <br></br>
             <input id='collectionElementEmail'
               type='text'
-              value={collectionElementInformationToUpdate.collectionElementEmailToUpdate}
+              value={collectionElementAttributesToUpdate.collectionElementEmailToUpdate}
               onChange={updateCollectionElement}
               name='collectionElementEmailToUpdate'    
             />
             <input id='collectionElementCooking'
               type='text'
-              value={collectionElementInformationToUpdate.collectionElementCookingToUpdate}
+              value={collectionElementAttributesToUpdate.collectionElementCookingToUpdate}
               onChange={updateCollectionElement}
               name='collectionElementCookingToUpdate'        
             />
             <input id='collectionElementRecommandation'
               type='text'
-              value={collectionElementInformationToUpdate.collectionElementRecommandationToUpdate}
+              value={collectionElementAttributesToUpdate.collectionElementRecommandationToUpdate}
               onChange={updateCollectionElement}
               name='collectionElementRecommandationToUpdate'        
             />

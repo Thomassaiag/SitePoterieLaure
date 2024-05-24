@@ -148,7 +148,7 @@ export const CollectionElement = () => {
               </div>
             </div>
             <div className='collectionElementInformationContainer'> 
-              <UpdateCollectionElement  collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation} collectionUID={newId}/>
+              <UpdateCollectionElement  collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation} collectionUID={newId} fetchCollectionElement={fetchCollectionElement}/>
 
             </div>
           </div>
