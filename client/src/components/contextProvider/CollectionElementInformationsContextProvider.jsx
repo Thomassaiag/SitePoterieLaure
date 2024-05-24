@@ -4,11 +4,11 @@ const CollectionElementInformations=createContext()
 
 export const CollectionElementInformationsContextProvider = ({children}) => {
 
-    const [collectionElementInformations, setCollectionElementInformations]=useState([])
+    const [currentInformations, setCurrentInformations]=useState([])
 
     return (
     <>
-        <CollectionElementInformations.Provider value={{collectionElementInformations, setCollectionElementInformations}}>
+        <CollectionElementInformations.Provider value={{currentInformations, setCurrentInformations}}>
             {children}
         </CollectionElementInformations.Provider>
     </>
@@ -16,4 +16,4 @@ export const CollectionElementInformationsContextProvider = ({children}) => {
 }
 
 
-export const useConnectionStatus=()=>useContext(CollectionElementInformations)
+export const useCollectionElementInformations=()=>useContext(CollectionElementInformations)

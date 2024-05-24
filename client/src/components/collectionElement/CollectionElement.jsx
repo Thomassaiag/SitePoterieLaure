@@ -5,7 +5,7 @@ import { CollectionElementInformations } from '../collectionElementInformations/
 import { ScrollToTop } from '../scrollToTop/ScrollToTop'
 import './CollectionElement.css'
 import { CollectionMainPic } from '../collectionMainPic/CollectionMainPic'
-import { UpdateElementInformation } from '../updateElementInformation/UpdateElementInformation'
+import { UpdateCollectionElement } from '../updateCollectionElement/UpdateCollectionElement'
 
 
 export const CollectionElement = () => {
@@ -148,7 +148,7 @@ export const CollectionElement = () => {
               </div>
             </div>
             <div className='collectionElementInformationContainer'> 
-              <UpdateElementInformation  collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation} collectionUID={newId}/>
+              <UpdateCollectionElement  collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation} collectionUID={newId}/>
 
             </div>
           </div>

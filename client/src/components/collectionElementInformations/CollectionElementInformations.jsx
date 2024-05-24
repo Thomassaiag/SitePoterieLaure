@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import './CollectionElementInformations.css'
+import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
 
 export const CollectionElementInformations = ({collection_uid}) => {
 
-const [currentInformations, setCurrentInformations]=useState([])
+const {currentInformations, setCurrentInformations}=useCollectionElementInformations()
 
 const fetchElementInformations=async()=>{
     let response=await fetch(`http://localhost:5000/collections/${collection_uid}/information`)
