@@ -3,7 +3,7 @@ import { useCollectionElementInformations } from '../contextProvider/CollectionE
 import { UpdateCollectionElementInformations } from '../updateCollectionElementInformations/UpdateCollectionElementInformations'
 import { useCollectionElementInformationsToUpdate } from '../contextProvider/CollectionElementInformationsToUpdateContextProvider'
 import '../collectionElement/CollectionElement.css'
-import { response } from 'express'
+
 
 export const UpdateCollectionElement = ({collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID, fetchCollectionElement}) => {
 
@@ -53,7 +53,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
         })
         let data= await response.json()
         console.log(data)
-        fetchCollectionElement()
+        
         try {
           let response=await fetch('http://localhost:5000/admin/updateCollectionElementInformations',{
             method:'PUT',
@@ -66,6 +66,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
           })
           let data=response.json()
           console.log(data)
+          fetchCollectionElement()
         } catch (error) {
           console.error({message: error})  
         }
