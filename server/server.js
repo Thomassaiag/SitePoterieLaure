@@ -365,7 +365,7 @@ app.put('/admin/updateCollectionElementAttributes',async(req, res,next)=>{
         let {descriptionToUpdate, emailToUpdate, cookingToUpdate, recommandationToUpdate, collectionUID}=req.body
         console.log(informationsToUpdate)
 
-        await pool.query('BEGIN')
+        // await pool.query('BEGIN')
 
         let collectionElementAttributesToUpdate=await pool.query(
             `UPDATE collection_element
@@ -392,14 +392,14 @@ app.put('/admin/updateCollectionElementAttributes',async(req, res,next)=>{
 
         // await Promise.all(updatedInformations)
 
-        await pool.query('COMMIT')
+        // await pool.query('COMMIT')
 
 
         // if (collectionElementAttributesToUpdate && updatedInformations){
         if (collectionElementAttributesToUpdate){
-            res.status(200).json({message: `collection ${collectionUID} updated and collection_element updated` })        
+            res.status(200).json({message: `collection ${collectionUID} updated `})        
         }
-        else res.status(201).json({message: `collection ${collectionUID} or collection_element NOT updated` })
+        else res.status(201).json({message: `collection ${collectionUID} NOT updated` })
     } catch (error) {
         await pool.query('ROLLBACK')
         console.error(`error updating collection => ${error} `)
@@ -408,6 +408,41 @@ app.put('/admin/updateCollectionElementAttributes',async(req, res,next)=>{
 
 
 })
+
+
+// app.use('/admin/updateCollectionElementInformations',async(req,res,next)=>{
+//     try{
+//         const {informationsToUpdate}=req.body
+
+//         await pool.query('BEGIN')
+
+//         const updatedInformations = informationsToUpdate.map((information)=>{
+//             let {collection_element_information_uid, collection_element_information_text}=information
+//             console.log('uid => ',collection_element_information_uid)
+//             console.log('text => ',collection_element_information_text)
+//             return pool.query(
+//                 `UPDATE collection_element_informations
+//                 SET collection_element_information_text=$1
+//                 WHERE collection_element_information_uid=$2
+//                     AND collection_element_information_text<>$1;
+//                 `,[collection_element_information_text,collection_element_information_uid]
+//             )
+//         })
+
+//         await Promise.all(updatedInformations)
+
+//         await pool.query('COMMIT')
+
+
+//         if (updatedInformations){
+//             res.status(200).json({message: `collection Element Informations updated` })        
+//         } else res.status(201).json({message: `collection Element Informations NOT updated` })
+//     } catch (error) {
+//         await pool.query('ROLLBACK')
+//         console.error(`error updating collection => ${error} `)
+//         return res.status(400).json({message:"Update wasn't completed due to an error"})
+//     }
+// })
 
 
 //----------------------------------------------------------------------

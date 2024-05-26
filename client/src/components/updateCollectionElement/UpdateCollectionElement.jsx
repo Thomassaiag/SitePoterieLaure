@@ -55,7 +55,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
         console.log(data)
         fetchCollectionElement()
         try {
-          let response=await fetch('http://localhost/admin/updateCollectionElementInformations',{
+          let response=await fetch('http://localhost:5000/admin/updateCollectionElementInformations',{
             method:'PUT',
             headers: {
               'Content-Type': 'application/json'
