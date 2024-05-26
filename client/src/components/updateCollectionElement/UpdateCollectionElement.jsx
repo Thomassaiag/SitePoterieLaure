@@ -3,6 +3,7 @@ import { useCollectionElementInformations } from '../contextProvider/CollectionE
 import { UpdateCollectionElementInformations } from '../updateCollectionElementInformations/UpdateCollectionElementInformations'
 import { useCollectionElementInformationsToUpdate } from '../contextProvider/CollectionElementInformationsToUpdateContextProvider'
 import '../collectionElement/CollectionElement.css'
+import { response } from 'express'
 
 export const UpdateCollectionElement = ({collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID, fetchCollectionElement}) => {
 
@@ -36,7 +37,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
     const handleSubmit=async(e)=>{
       e.preventDefault()
       try {
-        let response = await fetch('http://localhost:5000/admin/updateCollectionElementInformation',{
+        let response = await fetch('http://localhost:5000/admin/updateCollectionElementAttributes',{
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
@@ -47,17 +48,30 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
             cookingToUpdate:collectionElementAttributesToUpdate.collectionElementCookingToUpdate,
             recommandationToUpdate:collectionElementAttributesToUpdate.collectionElementRecommandationToUpdate,
             collectionUID:collectionElementAttributesToUpdate.collectionUID,
-            informationsToUpdate:collectionElementAttributesToUpdate.collectionElementInformationsToUpdate
+            // informationsToUpdate:collectionElementAttributesToUpdate.collectionElementInformationsToUpdate
           })
         })
         let data= await response.json()
         console.log(data)
         fetchCollectionElement()
-        
+        try {
+          let response=await fetch('http://localhost/admin/updateCollectionElementInformations',{
+            method:'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({
+              informationsToUpdate:collectionElementAttributesToUpdate.collectionElementInformationsToUpdate
+            })
+          })
+          let data=response.json()
+          console.log(data)
+        } catch (error) {
+          console.error({message: error})  
+        }
       } catch (error) {
         console.error({message: error})
       }
-      return
     }
 
     // useEffect(()=>{

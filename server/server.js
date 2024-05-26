@@ -360,9 +360,9 @@ app.put('/admin/deleteElementPicture/',async(req, res, next)=>{
 
 //update collection Element information
 
-app.put('/admin/updateCollectionElementInformation',async(req, res,next)=>{
+app.put('/admin/updateCollectionElementAttributes',async(req, res,next)=>{
     try {
-        let {descriptionToUpdate, emailToUpdate, cookingToUpdate, recommandationToUpdate, collectionUID, informationsToUpdate}=req.body
+        let {descriptionToUpdate, emailToUpdate, cookingToUpdate, recommandationToUpdate, collectionUID}=req.body
         console.log(informationsToUpdate)
 
         await pool.query('BEGIN')
