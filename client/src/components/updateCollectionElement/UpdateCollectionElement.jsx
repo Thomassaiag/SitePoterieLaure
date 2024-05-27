@@ -3,7 +3,7 @@ import { useCollectionElementInformations } from '../contextProvider/CollectionE
 import { UpdateCollectionElementInformations } from '../updateCollectionElementInformations/UpdateCollectionElementInformations'
 import { useCollectionElementInformationsToUpdate } from '../contextProvider/CollectionElementInformationsToUpdateContextProvider'
 import '../collectionElement/CollectionElement.css'
-import { response } from 'express'
+
 
 export const UpdateCollectionElement = ({collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID, fetchCollectionElement}) => {
 
@@ -101,7 +101,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
               name='collectionElementDescriptionToUpdate'        
             />
           </div >
-          <div div className='collectionElementRightContainer'>
+          <div className='collectionElementRightContainer'>
             <label
               htmlFor='collectionElementEmail'>Informations techniques  
             </label>
