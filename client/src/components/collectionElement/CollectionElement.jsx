@@ -6,6 +6,7 @@ import { ScrollToTop } from '../scrollToTop/ScrollToTop'
 import './CollectionElement.css'
 import { CollectionMainPic } from '../collectionMainPic/CollectionMainPic'
 import { UpdateCollectionElement } from '../updateCollectionElement/UpdateCollectionElement'
+import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
 
 
 export const CollectionElement = () => {
@@ -24,6 +25,7 @@ export const CollectionElement = () => {
   const [collectionElementEmail, setCollectionElementEmail]=useState()
   const [collectionElementCooking, setCollectionElementCooking]=useState()
   const [collectionElementRecommandation, setCollectionElementRecommandation]=useState()
+  const {currentInformations, setCurrentInformations}=useCollectionElementInformations()
 
 
   useEffect(()=>{
@@ -55,6 +57,13 @@ export const CollectionElement = () => {
       
     }
   }
+
+
+  const fetchElementInformations=async(collectionUid)=>{
+    let response=await fetch(`http://localhost:5000/collections/${collectionUid}/information`)
+    let jsonData=await response.json()
+    setCurrentInformations(jsonData)
+}
   
   const fetchAllCollectionUids=async()=>{
     try {
@@ -141,14 +150,14 @@ export const CollectionElement = () => {
               </div>
               <div className='collectionElementRightContainer'>
                 <h2 >Informations techniques</h2>
-                <CollectionElementInformations collection_uid={newId}/>
+                <CollectionElementInformations collection_uid={newId} fetchElementInformations={fetchElementInformations}/>
                 <p>{collectionElementEmail}</p>
                 <p>{collectionElementCooking}</p>
                 <p>{collectionElementRecommandation}</p>
               </div>
             </div>
             <div className='collectionElementInformationContainer'> 
-              <UpdateCollectionElement  collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation} collectionUID={newId} fetchCollectionElement={fetchCollectionElement}/>
+              <UpdateCollectionElement  collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation} collectionUID={newId} fetchCollectionElement={fetchCollectionElement} fetchElementInformations={fetchElementInformations}/>
 
             </div>
           </div>

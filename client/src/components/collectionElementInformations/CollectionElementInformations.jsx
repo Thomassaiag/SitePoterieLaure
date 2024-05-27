@@ -1,19 +1,21 @@
 import React, {useEffect, useState} from 'react'
 import './CollectionElementInformations.css'
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
+import { useCollectionElementInformationsToUpdate } from '../contextProvider/CollectionElementInformationsToUpdateContextProvider'
 
-export const CollectionElementInformations = ({collection_uid}) => {
+export const CollectionElementInformations = ({collection_uid, fetchElementInformations}) => {
 
 const {currentInformations, setCurrentInformations}=useCollectionElementInformations()
+const {currentInformationsToUpdate}=useCollectionElementInformationsToUpdate()
 
-const fetchElementInformations=async()=>{
-    let response=await fetch(`http://localhost:5000/collections/${collection_uid}/information`)
-    let jsonData=await response.json()
-    setCurrentInformations(jsonData)
-}
+// const fetchElementInformations=async()=>{
+//     let response=await fetch(`http://localhost:5000/collections/${collection_uid}/information`)
+//     let jsonData=await response.json()
+//     setCurrentInformations(jsonData)
+// }
 
 useEffect(()=>{
-    fetchElementInformations()
+    fetchElementInformations(collection_uid)
 },[collection_uid])
 
 useEffect(()=>{

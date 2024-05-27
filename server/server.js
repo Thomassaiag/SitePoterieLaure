@@ -334,12 +334,12 @@ app.put('/admin/deleteCollection/',async(req, res, next)=>{
             WHERE collection_uid=$1`,[collectionUID]
         )
         if(collectionToDelete){
-            return res.status(200).json({message:"collection deleted"})
             console.log("collection deleted")
+            return res.status(200).json({message:"collection deleted"})
         }
         else {
-            return res.status(201).json({message:"collection didn't deleted"})
             console.log("the collection didn't get deleted")
+            return res.status(201).json({message:"collection didn't deleted"})
         }
     } catch (err) {
         console.error('error deleting collection =>',err )
@@ -405,7 +405,6 @@ app.put('/admin/updateCollectionElementAttributes',async(req, res,next)=>{
         console.error(`error updating collection => ${error} `)
         return res.status(400).json({message:"Update wasn't completed due to an error"})
     }
-
 
 })
 

@@ -5,7 +5,7 @@ import { useCollectionElementInformationsToUpdate } from '../contextProvider/Col
 import '../collectionElement/CollectionElement.css'
 
 
-export const UpdateCollectionElement = ({collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID, fetchCollectionElement}) => {
+export const UpdateCollectionElement = ({collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID, fetchCollectionElement, fetchElementInformations}) => {
 
 
     const {currentInformations}=useCollectionElementInformations()
@@ -67,6 +67,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
           let data=response.json()
           console.log(data)
           fetchCollectionElement()
+          fetchElementInformations(collectionUID)
         } catch (error) {
           console.error({message: error})  
         }
