@@ -4,6 +4,7 @@ const pool=require('./database/db')
 const multer=require('multer')
 const path=require('path')
 const nodemailer =require('nodemailer')
+require('dotenv').config()
 
 const bcrypt=require('bcrypt')
 const {hashPassword}=require('./passwordEncryption')
@@ -11,8 +12,9 @@ const {hashPassword}=require('./passwordEncryption')
 
 const cors= require('cors')
 
-const collectionPath="C:/Users/Moi/OneDrive/Documents/Ada/ProjetsPerso/SiteWebLaure/client/public/images/Collections/"
-const collectionElementPath="C:/Users/Moi/OneDrive/Documents/Ada/ProjetsPerso/SiteWebLaure/client/public/images/Test/"
+const collectionPath=process.env.COLLECTIONPICTUREPATH
+const collectionElementPath=process.env.COLLECTIONELEMENTPICTURESPATH
+
 app.use(express.json())
 
 
@@ -212,6 +214,7 @@ app.post('/admin/uploadCollection', upload.single('file'), async(req, res, next)
 
     const {collectionTitle, collectionDescription}=req.body
     console.log(collectionTitle)
+    console.log(upload)
     const collectionPictureAlt=`Image ${collectionTitle}`
     const collectionPictureUrl=`/images/Collections/${req.file.originalname}`
 
@@ -246,27 +249,39 @@ const storageCollectionElementPicture=multer.diskStorage({
 const uploadCollectionElementPicture=multer({storage:storageCollectionElementPicture})
 
 app.post('/admin/editElement/addNewPicture', uploadCollectionElementPicture.single('file'), async(req, res, next)=>{
-
-    const {file, collectionUID}=req.body
-    console.log(file)
-    console.log(collectionUID)
-    const collectionElementPictureAlt=`Image ${file}`
-    const collectionElementPictureUrl=`/images/Collections/${req.file.originalname}`
-
+    const {collectionUID}=req.body
     try{
-        const newCollectionElementPicture=await pool.query(
-            'INSERT INTO collection_element_pictures (collection_uid, collection_element_picture_url, collection_element_picture_alt, collection_element_pictures_deletionflag) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-            [collectionUID, collectionElementPictureUrl, collectionElementPictureAlt, false]
+        const collectionName=await pool.query(
+            `SELECT collection_title FROM collection
+            WHERE collection_uid=$1`,[collectionUID]
         )
-        if(newCollectionElementPicture){
-            res.status(200).json({message:newCollection.rows[0]})
+        if (collectionName){
+            res.status(200).json({message:collectionName.rows[0]})
+            console.log('collection Name =>',collectionName)
+            const collectionDirectory=collectionName.rows[0].collection_title
+            console.log('collection Directory =>',collectionDirectory)
+            const collectionElementPictureAlt=`Image ${req.file.originalname}`
+            const collectionElementPictureUrl=`/images/${req.file.originalname}`
+            
+            try{
+                const newCollectionElementPicture=await pool.query(
+                    'INSERT INTO collection_element_pictures (collection_uid, collection_element_picture_url, collection_element_picture_alt, collection_element_pictures_deletionflag) VALUES ($1, $2, $3, $4) RETURNING *',
+                    [collectionUID, collectionElementPictureUrl, collectionElementPictureAlt, false]
+                )
+                if(newCollectionElementPicture){
+                    res.status(200).json({message:newCollectionElementPicture.rows[0]})
+                }
+                else res.status(201).json({message:"picture not added"})
+            }
+            catch(err){
+                console.error('Error adding newCollectionElemenPicture', err)
+                res.status(500).send('Server Error')
+            }
         }
-        else res.status(201).json({message:"picture not added"})
     }
-    catch(err){
-        console.error('Error adding newCollection', err)
-        res.status(500).send('Server Error')
+    catch (error){
     }
+
 })
 
 

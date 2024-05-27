@@ -30,6 +30,7 @@ export const FormulaireCreationCollection = () => {
         newCollectionData.append('collectionDescription', collectionText.collectionDescription)
 
         console.log(newCollectionData.get('collectionTitle'))
+        console.log(newCollectionData.get('file'))
 
         if(!collectionPicture){
             alert('Merci de sélectionner une image')

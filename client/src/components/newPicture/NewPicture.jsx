@@ -1,40 +1,58 @@
-import React, {useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import './NewPicture'
 
 export const NewPicture = ({collectionUID}) => {
     const fileInputRef=useRef(null)
 
-    const[newCollectionElementPicture, setNewCollectionElementPicture]=useState(null)
+    const[newCollectionElementPicture, setNewCollectionElementPicture]=useState()
     const[currentCollectionUID, setCurrentCollectionUID]=useState(collectionUID)
 
-
-    const addNewCollectionElementPicture=()=>{
+    const addNewCollectionElementPicture=(event)=>{
+        event.stopPropagation()
         console.log("addition of a new picture")
         fileInputRef.current.click()
     }
-    const collectionPictureElement= new FormData()
-    collectionPictureElement.append("file", newCollectionElementPicture)
-
-    const handleFileChange=async(event)=>{
+    
+    
+    const handleFileChange=(event)=>{
         event.preventDefault();
         setNewCollectionElementPicture(event.target.files[0])
-        console.log(collectionPictureElement.file)
+    }    
+    
+    const updateFile = async()=>{
+
+        console.log(newCollectionElementPicture)
+        const collectionPictureElement= new FormData()
+        collectionPictureElement.append('file', newCollectionElementPicture)
+        collectionPictureElement.append('collectionUID', collectionUID)
+        
+        
         console.log(collectionUID)
+        
         if(newCollectionElementPicture){
-            let response=await fetch('http://localhost/admin/editElement/addNewPicture',{
-                method:"PUT",
+            let response=await fetch('http://localhost:5000/admin/editElement/addNewPicture',{
+                method:'POST',
                 // headers: {
                 //     'Content-Type': 'application/json'
                 // },
                 body:collectionPictureElement
             })
-            let data=await response.json()
-            console.log(data)
+            if(!response.ok){
+                throw new Error('Network response was not OK')
+            }
+            else {
+                let data=await response.json()
+                console.log(data)
+            }
         }
-        else console.log("no image was uploaded")
-
+        else console.log("no image was uploaded")        
     }
     
+    
+    useEffect((event)=>{
+        updateFile()
+    },[newCollectionElementPicture])
+
     return (
         <div onClick={addNewCollectionElementPicture}>
             <p>Ajouter une Photo</p>
@@ -44,7 +62,8 @@ export const NewPicture = ({collectionUID}) => {
                     type='file'
                     ref={fileInputRef}
                     style={{display: 'none'}}
-                    onChange={handleFileChange}    
+                    onChange={handleFileChange}
+                    onClick={(event)=>event.stopPropagation()} 
                 />
             </form>
         </div>
