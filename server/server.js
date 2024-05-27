@@ -395,25 +395,6 @@ app.put('/admin/updateCollectionElementAttributes',async(req, res,next)=>{
             `,[descriptionToUpdate,emailToUpdate, recommandationToUpdate,cookingToUpdate, collectionUID]
         )
 
-        // const updatedInformations = informationsToUpdate.map((information)=>{
-        //     let {collection_element_information_uid, collection_element_information_text}=information
-        //     console.log('uid => ',collection_element_information_uid)
-        //     console.log('text => ',collection_element_information_text)
-        //     return pool.query(
-        //         `UPDATE collection_element_informations
-        //         SET collection_element_information_text=$1
-        //         WHERE collection_element_information_uid=$2
-        //             AND collection_element_information_text<>$1;
-        //         `,[collection_element_information_text,collection_element_information_uid]
-        //     )
-        // })
-
-        // await Promise.all(updatedInformations)
-
-        // await pool.query('COMMIT')
-
-
-        // if (collectionElementAttributesToUpdate && updatedInformations){
         if (collectionElementAttributesToUpdate){
             res.status(200).json({message: `collection ${collectionUID} updated `})        
             console.log('all good')
@@ -429,34 +410,39 @@ app.put('/admin/updateCollectionElementAttributes',async(req, res,next)=>{
 })
 
 
-app.use('/admin/updateCollectionElementInformations',async(req,res,next)=>{
+app.put('/admin/updateCollectionElementInformations',async(req,res,next)=>{
     try{
         const {informationsToUpdate}=req.body
 
         await pool.query('BEGIN')
 
-        const updatedInformations = informationsToUpdate.map((information)=>{
-            let {collection_element_information_uid, collection_element_information_text}=information
+        for (let informationToUpdate of informationsToUpdate) {
+
+            let {collection_element_information_uid, collection_element_information_text}=informationToUpdate
             console.log('uid => ',collection_element_information_uid)
             console.log('text => ',collection_element_information_text)
-            return pool.query(
+            let result= await pool.query(
                 `UPDATE collection_element_informations
                 SET collection_element_information_text=$1
                 WHERE collection_element_information_uid=$2
-                    AND collection_element_information_text<>$1;
+                AND collection_element_information_text<>$1;
                 `,[collection_element_information_text,collection_element_information_uid]
             )
-        })
+            if(result.rowCount===0){
+                console.log(`No Update was done for uid ${collection_element_information_uid}`)
+            }
+            else {
+                console.log(`Update was successful for uid ${collection_element_information_uid}`)
+            }
+        }
 
-        await Promise.all(updatedInformations)
 
         await pool.query('COMMIT')
 
 
-        if (updatedInformations){
-            res.status(200).json({message: `collection Element Informations updated` })        
-            console.log('update information ok')
-        } else res.status(201).json({message: `collection Element Informations NOT updated` })
+        res.status(200).json({message: `collection Element Informations updated` })        
+        console.log('update information ok')
+
     } catch (error) {
         await pool.query('ROLLBACK')
         console.error(`error updating collection => ${error} `)

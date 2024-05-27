@@ -33,6 +33,7 @@ export const UpdateCollectionElementInformations = () => {
         if(currentInformations.length>0){
             setCurrentInformationsToUpdate(currentInformations)
         }
+        else setCurrentInformationsToUpdate([])
     },[currentInformations])
 
     useEffect(()=>{
@@ -44,8 +45,8 @@ export const UpdateCollectionElementInformations = () => {
     <div className='collectionElementInformationsContainer'>
     {
         currentInformationsToUpdate ?(
-            currentInformationsToUpdate.map((currentInformation)=>{
-                let {collection_element_information_text, collection_element_information_uid}=currentInformation
+            currentInformationsToUpdate.map((currentInformationToUpdate)=>{
+                let {collection_element_information_text, collection_element_information_uid}=currentInformationToUpdate
                 return(
                     <input
                         name={collection_element_information_uid}
