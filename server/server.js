@@ -256,8 +256,6 @@ app.post('/admin/editElement/addNewPicture', uploadCollectionElementPicture.sing
             WHERE collection_uid=$1`,[collectionUID]
         )
         if (collectionName){
-            res.status(200).json({message:collectionName.rows[0]})
-            console.log('collection Name =>',collectionName)
             const collectionDirectory=collectionName.rows[0].collection_title
             console.log('collection Directory =>',collectionDirectory)
             const collectionElementPictureAlt=`Image ${req.file.originalname}`
@@ -269,17 +267,22 @@ app.post('/admin/editElement/addNewPicture', uploadCollectionElementPicture.sing
                     [collectionUID, collectionElementPictureUrl, collectionElementPictureAlt, false]
                 )
                 if(newCollectionElementPicture){
-                    res.status(200).json({message:newCollectionElementPicture.rows[0]})
+                    return res.status(200).json({message:newCollectionElementPicture.rows[0]})
                 }
-                else res.status(201).json({message:"picture not added"})
+                else {
+                    return res.status(201).json({message:"picture not added"})
+                }
             }
-            catch(err){
-                console.error('Error adding newCollectionElemenPicture', err)
-                res.status(500).send('Server Error')
+            catch(error){
+                console.error('Error adding newCollectionElemenPicture', error)
+                return res.status(500).send('Server Error')
             }
         }
     }
     catch (error){
+        console.error('Error getting Collection UID', error)
+        return res.status(500).send('Server Error 2')
+
     }
 
 })
