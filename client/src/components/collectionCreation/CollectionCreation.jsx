@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import { CollectionElementCreation } from '../collectionElementCreation/CollectionElementCreation'
 
 export const CollectionCreation = () => {
     const [collectionText, setCollectionText]=useState({
@@ -6,6 +7,8 @@ export const CollectionCreation = () => {
         collectionDescription:''
     })
     const [collectionPicture, setCollectionPicture]=useState(null)
+
+    const [collectionCreated, setCollectionCreated]=useState(false)
 
 
     const handleFileChange=(event)=>{
@@ -50,6 +53,7 @@ export const CollectionCreation = () => {
                 throw new Error('Network response was not OK')
             }
             else console.log('New Entry Created Successfuly')
+            setCollectionCreated(true)
         } catch (err) {
             console.error('Error adding New Collection', err)
         }
@@ -93,6 +97,7 @@ export const CollectionCreation = () => {
 
             <button type='submit'>Créer Collection</button>
         </form>
+        {collectionCreated ? <CollectionElementCreation/> : <></>}
     </div>
     )
 }
