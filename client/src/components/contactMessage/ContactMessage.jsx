@@ -72,15 +72,17 @@ export const ContactMessage = () => {
             <div className='contactFormContainer'>
                 <form className='contactForm' onSubmit={sendMessage}>
                     <div className='NameFirstNameContainer'>
-                        <label className="nameLabel" for='firstName'>Prénom</label>
+                        <label className="nameLabel" htmlFor='firstName'>Prénom</label>
                         <input
+                            id='firstName'
                             className='name'
                             name='firstName'
                             placeholder='Votre Prénom'
                             onChange={handleTextChange}
                         />
-                        <label className="nameLabel" for='lastName'>Nom</label>
+                        <label className="nameLabel" htmlFor='lastName'>Nom</label>
                         <input
+                            id='lastName'
                             className='name'
                             name='lastName'
                             placeholder='Votre Nom'
@@ -88,8 +90,9 @@ export const ContactMessage = () => {
                         />
                     </div>
                     <div className='emailContainer'>
-                        <label for='senderEmail'>Adresse Email</label>
+                        <label htmlFor='senderEmail'>Adresse Email</label>
                         <input
+                            id='senderEmail'
                             className='senderEmail'
                             name='senderEmail'
                             placeholder='Adresse email'
@@ -97,8 +100,9 @@ export const ContactMessage = () => {
                         />
                     </div>
                     <div className='objectContainer'>
-                        <label for='object'>Objet du Message</label>
+                        <label htmlFor='object'>Objet du Message</label>
                         <input
+                            id='object'
                             className='object'
                             name='object'
                             placeholder='Objet du Message'
@@ -106,8 +110,9 @@ export const ContactMessage = () => {
                         />
                     </div>
                     <div className='messageContainer'>
-                        <label className= "messageLabel"for='senderMessage'>Message</label>
+                        <label className= "messageLabel" htmlFor='senderMessage'>Message</label>
                         <textarea
+                            id='senderMessage'
                             value={emailData.senderMessage}
                             className='senderMessage'
                             name='senderMessage'
