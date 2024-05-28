@@ -210,7 +210,7 @@ const storage=multer.diskStorage({
 
 const upload=multer({storage:storage})
 
-app.post('/admin/uploadCollection', upload.single('file'), async(req, res, next)=>{
+app.post('/admin/createCollection', upload.single('file'), async(req, res, next)=>{
 
     const {collectionTitle, collectionDescription}=req.body
     console.log(collectionTitle)
@@ -223,7 +223,7 @@ app.post('/admin/uploadCollection', upload.single('file'), async(req, res, next)
             'INSERT INTO collection (collection_title, collection_description, collection_picture_url, collection_picture_alt, collection_deletionflag) VALUES ($1, $2, $3, $4, $5) RETURNING *',
             [collectionTitle, collectionDescription, collectionPictureUrl, collectionPictureAlt, false]
         )
-        res.json(newCollection.rows[0])
+        res.status(200).json({message: newCollection.rows[0]})
     }
     catch(err){
         console.error('Error adding newCollection', err)
@@ -231,6 +231,36 @@ app.post('/admin/uploadCollection', upload.single('file'), async(req, res, next)
     }
 })
 
+
+
+
+//Create collection Element attributes
+
+app.post('/admin/createCollectionElement',async(req, res,next)=>{
+    try {
+        console.log(req.body)
+        let {descriptionToCreate, emailToCreate, cookingToCreate, recommandationToCreate, collectionUID}=req.body
+        
+
+        let collectionElementAttributesToCreate=await pool.query(
+            `INSERT INTO collection_element
+            (collection_element_description, collection_element_email, collection_element_recommandation,collection_element_cooking, collection_uid)
+            VALUES ($1, $2, $3, $4,$5)
+            `,[descriptionToCreate,emailToCreate, recommandationToCreate,cookingToCreate, collectionUID]
+        )
+
+        if (collectionElementAttributesToCreate){
+            res.status(200).json({message: `collection Element for collection ${collectionUID} created`})        
+            console.log('all good')
+        }
+        else res.status(201).json({message: `collection Element for collection ${collectionUID} NOT created` })
+    } catch (error) {
+        await pool.query('ROLLBACK')
+        console.error(`error ceating collection element => ${error} `)
+        return res.status(400).json({message:"Creation wasn't completed due to an error"})
+    }
+
+})
 
 
 //Post 1 new Collection Element Picture
@@ -376,7 +406,7 @@ app.put('/admin/deleteElementPicture/',async(req, res, next)=>{
 
 
 
-//update collection Element information
+//update collection Element attributes
 
 app.put('/admin/updateCollectionElementAttributes',async(req, res,next)=>{
     try {

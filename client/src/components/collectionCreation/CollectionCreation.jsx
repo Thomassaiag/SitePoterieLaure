@@ -10,6 +10,9 @@ export const CollectionCreation = () => {
 
     const [collectionCreated, setCollectionCreated]=useState(false)
 
+    const [newCollectionUID, setNewCollectionUID]=useState('')
+    
+
 
     const handleFileChange=(event)=>{
         event.preventDefault();
@@ -41,19 +44,26 @@ export const CollectionCreation = () => {
         }
         try {
             console.log('submit clicked1')
-            const response=await fetch('http://localhost:5000/admin/uploadCollection',{
+            const response=await fetch('http://localhost:5000/admin/createCollection',{
                 method: 'POST',
                 // headers: {
                 //     'Content-Type': 'application/json'
                 // },
                 body: newCollectionData
             })
-            console.log('submit clicked2')
+            
             if(!response.ok){
                 throw new Error('Network response was not OK')
             }
-            else console.log('New Entry Created Successfuly')
-            setCollectionCreated(true)
+            else {
+                console.log('New Entry Created Successfuly')
+                let data= await response.json()
+                let newCollectionUID=data.collection_uid
+                console.log('collection created => ',data)
+                setCollectionCreated(true)
+                setNewCollectionUID(newCollectionUID)
+
+            }    
         } catch (err) {
             console.error('Error adding New Collection', err)
         }
@@ -97,7 +107,8 @@ export const CollectionCreation = () => {
 
             <button type='submit'>Créer Collection</button>
         </form>
-        {collectionCreated ? <CollectionElementCreation/> : <></>}
+        {/* {collectionCreated ? <CollectionElementCreation/> : <></>} */}
+        <CollectionElementCreation newCollectionUID={newCollectionUID}/>
     </div>
     )
 }
