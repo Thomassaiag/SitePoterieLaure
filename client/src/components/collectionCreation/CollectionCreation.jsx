@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 
-export const FormulaireCreationCollection = () => {
+export const CollectionCreation = () => {
     const [collectionText, setCollectionText]=useState({
         collectionTitle:'',
         collectionDescription:''
@@ -61,8 +61,9 @@ export const FormulaireCreationCollection = () => {
         <h1>Créer une nouvelle Collection</h1>
         <form onSubmit={handleSubmit}>
             <div>
-                <label>Nom de la Collection</label> 
+                <label htmlFor='collectionTitle'>Nom de la Collection</label> 
                 <input
+                    id='collectionTitle'
                     type="text"
                     name="collectionTitle"
                     onChange={handleTextChange}
@@ -70,8 +71,9 @@ export const FormulaireCreationCollection = () => {
                 />
             </div>
             <div>
-                <label>Choisir une image principale pour la Collection</label> 
+                <label htmlFor='collectionPicture'>Choisir une image principale pour la Collection</label> 
                 <input
+                    id='collectionPicture'
                     type='file'
                     name='collectionPicture'
                     accept="image/*"
@@ -79,8 +81,9 @@ export const FormulaireCreationCollection = () => {
                 />
             </div>
             <div>
-                <label>Description de la Collection</label> 
+                <label htmlFor='collectionDescription'>Description de la Collection</label> 
                 <input
+                    id='collectionDescription'
                     type='text'
                     name='collectionDescription'
                     onChange={handleTextChange}

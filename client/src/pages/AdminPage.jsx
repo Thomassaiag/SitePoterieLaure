@@ -1,7 +1,7 @@
 import React from 'react'
 import { Header } from '../components/header/Header'
 import { Footer } from '../components/footer/Footer'
-import { FormulaireCreationCollection } from '../components/formulaireCreationCollection/FormulaireCreationCollection'
+import { CollectionCreation } from '../components/collectionCreation/CollectionCreation'
 import { AdminHeader } from '../components/adminHeader/AdminHeader'
 
 
@@ -10,7 +10,7 @@ export const AdminPage = () => {
     <div>
         <Header/>
         <AdminHeader/>
-        <FormulaireCreationCollection/>
+        <CollectionCreation/>
         <Footer className='footer'/>
     </div>
   )
