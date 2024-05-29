@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
 
 import '../collectionElement/CollectionElement.css'
+import { CreateCollectionElementInformations } from '../createCollectionElementInformations/CreateCollectionElementInformations'
 
 export const CollectionElementCreation = ({newCollectionUIDAndTitle}) => {
-
 
 
     const[collectionElementAttributesToCreate, setCollectionElementAttributesToCreate]=useState({
@@ -13,11 +13,8 @@ export const CollectionElementCreation = ({newCollectionUIDAndTitle}) => {
       collectionElementRecommandationToCreate: '',
       collectionUID: '',
       collectionElementInformationsToCreate:''
-
     })
 
-
-  
 
     const createCollectionElement=async(e)=>{
       e.preventDefault()
@@ -60,9 +57,6 @@ export const CollectionElementCreation = ({newCollectionUIDAndTitle}) => {
       }
     }
 
-    useEffect(()=>{
-      console.log(collectionElementAttributesToCreate)
-    },[collectionElementAttributesToCreate])
 
     const handleChange=(e)=>{
       e.preventDefault()
@@ -91,7 +85,7 @@ export const CollectionElementCreation = ({newCollectionUIDAndTitle}) => {
             <label
               htmlFor='collectionElementEmail'>Informations techniques  
             </label>
-            {/* <UpdateCollectionElementInformations/> */}
+            <CreateCollectionElementInformations/>
             <br></br>
             <input id='collectionElementEmail'
               type='text'
