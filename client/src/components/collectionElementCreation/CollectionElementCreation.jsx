@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
 import '../collectionElement/CollectionElement.css'
-import { CreateCollectionElementInformations } from '../createCollectionElementInformations/CreateCollectionElementInformations'
+import { CollectionElementInformationsCreation } from '../collectionElementInformationsCreation/CollectionElementInformationsCreation'
 
 export const CollectionElementCreation = ({newCollectionUIDAndTitle}) => {
 
@@ -86,7 +86,7 @@ export const CollectionElementCreation = ({newCollectionUIDAndTitle}) => {
               htmlFor='collectionElementEmail'>Informations techniques  
             </label>
 
-            <CreateCollectionElementInformations/>
+            <CollectionElementInformationsCreation/>
 
 
             <br></br>
