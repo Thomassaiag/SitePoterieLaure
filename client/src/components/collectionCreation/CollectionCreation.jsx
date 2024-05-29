@@ -112,8 +112,12 @@ export const CollectionCreation = () => {
 
             <button type='submit'>Créer Collection</button>
         </form>
-        {/* {collectionCreated ? <CollectionElementCreation/> : <></>} */}
-        <CollectionElementCreation newCollectionUID={newCollectionUID}/>
+        {collectionCreated ? 
+            <>
+                <br />
+                <CollectionElementCreation newCollectionUID={newCollectionUID}/> 
+            </> : <></>
+        }
     </div>
     )
 }
