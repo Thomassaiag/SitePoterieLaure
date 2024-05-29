@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 
 import '../collectionElement/CollectionElement.css'
 
-export const CollectionElementCreation = ({newCollectionUID}) => {
+export const CollectionElementCreation = ({newCollectionUIDAndTitle}) => {
 
 
 
@@ -32,7 +32,8 @@ export const CollectionElementCreation = ({newCollectionUID}) => {
             emailToCreate:collectionElementAttributesToCreate.collectionElementEmailToCreate,
             cookingToCreate:collectionElementAttributesToCreate.collectionElementCookingToCreate,
             recommandationToCreate:collectionElementAttributesToCreate.collectionElementRecommandationToCreate,
-            collectionUID:newCollectionUID,
+            collectionUID:newCollectionUIDAndTitle.newCollectionUID,
+            collectionTitle:newCollectionUIDAndTitle.newCollectionTitle,
           })
         })
         let data= await response.json()

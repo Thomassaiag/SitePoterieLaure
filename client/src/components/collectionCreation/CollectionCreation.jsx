@@ -10,7 +10,10 @@ export const CollectionCreation = () => {
 
     const [collectionCreated, setCollectionCreated]=useState(false)
 
-    const [newCollectionUID, setNewCollectionUID]=useState()
+    const [newCollectionUIDAndTitle, setNewCollectionUIDAndTitle]=useState({
+        newCollectionUID:'',
+        newCollectionTitle:''
+    })
     
 
 
@@ -35,15 +38,11 @@ export const CollectionCreation = () => {
         newCollectionData.append('collectionTitle', collectionText.collectionTitle)
         newCollectionData.append('collectionDescription', collectionText.collectionDescription)
 
-        console.log(newCollectionData.get('collectionTitle'))
-        console.log(newCollectionData.get('file'))
-
         if(!collectionPicture){
             alert('Merci de sélectionner une image')
             return
         }
         try {
-            console.log('submit clicked1')
             const response=await fetch('http://localhost:5000/admin/createCollection',{
                 method: 'POST',
                 // headers: {
@@ -59,10 +58,14 @@ export const CollectionCreation = () => {
                 console.log('New Entry Created Successfuly')
                 let data= await response.json()
                 let newCollectionUID=data.message.collection_uid
+                let newCollectionTitle=data.message.collection_title
                 console.log('collection created => ',data)
                 console.log('newCollectionUID => ',newCollectionUID)
                 setCollectionCreated(true)
-                setNewCollectionUID(newCollectionUID)
+                setNewCollectionUIDAndTitle({...CollectionCreation,
+                     newCollectionUID: newCollectionUID,
+                     newCOllectionTitle:newCollectionTitle
+                })
 
             }    
         } catch (err) {
@@ -70,10 +73,6 @@ export const CollectionCreation = () => {
         }
     
     }
-
-    useEffect(()=>{
-        console.log('newCollectionUID => ',newCollectionUID)
-    },[newCollectionUID])
 
     return (
     <div>
@@ -115,7 +114,7 @@ export const CollectionCreation = () => {
         {collectionCreated ? 
             <>
                 <br />
-                <CollectionElementCreation newCollectionUID={newCollectionUID}/> 
+                <CollectionElementCreation newCollectionUIDAndTitle={newCollectionUIDAndTitle}/> 
             </> : <></>
         }
     </div>

@@ -21,14 +21,10 @@ export const NewPicture = ({collectionUID}) => {
     
     const updateFile = async()=>{
 
-        console.log(newCollectionElementPicture)
         const collectionPictureElement= new FormData()
         collectionPictureElement.append('file', newCollectionElementPicture)
         collectionPictureElement.append('collectionUID', collectionUID)
-        
-        
-        console.log(collectionUID)
-        
+
         if(newCollectionElementPicture){
             let response=await fetch('http://localhost:5000/admin/editElement/addNewPicture',{
                 method:'POST',
@@ -42,7 +38,6 @@ export const NewPicture = ({collectionUID}) => {
             }
             else {
                 let data=await response.json()
-                console.log(data)
             }
         }
         else console.log("no image was uploaded")        

@@ -239,14 +239,14 @@ app.post('/admin/createCollection', upload.single('file'), async(req, res, next)
 app.post('/admin/createCollectionElement',async(req, res,next)=>{
     try {
         console.log(req.body)
-        let {descriptionToCreate, emailToCreate, cookingToCreate, recommandationToCreate, collectionUID}=req.body
+        let {descriptionToCreate, emailToCreate, cookingToCreate, recommandationToCreate, collectionUID,collectionTitle}=req.body
 
 
         let collectionElementAttributesToCreate=await pool.query(
             `INSERT INTO collection_element
-            (collection_element_description, collection_element_email, collection_element_recommandation,collection_element_cooking, collection_uid)
-            VALUES ($1, $2, $3, $4,$5)
-            `,[descriptionToCreate,emailToCreate, recommandationToCreate,cookingToCreate, collectionUID]
+            (collection_element_description, collection_element_email, collection_element_recommandation,collection_element_cooking, collection_uid, collection_element_title)
+            VALUES ($1, $2, $3, $4,$5, $6)
+            `,[descriptionToCreate,emailToCreate, recommandationToCreate,cookingToCreate, collectionUID,collectionTitle]
         )
 
         if (collectionElementAttributesToCreate){

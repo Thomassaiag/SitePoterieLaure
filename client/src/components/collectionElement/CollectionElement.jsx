@@ -37,14 +37,12 @@ export const CollectionElement = () => {
   },[])
 
   useEffect(()=>{
-
-    let {collection_element_name, collection_element_description, collection_element_email, collection_element_cooking, collection_element_recommandation }=collectionElement
+    let {collection_element_title, collection_element_description, collection_element_email, collection_element_cooking, collection_element_recommandation }=collectionElement
     setCollectionElementDescription(collection_element_description)
-    setCollectionElementName(collection_element_name)
+    setCollectionElementName(collection_element_title)
     setCollectionElementEmail(collection_element_email)
     setCollectionElementCooking(collection_element_cooking)
     setCollectionElementRecommandation(collection_element_recommandation)
-
   },[collectionElement])
 
 

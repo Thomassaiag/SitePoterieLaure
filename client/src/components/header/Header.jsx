@@ -8,18 +8,8 @@ const logoLaureSansNom = '../../images/logoLaureSansNom.jpg'
 
 export const Header = () => {
   let navigate=useNavigate()
-  
-  
+
   const {connectionAttributes}=useConnectionStatus()
-
-
-  useEffect(() => {
-    console.log(`header connectedUserFirstName => ${connectionAttributes.connectedUserFirstName}`)
-    console.log(`header adminConnection => ${connectionAttributes.adminConnection}`)
-    console.log(`header invalidConnection => ${connectionAttributes.invalidConnection}`)
-  },[connectionAttributes])
-  
-
 
   const navigateToConnection=()=>{
     navigate('/connection')
