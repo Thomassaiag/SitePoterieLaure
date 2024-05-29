@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import { CollectionElementCreation } from '../collectionElementCreation/CollectionElementCreation'
 
 export const CollectionCreation = () => {
@@ -10,7 +10,7 @@ export const CollectionCreation = () => {
 
     const [collectionCreated, setCollectionCreated]=useState(false)
 
-    const [newCollectionUID, setNewCollectionUID]=useState('')
+    const [newCollectionUID, setNewCollectionUID]=useState()
     
 
 
@@ -58,8 +58,9 @@ export const CollectionCreation = () => {
             else {
                 console.log('New Entry Created Successfuly')
                 let data= await response.json()
-                let newCollectionUID=data.collection_uid
+                let newCollectionUID=data.message.collection_uid
                 console.log('collection created => ',data)
+                console.log('newCollectionUID => ',newCollectionUID)
                 setCollectionCreated(true)
                 setNewCollectionUID(newCollectionUID)
 
@@ -69,6 +70,10 @@ export const CollectionCreation = () => {
         }
     
     }
+
+    useEffect(()=>{
+        console.log('newCollectionUID => ',newCollectionUID)
+    },[newCollectionUID])
 
     return (
     <div>

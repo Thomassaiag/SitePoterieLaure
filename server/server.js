@@ -240,7 +240,7 @@ app.post('/admin/createCollectionElement',async(req, res,next)=>{
     try {
         console.log(req.body)
         let {descriptionToCreate, emailToCreate, cookingToCreate, recommandationToCreate, collectionUID}=req.body
-        
+
 
         let collectionElementAttributesToCreate=await pool.query(
             `INSERT INTO collection_element
