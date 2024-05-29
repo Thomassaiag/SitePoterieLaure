@@ -10,10 +10,6 @@ const [inputIDList, setInputIDList]=useState([
     }
 ])
 
-const handleSubmit=(()=>{
-    return
-})
-
 const addNewInformation=(e)=>{
     e.preventDefault()
     setInputIDList(prevInputIDList=>[...prevInputIDList,{id:nanoid()}])
@@ -26,21 +22,19 @@ const deleteInformation=(e,idToDelete)=>{
 
   return (
     <div>
-        <form onSubmit={handleSubmit}>
-            {inputIDList.map((element)=>{
-                const{id}=element
-                return (
-                    <div key={id}>
-                    <input
-                        type='text'
-                        name={id}
-                    />
-                    <button onClick={(e)=>deleteInformation(e, id)}>Delete Information</button>
-                    </div>
-                )
-            })}
-        </form>
-        <button onClick={addNewInformation}>Ajouter une nouvelle information</button>
+        {inputIDList.map((element)=>{
+            const{id}=element
+            return (
+                <div key={id}>
+                <input 
+                    type='text'
+                    name={id}
+                />
+                <button type='button' onClick={(e)=>deleteInformation(e, id)}>Delete Information</button>
+                </div>
+            )
+        })}
+        <button type='button' onClick={addNewInformation}>Ajouter une nouvelle information</button>
     </div>
   )
 }

@@ -85,7 +85,10 @@ export const CollectionElementCreation = ({newCollectionUIDAndTitle}) => {
             <label
               htmlFor='collectionElementEmail'>Informations techniques  
             </label>
+
             <CreateCollectionElementInformations/>
+
+
             <br></br>
             <input id='collectionElementEmail'
               type='text'
