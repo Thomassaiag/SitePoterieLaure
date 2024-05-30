@@ -517,29 +517,29 @@ app.put('/admin/updateCollectionElementInformations',async(req,res,next)=>{
 
 // update collection element information by deleting collection element informations
 
-app.delete('/admin/deleteInformationInput',async (req, res, next)=>{
-    console.log(req.body)
-    try{
-        let {informationId}=req.body
-        console.log(informationId)
-        let informationToDelete=await pool.query(
-            `DELETE FROM collection_element_informations
-            WHERE collection_element_information_uid=$1
-            `,[informationId]
-        )
-        console.log(informationToDelete)
-        if(informationToDelete===0){
-            console.log(`information with ID ${informationId} did't get deleted`)
-        } else {
-            console.log(`information with ID ${informationId} was deleted`)
-            res.status(200).json({message:`information with ID ${informationId} was deleted`})
-        }
-    } catch (error){
-        console.log('something went wrong, information didn\' get deleted')
-        res.status(400).json({message: 'information didn\'t get deleted'})
+// app.delete('/admin/deleteInformationInput',async (req, res, next)=>{
+//     console.log(req.body)
+//     try{
+//         let {informationId}=req.body
+//         console.log(informationId)
+//         let informationToDelete=await pool.query(
+//             `DELETE FROM collection_element_informations
+//             WHERE collection_element_information_uid=$1
+//             `,[informationId]
+//         )
+//         console.log(informationToDelete)
+//         if(informationToDelete===0){
+//             console.log(`information with ID ${informationId} did't get deleted`)
+//         } else {
+//             console.log(`information with ID ${informationId} was deleted`)
+//             res.status(200).json({message:`information with ID ${informationId} was deleted`})
+//         }
+//     } catch (error){
+//         console.log('something went wrong, information didn\' get deleted')
+//         res.status(400).json({message: 'information didn\'t get deleted'})
 
-    }
-})
+//     }
+// })
 
 //----------------------------------------------------------------------
 
