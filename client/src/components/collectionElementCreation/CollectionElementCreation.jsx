@@ -49,7 +49,7 @@ export const CollectionElementCreation = ({newCollectionUIDAndTitle}) => {
               collectionUID:newCollectionUIDAndTitle.newCollectionUID,
             })
           })
-          let data=response.json()
+          let data=await response.json()
           console.log(data)
 
         } catch (error) {
@@ -61,8 +61,8 @@ export const CollectionElementCreation = ({newCollectionUIDAndTitle}) => {
     }
 
     useEffect(()=>{
-      console.log(currentInformations)
-    },[currentInformations])
+      console.log('newCollectionUIDAndTitle =>',newCollectionUIDAndTitle)
+    },[newCollectionUIDAndTitle])
 
 
     const handleChange=(e)=>{

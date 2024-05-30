@@ -64,7 +64,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
               informationsToUpdate:collectionElementAttributesToUpdate.collectionElementInformationsToUpdate
             })
           })
-          let data=response.json()
+          let data=await response.json()
           console.log(data)
           fetchCollectionElement()
           fetchElementInformations(collectionUID)

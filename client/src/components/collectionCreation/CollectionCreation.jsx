@@ -64,7 +64,7 @@ export const CollectionCreation = () => {
                 setCollectionCreated(true)
                 setNewCollectionUIDAndTitle({...CollectionCreation,
                      newCollectionUID: newCollectionUID,
-                     newCOllectionTitle:newCollectionTitle
+                     newCollectionTitle:newCollectionTitle
                 })
 
             }    
@@ -99,7 +99,7 @@ export const CollectionCreation = () => {
                 />
             </div>
             <div>
-                <label htmlFor='collectionDescription'>Description de la Collection</label> 
+                <label htmlFor='collectionDescription'>Titre de la Collection</label> 
                 <input
                     id='collectionDescription'
                     type='text'

@@ -37,13 +37,9 @@ export const CollectionElementInformationsCreation = () => {
     
     const handleChange=(e,inputId)=>{
         e.preventDefault()
-        console.log("inputID =>",inputId)
-        console.log("input value => ",e.target.value)
         setCurrentInformations((prevCollectionInformationsToCreate)=>{
             let identifiedElementIndex=prevCollectionInformationsToCreate.findIndex((prevCollectionInformationToCreate)=>prevCollectionInformationToCreate.informationInputId==inputId)
-            console.log('identifiedElement Index=>',identifiedElementIndex)
             if(identifiedElementIndex!=-1){
-                console.log('if')
                 // return prevCollectionInformationsToCreate.splice(identifiedElementIndex,1,{informationInputId:inputId,informationInputText:e.target.value })
                 return prevCollectionInformationsToCreate.map((prevCollectionInformationToCreate)=>{
                     const{informationInputId, informationInputText}=prevCollectionInformationToCreate
@@ -53,19 +49,18 @@ export const CollectionElementInformationsCreation = () => {
                     else return prevCollectionInformationToCreate
                 })
             } else {
-                console.log('else')
                 return [...prevCollectionInformationsToCreate,{informationInputId:inputId, informationInputText:e.target.value}]
             }
         })
     }
 
-    useEffect(()=>{
-        console.log(currentInformations)
-    },[currentInformations])
+    // useEffect(()=>{
+    //     console.log(currentInformations)
+    // },[currentInformations])
 
-        useEffect(()=>{
-        console.log(currentInformations)
-    },[])
+    // useEffect(()=>{
+    //     console.log(currentInformations)
+    // },[])
 
     return (
         <div>
