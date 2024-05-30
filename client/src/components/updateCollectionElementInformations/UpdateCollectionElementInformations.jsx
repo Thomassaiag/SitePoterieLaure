@@ -28,6 +28,25 @@ export const UpdateCollectionElementInformations = () => {
         })
     }
 
+    const discardInformationInput=async(e,informationId)=>{
+        e.preventDefault()
+        try {
+            let response= await fetch('http://localhost:5000/admin/deleteInformationInput',{
+                method:'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body:JSON.stringify({
+                    informationId:informationId
+                })
+            })
+            let data=await response.json()
+            console.log(data)
+        } catch (error) {
+            console.log(`information didn't get deleted => ${error}`)
+            
+        }
+    }
 
     useEffect(()=>{
         if(currentInformations.length>0){
@@ -48,12 +67,14 @@ export const UpdateCollectionElementInformations = () => {
             currentInformationsToUpdate.map((currentInformationToUpdate)=>{
                 let {collection_element_information_text, collection_element_information_uid}=currentInformationToUpdate
                 return(
+                    <div key={collection_element_information_uid}>
                     <input
                         name={collection_element_information_uid}
-                        key={collection_element_information_uid}
                         value={collection_element_information_text}
                         onChange={(e)=>updateCollectionElementInformations(e)}
-                    />
+                        />
+                    <button type='button' onClick={(e)=>discardInformationInput(e,collection_element_information_uid)}>Effacer Information</button>
+                    </div>
                 )
             })
         ):(
