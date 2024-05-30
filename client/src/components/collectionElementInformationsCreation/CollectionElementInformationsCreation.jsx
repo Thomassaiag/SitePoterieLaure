@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import {nanoid} from  'nanoid'
-
+import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
 export const CollectionElementInformationsCreation = () => {
 
 
     const [inputIDList, setInputIDList]=useState([{id:nanoid()}])
+    const {currentInformations, setCurrentInformations}=useCollectionElementInformations()
 
-    const [collectionInformationsToCreate, setCollectionInformationsToCreate]=useState([{
+    useEffect(()=>{
+        setCurrentInformations([{
         informationInputId:inputIDList[0].id,
         informationInputText:''
     }])
+    },[])
+
+    // const [currentInformations, setCurrentInformations]=useState([{
+    //     informationInputId:inputIDList[0].id,
+    //     informationInputText:''
+    // }])
 
     const addNewInformation=(e)=>{
         e.preventDefault()
@@ -22,7 +30,7 @@ export const CollectionElementInformationsCreation = () => {
            alert("vous devez avoir au moins 1 information")
         } else {
             setInputIDList(prevInputIDList=>prevInputIDList.filter(prevInputID=>prevInputID.id!=idToDelete))
-            setCollectionInformationsToCreate(prevCollectionInformationsToCreate=>prevCollectionInformationsToCreate.filter(prevCollectionInformationToCreate=>prevCollectionInformationToCreate.informationInputId!=idToDelete))
+            setCurrentInformations(prevCollectionInformationsToCreate=>prevCollectionInformationsToCreate.filter(prevCollectionInformationToCreate=>prevCollectionInformationToCreate.informationInputId!=idToDelete))
         }
     }
     
@@ -31,7 +39,7 @@ export const CollectionElementInformationsCreation = () => {
         e.preventDefault()
         console.log("inputID =>",inputId)
         console.log("input value => ",e.target.value)
-        setCollectionInformationsToCreate((prevCollectionInformationsToCreate)=>{
+        setCurrentInformations((prevCollectionInformationsToCreate)=>{
             let identifiedElementIndex=prevCollectionInformationsToCreate.findIndex((prevCollectionInformationToCreate)=>prevCollectionInformationToCreate.informationInputId==inputId)
             console.log('identifiedElement Index=>',identifiedElementIndex)
             if(identifiedElementIndex!=-1){
@@ -52,11 +60,11 @@ export const CollectionElementInformationsCreation = () => {
     }
 
     useEffect(()=>{
-        console.log(collectionInformationsToCreate)
-    },[collectionInformationsToCreate])
+        console.log(currentInformations)
+    },[currentInformations])
 
         useEffect(()=>{
-        console.log(collectionInformationsToCreate)
+        console.log(currentInformations)
     },[])
 
     return (
@@ -69,7 +77,7 @@ export const CollectionElementInformationsCreation = () => {
                         type='text'
                         name={id}
                         onChange={(e)=>handleChange(e,id)}
-                        value={collectionInformationsToCreate.informationInputText}
+                        value={currentInformations.informationInputText}
                     />
                     <button type='button' onClick={(e)=>deleteInformation(e, id)}>Delete Information</button>
                     </div>

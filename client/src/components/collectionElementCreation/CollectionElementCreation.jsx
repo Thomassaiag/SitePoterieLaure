@@ -2,9 +2,11 @@ import React, {useEffect, useState} from 'react'
 
 import '../collectionElement/CollectionElement.css'
 import { CollectionElementInformationsCreation } from '../collectionElementInformationsCreation/CollectionElementInformationsCreation'
+import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
 
 export const CollectionElementCreation = ({newCollectionUIDAndTitle}) => {
 
+    const {currentInformations}=useCollectionElementInformations()
 
     const[collectionElementAttributesToCreate, setCollectionElementAttributesToCreate]=useState({
       collectionElementDescriptionToCreate:'',
@@ -36,26 +38,31 @@ export const CollectionElementCreation = ({newCollectionUIDAndTitle}) => {
         let data= await response.json()
         console.log(data)
         
-        // try {
-        //   let response=await fetch('http://localhost:5000/admin/createCollectionElementInformations',{
-        //     method:'POST',
-        //     headers: {
-        //       'Content-Type': 'application/json'
-        //     },
-        //     body:JSON.stringify({
-        //       informationsToCreate:collectionElementAttributesToCreate.collectionElementInformationsToCreate
-        //     })
-        //   })
-        //   let data=response.json()
-        //   console.log(data)
+        try {
+          let response=await fetch('http://localhost:5000/admin/createCollectionElementInformations',{
+            method:'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({
+              informationsToCreate:currentInformations,
+              collectionUID:newCollectionUIDAndTitle.newCollectionUID,
+            })
+          })
+          let data=response.json()
+          console.log(data)
 
-        // } catch (error) {
-        //   console.error({message: error})  
-        // }
+        } catch (error) {
+          console.error({message: error})  
+        }
       } catch (error) {
         console.error({message: error})
       }
     }
+
+    useEffect(()=>{
+      console.log(currentInformations)
+    },[currentInformations])
 
 
     const handleChange=(e)=>{

@@ -263,6 +263,38 @@ app.post('/admin/createCollectionElement',async(req, res,next)=>{
 })
 
 
+//Create Collection Element informations
+
+
+app.post('/admin/admin/createCollectionElementInformation',async(req, res,next)=>{
+    try {
+        console.log(req.body)
+        let {informationsToCreate:currentInformations,collectionUID}=req.body
+
+
+        let collectionElementInformationsToCreate=await pool.query(
+            `INSERT INTO collection_element_information
+            (collection_element_description, collection_element_email, collection_element_recommandation,collection_element_cooking, collection_uid, collection_element_title)
+            VALUES ($1, $2, $3, $4,$5, $6)
+            `,[descriptionToCreate,emailToCreate, recommandationToCreate,cookingToCreate, collectionUID,collectionTitle]
+        )
+
+        if (collectionElementInformationsToCreate){
+            res.status(200).json({message: `collection Element for collection ${collectionUID} created`})        
+            console.log('all good')
+        }
+        else res.status(201).json({message: `collection Element for collection ${collectionUID} NOT created` })
+    } catch (error) {
+        await pool.query('ROLLBACK')
+        console.error(`error ceating collection element => ${error} `)
+        return res.status(400).json({message:"Creation wasn't completed due to an error"})
+    }
+
+})
+
+
+s
+
 //Post 1 new Collection Element Picture
 
 
