@@ -4,11 +4,11 @@ const CollectionElementInformationsToUpdateCreate=createContext()
 
 export const CollectionElementInformationsToUpdateCreateContextProvider = ({children}) => {
 
-    const [currentInformationsToUpdateCreate, setCurrentInformationsToCreate]=useState([])
+    const [currentInformationsToUpdateCreate, setCurrentInformationsToUpdateCreate]=useState([])
 
     return (
     <>
-        <CollectionElementInformationsToUpdateCreate.Provider value={{currentInformationsToUpdateDelete: currentInformationsToUpdateCreate, setCurrentInformationsToUpdate: setCurrentInformationsToCreate}}>
+        <CollectionElementInformationsToUpdateCreate.Provider value={{currentInformationsToUpdateCreate, setCurrentInformationsToUpdateCreate}}>
             {children}
         </CollectionElementInformationsToUpdateCreate.Provider>
     </>

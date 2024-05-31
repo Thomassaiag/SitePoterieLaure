@@ -477,7 +477,7 @@ app.put('/admin/updateCollectionElementAttributes',async(req, res,next)=>{
 app.put('/admin/updateCollectionElementInformations',async(req,res,next)=>{
     try{
         const {informationsToUpdate}=req.body
-
+        console.log('informations to Update =>',informationsToUpdate)
         await pool.query('BEGIN')
 
         for (let informationToUpdate of informationsToUpdate) {

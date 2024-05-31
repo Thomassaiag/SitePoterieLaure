@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import {nanoid} from 'nanoid'
 
 
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
@@ -17,14 +18,15 @@ export const UpdateCollectionElementInformations = () => {
     
     const updateCollectionElementInformations=(e)=>{
         e.preventDefault()
-        // console.log(e.target.name)
+        console.log(e.target.name)
         setCurrentInformationsToUpdate((prevInformations)=>{
             // console.log("prevInformations =>",prevInformations)
-            // console.log(e.target.value)
+            console.log(e.target.value)
             return prevInformations.map((prevInformation)=>{
                 // console.log(prevInformation)
                 let {collection_element_information_uid}=prevInformation
-                if(parseInt(collection_element_information_uid)==parseInt(e.target.name)){
+                // if(currentInformations.find((currentInformation)=>currentInformation.collection_element_information_uid==collection_element_information_uid))
+                if(collection_element_information_uid==e.target.name){
                     return {...prevInformation, collection_element_information_text: e.target.value}
                 } else {
                     return prevInformation
@@ -38,18 +40,33 @@ export const UpdateCollectionElementInformations = () => {
         if(currentInformationsToUpdate.length==1){
             alert('Vous devez conserver au moins une information')
         }else {
-            console.log(informationId)
-            console.log(currentInformationsToUpdateDelete)
-            setCurrentInformationsToUpdateDelete((prevInformationsToUpdateDelete)=>{
-                return [...prevInformationsToUpdateDelete, {collectionElementInformationUID:informationId}]
-                
-            })
+            if(currentInformations.find((currentInformation)=>currentInformation.collection_element_information_uid==informationId)){
+
+                console.log(informationId)
+                console.log(currentInformationsToUpdateDelete)
+                setCurrentInformationsToUpdateDelete((prevInformationsToUpdateDelete)=>{
+                    return [...prevInformationsToUpdateDelete, {collectionElementInformationUID:informationId}]
+                    
+                })
+            }
             setCurrentInformationsToUpdate((prevInformationsToUpdate)=>{
                 return prevInformationsToUpdate.filter((prevInformationToUpdate)=>prevInformationToUpdate.collection_element_information_uid!=informationId)
             })
             console.log('currentInformationsToUpdateDelete =>',currentInformationsToUpdateDelete)
         }
 
+    }
+
+    const addInformationInput =(e)=>{
+        e.preventDefault()
+        setCurrentInformationsToUpdate((prevInformationsToUpdate)=>{
+            return [...prevInformationsToUpdate, {
+                collection_element_information_uid: nanoid(),
+                collection_uid:currentInformationsToUpdate[0].collection_uid,
+                collection_element_information_text:''
+            }]
+        })
+        return
     }
 
     useEffect(()=>{
@@ -107,6 +124,7 @@ export const UpdateCollectionElementInformations = () => {
             <p>Loading...</p>
         )
     }
+    <button onClick={addInformationInput}>Ajouter une information</button>
     </div>
   )
 }
