@@ -4,11 +4,11 @@ const CollectionElementInformationsToUpdateDelete=createContext()
 
 export const CollectionElementInformationsToUpdateDeleteContextProvider = ({children}) => {
 
-    const [currentInformationsToUpdateDelete, setCurrentInformationsToUpdate]=useState([])
+    const [currentInformationsToUpdateDelete, setCurrentInformationsToUpdateDelete]=useState([])
 
     return (
     <>
-        <CollectionElementInformationsToUpdateDelete.Provider value={{currentInformationsToUpdateDelete, setCurrentInformationsToUpdate}}>
+        <CollectionElementInformationsToUpdateDelete.Provider value={{currentInformationsToUpdateDelete, setCurrentInformationsToUpdateDelete}}>
             {children}
         </CollectionElementInformationsToUpdateDelete.Provider>
     </>

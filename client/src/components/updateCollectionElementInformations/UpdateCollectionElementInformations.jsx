@@ -4,7 +4,7 @@ import React, {useEffect, useState} from 'react'
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
 import { useCollectionElementInformationsToUpdate } from '../contextProvider/CollectionElementInformationsToUpdateContextProvider'
 import { useCollectionElementInformationsToUpdateCreate } from '../contextProvider/CollectionElementInformationsToUpdateCreateContextProvider'
-import { useCollectionElementInformationsToUpdateDelete } from '../contextProvider/CollectionElementInformationsToUpdateDeleteContextProvider copy'
+import { useCollectionElementInformationsToUpdateDelete } from '../contextProvider/CollectionElementInformationsToUpdateDeleteContextProvider'
 
 export const UpdateCollectionElementInformations = () => {
 
@@ -12,7 +12,9 @@ export const UpdateCollectionElementInformations = () => {
     const {currentInformationsToUpdate, setCurrentInformationsToUpdate}=useCollectionElementInformationsToUpdate()
     const {currentInformationsToUpdateCreate, setCurrentInformationsToUpdateCreate}=useCollectionElementInformationsToUpdateCreate()
     const {currentInformationsToUpdateDelete, setCurrentInformationsToUpdateDelete}=useCollectionElementInformationsToUpdateDelete()
-
+    // const [inputIDList, setInputIDList]=useState([])
+    
+    
     const updateCollectionElementInformations=(e)=>{
         e.preventDefault()
         // console.log(e.target.name)
@@ -31,36 +33,72 @@ export const UpdateCollectionElementInformations = () => {
         })
     }
 
-    // const discardInformationInput=async(e,informationId)=>{
-    //     e.preventDefault()
-    //     try {
-    //         let response= await fetch('http://localhost:5000/admin/deleteInformationInput',{
-    //             method:'DELETE',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body:JSON.stringify({
-    //                 informationId:informationId
-    //             })
-    //         })
-    //         let data=await response.json()
-    //         console.log(data)
-    //     } catch (error) {
-    //         console.log(`information didn't get deleted => ${error}`)
+    const discardInformationInput=async(e,informationId)=>{
+        e.preventDefault()
+        if(currentInformationsToUpdate.length==1){
+            alert('Vous devez conserver au moins une information')
+        }else {
+            console.log(informationId)
+            console.log(currentInformationsToUpdateDelete)
+            setCurrentInformationsToUpdateDelete((prevInformationsToUpdateDelete)=>{
+                return [...prevInformationsToUpdateDelete, {collectionElementInformationUID:informationId}]
+                
+            })
+            setCurrentInformationsToUpdate((prevInformationsToUpdate)=>{
+                return prevInformationsToUpdate.filter((prevInformationToUpdate)=>prevInformationToUpdate.collection_element_information_uid!=informationId)
+            })
+            console.log('currentInformationsToUpdateDelete =>',currentInformationsToUpdateDelete)
+        }
+        // try {
+        //     let response= await fetch('http://localhost:5000/admin/deleteInformationInput',{
+        //         method:'DELETE',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body:JSON.stringify({
+        //             informationId:informationId
+        //         })
+        //     })
+        //     let data=await response.json()
+        //     console.log(data)
+        // } catch (error) {
+        //     console.log(`information didn't get deleted => ${error}`)
             
-    //     }
-    // }
+        // }
+    }
 
     useEffect(()=>{
         if(currentInformations.length>0){
             setCurrentInformationsToUpdate(currentInformations)
+            // setInputIDList((prevInputList)=>{
+            //     return currentInformationsToUpdate.map((currentInformationToUpdate)=>{
+            //         const {collection_element_information_uid}=currentInformationToUpdate
+            //         return [...prevInputList,{inputUID:collection_element_information_uid}]
+            //     })                
+            // })
         }
         else setCurrentInformationsToUpdate([])
     },[currentInformations])
 
+
     useEffect(()=>{
-        console.log(currentInformationsToUpdate)
+        setCurrentInformationsToUpdateDelete([])
+    },[currentInformations])
+
+
+    useEffect(()=>{
+        console.log('currentInformationsToUpdate => ',currentInformationsToUpdate)
     },[currentInformationsToUpdate])
+
+
+
+    useEffect(()=>{
+        console.log('currentInformationsToUpdateDelete when updated=> ',currentInformationsToUpdateDelete)
+    },[currentInformationsToUpdateDelete])
+
+    // useEffect(()=>{
+    //     console.log('inputIDList=> ',inputIDList)
+    // },[currentInformationsToUpdate])
 
 
   return (

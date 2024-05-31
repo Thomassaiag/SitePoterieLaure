@@ -2,6 +2,7 @@ import React, {Fragment, useEffect, useState} from 'react'
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
 import { UpdateCollectionElementInformations } from '../updateCollectionElementInformations/UpdateCollectionElementInformations'
 import { useCollectionElementInformationsToUpdate } from '../contextProvider/CollectionElementInformationsToUpdateContextProvider'
+import { useCollectionElementInformationsToUpdateDelete } from '../contextProvider/CollectionElementInformationsToUpdateCreateContextProvider'
 import '../collectionElement/CollectionElement.css'
 
 
@@ -10,7 +11,8 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
 
     const {currentInformations}=useCollectionElementInformations()
     const {currentInformationsToUpdate}=useCollectionElementInformationsToUpdate()
-
+    const {currentInformationsToUpdateDelete}=useCollectionElementInformationsToUpdateDelete()
+    
     const[collectionElementAttributesToUpdate, setCollectionElementAttributesToUpdate]=useState({
       collectionElementDescriptionToUpdate:collectionElementDescription,
       collectionElementEmailToUpdate: collectionElementEmail,
