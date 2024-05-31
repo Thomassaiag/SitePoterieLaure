@@ -3,12 +3,15 @@ import React, {useEffect, useState} from 'react'
 
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
 import { useCollectionElementInformationsToUpdate } from '../contextProvider/CollectionElementInformationsToUpdateContextProvider'
+import { useCollectionElementInformationsToUpdateCreate } from '../contextProvider/CollectionElementInformationsToUpdateCreateContextProvider'
+import { useCollectionElementInformationsToUpdateDelete } from '../contextProvider/CollectionElementInformationsToUpdateDeleteContextProvider copy'
 
 export const UpdateCollectionElementInformations = () => {
 
     const {currentInformations}=useCollectionElementInformations()
     const {currentInformationsToUpdate, setCurrentInformationsToUpdate}=useCollectionElementInformationsToUpdate()
-
+    const {currentInformationsToUpdateCreate, setCurrentInformationsToUpdateCreate}=useCollectionElementInformationsToUpdateCreate()
+    const {currentInformationsToUpdateDelete, setCurrentInformationsToUpdateDelete}=useCollectionElementInformationsToUpdateDelete()
 
     const updateCollectionElementInformations=(e)=>{
         e.preventDefault()
