@@ -250,7 +250,7 @@ app.post('/admin/createCollectionElement',async(req, res,next)=>{
 
         if (collectionElementAttributesToCreate){
             res.status(200).json({message: `collection Element for collection ${collectionUID} created`})        
-            console.log('all good')
+            console.log('Collection Element Attributes Created')
         }
         else res.status(201).json({message: `collection Element for collection ${collectionUID} NOT created` })
     } catch (error) {
@@ -462,7 +462,7 @@ app.put('/admin/updateCollectionElementAttributes',async(req, res,next)=>{
 
         if (collectionElementAttributesToUpdate){
             res.status(200).json({message: `collection ${collectionUID} updated `})        
-            console.log('all good')
+            console.log('Collection Element Attributes updated')
         }
         else res.status(201).json({message: `collection ${collectionUID} NOT updated` })
     } catch (error) {
@@ -483,8 +483,8 @@ app.put('/admin/updateCollectionElementInformations',async(req,res,next)=>{
         for (let informationToUpdate of informationsToUpdate) {
 
             let {collection_element_information_uid, collection_element_information_text}=informationToUpdate
-            console.log('uid => ',collection_element_information_uid)
-            console.log('text => ',collection_element_information_text)
+            // console.log('uid => ',collection_element_information_uid)
+            // console.log('text => ',collection_element_information_text)
             let result= await pool.query(
                 `UPDATE collection_element_informations
                 SET collection_element_information_text=$1
@@ -517,29 +517,39 @@ app.put('/admin/updateCollectionElementInformations',async(req,res,next)=>{
 
 // update collection element information by deleting collection element informations
 
-// app.delete('/admin/deleteInformationInput',async (req, res, next)=>{
-//     console.log(req.body)
-//     try{
-//         let {informationId}=req.body
-//         console.log(informationId)
-//         let informationToDelete=await pool.query(
-//             `DELETE FROM collection_element_informations
-//             WHERE collection_element_information_uid=$1
-//             `,[informationId]
-//         )
-//         console.log(informationToDelete)
-//         if(informationToDelete===0){
-//             console.log(`information with ID ${informationId} did't get deleted`)
-//         } else {
-//             console.log(`information with ID ${informationId} was deleted`)
-//             res.status(200).json({message:`information with ID ${informationId} was deleted`})
-//         }
-//     } catch (error){
-//         console.log('something went wrong, information didn\' get deleted')
-//         res.status(400).json({message: 'information didn\'t get deleted'})
+app.delete('/admin/deleteInformationInput',async (req, res, next)=>{
+    
+    try{
+        const {informationIdToDeleteList}=req.body
+        console.log('informationList to delete =>',informationIdToDeleteList)
+        await pool.query('BEGIN')
 
-//     }
-// })
+        for (let informationIdToDelete of informationIdToDeleteList){
+            let {collectionElementInformationUID}=informationIdToDelete
+            // console.log('informationIdToDelete =>',collectionElementInformationUID)
+            let informationToDelete=await pool.query(
+                `DELETE FROM collection_element_informations
+                WHERE collection_element_information_uid=$1
+                `,[collectionElementInformationUID]
+            )
+            console.log(informationToDelete)
+            if(informationToDelete.rowCount===0){
+                console.log(`information with ID ${collectionElementInformationUID} did't get deleted`)
+            } else {
+                console.log(`information with ID ${collectionElementInformationUID} was deleted`)
+            }
+        }
+        await pool.query('COMMIT')
+        res.status(200).json({message:`All information was deleted`})
+        console.log(`All information was deleted`)
+        
+    } catch (error){
+        await pool.query('ROLLBACK')
+        console.log('something went wrong, information didn\' get deleted')
+        res.status(400).json({message: 'information didn\'t get deleted'})
+
+    }
+})
 
 //----------------------------------------------------------------------
 

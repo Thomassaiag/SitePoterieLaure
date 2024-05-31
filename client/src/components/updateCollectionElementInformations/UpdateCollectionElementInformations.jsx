@@ -49,22 +49,7 @@ export const UpdateCollectionElementInformations = () => {
             })
             console.log('currentInformationsToUpdateDelete =>',currentInformationsToUpdateDelete)
         }
-        // try {
-        //     let response= await fetch('http://localhost:5000/admin/deleteInformationInput',{
-        //         method:'DELETE',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body:JSON.stringify({
-        //             informationId:informationId
-        //         })
-        //     })
-        //     let data=await response.json()
-        //     console.log(data)
-        // } catch (error) {
-        //     console.log(`information didn't get deleted => ${error}`)
-            
-        // }
+
     }
 
     useEffect(()=>{
