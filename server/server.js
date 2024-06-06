@@ -267,13 +267,14 @@ app.post('/admin/createCollectionElement',async(req, res,next)=>{
 
 app.post('/admin/createCollectionElementInformations',async(req, res,next)=>{
     try {
-        console.log(req.body)
+        console.log('informations to Create => ',req.body)
         let {informationsToCreate,collectionUID}=req.body
 
         await pool.query('BEGIN')
+        if (informationsToCreate.length>0){
 
-        for (let informationToCreate of informationsToCreate){
-            const {informationInputText}=informationToCreate
+            for (let informationToCreate of informationsToCreate){
+                const {informationInputText}=informationToCreate
             let collectionElementInformationToCreate=await pool.query(
                 `INSERT INTO collection_element_informations
                 (collection_uid, collection_element_information_text)
@@ -284,11 +285,12 @@ app.post('/admin/createCollectionElementInformations',async(req, res,next)=>{
                 console.log(`collection information was NOT created for collection_uid ${collectionUID}`)
             }
             else console.log(`collection information was created for collection_uid ${collectionUID}`)
+            }
+
+            await pool.query('COMMIT')
+            res.status(200).json({message: 'collection element informations were created'})
         }
-
-        await pool.query('COMMIT')
-
-        res.status(200).json({message: 'collection element informations were created'})
+        else console.log('No information was received')
 
     } catch (error) {
         await pool.query('ROLLBACK')

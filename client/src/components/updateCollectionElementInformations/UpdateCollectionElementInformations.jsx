@@ -4,14 +4,12 @@ import {nanoid} from 'nanoid'
 
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
 import { useCollectionElementInformationsToUpdate } from '../contextProvider/CollectionElementInformationsToUpdateContextProvider'
-import { useCollectionElementInformationsToUpdateCreate } from '../contextProvider/CollectionElementInformationsToUpdateCreateContextProvider'
 import { useCollectionElementInformationsToUpdateDelete } from '../contextProvider/CollectionElementInformationsToUpdateDeleteContextProvider'
 
 export const UpdateCollectionElementInformations = () => {
 
     const {currentInformations}=useCollectionElementInformations()
     const {currentInformationsToUpdate, setCurrentInformationsToUpdate}=useCollectionElementInformationsToUpdate()
-    const {currentInformationsToUpdateCreate, setCurrentInformationsToUpdateCreate}=useCollectionElementInformationsToUpdateCreate()
     const {currentInformationsToUpdateDelete, setCurrentInformationsToUpdateDelete}=useCollectionElementInformationsToUpdateDelete()
     // const [inputIDList, setInputIDList]=useState([])
     
@@ -43,7 +41,7 @@ export const UpdateCollectionElementInformations = () => {
             if(currentInformations.find((currentInformation)=>currentInformation.collection_element_information_uid==informationId)){
 
                 console.log(informationId)
-                console.log(currentInformationsToUpdateDelete)
+                // console.log(currentInformationsToUpdateDelete)
                 setCurrentInformationsToUpdateDelete((prevInformationsToUpdateDelete)=>{
                     return [...prevInformationsToUpdateDelete, {collectionElementInformationUID:informationId}]
                     
@@ -52,7 +50,7 @@ export const UpdateCollectionElementInformations = () => {
             setCurrentInformationsToUpdate((prevInformationsToUpdate)=>{
                 return prevInformationsToUpdate.filter((prevInformationToUpdate)=>prevInformationToUpdate.collection_element_information_uid!=informationId)
             })
-            console.log('currentInformationsToUpdateDelete =>',currentInformationsToUpdateDelete)
+            // console.log('currentInformationsToUpdateDelete =>',currentInformationsToUpdateDelete)
         }
 
     }

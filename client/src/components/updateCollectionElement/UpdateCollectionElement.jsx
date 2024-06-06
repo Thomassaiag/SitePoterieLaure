@@ -3,7 +3,7 @@ import { useCollectionElementInformations } from '../contextProvider/CollectionE
 import { UpdateCollectionElementInformations } from '../updateCollectionElementInformations/UpdateCollectionElementInformations'
 import { useCollectionElementInformationsToUpdate } from '../contextProvider/CollectionElementInformationsToUpdateContextProvider'
 import { useCollectionElementInformationsToUpdateDelete } from '../contextProvider/CollectionElementInformationsToUpdateDeleteContextProvider'
-import { useCollectionElementInformationsToUpdateCreate } from '../contextProvider/CollectionElementInformationsToUpdateCreateContextProvider' 
+
 import '../collectionElement/CollectionElement.css'
 
 
@@ -11,10 +11,12 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
 
 
   const {currentInformations}=useCollectionElementInformations()
-  const {currentInformationsToUpdate, setCurrentInformationsToUpdate}=useCollectionElementInformationsToUpdate()
-  const {currentInformationsToUpdateDelete}=useCollectionElementInformationsToUpdateDelete()
-  const {currentInformationsToUpdateCreate, setCurrentInformationsToUpdateCreate }=useCollectionElementInformationsToUpdateCreate()
+  const {currentInformationsToUpdate}=useCollectionElementInformationsToUpdate()
+  const {currentInformationsToUpdateDelete, setCurrentInformationsToUpdateDelete}=useCollectionElementInformationsToUpdateDelete()
+  const [currentInformationsToUpdateCreate, setCurrentInformationsToUpdateCreate ]=useState([])
   const [currentInformationsToUpdateFinal, setCurrentInformationsToUpdateFinal]=useState([])
+  const [fetchCompleted, setFetchCompleted]=useState(false)
+
 
   const[collectionElementAttributesToUpdate, setCollectionElementAttributesToUpdate]=useState({
     collectionElementDescriptionToUpdate:collectionElementDescription,
@@ -40,35 +42,8 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
   },[collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID, currentInformationsToUpdate])
 
 
-  const updateCollectionElement=async(e)=>{
-    e.preventDefault()
-    console.log(currentInformations)
-    currentInformationsToUpdate.forEach((currentInformationToUpdate)=>{
-      const {collection_element_information_uid, collection_element_information_text}=currentInformationToUpdate
-      console.log(collection_element_information_uid)
-      console.log(collection_element_information_text)
 
-      if(!currentInformations.find((currentInformation)=>currentInformation.collection_element_information_uid==collection_element_information_uid)){
-        console.log('id not found')
-        setCurrentInformationsToUpdateCreate((prevInformationsToUpdateCreate)=>{
-          return [...prevInformationsToUpdateCreate,{
-            collection_element_information_uid:collection_element_information_uid,
-            collection_uid: currentInformations[0].collection_uid,
-            collection_element_information_text:collection_element_information_text
-          }]
-        })
-      } else {
-        console.log('else')
-        setCurrentInformationsToUpdateFinal((prevInformationsToUpdateFinal)=>{
-          return [...prevInformationsToUpdateFinal,{collection_element_information_uid: collection_element_information_uid, collection_element_information_text: collection_element_information_text}]
-        })
-      }
-    })
-
-    await new Promise((resolve) => {
-      setTimeout(resolve, 0);
-    });
-
+  const udpateCollectionElementAttributesOnly = async (collectionElementDescriptionToUpdate, collectionElementEmailToUpdate, collectionElementCookingToUpdate, collectionElementRecommandationToUpdate, collectionUID)=>{
     try {
       let response = await fetch('http://localhost:5000/admin/updateCollectionElementAttributes',{
         method: 'PUT',
@@ -76,19 +51,21 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
           'Content-Type': 'application/json'
         },
         body:JSON.stringify({
-          descriptionToUpdate:collectionElementAttributesToUpdate.collectionElementDescriptionToUpdate,
-          emailToUpdate:collectionElementAttributesToUpdate.collectionElementEmailToUpdate,
-          cookingToUpdate:collectionElementAttributesToUpdate.collectionElementCookingToUpdate,
-          recommandationToUpdate:collectionElementAttributesToUpdate.collectionElementRecommandationToUpdate,
-          collectionUID:collectionElementAttributesToUpdate.collectionUID,
+          descriptionToUpdate:collectionElementDescriptionToUpdate,
+          emailToUpdate:collectionElementEmailToUpdate,
+          cookingToUpdate:collectionElementCookingToUpdate,
+          recommandationToUpdate:collectionElementRecommandationToUpdate,
+          collectionUID:collectionUID,
         })
       })
       let data= await response.json()
       console.log(data)
     } catch (error) {
-      console.error({message: error})
+      console.error('element attributes didn`t get updated ',{message: error})
     }
-    
+  }
+
+  const updateCollectionElementInformations=async(informationsToUpdate)=>{
     try {
       let response=await fetch('http://localhost:5000/admin/updateCollectionElementInformations',{
         method:'PUT',
@@ -96,18 +73,20 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
           'Content-Type': 'application/json'
         },
         body:JSON.stringify({
-          informationsToUpdate:currentInformationsToUpdateFinal
+          informationsToUpdate:informationsToUpdate
         })
       })
       let data=await response.json()
       console.log(data)
     } catch (error) {
-      console.error({message: error})  
+      console.error('information didn\'t get updated ',{message: error})  
     }
-    if(currentInformationsToUpdateDelete.length>0){
+  }
 
+
+  const deleteCollectionElementInformations=async (currentInformationsToUpdateDelete)=>{
+    if(currentInformationsToUpdateDelete.length>0){
       try {
-        console.log(currentInformationsToUpdateDelete)
         let response= await fetch('http://localhost:5000/admin/deleteInformationInput',{
           method:'DELETE',
           headers: {
@@ -120,41 +99,94 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
         let data=await response.json()
         console.log(data)
       } catch (error) {
-        console.log(`information didn't get deleted => ${error}`)
-        
+        console.log(`information didn't get deleted => ${error}`)       
       }
     }
-    fetchCollectionElement()
-    fetchElementInformations(collectionUID)
-    // setCurrentInformationsToUpdateFinal([])
+    else console.log('No information to Delete')
+  }
+
+
+
+  const createCollectionElementInformation=async(collectionElementInformationToCreate, collectionUID)=>{
+    if(collectionElementInformationToCreate.length>0){
+      try {  
+        let response=await fetch('http://localhost:5000/admin/createCollectionElementInformations',{
+          method:'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body:JSON.stringify({
+          informationsToCreate:collectionElementInformationToCreate,
+          collectionUID:collectionUID
+        })
+      })
+      let data=await response.json(response)
+      console.log(data)
+      } catch (error) {
+        console.log('something went wrong on information deletion : ',error)
+      }
+    }
+    else console.log('no information to create')
   }
   
+
+  const resetUpdateStateValues=async()=>{
+    await setCurrentInformationsToUpdateDelete([])
+    setCurrentInformationsToUpdateCreate([])
+    setCurrentInformationsToUpdateFinal ([])
+  }
+
   
+  const updateCollectionElement=async(e)=>{
+    e.preventDefault()
+    setFetchCompleted(false)
+    const tempCurrentInformationsToUpdateCreate=[]
+    const tempCurrentInformationsToUpdateFinal=[]
+
+    currentInformationsToUpdate.forEach((currentInformationToUpdate)=>{
+      const {collection_element_information_uid, collection_element_information_text}=currentInformationToUpdate
+      console.log(collection_element_information_uid)
+      console.log(collection_element_information_text)
+
+      if(!currentInformations.find((currentInformation)=>currentInformation.collection_element_information_uid==collection_element_information_uid)){
+        console.log('id not found')
+        tempCurrentInformationsToUpdateCreate.push({
+            informationInputText:collection_element_information_text
+          })
+      } else {
+        console.log('else')
+        tempCurrentInformationsToUpdateFinal.push({
+          collection_element_information_uid: collection_element_information_uid, collection_element_information_text: collection_element_information_text
+        })
+      }  
+    })
+      
+    setCurrentInformationsToUpdateCreate(tempCurrentInformationsToUpdateCreate)
+    setCurrentInformationsToUpdateFinal(tempCurrentInformationsToUpdateFinal)
+
+    
+    await udpateCollectionElementAttributesOnly(
+      collectionElementAttributesToUpdate.collectionElementDescriptionToUpdate,
+      collectionElementAttributesToUpdate.collectionElementEmailToUpdate,
+      collectionElementAttributesToUpdate.collectionElementCookingToUpdate,
+      collectionElementAttributesToUpdate.collectionElementRecommandationToUpdate,
+      collectionElementAttributesToUpdate.collectionUID
+      )
+
+    await updateCollectionElementInformations(tempCurrentInformationsToUpdateFinal)
+    await deleteCollectionElementInformations(currentInformationsToUpdateDelete)
+    await createCollectionElementInformation(tempCurrentInformationsToUpdateCreate, collectionUID)
+
+    await fetchCollectionElement()
+    await fetchElementInformations(collectionUID)
+    setFetchCompleted(true)
+  }
   
-
   useEffect(()=>{
-    console.log('collection Element Attributes To Update before Update =>',collectionElementAttributesToUpdate)
-  },[collectionElementAttributesToUpdate])
-
-
-  useEffect(()=>{
-    if(currentInformationsToUpdateCreate.length>0){
-      console.log('collection element information to Create ',currentInformationsToUpdateCreate)
+    if(fetchCompleted){
+      resetUpdateStateValues()
     }
-  },[currentInformationsToUpdateCreate])
-
-
-  useEffect(()=>{
-    if(currentInformationsToUpdateFinal.length>0){
-      console.log('collection element information to Update final ',currentInformationsToUpdateFinal)
-    }
-  },[currentInformationsToUpdateFinal])
-
-    useEffect(()=>{
-      if(currentInformationsToUpdateDelete.length>0){
-        console.log('collection element information to Delete ',currentInformationsToUpdateDelete)
-      }
-  },[currentInformationsToUpdateDelete])
+  },[fetchCompleted])
 
 
 
