@@ -44,8 +44,10 @@ export const NewPicture = ({collectionUID}) => {
     }
     
     
-    useEffect((event)=>{
-        updateFile()
+    useEffect(()=>{
+        if(newCollectionElementPicture){
+            updateFile()
+        }
     },[newCollectionElementPicture])
 
     return (
