@@ -5,21 +5,17 @@ import { useCollectionElementInformationsToUpdate } from '../contextProvider/Col
 
 export const CollectionElementInformations = ({collection_uid, fetchElementInformations}) => {
 
-const {currentInformations, setCurrentInformations}=useCollectionElementInformations()
+const {currentInformations}=useCollectionElementInformations()
 const {currentInformationsToUpdate}=useCollectionElementInformationsToUpdate()
-
-// const fetchElementInformations=async()=>{
-//     let response=await fetch(`http://localhost:5000/collections/${collection_uid}/information`)
-//     let jsonData=await response.json()
-//     setCurrentInformations(jsonData)
-// }
 
 useEffect(()=>{
     fetchElementInformations(collection_uid)
 },[collection_uid])
 
 useEffect(()=>{
-    console.log('currentInformations =>',currentInformations)
+    if(currentInformations.length>0){
+        console.log('currentInformations =>',currentInformations)
+    }
 },[currentInformations])
 
   return (

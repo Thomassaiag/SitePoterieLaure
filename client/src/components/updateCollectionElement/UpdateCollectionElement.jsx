@@ -35,9 +35,9 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
       collectionElementCookingToUpdate: collectionElementCooking,
       collectionElementRecommandationToUpdate: collectionElementRecommandation,
       collectionUID: collectionUID,
-      collectionElementInformationsToUpdate:currentInformationsToUpdateFinal
+      collectionElementInformationsToUpdate:currentInformationsToUpdate
     }))
-  },[collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID, currentInformationsToUpdateFinal])
+  },[collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID, currentInformationsToUpdate])
 
 
   const updateCollectionElement=async(e)=>{
@@ -133,22 +133,30 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
   
 
   useEffect(()=>{
-    console.log('collection Element Attributes To Update =>',collectionElementAttributesToUpdate)
+    console.log('collection Element Attributes To Update before Update =>',collectionElementAttributesToUpdate)
   },[collectionElementAttributesToUpdate])
 
 
   useEffect(()=>{
-    console.log('collection element information to Create ',currentInformationsToUpdateCreate)
+    if(currentInformationsToUpdateCreate.length>0){
+      console.log('collection element information to Create ',currentInformationsToUpdateCreate)
+    }
   },[currentInformationsToUpdateCreate])
 
 
   useEffect(()=>{
-    console.log('collection element information to Update final ',currentInformationsToUpdateFinal)
+    if(currentInformationsToUpdateFinal.length>0){
+      console.log('collection element information to Update final ',currentInformationsToUpdateFinal)
+    }
   },[currentInformationsToUpdateFinal])
 
     useEffect(()=>{
-    console.log('collection element information to Delete ',currentInformationsToUpdateDelete)
+      if(currentInformationsToUpdateDelete.length>0){
+        console.log('collection element information to Delete ',currentInformationsToUpdateDelete)
+      }
   },[currentInformationsToUpdateDelete])
+
+
 
   const handleChange=(e)=>{
     e.preventDefault()

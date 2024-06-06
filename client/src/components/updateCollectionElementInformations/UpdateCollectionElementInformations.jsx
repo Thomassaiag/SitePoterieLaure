@@ -72,12 +72,6 @@ export const UpdateCollectionElementInformations = () => {
     useEffect(()=>{
         if(currentInformations.length>0){
             setCurrentInformationsToUpdate(currentInformations)
-            // setInputIDList((prevInputList)=>{
-            //     return currentInformationsToUpdate.map((currentInformationToUpdate)=>{
-            //         const {collection_element_information_uid}=currentInformationToUpdate
-            //         return [...prevInputList,{inputUID:collection_element_information_uid}]
-            //     })                
-            // })
         }
         else setCurrentInformationsToUpdate([])
     },[currentInformations])
@@ -89,18 +83,18 @@ export const UpdateCollectionElementInformations = () => {
 
 
     useEffect(()=>{
-        console.log('currentInformationsToUpdate => ',currentInformationsToUpdate)
+        if(currentInformationsToUpdate.length>0){
+            console.log('currentInformationsToUpdate => ',currentInformationsToUpdate)
+        }
     },[currentInformationsToUpdate])
 
 
 
     useEffect(()=>{
-        console.log('currentInformationsToUpdateDelete when updated=> ',currentInformationsToUpdateDelete)
+        if(currentInformationsToUpdateDelete.length>0){
+            console.log('currentInformationsToUpdateDelete when updated=> ',currentInformationsToUpdateDelete)
+        }
     },[currentInformationsToUpdateDelete])
-
-    // useEffect(()=>{
-    //     console.log('inputIDList=> ',inputIDList)
-    // },[currentInformationsToUpdate])
 
 
   return (
