@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import {nanoid} from  'nanoid'
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
+
+
+
 export const CollectionElementInformationsCreation = () => {
 
 
     const [inputIDList, setInputIDList]=useState([{id:nanoid()}])
     const {currentInformations, setCurrentInformations}=useCollectionElementInformations()
+    const inputRef=useRef(null)
+
 
     useEffect(()=>{
         setCurrentInformations([{
@@ -54,13 +59,11 @@ export const CollectionElementInformationsCreation = () => {
         })
     }
 
-    // useEffect(()=>{
-    //     console.log(currentInformations)
-    // },[currentInformations])
-
-    // useEffect(()=>{
-    //     console.log(currentInformations)
-    // },[])
+    useEffect(()=>{
+        if(inputRef.current){
+            inputRef.current.focus()
+        }
+    },[inputIDList])
 
     return (
         <div>
@@ -69,6 +72,7 @@ export const CollectionElementInformationsCreation = () => {
                 return (
                     <div key={id}>
                     <input 
+                        ref={inputRef}
                         type='text'
                         name={id}
                         onChange={(e)=>handleChange(e,id)}

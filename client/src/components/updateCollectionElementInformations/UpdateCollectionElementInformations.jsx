@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef} from 'react'
 import {nanoid} from 'nanoid'
 
 
@@ -6,24 +6,17 @@ import { useCollectionElementInformations } from '../contextProvider/CollectionE
 import { useCollectionElementInformationsToUpdate } from '../contextProvider/CollectionElementInformationsToUpdateContextProvider'
 import { useCollectionElementInformationsToUpdateDelete } from '../contextProvider/CollectionElementInformationsToUpdateDeleteContextProvider'
 
-export const UpdateCollectionElementInformations = () => {
-
+export const UpdateCollectionElementInformations = ({collectionUID}) => {
+    const inputRef=useRef(null)
     const {currentInformations}=useCollectionElementInformations()
     const {currentInformationsToUpdate, setCurrentInformationsToUpdate}=useCollectionElementInformationsToUpdate()
     const {currentInformationsToUpdateDelete, setCurrentInformationsToUpdateDelete}=useCollectionElementInformationsToUpdateDelete()
-    // const [inputIDList, setInputIDList]=useState([])
-    
     
     const updateCollectionElementInformations=(e)=>{
         e.preventDefault()
-        console.log(e.target.name)
         setCurrentInformationsToUpdate((prevInformations)=>{
-            // console.log("prevInformations =>",prevInformations)
-            console.log(e.target.value)
             return prevInformations.map((prevInformation)=>{
-                // console.log(prevInformation)
                 let {collection_element_information_uid}=prevInformation
-                // if(currentInformations.find((currentInformation)=>currentInformation.collection_element_information_uid==collection_element_information_uid))
                 if(collection_element_information_uid==e.target.name){
                     return {...prevInformation, collection_element_information_text: e.target.value}
                 } else {
@@ -39,9 +32,6 @@ export const UpdateCollectionElementInformations = () => {
             alert('Vous devez conserver au moins une information')
         }else {
             if(currentInformations.find((currentInformation)=>currentInformation.collection_element_information_uid==informationId)){
-
-                console.log(informationId)
-                // console.log(currentInformationsToUpdateDelete)
                 setCurrentInformationsToUpdateDelete((prevInformationsToUpdateDelete)=>{
                     return [...prevInformationsToUpdateDelete, {collectionElementInformationUID:informationId}]
                     
@@ -50,7 +40,6 @@ export const UpdateCollectionElementInformations = () => {
             setCurrentInformationsToUpdate((prevInformationsToUpdate)=>{
                 return prevInformationsToUpdate.filter((prevInformationToUpdate)=>prevInformationToUpdate.collection_element_information_uid!=informationId)
             })
-            // console.log('currentInformationsToUpdateDelete =>',currentInformationsToUpdateDelete)
         }
 
     }
@@ -60,12 +49,17 @@ export const UpdateCollectionElementInformations = () => {
         setCurrentInformationsToUpdate((prevInformationsToUpdate)=>{
             return [...prevInformationsToUpdate, {
                 collection_element_information_uid: nanoid(),
-                collection_uid:currentInformationsToUpdate[0].collection_uid,
+                collection_uid:collectionUID,
                 collection_element_information_text:''
             }]
         })
-        return
     }
+    useEffect(()=>{
+        if(inputRef.current){
+            inputRef.current.focus()
+        }
+    },[currentInformationsToUpdate])
+
 
     useEffect(()=>{
         if(currentInformations.length>0){
@@ -80,19 +74,19 @@ export const UpdateCollectionElementInformations = () => {
     },[currentInformations])
 
 
-    useEffect(()=>{
-        if(currentInformationsToUpdate.length>0){
-            console.log('currentInformationsToUpdate => ',currentInformationsToUpdate)
-        }
-    },[currentInformationsToUpdate])
+    // useEffect(()=>{
+    //     if(currentInformationsToUpdate.length>0){
+    //         console.log('currentInformationsToUpdate => ',currentInformationsToUpdate)
+    //     }
+    // },[currentInformationsToUpdate])
 
 
 
-    useEffect(()=>{
-        if(currentInformationsToUpdateDelete.length>0){
-            console.log('currentInformationsToUpdateDelete when updated=> ',currentInformationsToUpdateDelete)
-        }
-    },[currentInformationsToUpdateDelete])
+    // useEffect(()=>{
+    //     if(currentInformationsToUpdateDelete.length>0){
+    //         console.log('currentInformationsToUpdateDelete when updated=> ',currentInformationsToUpdateDelete)
+    //     }
+    // },[currentInformationsToUpdateDelete])
 
 
   return (
@@ -104,6 +98,7 @@ export const UpdateCollectionElementInformations = () => {
                 return(
                     <div key={collection_element_information_uid}>
                     <input
+                        ref={inputRef}
                         name={collection_element_information_uid}
                         value={collection_element_information_text}
                         onChange={(e)=>updateCollectionElementInformations(e)}

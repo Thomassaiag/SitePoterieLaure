@@ -217,7 +217,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
         <label
           htmlFor='collectionElementEmail'>Informations techniques  
         </label>
-        <UpdateCollectionElementInformations/>
+        <UpdateCollectionElementInformations collectionUID={collectionUID}/>
         <br></br>
         <input id='collectionElementEmail'
           type='text'
