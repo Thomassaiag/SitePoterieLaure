@@ -3,6 +3,6 @@ import './CollectionMainPic.css'
 
 export const CollectionMainPic = ({imageUrl, imageAlt}) => {
   return (
-    <img src={imageUrl} alt={imageAlt}/>
+    <img className='collectionImage' src={imageUrl} alt={imageAlt}/>
   )
 }

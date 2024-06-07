@@ -42,12 +42,14 @@ export const Collections =()=>{
             {
               const {collection_picture_url,collection_title, collection_picture_alt, collection_uid}=collection
               return (
-                <Collection className='collectionItem' key={collection_uid}
-                  imageUrl={collection_picture_url} 
-                  title={collection_title} 
-                  imageAlt={collection_picture_alt}
-                  collectionUid={collection_uid}
-                />
+                <div className='collectionItem' key={collection_uid}>
+                  <Collection  
+                    imageUrl={collection_picture_url} 
+                    title={collection_title} 
+                    imageAlt={collection_picture_alt}
+                    collectionUid={collection_uid}
+                  />
+                </div>
               )
             }) 
             ) : (

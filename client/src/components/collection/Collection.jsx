@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import './Collection.css'
 import { CollectionMainPic } from '../collectionMainPic/CollectionMainPic'
 import { DeleteCollectionElement } from '../deleteCollectionElement/DeleteCollectionElement'
@@ -40,15 +40,15 @@ export const Collection = ({imageUrl, imageAlt, title, collectionUid}) => {
 
 
   return (
-    <div className='collectionContainer'>
-      <Link className='collectionItem' to={`/collections/${collectionUid}`}>
+    <>
+      <Link className='collectionItemLink' to={`/collections/${collectionUid}`}>
         <CollectionMainPic imageUrl={imageUrl} imageAlt={imageAlt}/>
       </Link>
-      <div className='deleteCollectionButtonContainer'>
-        <DeleteCollectionElement handleDeleteClick={handleDeleteClick} elementToDeleteID={collectionUid}/>
-        {/* <img className='deleteCollectionButton' src="../../../images/deleteCollection.jpg" alt="Delete Collection" onClick={()=>handleDeleteClick(collectionUid)}/> */}
-      </div>  
       <p>{title}</p>
-    </div>
+      <div className='deleteButtonContainer'>
+        <DeleteCollectionElement handleDeleteClick={handleDeleteClick} elementToDeleteID={collectionUid}/>
+      </div>
+
+    </>
   )
 }

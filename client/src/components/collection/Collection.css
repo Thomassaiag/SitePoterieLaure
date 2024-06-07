@@ -1,25 +1,23 @@
-.collectionContainer{
+.deleteButtonContainer{
+    margin: 0 auto;
+    width:100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 }
 
-.collectionContainer img{
-    height:15rem;
-    width: 15rem;
+.collectionItemLink {
+    height: 100%;
+    width: auto;
 }
 
-.collectionContainer p{
+p{
     font-size: 28.8;
+    text-align: center;
+    margin-right: 10px;
 }
-
-
-/* .deleteCollectionButtonContainer{
-    width: 5px;
-} */
 
 .deleteCollectionButton{
     width: auto;
-    height: 10px;
+    height: 20px;
 }
