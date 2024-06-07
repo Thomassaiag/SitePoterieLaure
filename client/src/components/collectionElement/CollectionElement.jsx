@@ -135,7 +135,7 @@ export const CollectionElement = () => {
             <div className='collectionElementInformationContainer'>
               <div className='collectionElementLeftContainer'>
                 <h2>En Quelques Mots</h2>
-                <p>
+                <p style={{textAlign:'justify'}}>
                   {collectionElementDescription.replace(/\\n/g,'\n').split('\n').map((line, index)=>{
                     return(
                       <React.Fragment key={index}>
