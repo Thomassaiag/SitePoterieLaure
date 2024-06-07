@@ -1,5 +1,6 @@
 .collectionElementContainer{
     font-family: "Questrial";
+    margin-bottom:5rem;
 }
 
 .collectionElementTitleContainer{
@@ -22,7 +23,10 @@
     grid-template-columns: 2fr 1fr;
 }
 
-
+form{
+    background-color:  #E4DCD1;
+    margin-bottom:10px;
+}
 
 
 .collectionElementLeftContainer{

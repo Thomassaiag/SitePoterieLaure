@@ -55,11 +55,11 @@ export const UpdateCollectionElementInformations = ({collectionUID}) => {
             }]
         })
     }
-    useEffect(()=>{
-        if(inputRef.current){
-            inputRef.current.focus()
-        }
-    },[currentInformationsToUpdate])
+    // useEffect(()=>{
+    //     if(inputRef.current){
+    //         inputRef.current.focus()
+    //     }
+    // },[currentInformationsToUpdate])
 
 
     useEffect(()=>{

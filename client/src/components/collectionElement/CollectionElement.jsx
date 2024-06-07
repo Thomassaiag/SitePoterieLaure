@@ -153,7 +153,7 @@ export const CollectionElement = () => {
                 <p style={{textAlign:'left'}}>{collectionElementRecommandation}</p>
               </div>
             </div>
-            <UpdateCollectionElement  collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation} collectionUID={newId} fetchCollectionElement={fetchCollectionElement} fetchElementInformations={fetchElementInformations}/>
+            <UpdateCollectionElement  className='collectionElementUpdateContainer' collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation} collectionUID={newId} fetchCollectionElement={fetchCollectionElement} fetchElementInformations={fetchElementInformations}/>
           </div>
         ) : (
           <p>Loading Data</p>

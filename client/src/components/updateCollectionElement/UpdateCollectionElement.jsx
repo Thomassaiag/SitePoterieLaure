@@ -193,18 +193,21 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
 
   const handleChange=(e)=>{
     e.preventDefault()
+    setFetchCompleted(false)
     setCollectionElementAttributesToUpdate((prevCollectionElementAttributesToUpdate)=>({
       ...prevCollectionElementAttributesToUpdate,
       [e.target.name]:e.target.value
     }))
   }
 
+  useEffect(()=>{
+    setFetchCompleted(false)
+  }, [collectionUID])
 
 
   return (
     <>
       <form  className='collectionElementInformationContainer'onSubmit={updateCollectionElement}>
-        {/* <div > */}
         <div className='collectionElementLeftContainer'>
           <label
             htmlFor='collectionElementDescription'>          
@@ -244,9 +247,11 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
               name='collectionElementRecommandationToUpdate'        
             />
           </div>
+          {fetchCompleted && <p>Informations mises à Jour</p>}
         </div>
-        <button>Update Collection</button>
-        {/* </div> */}
+        <div className='updateCollectionButtonContainer'>
+          <button className='updateCollectionButton'>Update Collection</button>
+        </div>
       </form>
     </>
   )
