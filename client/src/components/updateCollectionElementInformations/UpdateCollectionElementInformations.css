@@ -15,6 +15,26 @@ li {
     margin: 0 auto;
     width:100%;
     display: flex;
+    justify-content: flex-center;
+    align-items: center;
+}
+
+.deleteButtonContainer img{
+    width:20px;
+    height: auto;
+
+}
+
+
+.AddInputButtonContainer{
+    margin: 0 auto;
+    width:100%;
+    display: flex;
     justify-content: flex-end;
     align-items: center;
+}
+
+.AddInputButtonContainer img{
+    width:20px;
+    height: auto;
 }
