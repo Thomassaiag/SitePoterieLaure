@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react'
 import {nanoid} from 'nanoid'
-import '../collection/Collection.css'
+import './UpdateCollectionElementInformations'
 import { DeleteInput } from '../deleteInput/DeleteInput'
 
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
@@ -75,21 +75,6 @@ export const UpdateCollectionElementInformations = ({collectionUID}) => {
     },[currentInformations])
 
 
-    // useEffect(()=>{
-    //     if(currentInformationsToUpdate.length>0){
-    //         console.log('currentInformationsToUpdate => ',currentInformationsToUpdate)
-    //     }
-    // },[currentInformationsToUpdate])
-
-
-
-    // useEffect(()=>{
-    //     if(currentInformationsToUpdateDelete.length>0){
-    //         console.log('currentInformationsToUpdateDelete when updated=> ',currentInformationsToUpdateDelete)
-    //     }
-    // },[currentInformationsToUpdateDelete])
-
-
   return (
     <>
         {currentInformationsToUpdate ?(
@@ -103,9 +88,9 @@ export const UpdateCollectionElementInformations = ({collectionUID}) => {
                             value={collection_element_information_text}
                             onChange={(e)=>updateCollectionElementInformations(e)}
                         />
-                        <div className='deleteButtonContainer'>
+                        {/* <div className='deleteButtonContainer'>
                             <DeleteInput />
-                        </div>
+                        </div> */}
                         {/* <button type='button' discardInformationInput={discardInformationInput} onClick={(e)=>discardInformationInput(e,collection_element_information_uid) collection_element_information_uid={collection_element_information_uid}}>Effacer Information</button> */}
                     </div>
                 )

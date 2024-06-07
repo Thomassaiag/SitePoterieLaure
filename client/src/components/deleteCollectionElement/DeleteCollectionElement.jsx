@@ -1,4 +1,5 @@
 import React from 'react'
+import './DeleteCollectionElement.css'
 
 export const DeleteCollectionElement = ({elementToDeleteID, handleDeleteClick, buttonName}) => {
     return (

@@ -9,3 +9,12 @@ li {
 .collectionElementInformation{
     width:100%;
 }
+
+
+.deleteButtonContainer{
+    margin: 0 auto;
+    width:100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
