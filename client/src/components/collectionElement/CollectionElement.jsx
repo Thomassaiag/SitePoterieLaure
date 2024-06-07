@@ -143,21 +143,17 @@ export const CollectionElement = () => {
                       </React.Fragment>
                     )
                   })}
-                  {/* {collectionElementDescription} */}
                 </p>
               </div>
               <div className='collectionElementRightContainer'>
                 <h2 >Informations techniques</h2>
                 <CollectionElementInformations collection_uid={newId} fetchElementInformations={fetchElementInformations}/>
-                <p>{collectionElementEmail}</p>
-                <p>{collectionElementCooking}</p>
-                <p>{collectionElementRecommandation}</p>
+                <p style={{textAlign:'left'}}>{collectionElementEmail}</p>
+                <p style={{textAlign:'left'}}>{collectionElementCooking}</p>
+                <p style={{textAlign:'left'}}>{collectionElementRecommandation}</p>
               </div>
             </div>
-            <div className='collectionElementInformationContainer'> 
-              <UpdateCollectionElement  collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation} collectionUID={newId} fetchCollectionElement={fetchCollectionElement} fetchElementInformations={fetchElementInformations}/>
-
-            </div>
+            <UpdateCollectionElement  collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation} collectionUID={newId} fetchCollectionElement={fetchCollectionElement} fetchElementInformations={fetchElementInformations}/>
           </div>
         ) : (
           <p>Loading Data</p>

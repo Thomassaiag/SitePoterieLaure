@@ -1,6 +1,7 @@
 import React, {useEffect, useRef} from 'react'
 import {nanoid} from 'nanoid'
-
+import '../collection/Collection.css'
+import { DeleteInput } from '../deleteInput/DeleteInput'
 
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
 import { useCollectionElementInformationsToUpdate } from '../contextProvider/CollectionElementInformationsToUpdateContextProvider'
@@ -90,28 +91,30 @@ export const UpdateCollectionElementInformations = ({collectionUID}) => {
 
 
   return (
-    <div className='collectionElementInformationsContainer'>
-    {
-        currentInformationsToUpdate ?(
+    <>
+        {currentInformationsToUpdate ?(
             currentInformationsToUpdate.map((currentInformationToUpdate)=>{
                 let {collection_element_information_text, collection_element_information_uid}=currentInformationToUpdate
                 return(
-                    <div key={collection_element_information_uid}>
-                    <input
-                        ref={inputRef}
-                        name={collection_element_information_uid}
-                        value={collection_element_information_text}
-                        onChange={(e)=>updateCollectionElementInformations(e)}
+                    <div className='collectionElementInformationContainer' key={collection_element_information_uid}>
+                        <input className='collectionElementInformation'
+                            ref={inputRef}
+                            name={collection_element_information_uid}
+                            value={collection_element_information_text}
+                            onChange={(e)=>updateCollectionElementInformations(e)}
                         />
-                    <button type='button' onClick={(e)=>discardInformationInput(e,collection_element_information_uid)}>Effacer Information</button>
+                        <div className='deleteButtonContainer'>
+                            <DeleteInput />
+                        </div>
+                        {/* <button type='button' discardInformationInput={discardInformationInput} onClick={(e)=>discardInformationInput(e,collection_element_information_uid) collection_element_information_uid={collection_element_information_uid}}>Effacer Information</button> */}
                     </div>
                 )
             })
-        ):(
-            <p>Loading...</p>
-        )
-    }
-    <button onClick={addInformationInput}>Ajouter une information</button>
-    </div>
+            ):(
+                <p>Loading...</p>
+            )
+        }
+        <button onClick={addInformationInput}>Ajouter une information</button>
+    </>
   )
 }

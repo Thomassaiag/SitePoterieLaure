@@ -5,6 +5,7 @@ import { useCollectionElementInformationsToUpdate } from '../contextProvider/Col
 import { useCollectionElementInformationsToUpdateDelete } from '../contextProvider/CollectionElementInformationsToUpdateDeleteContextProvider'
 
 import '../collectionElement/CollectionElement.css'
+import './UpdateCollectionElement.css'
 
 
 export const UpdateCollectionElement = ({collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID, fetchCollectionElement, fetchElementInformations}) => {
@@ -201,44 +202,52 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
 
 
   return (
-    <form className='collectionElementInformationContainer' onSubmit={updateCollectionElement}>
-      <div className='collectionElementLeftContainer'>
-        <label
-          htmlFor='collectionElementDescription'>Collection Description  
-        </label>
-        <input id='collectionElementDescription'
-          type='text'
-          value={collectionElementAttributesToUpdate.collectionElementDescriptionToUpdate}
-          onChange={handleChange}
-          name='collectionElementDescriptionToUpdate'        
-        />
-      </div >
-      <div className='collectionElementRightContainer'>
-        <label
-          htmlFor='collectionElementEmail'>Informations techniques  
-        </label>
-        <UpdateCollectionElementInformations collectionUID={collectionUID}/>
-        <br></br>
-        <input id='collectionElementEmail'
-          type='text'
-          value={collectionElementAttributesToUpdate.collectionElementEmailToUpdate}
-          onChange={handleChange}
-          name='collectionElementEmailToUpdate'    
-        />
-        <input id='collectionElementCooking'
-          type='text'
-          value={collectionElementAttributesToUpdate.collectionElementCookingToUpdate}
-          onChange={handleChange}
-          name='collectionElementCookingToUpdate'        
-        />
-        <input id='collectionElementRecommandation'
-          type='text'
-          value={collectionElementAttributesToUpdate.collectionElementRecommandationToUpdate}
-          onChange={handleChange}
-          name='collectionElementRecommandationToUpdate'        
-        />
-      </div>
-      <button>Update Collection</button>
-    </form>
+    <>
+      <form  className='collectionElementInformationContainer'onSubmit={updateCollectionElement}>
+        {/* <div > */}
+        <div className='collectionElementLeftContainer'>
+          <label
+            htmlFor='collectionElementDescription'>          
+            <h2>En Quelques Mots</h2>
+          </label>
+          <textarea 
+            id='collectionElementDescription'
+            type='text'
+            value={collectionElementAttributesToUpdate.collectionElementDescriptionToUpdate}
+            onChange={handleChange}
+            name='collectionElementDescriptionToUpdate'        
+          />
+        </div >
+        <div className='collectionElementRightContainer'>
+          <h2>Informations techniques</h2>
+          <div className='collectionElementInformationsContainer'>
+            <UpdateCollectionElementInformations collectionUID={collectionUID}/>
+          </div>
+          <br></br>
+          <div className='collectionElementEmailCookingRecoContainer'>
+            <input id='collectionElementEmail'
+              type='text'
+              value={collectionElementAttributesToUpdate.collectionElementEmailToUpdate}
+              onChange={handleChange}
+              name='collectionElementEmailToUpdate'    
+            />
+            <input id='collectionElementCooking'
+              type='text'
+              value={collectionElementAttributesToUpdate.collectionElementCookingToUpdate}
+              onChange={handleChange}
+              name='collectionElementCookingToUpdate'        
+            />
+            <input id='collectionElementRecommandation'
+              type='text'
+              value={collectionElementAttributesToUpdate.collectionElementRecommandationToUpdate}
+              onChange={handleChange}
+              name='collectionElementRecommandationToUpdate'        
+            />
+          </div>
+        </div>
+        <button>Update Collection</button>
+        {/* </div> */}
+      </form>
+    </>
   )
 }

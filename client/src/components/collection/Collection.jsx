@@ -5,7 +5,7 @@ import { DeleteCollectionElement } from '../deleteCollectionElement/DeleteCollec
 
 import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
 import { Link } from 'react-router-dom'
-// import {deleteCollection} from '../../../public/images/deleteCollection.jpg'
+
 
 export const Collection = ({imageUrl, imageAlt, title, collectionUid}) => {
   const buttonName='Effacer toute la collection'

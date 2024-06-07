@@ -2,8 +2,10 @@ li {
     list-style: none;
 }
 
-.collectionElementInformationsContainer{
-    padding: 0;
-    margin: 0;
-    font-size: 12;
+.collectionElementInformationContainer{
+    width:100%;
+}
+
+.collectionElementInformation{
+    width:100%;
 }
