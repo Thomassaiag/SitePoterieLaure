@@ -4,6 +4,7 @@ import { PopUpPicture } from '../popUpPicture/PopUpPicture'
 import { DeleteCollectionElement } from '../deleteCollectionElement/DeleteCollectionElement'
 
 export const CollectionElementPicture = ({collection_uid, collection_element_picture_url, collection_element_picture_alt, collection_element_picture_uid}) => {
+  const buttonName='Effacer l\'image'
   const [showPopUpPicture, setShowPopUpPicture]=useState(false)
   const [collectionElementPictureToDeleteID, setCollectionElementPictureToDeleteID]=useState(collection_element_picture_uid)
   const togglePopUpPicture=()=>{
@@ -34,9 +35,11 @@ export const CollectionElementPicture = ({collection_uid, collection_element_pic
   return (
     <>
     <div className='collectionPictureContainer'>
-      <img src={collection_element_picture_url} alt={collection_element_picture_alt} onClick={togglePopUpPicture}/>
+      <img className='collectionElementPicture' src={collection_element_picture_url} alt={collection_element_picture_alt} onClick={togglePopUpPicture}/>
     </div>
-    <DeleteCollectionElement elementToDeleteID={collection_element_picture_uid} handleDeleteClick={handleDeleteClick}/>
+    <div className='deleteButtonContainer'>
+      <DeleteCollectionElement buttonName={buttonName} elementToDeleteID={collection_element_picture_uid} handleDeleteClick={handleDeleteClick}/>
+    </div>
     {showPopUpPicture && <PopUpPicture imageUrl={collection_element_picture_url} imageAlt={collection_element_picture_alt} imageUid={collection_element_picture_uid} collection_uid={collection_uid} onClose={togglePopUpPicture}/>}
     </>
   )

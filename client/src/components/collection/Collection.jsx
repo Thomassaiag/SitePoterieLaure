@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 // import {deleteCollection} from '../../../public/images/deleteCollection.jpg'
 
 export const Collection = ({imageUrl, imageAlt, title, collectionUid}) => {
-
+  const buttonName='Effacer toute la collection'
   const {connectionAttributes}=useConnectionStatus()
   const [collectionToDelete, setCollectionToDelete]=useState(collectionUid)
 
@@ -46,7 +46,7 @@ export const Collection = ({imageUrl, imageAlt, title, collectionUid}) => {
       </Link>
       <p>{title}</p>
       <div className='deleteButtonContainer'>
-        <DeleteCollectionElement handleDeleteClick={handleDeleteClick} elementToDeleteID={collectionUid}/>
+        <DeleteCollectionElement buttonName={buttonName} handleDeleteClick={handleDeleteClick} elementToDeleteID={collectionUid}/>
       </div>
 
     </>

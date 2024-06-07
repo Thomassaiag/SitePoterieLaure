@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useEffect, useRef, useState, Fragment} from 'react'
 import './NewPicture'
 
 export const NewPicture = ({collectionUID}) => {
@@ -51,9 +51,13 @@ export const NewPicture = ({collectionUID}) => {
     },[newCollectionElementPicture])
 
     return (
-        <div onClick={addNewCollectionElementPicture}>
-            <p>Ajouter une Photo</p>
-            <img className='newPicture' src='../../../public/images/addPicture.jpg' alt='Ajouter une Photo'/>
+        <>
+            <div className='collectionPictureContainer' onClick={addNewCollectionElementPicture}>
+                <img className='collectionElementPicture' src='../../../public/images/addPicture.jpg' alt='Ajouter une Photo' style={{cursor: 'pointer'}}/>
+            </div>
+            <div>
+                <p>Ajouter une Photo</p>
+            </div>
             <form>
                 <input
                     type='file'
@@ -63,6 +67,6 @@ export const NewPicture = ({collectionUID}) => {
                     onClick={(event)=>event.stopPropagation()} 
                 />
             </form>
-        </div>
+        </>
     )
 }

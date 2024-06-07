@@ -9,6 +9,11 @@
     font-size: 15px;
 }
 
+.collectionElementPicturesContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
 
 
 /* information CSS */

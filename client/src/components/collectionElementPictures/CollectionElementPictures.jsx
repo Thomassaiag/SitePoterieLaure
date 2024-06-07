@@ -33,22 +33,23 @@ export const CollectionElementPictures = ({collection_uid}) => {
 
 
     return (
-        <div className='collectionElementPicturesContainer'>
-            <NewPicture className='collectionElementSinglePictureContainer' collectionUID={collection_uid}/>
-            {
-                currentPictures ? (
-                    currentPictures.map((currentPicture)=>{
-                        let {collection_uid, collection_element_picture_url, collection_element_picture_alt, collection_element_picture_uid}=currentPicture
-                        return(
-                            <div className='collectionElementSinglePictureContainer' key={collection_element_picture_uid}>
-                                <CollectionElementPicture className='collectionElementPicture'  collection_element_picture_url={collection_element_picture_url} collection_element_picture_alt={collection_element_picture_alt} collection_element_picture_uid={collection_element_picture_uid} collection_uid={collection_uid}/>
-                            </div>    
-                        )
-                    })
+        <>
+            <div className='collectionElementSinglePictureContainer'>
+                <NewPicture collectionUID={collection_uid}/>
+            </div>
+            {currentPictures ? (
+                currentPictures.map((currentPicture)=>{
+                    let {collection_uid, collection_element_picture_url, collection_element_picture_alt, collection_element_picture_uid}=currentPicture
+                    return(
+                        <div className='collectionElementSinglePictureContainer' key={collection_element_picture_uid}>
+                            <CollectionElementPicture collection_element_picture_url={collection_element_picture_url} collection_element_picture_alt={collection_element_picture_alt} collection_element_picture_uid={collection_element_picture_uid} collection_uid={collection_uid}/>
+                        </div>    
+                    )
+                })
                 ):(
                     <p>Loading</p>
                 )
             }
-            </div>
+            </>
     )
 }
