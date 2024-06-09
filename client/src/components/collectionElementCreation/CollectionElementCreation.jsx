@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'
 
 import '../collectionElement/CollectionElement.css'
+import './CollectionElementCreation.css'
+
 import { CollectionElementInformationsCreation } from '../collectionElementInformationsCreation/CollectionElementInformationsCreation'
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
 
@@ -81,7 +83,7 @@ export const CollectionElementCreation = ({newCollectionUIDAndTitle}) => {
             <label
               htmlFor='collectionElementDescription'>Collection Description  
             </label>
-            <input id='collectionElementDescription'
+            <textarea id='collectionElementDescription'
               type='text'
               value={collectionElementAttributesToCreate.collectionElementDescriptionToCreate}
               onChange={handleChange}
@@ -96,27 +98,40 @@ export const CollectionElementCreation = ({newCollectionUIDAndTitle}) => {
             <CollectionElementInformationsCreation/>
 
 
-            <br></br>
-            <input id='collectionElementEmail'
-              type='text'
-              value={collectionElementAttributesToCreate.collectionElementEmailToCreate}
-              onChange={handleChange}
-              name='collectionElementEmailToCreate'    
-            />
-            <input id='collectionElementCooking'
-              type='text'
-              value={collectionElementAttributesToCreate.collectionElementCookingToCreate}
-              onChange={handleChange}
-              name='collectionElementCookingToCreate'        
-            />
-            <input id='collectionElementRecommandation'
-              type='text'
-              value={collectionElementAttributesToCreate.collectionElementRecommandationToCreate}
-              onChange={handleChange}
-              name='collectionElementRecommandationToCreate'        
-            />
+            <br/>
+            <div className='inputContainer'>
+              <label htmlFor='collectionElementEmail'>Email : </label>
+              <input id='collectionElementEmail'
+                type='text'
+                value={collectionElementAttributesToCreate.collectionElementEmailToCreate}
+                onChange={handleChange}
+                name='collectionElementEmailToCreate'    
+                />
+            </div>
+            <br/>
+            <div className='inputContainer'>
+              <label htmlFor='collectionElementCooking'>Cuisson : </label>
+              <input id='collectionElementCooking'
+                type='text'
+                value={collectionElementAttributesToCreate.collectionElementCookingToCreate}
+                onChange={handleChange}
+                name='collectionElementCookingToCreate'        
+              />
+            </div>
+            <br/>
+            <div className='inputContainer'>
+              <label htmlFor='collectionElementRecommandation'>Recommandations : </label>
+              <input id='collectionElementRecommandation'
+                type='text'
+                value={collectionElementAttributesToCreate.collectionElementRecommandationToCreate}
+                onChange={handleChange}
+                name='collectionElementRecommandationToCreate'        
+              />
+              </div>
           </div>
-          <button>Ajouter les élements de la nouvelle Collection</button>
+          <br></br>
+          <br></br>
+          <button className='collectionElementCreationButton'>Ajouter les élements de la nouvelle Collection</button>
 
         </form>
 

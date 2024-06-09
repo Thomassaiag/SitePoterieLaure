@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from 'react'
 import {nanoid} from 'nanoid'
 import './UpdateCollectionElementInformations.css'
-import { DeleteInput } from '../deleteInput/DeleteInput'
+
 
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
 import { useCollectionElementInformationsToUpdate } from '../contextProvider/CollectionElementInformationsToUpdateContextProvider'
@@ -90,9 +90,7 @@ export const UpdateCollectionElementInformations = ({collectionUID}) => {
                         />
                         <div className='deleteButtonContainer'>
                             <img src="../../../images/deleteCollection.jpg" alt="Delete Input" onClick={(e)=>discardInformationInput(e,collection_element_information_uid)} style={{cursor: 'pointer'}}/>
-                            {/* <DeleteInput discardInformationInput={discardInformationInput} collection_element_information_uid={collection_element_information_uid}/> */}
                         </div>
-                        {/* <button type='button' onClick={(e)=>discardInformationInput(e,collection_element_information_uid)}>Effacer Information</button> */}
                     </div>
                 )
             })

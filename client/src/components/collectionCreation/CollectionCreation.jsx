@@ -1,6 +1,8 @@
 import React,{useState, useEffect} from 'react'
 import { CollectionElementCreation } from '../collectionElementCreation/CollectionElementCreation'
 
+import './CollectionCreation.css'
+
 export const CollectionCreation = () => {
     const [collectionText, setCollectionText]=useState({
         collectionTitle:'',
@@ -76,10 +78,9 @@ export const CollectionCreation = () => {
 
     return (
     <div>
-        <h1>Créer une nouvelle Collection</h1>
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor='collectionTitle'>Nom de la Collection</label> 
+        <form className='collectionCreationForm' onSubmit={handleSubmit}>
+            <div className='collectionCreationInput'>
+                <label htmlFor='collectionTitle'>Nom de la Collection : </label> 
                 <input
                     id='collectionTitle'
                     type="text"
@@ -88,8 +89,9 @@ export const CollectionCreation = () => {
                     required
                 />
             </div>
-            <div>
-                <label htmlFor='collectionPicture'>Choisir une image principale pour la Collection</label> 
+            <br></br>
+            <div className='collectionCreationInput'>
+                <label htmlFor='collectionPicture'>Image principale pour la Collection : </label> 
                 <input
                     id='collectionPicture'
                     type='file'
@@ -98,8 +100,9 @@ export const CollectionCreation = () => {
                     onChange={handleFileChange}
                 />
             </div>
-            <div>
-                <label htmlFor='collectionDescription'>Titre de la Collection</label> 
+            <br></br>
+            <div className='collectionCreationInput'>
+                <label htmlFor='collectionDescription'>Titre de la Collection : </label> 
                 <input
                     id='collectionDescription'
                     type='text'
@@ -108,8 +111,9 @@ export const CollectionCreation = () => {
                     required
                 />
             </div>
-
-            <button type='submit'>Créer Collection</button>
+            <br></br>
+            <br></br>
+            <button className='createCollectionButton' type='submit'>Créer La Collection</button>
         </form>
         {/* {collectionCreated ? 
             <>
