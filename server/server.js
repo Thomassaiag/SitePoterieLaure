@@ -17,7 +17,6 @@ app.use('/',routes)
 const bcrypt=require('bcrypt')
 const {hashPassword}=require('./passwordEncryption')
 
-const collectionPath=process.env.COLLECTIONPICTUREPATH
 const collectionElementPath=process.env.COLLECTIONELEMENTPICTURESPATH
 
 
@@ -28,43 +27,6 @@ app.use((req, res, next) => {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   next();
 });
-
-
-//Post 1 new Collection ID in Collection Table
-
-const storage=multer.diskStorage({
-    destination: function(req, file, cb){
-        cb(null, collectionPath);
-    },
-    filename:function(req, file, cb){
-        cb(null, file.originalname)
-    }
-})
-
-
-const upload=multer({storage:storage})
-
-app.post('/admin/createCollection', upload.single('file'), async(req, res, next)=>{
-
-    const {collectionTitle, collectionDescription}=req.body
-    console.log(collectionTitle)
-    console.log(upload)
-    const collectionPictureAlt=`Image ${collectionTitle}`
-    const collectionPictureUrl=`/images/Collections/${req.file.originalname}`
-
-    try{
-        const newCollection=await pool.query(
-            'INSERT INTO collection (collection_title, collection_description, collection_picture_url, collection_picture_alt, collection_deletionflag) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-            [collectionTitle, collectionDescription, collectionPictureUrl, collectionPictureAlt, false]
-        )
-        res.status(200).json({message: newCollection.rows[0]})
-    }
-    catch(err){
-        console.error('Error adding newCollection', err)
-        res.status(500).send('Server Error')
-    }
-})
-
 
 
 
