@@ -15,7 +15,7 @@ export const CollectionElementPictures = ({collection_uid}) => {
 
     const fetchCurrentPictures=async()=>{
         try {
-            const response = await fetch(`http://localhost:5000/collections/${collection_uid}/pictures`)
+            const response = await fetch(`http://localhost:5000/collectionElement/${collection_uid}/pictures`)
             const jsonData=await response.json()
             setCurrentPictures(jsonData)
     }
@@ -25,11 +25,13 @@ export const CollectionElementPictures = ({collection_uid}) => {
         }
     }
 
+    // useEffect(()=>{
+    //     fetchCurrentPictures()
+    // },[collection_uid, currentPictures])
+
     useEffect(()=>{
         fetchCurrentPictures()
-    },[collection_uid, currentPictures])
-
-
+    },[collection_uid])
 
 
     return (
