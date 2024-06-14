@@ -15,7 +15,7 @@ export const Newsletter = () => {
             return
         }
         try {
-            const response=await fetch('http://localhost:5000/contact',{
+            const response=await fetch('http://localhost:5000/contact/subscribe',{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
