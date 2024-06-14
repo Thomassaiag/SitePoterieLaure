@@ -30,34 +30,6 @@ app.use((req, res, next) => {
 
 
 
-//Create collection Element attributes
-
-app.post('/admin/createCollectionElement',async(req, res,next)=>{
-    try {
-        console.log(req.body)
-        let {descriptionToCreate, emailToCreate, cookingToCreate, recommandationToCreate, collectionUID,collectionTitle}=req.body
-
-        let collectionElementAttributesToCreate=await pool.query(
-            `INSERT INTO collection_element
-            (collection_element_description, collection_element_email, collection_element_recommandation,collection_element_cooking, collection_uid, collection_element_title)
-            VALUES ($1, $2, $3, $4,$5, $6)
-            `,[descriptionToCreate,emailToCreate, recommandationToCreate,cookingToCreate, collectionUID,collectionTitle]
-        )
-
-        if (collectionElementAttributesToCreate){
-            res.status(200).json({message: `collection Element for collection ${collectionUID} created`})        
-            console.log('Collection Element Attributes Created')
-        }
-        else res.status(201).json({message: `collection Element for collection ${collectionUID} NOT created` })
-    } catch (error) {
-        await pool.query('ROLLBACK')
-        console.error(`error ceating collection element => ${error} `)
-        return res.status(400).json({message:"Creation wasn't completed due to an error"})
-    }
-
-})
-
-
 //Create Collection Element informations
 
 
