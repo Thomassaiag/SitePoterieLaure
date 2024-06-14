@@ -8,18 +8,16 @@ const imageLeft='../../images/poteriePresentation.jpg'
 export const Portrait= () => {
   return (
     <div className="portraitContainer">
-      <div className='titleContainer'>
-        <p className='titleText'>VL Céramique - Hand made by Laure</p>
-      </div>
-        <div className='presentationContainer'>
-          <div className='presentationPictureContainer'>
-            <img className='presentationPicture' src={imageLeft} alt="image" />
-          </div>
-          <div className='presentationContainerRight'>
-            <Description descriptionText={portraitText}/>
-            <img src={logo} alt="logo"/>
-          </div>
+      <p className='titleText'>VL Céramique - Hand made by Laure</p>
+      <div className='presentationContainer'>
+        <div className='presentationPictureContainer'>
+          <img className='presentationPicture' src={imageLeft} alt="image" />
         </div>
+        <div className='presentationContainerRight'>
+          <Description descriptionText={portraitText}/>
+          <img src={logo} alt="logo"/>
+        </div>
+      </div>
     </div>
   )
 }

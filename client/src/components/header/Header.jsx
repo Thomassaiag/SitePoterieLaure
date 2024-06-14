@@ -29,10 +29,10 @@ export const Header = () => {
       </Link>
       <div className='headerLinks'>
         <Link to='/collections'>collections</Link>
-        <Link to=''>boutique</Link>
+        {/* <Link to=''>boutique</Link> */}
         <Link to='/galerie'>galerie</Link>
         <Link to='/portrait'>portrait</Link>
-        <Link to=''>blog</Link>
+        {/* <Link to=''>blog</Link> */}
         <Link to='/contact'>contact</Link>
         {/* {connectionAttributes.adminConnection && <Link to='/admin'>admin</Link>} */}
         <Link to='/admin'>admin</Link>

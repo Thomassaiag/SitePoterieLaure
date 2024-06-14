@@ -3,7 +3,7 @@ import './Description.css'
 
 export const Description = ({descriptionText}) => {
   return (
-    <p>
+    <p style={{textAlign:'justify'}}>
         {descriptionText.split('\n').map((line, index)=>{
           return(
             <React.Fragment key={index}>
@@ -11,7 +11,6 @@ export const Description = ({descriptionText}) => {
             </React.Fragment>
           )
         })}
-
     </p>
   )
 }

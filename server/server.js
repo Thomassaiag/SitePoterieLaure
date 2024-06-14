@@ -1,10 +1,14 @@
 const express=require('express')
 const app=express()
-const pool=require('./database/db')
+const {pool,connectToDatabase}=require('./config/db')
 const multer=require('multer')
 const path=require('path')
 const nodemailer =require('nodemailer')
 require('dotenv').config()
+
+// const {connectToDatabase}=require('./database/db')
+
+// const routes=require ('./routes')
 
 const bcrypt=require('bcrypt')
 const {hashPassword}=require('./passwordEncryption')
@@ -17,6 +21,7 @@ const collectionElementPath=process.env.COLLECTIONELEMENTPICTURESPATH
 
 app.use(express.json())
 
+connectToDatabase()
 
 app.use(cors())
 
