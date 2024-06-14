@@ -30,23 +30,6 @@ app.use((req, res, next) => {
 });
 
 
-// get 1 collection Element information
-app.get('/collections/:id/information', async (req, res, next)=>{
-    try {
-        const {id}=req.params
-        const {rows} = await pool.query(
-            `SELECT * FROM collection_element_informations WHERE collection_UID=$1`,[id]
-        )
-        res.json(rows) 
-    }
-    catch (err) {
-        console.error('Error executing query',err)
-        res.status(500).json({error:'something went wrong'})
-    }
-})
-
-
-
 //Post 1 new Collection ID in Collection Table
 
 const storage=multer.diskStorage({

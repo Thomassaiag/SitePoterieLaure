@@ -10,7 +10,7 @@ const getCollectionElement=async (req, res, next)=>{
             `SELECT * FROM collection_element WHERE collection_UID=$1`,[id]
         )
         if(rows){           
-            console.log(`Collection Element retrieved successfully for collection ${id}`)
+            console.log(`Collection Element for collection ${id}, retrieved successfully `)
             res.status(200).json(rows)
         }
     }
@@ -31,7 +31,7 @@ const getCollectionElementPictures=async (req, res, next)=>{
             `SELECT * FROM collection_element_pictures WHERE collection_UID=$1 AND collection_element_pictures_deletionFlag=false`,[id]
         )
         if(rows){
-            console.log(`Pictures for collection ${id} successfully retrieved`)
+            console.log(`Pictures for collection ${id}, retrieved successfully`)
             res.status(200).json(rows) 
         }
     }
@@ -53,7 +53,7 @@ const getCollectionElementIndividualPicture=async (req, res, next)=>{
         )
         if(rows){
             res.json(rows) 
-            console.log(`Collection Element for Collection ${id} Individual picutre ${pictureId} successfully retrieved`)
+            console.log(`Collection Element for Collection ${id} Individual picutre ${pictureId}, retrieved successfully`)
         }
     }
     catch (err) {
@@ -62,4 +62,25 @@ const getCollectionElementIndividualPicture=async (req, res, next)=>{
     }
 }
 
-module.exports={getCollectionElement, getCollectionElementPictures, getCollectionElementIndividualPicture}
+
+
+// get 1 collection Element information
+const getCollectionElementInformation = async (req, res, next)=>{
+    try {
+        const {id}=req.params
+        const {rows} = await pool.query(
+            `SELECT * FROM collection_element_informations WHERE collection_UID=$1`,[id]
+        )
+        if(rows)
+            {
+                console.log(`collection Element Information for Collection ${id}, retrieved Successfully`)
+                res.status(200).json(rows) 
+            }
+    }
+    catch (err) {
+        console.error('Couldn\'t retrieve collection element information',err)
+        res.status(500).json({error:'Couldn\'t retrieve collection element information'})
+    }
+}
+
+module.exports={getCollectionElement, getCollectionElementPictures, getCollectionElementIndividualPicture,getCollectionElementInformation}

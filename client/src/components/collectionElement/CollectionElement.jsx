@@ -58,7 +58,7 @@ export const CollectionElement = () => {
 
 
   const fetchElementInformations=async(collectionUid)=>{
-    let response=await fetch(`http://localhost:5000/collections/${collectionUid}/information`)
+    let response=await fetch(`http://localhost:5000/collectionElement/${collectionUid}/information`)
     let jsonData=await response.json()
     setCurrentInformations(jsonData)
 }
