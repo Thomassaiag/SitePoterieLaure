@@ -29,20 +29,20 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get(`/allCollectionsUids`, async(req, res, next)=>{
-    try {
-        const {rows}= await pool.query(
-            `SELECT collection_uid
-            FROM collection
-            WHERE collection_deletionflag=false
-            ORDER BY collection_uid ASC`
-        )
-        res.json(rows)
-    } catch (error) {
+// app.get(`/allCollectionsUids`, async(req, res, next)=>{
+//     try {
+//         const {rows}= await pool.query(
+//             `SELECT collection_uid
+//             FROM collection
+//             WHERE collection_deletionflag=false
+//             ORDER BY collection_uid ASC`
+//         )
+//         res.json(rows)
+//     } catch (error) {
         
-    }
+//     }
 
-})
+// })
 
 //Get 1 collection
 

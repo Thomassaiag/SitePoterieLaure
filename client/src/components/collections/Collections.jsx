@@ -23,7 +23,7 @@ export const Collections =()=>{
   
   useEffect(()=>{
     fetchCollections()
-  },[collectionData])
+  },[])
   
   return (
 
