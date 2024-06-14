@@ -65,7 +65,7 @@ export const CollectionElement = () => {
   
   const fetchAllCollectionUids=async()=>{
     try {
-      let response=await fetch(`http://localhost:5000/allCollectionsUids`)
+      let response=await fetch(`http://localhost:5000/collections/allCollectionsUids`)
       let jsonData= await response.json()
       jsonData= await jsonData.map(element=>element.collection_uid)
       setCollectionUids(jsonData)
@@ -112,9 +112,13 @@ export const CollectionElement = () => {
     fetchCollectionElement()
   },[newId])
   
-  useEffect(()=>{
+  // useEffect(()=>{
+  //   fetchNextPreviousCollection()
+  // },[previousCollectionPicture, nextCollectionPicture])
+
+   useEffect(()=>{
     fetchNextPreviousCollection()
-  },[previousCollectionPicture, nextCollectionPicture])
+  },[newId])
   
   
   let {collection_picture_url: previousCollectionPictureUrl, collection_picture_alt: previousCollectionPictureAlt}=previousCollectionPicture
