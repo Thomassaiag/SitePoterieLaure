@@ -70,7 +70,7 @@ export const CollectionElement = () => {
       jsonData= await jsonData.map(element=>element.collection_uid)
       setCollectionUids(jsonData)
     } catch (error) {
-      
+      console.log(error)
     }
   }
 

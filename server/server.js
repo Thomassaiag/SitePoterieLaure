@@ -2,7 +2,7 @@ const express=require('express')
 const {pool,connectToDatabase}=require('./config/db')
 const multer=require('multer')
 const path=require('path')
-// const nodemailer =require('nodemailer')
+
 const routes=require ('./routes')
 const cors= require('cors')
 require('dotenv').config()
@@ -17,8 +17,6 @@ app.use('/',routes)
 const bcrypt=require('bcrypt')
 const {hashPassword}=require('./passwordEncryption')
 
-
-
 const collectionPath=process.env.COLLECTIONPICTUREPATH
 const collectionElementPath=process.env.COLLECTIONELEMENTPICTURESPATH
 
@@ -26,36 +24,10 @@ const collectionElementPath=process.env.COLLECTIONELEMENTPICTURESPATH
 connectToDatabase()
 
 
-// app.use((req, res, next) => {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-//   next();
-// });
-
-
 app.use((req, res, next) => {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   next();
 });
-
-
-//Get All collections
-
-app.get('/collections', async (req, res, next)=>{
-    try {
-        const {rows} = await pool.query(
-            `SELECT * FROM collection
-            WHERE collection_deletionflag=false
-            ORDER BY collection_uid ASC`
-        )
-        res.json(rows) 
-    }
-    catch (err) {
-        console.error('Error executing query',err)
-        res.status(500).json({error:'something went wrong'})
-    }
-})
 
 app.get(`/allCollectionsUids`, async(req, res, next)=>{
     try {
