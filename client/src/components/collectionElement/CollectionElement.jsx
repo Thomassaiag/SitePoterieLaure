@@ -48,7 +48,7 @@ export const CollectionElement = () => {
 
   const fetchCollectionElement=async()=>{
     try {
-      let response= await fetch(`http://localhost:5000/collections/${newId}`)
+      let response= await fetch(`http://localhost:5000/collectionElement/${newId}`)
       let jsonData= await response.json()
       setCollectionElement(jsonData[0])
     } catch (error) {

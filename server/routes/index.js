@@ -7,6 +7,6 @@ const router=express.Router()
 
 router.use('/contact',contactRoutes)
 router.use('/collections',collectionRoutes)
-// router.use('/collections',collectionElementRoutes)
+router.use('/collectionElement',collectionElementRoutes)
 
 module.exports=router

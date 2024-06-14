@@ -1,8 +1,8 @@
 const express=require('express')
-const {getAllCollectionUids}=require('../controllers/collectionControllers/collectionNavigationController')
+const {getCollectionElement}=require('../controllers/collectionElementController')
 
 const router=express.Router()
 
-// router.get('/allCollectionsUids',getAllCollectionUids)
+router.get('/:id',getCollectionElement)
 
 module.exports=router
