@@ -20,6 +20,8 @@ const getCollectionElement=async (req, res, next)=>{
     }
 }
 
+
+
 //Get 1 collection element pictures
 
 const getCollectionElementPictures=async (req, res, next)=>{
@@ -34,9 +36,30 @@ const getCollectionElementPictures=async (req, res, next)=>{
         }
     }
     catch (err) {
-        console.error('Could\'t retrieve picture for collection',err)
-        res.status(500).json({error:'Could\'t retrieve picture for collection'})
+        console.error('Could\'t retrieve pictures for collection Element',err)
+        res.status(500).json({error:'Could\'t retrieve pictures for collection Element'})
     }
 }
 
-module.exports={getCollectionElement, getCollectionElementPictures}
+const getCollectionElementIndividualPicture=async (req, res, next)=>{
+    try {
+        const {id, pictureId}=req.params
+        const {rows} = await pool.query(
+            `SELECT * FROM collection_element_pictures
+                WHERE collection_UID=$1
+                AND collection_element_picture_uid=$2
+                AND collection_element_pictures_deletionFlag=false`,
+                [id, pictureId]
+        )
+        if(rows){
+            res.json(rows) 
+            console.log(`Collection Element for Collection ${id} Individual picutre ${pictureId} successfully retrieved`)
+        }
+    }
+    catch (err) {
+        console.error('Could\'t retrieve individual picture for collection Element',err)
+        res.status(500).json({error:'Could\'t retrieve individual picture for collection Element'})
+    }
+}
+
+module.exports={getCollectionElement, getCollectionElementPictures, getCollectionElementIndividualPicture}

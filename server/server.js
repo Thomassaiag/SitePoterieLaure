@@ -30,23 +30,6 @@ app.use((req, res, next) => {
 });
 
 
-
-// get 1 collection Element 1 selected picture
-app.get('/collections/:id/pictures/:pictureId', async (req, res, next)=>{
-    try {
-        const {id, pictureId}=req.params
-        const {rows} = await pool.query(
-            `SELECT * FROM collection_element_pictures WHERE collection_UID=$1 AND collection_element_picture_uid=$ AND collection_element_pictures_deletionFlag=false`,[id, pictureId]
-        )
-        res.json(rows) 
-    }
-    catch (err) {
-        console.error('Error executing query',err)
-        res.status(500).json({error:'something went wrong'})
-    }
-})
-
-
 // get 1 collection Element information
 app.get('/collections/:id/information', async (req, res, next)=>{
     try {

@@ -11,7 +11,7 @@ export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose, collection_
   
 
   const fetchAllPicturesUID= async () =>{
-    let response=await fetch(`http://localhost:5000/collections/${collection_uid}/pictures`)
+    let response=await fetch(`http://localhost:5000/collectionElement/${collection_uid}/pictures`)
     let jsonData = await response.json()
     jsonData= await jsonData.map((element)=>{
       return element.collection_element_picture_uid
@@ -20,7 +20,7 @@ export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose, collection_
   }
   
   const fetchPicture= async () =>{
-    let response=await fetch(`http://localhost:5000/collections/${collection_uid}/pictures/${newPictureUid}`)
+    let response=await fetch(`http://localhost:5000/collectionElement/${collection_uid}/pictures/${newPictureUid}`)
     let jsonData = await response.json()
     setNewPicture(jsonData[0])
   }
@@ -71,11 +71,11 @@ export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose, collection_
       <div className='overlay'>
         <div className='popup'>
           <div className='chevronPictureContainer'>
-            <img src='/images/leftChevron.jpg' alt='previous picture' onClick={displayPreviousPicture}/>
+            <img src='/images/leftChevron.jpg' alt='previous picture' onClick={displayPreviousPicture} style={{cursor:'pointer'}}/>
           </div>
-          <img className='popUpPicture' src={newImageUrl} alt={newImageAlt} onClick={onClose}/>
+          <img className='popUpPicture' src={newImageUrl} alt={newImageAlt} onClick={onClose} style={{cursor:'pointer'}}/>
           <div className='chevronPictureContainer'>
-            <img src='/images/rightChevron.jpg' alt='next picture' onClick={displayNextPicture}/>
+            <img src='/images/rightChevron.jpg' alt='next picture' onClick={displayNextPicture} style={{cursor:'pointer'}}/>
           </div>
         </div>
       </div>

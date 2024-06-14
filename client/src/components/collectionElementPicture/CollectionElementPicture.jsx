@@ -35,7 +35,7 @@ export const CollectionElementPicture = ({collection_uid, collection_element_pic
   return (
     <>
     <div className='collectionPictureContainer'>
-      <img className='collectionElementPicture' src={collection_element_picture_url} alt={collection_element_picture_alt} onClick={togglePopUpPicture}/>
+      <img className='collectionElementPicture' src={collection_element_picture_url} alt={collection_element_picture_alt} onClick={togglePopUpPicture} style={{cursor:'pointer'}}/>
     </div>
     <div className='deleteButtonContainer'>
       <DeleteCollectionElement buttonName={buttonName} elementToDeleteID={collection_element_picture_uid} handleDeleteClick={handleDeleteClick}/>
