@@ -6,9 +6,12 @@ import { DeleteCollectionElement } from '../deleteCollectionElement/DeleteCollec
 import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
 import { Link } from 'react-router-dom'
 
+import { useCollectionDeletionStatus } from '../contextProvider/CollectionDeletionStatusContextProvider'
 
 export const Collection = ({imageUrl, imageAlt, title, collectionUid}) => {
   const buttonName='Effacer toute la collection'
+  const {setCollectionDeletionStatus}=useCollectionDeletionStatus()
+
   const {connectionAttributes}=useConnectionStatus()
   const [collectionToDelete, setCollectionToDelete]=useState(collectionUid)
 
@@ -20,7 +23,8 @@ export const Collection = ({imageUrl, imageAlt, title, collectionUid}) => {
   }
 
   const deleteCollection=async(id)=>{
-    setCollectionToDelete(id)  
+    setCollectionToDelete(id)
+    setCollectionDeletionStatus(true)
     try {
       const response=await fetch(`http://localhost:5000/admin/deleteCollection/`,{
         method: 'PUT',
@@ -33,11 +37,11 @@ export const Collection = ({imageUrl, imageAlt, title, collectionUid}) => {
       })
       const data=await response.json()
       console.log(data)
+
     } catch (error) {
       console.log(error)
     }
   }
-
 
   return (
     <>

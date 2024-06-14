@@ -4,9 +4,10 @@ import { Collection } from '../collection/Collection'
 import './Collections.css'
 import { ScrollToTop } from '../scrollToTop/ScrollToTop'
 
+import { useCollectionDeletionStatus } from '../contextProvider/CollectionDeletionStatusContextProvider'
 
 export const Collections =()=>{
-  
+  const {collectionDeletionStatus, setCollectionDeletionStatus}=useCollectionDeletionStatus()
   const [collectionData, setCollectionData]=useState(null)
 
   const fetchCollections=async ()=>{
@@ -14,7 +15,7 @@ export const Collections =()=>{
       const response = await fetch('http://localhost:5000/collections')
       const JsonData=await response.json()
       setCollectionData(JsonData)
-      
+      setCollectionDeletionStatus(false)
     }
     catch (error) {
       console.log(error.message)
@@ -23,7 +24,7 @@ export const Collections =()=>{
   
   useEffect(()=>{
     fetchCollections()
-  },[])
+  },[collectionDeletionStatus])
   
   return (
 

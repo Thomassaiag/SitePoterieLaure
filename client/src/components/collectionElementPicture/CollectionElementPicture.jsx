@@ -2,11 +2,15 @@ import React, {useState} from 'react'
 import './CollectionElementPicture.css'
 import { PopUpPicture } from '../popUpPicture/PopUpPicture'
 import { DeleteCollectionElement } from '../deleteCollectionElement/DeleteCollectionElement'
+import { useCollectionDeletionStatus } from '../contextProvider/CollectionDeletionStatusContextProvider'
+
+
 
 export const CollectionElementPicture = ({collection_uid, collection_element_picture_url, collection_element_picture_alt, collection_element_picture_uid}) => {
   const buttonName='Effacer l\'image'
   const [showPopUpPicture, setShowPopUpPicture]=useState(false)
   const [collectionElementPictureToDeleteID, setCollectionElementPictureToDeleteID]=useState(collection_element_picture_uid)
+  const {setCollectionDeletionStatus}=useCollectionDeletionStatus()
   const togglePopUpPicture=()=>{
     setShowPopUpPicture(!showPopUpPicture)
   }
@@ -21,6 +25,7 @@ export const CollectionElementPicture = ({collection_uid, collection_element_pic
 
   const deleteCollectionElementPicture=async(elementToDeleteID)=>{
     setCollectionElementPictureToDeleteID(elementToDeleteID)
+    setCollectionDeletionStatus(true)
     let response=await fetch('http://localhost:5000/admin/deleteElementPicture',{
       method: 'PUT',
       headers: {

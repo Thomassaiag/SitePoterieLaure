@@ -4,13 +4,12 @@ import './CollectionElementPictures.css'
 import { CollectionElementPicture } from '../collectionElementPicture/CollectionElementPicture'
 import { NewPicture } from '../newPicture/NewPicture'
 import { useParams } from 'react-router-dom'
-
+import { useCollectionDeletionStatus } from '../contextProvider/CollectionDeletionStatusContextProvider'
 
 
 export const CollectionElementPictures = ({collection_uid}) => {
     const [currentPictures, setCurrentPictures]=useState([])
-    // let {id}=useParams
-    
+    const {collectionDeletionStatus, setCollectionDeletionStatus}=useCollectionDeletionStatus()
 
 
     const fetchCurrentPictures=async()=>{
@@ -18,6 +17,7 @@ export const CollectionElementPictures = ({collection_uid}) => {
             const response = await fetch(`http://localhost:5000/collectionElement/${collection_uid}/pictures`)
             const jsonData=await response.json()
             setCurrentPictures(jsonData)
+            setCollectionDeletionStatus(false)
     }
         catch (error) {
             console.log('it didn t work')
@@ -25,13 +25,9 @@ export const CollectionElementPictures = ({collection_uid}) => {
         }
     }
 
-    // useEffect(()=>{
-    //     fetchCurrentPictures()
-    // },[collection_uid, currentPictures])
-
     useEffect(()=>{
         fetchCurrentPictures()
-    },[collection_uid])
+    },[collection_uid,collectionDeletionStatus])
 
 
     return (
