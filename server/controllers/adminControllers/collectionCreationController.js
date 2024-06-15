@@ -24,7 +24,7 @@ const createNewCollection= async(req, res, next)=>{
     }
 }
 
-
+//creation of collection element attributes, right after collection creation
 const createCollectionElement = async(req, res,next)=>{
     try {
         console.log(req.body)
@@ -50,4 +50,39 @@ const createCollectionElement = async(req, res,next)=>{
 
 }
 
-module.exports={createNewCollection, createCollectionElement}
+const createCollectionElementInformations=async(req, res,next)=>{
+    try {
+        console.log('informations to Create => ',req.body)
+        let {informationsToCreate,collectionUID}=req.body
+
+        await pool.query('BEGIN')
+        if (informationsToCreate.length>0){
+
+            for (let informationToCreate of informationsToCreate){
+                const {informationInputText}=informationToCreate
+            let collectionElementInformationToCreate=await pool.query(
+                `INSERT INTO collection_element_informations
+                (collection_uid, collection_element_information_text)
+                VALUES ($1, $2)
+                `,[collectionUID,informationInputText]
+            )
+            if(collectionElementInformationToCreate.rowCount===0){
+                console.log(`collection information was NOT created for collection_uid ${collectionUID}`)
+            }
+            else console.log(`collection information for collection_uid ${collectionUID}, created successfully`)
+            }
+
+            await pool.query('COMMIT')
+            res.status(200).json({message: 'collection element informations were created successfully'})
+        }
+        else console.log('No information was received')
+
+    } catch (error) {
+        await pool.query('ROLLBACK')
+        console.error(`error ceating collection element informations=> ${error} `)
+        return res.status(400).json({message:"Creation for collection Element informations wasn't completed due to an error"})
+    }
+
+}
+
+module.exports={createNewCollection, createCollectionElement, createCollectionElementInformations}
