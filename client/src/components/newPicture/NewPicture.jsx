@@ -1,12 +1,14 @@
 import React, {useEffect, useRef, useState, Fragment} from 'react'
 import './NewPicture'
+import { useCollectionDeletionStatus } from '../contextProvider/CollectionDeletionStatusContextProvider'
+
 
 export const NewPicture = ({collectionUID}) => {
     const fileInputRef=useRef(null)
 
     const[newCollectionElementPicture, setNewCollectionElementPicture]=useState()
     const[currentCollectionUID, setCurrentCollectionUID]=useState(collectionUID)
-
+    const {collectionDeletionStatus, setCollectionDeletionStatus}=useCollectionDeletionStatus()
     const addNewCollectionElementPicture=(event)=>{
         event.stopPropagation()
         console.log("addition of a new picture")
@@ -37,7 +39,9 @@ export const NewPicture = ({collectionUID}) => {
                 throw new Error('Network response was not OK')
             }
             else {
+                setCollectionDeletionStatus(true)
                 let data=await response.json()
+                console.log(data)
             }
         }
         else console.log("no image was uploaded")        

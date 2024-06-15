@@ -25,16 +25,22 @@ export const CollectionElementPicture = ({collection_uid, collection_element_pic
 
   const deleteCollectionElementPicture=async(elementToDeleteID)=>{
     setCollectionElementPictureToDeleteID(elementToDeleteID)
-    setCollectionDeletionStatus(true)
-    let response=await fetch('http://localhost:5000/admin/deleteElementPicture',{
-      method: 'PUT',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body:JSON.stringify({collectionElementPictureToDeleteID:collectionElementPictureToDeleteID})
-    })
-    let data=await response.json()
-    console.log(data)
+    try {
+      let response=await fetch('http://localhost:5000/admin/deleteElementPicture',{
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body:JSON.stringify({collectionElementPictureToDeleteID:collectionElementPictureToDeleteID})
+      })
+      if(response){
+        setCollectionDeletionStatus(true)
+        let data=await response.json()
+        console.log(data) 
+      }
+    } catch (error) {
+      
+    }
   }
 
   return (

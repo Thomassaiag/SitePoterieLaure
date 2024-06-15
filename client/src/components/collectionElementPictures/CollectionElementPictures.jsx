@@ -17,7 +17,7 @@ export const CollectionElementPictures = ({collection_uid}) => {
             const response = await fetch(`http://localhost:5000/collectionElement/${collection_uid}/pictures`)
             const jsonData=await response.json()
             setCurrentPictures(jsonData)
-            setCollectionDeletionStatus(false)
+
     }
         catch (error) {
             console.log('it didn t work')
@@ -27,6 +27,7 @@ export const CollectionElementPictures = ({collection_uid}) => {
 
     useEffect(()=>{
         fetchCurrentPictures()
+        setCollectionDeletionStatus(false)
     },[collection_uid,collectionDeletionStatus])
 
 
