@@ -30,35 +30,6 @@ app.use((req, res, next) => {
 
 
 
-//Delete 1 collection
-
-
-app.put('/admin/deleteCollection/',async(req, res, next)=>{
-    try {
-        const {collectionUID}=req.body
-        console.log(`collectionUID => ${collectionUID}`)
-        let collectionToDelete=await pool.query(
-            `UPDATE collection
-            SET collection_deletionflag=true
-            WHERE collection_uid=$1`,[collectionUID]
-        )
-        if(collectionToDelete){
-            console.log("collection deleted")
-            return res.status(200).json({message:"collection deleted"})
-        }
-        else {
-            console.log("the collection didn't get deleted")
-            return res.status(201).json({message:"collection didn't deleted"})
-        }
-    } catch (err) {
-        console.error('error deleting collection =>',err )
-        return res.status(400).json({message:"Deletion wasn't completed due to an error"})
-    }
-
-
-})
-
-
 //Delete 1 picture from 1 collection
 app.put('/admin/deleteElementPicture/',async(req, res, next)=>{
     try {
