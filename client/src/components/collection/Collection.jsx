@@ -49,10 +49,10 @@ export const Collection = ({imageUrl, imageAlt, title, collectionUid}) => {
         <CollectionMainPic imageUrl={imageUrl} imageAlt={imageAlt}/>
       </Link>
       <p>{title}</p>
+      {connectionAttributes.adminConnection && 
       <div className='deleteButtonContainer'>
         <DeleteCollectionElement buttonName={buttonName} handleDeleteClick={handleDeleteClick} elementToDeleteID={collectionUid}/>
-      </div>
-
+      </div>}
     </>
   )
 }

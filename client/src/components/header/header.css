@@ -85,3 +85,10 @@ a:hover{
     background-color: #E4DCD1;
     margin: 1rem 5rem 1rem 5rem;
 }
+
+.buttonContainer{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-end; 
+}

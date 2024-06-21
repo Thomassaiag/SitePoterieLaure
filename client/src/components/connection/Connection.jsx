@@ -58,6 +58,7 @@ export const Connection = () => {
             })
             })
             let data= await response.json()
+            console.log(`data => ${data}`)
             if(!response){
                 console.log("something went wrong")
             }
@@ -69,31 +70,23 @@ export const Connection = () => {
                 }))
             }
             else {
-                setConnectionAttributes(prevConnectionAttributes=>({
-                    ...prevConnectionAttributes,
+                const newConnectionAttributes={
                     invalidConnection:false,
-                    connectedUserFirstName: data.userFirstName
-                }))
-                if(data.adminStatus){
-                    console.log(`data.adminStatus => ${data.adminStatus}`)
-                    setConnectionAttributes(prevConnectionAttributes=>({
-                        ...prevConnectionAttributes,
-                        adminConnection:true,
-                        connectedUserFirstName: data.userFirstName,
-                    }))
-
-                } 
-                console.log(`adminConnection => ${connectionAttributes.adminConnection}`)
-            }
-            
+                    connectedUserFirstName: data.userFirstName,
+                    adminConnection: data.adminStatus || false
+                }
+                setConnectionAttributes(newConnectionAttributes)
+                localStorage.setItem('connectionAttributes',JSON.stringify(newConnectionAttributes))
+            }    
         } catch (error) {
-            
+            console.log(('Error during login',error))
         }
 
     }
 
     return (
         <div className='connectionContainer'>
+            {connectionAttributes.invalidConnection && 
             <div className='credentialContainer'>
                 <form className='credentialForm' onSubmit={handleClick}>
                     <div className='formInput'>
@@ -124,13 +117,13 @@ export const Connection = () => {
                         <button className='loginButton' >Login</button>
                     </div>
                 </form>
-            </div>
+            </div>}
             {loginClicked && connectionAttributes.invalidConnection && <p>Compte Inconnu ou password Incorrect, veuillez réessayer ou créer un comte</p>}
-            {loginClicked && !connectionAttributes.invalidConnection && !connectionAttributes.adminConnection && <p>Vous êtes Connecté.e</p>}
+            {!connectionAttributes.invalidConnection && !connectionAttributes.adminConnection && <p>Vous êtes Connecté.e</p>}
             {loginClicked && connectionAttributes.adminConnection && <p>Vous êtes Connecté.e en tant qu'administrateur</p>}
-            <div>
+            {connectionAttributes.invalidConnection && <div>
                 <p>Si vous n'avez pas de compte, vous pouvez en créer un : <a href='/accountCreation' style={{fontSize:20, fontWeight: "bold"}}>Créer un compte</a></p>
-            </div>
+            </div>}
             
         </div>
     )

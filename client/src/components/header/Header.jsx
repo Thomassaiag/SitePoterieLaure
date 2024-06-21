@@ -9,24 +9,45 @@ const logoLaureSansNom = '../../images/logoLaureSansNom.jpg'
 export const Header = () => {
   let navigate=useNavigate()
 
-  const {connectionAttributes}=useConnectionStatus()
+  const {connectionAttributes, setConnectionAttributes}=useConnectionStatus()
 
   const navigateToConnection=()=>{
     navigate('/connection')
   }
 
+  const handleDisconnection=()=>{
+    localStorage.clear()
+    setConnectionAttributes(prevConnectionAttributes=>({
+      ...prevConnectionAttributes,
+        adminConnection:false,
+        connectedUserFirstName:'',
+        invalidConnection: true
+    }))
+  }
+
+  useEffect(()=>{
+    console.log(`connectionAttributes => ${connectionAttributes.invalidConnection}`)
+  },[connectionAttributes])
+
   return (
     <div className='headerContainer'>
       <div className='buttonContainer'>
         {connectionAttributes.invalidConnection && <button className='connectionButton' onClick={navigateToConnection}>Se Connecter</button>}
-        {!connectionAttributes.invalidConnection && <p>Bonjour, {connectionAttributes.connectedUserFirstName}</p>}
+        {!connectionAttributes.invalidConnection && 
+          <>
+            <p>Bonjour, {connectionAttributes.connectedUserFirstName}</p>
+            <button className='connectionButton' onClick={handleDisconnection}>Se Déconnecter</button>
+          </>
+        }
       </div>
-      <Link className='logoAndTitleContainer'to='/'>
-          <img className='logo'src={logoLaureSansNom} alt='webSiteLogo'/>
-          <div className='titleContainer'>
-            <p>Laure Videau</p>
-          </div>
-      </Link>
+      <div>
+        <Link className='logoAndTitleContainer'to='/'>
+            <img className='logo'src={logoLaureSansNom} alt='webSiteLogo'/>
+            <div className='titleContainer'>
+              <p>Laure Videau</p>
+            </div>
+        </Link>
+      </div>
       <div className='headerLinks'>
         <Link to='/collections'>collections</Link>
         {/* <Link to=''>boutique</Link> */}
@@ -34,8 +55,8 @@ export const Header = () => {
         <Link to='/portrait'>portrait</Link>
         {/* <Link to=''>blog</Link> */}
         <Link to='/contact'>contact</Link>
-        {/* {connectionAttributes.adminConnection && <Link to='/admin'>admin</Link>} */}
-        <Link to='/admin'>admin</Link>
+        {connectionAttributes.adminConnection && <Link to='/admin'>admin</Link>}
+
       </div>
       <div className='collectionsSeparatorContainer'>
         <hr className='collectionsSeparator'></hr>

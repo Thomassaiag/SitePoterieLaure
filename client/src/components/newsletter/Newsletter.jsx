@@ -59,7 +59,7 @@ export const Newsletter = () => {
                             onChange={handleChange}
                             />
                     </div>
-                    <div className="buttonContainer">
+                    <div className="newsLetterButtonContainer">
                         <ContactButton/>
                     </div>
                 </div>
