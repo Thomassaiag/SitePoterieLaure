@@ -7,7 +7,7 @@ import './CollectionElement.css'
 import { CollectionMainPic } from '../collectionMainPic/CollectionMainPic'
 import { UpdateCollectionElement } from '../updateCollectionElement/UpdateCollectionElement'
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
-
+import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
 
 export const CollectionElement = () => {
   let navigate=useNavigate()
@@ -27,6 +27,7 @@ export const CollectionElement = () => {
   const [collectionElementRecommandation, setCollectionElementRecommandation]=useState()
   const {currentInformations, setCurrentInformations}=useCollectionElementInformations()
 
+  const {connectionAttributes}=useConnectionStatus()
 
   useEffect(()=>{
     fetchAllCollectionUids()
@@ -112,9 +113,6 @@ export const CollectionElement = () => {
     fetchCollectionElement()
   },[newId])
   
-  // useEffect(()=>{
-  //   fetchNextPreviousCollection()
-  // },[previousCollectionPicture, nextCollectionPicture])
 
    useEffect(()=>{
     fetchNextPreviousCollection()
@@ -157,7 +155,9 @@ export const CollectionElement = () => {
                 <p style={{textAlign:'left'}}>{collectionElementRecommandation}</p>
               </div>
             </div>
-            <UpdateCollectionElement  className='collectionElementUpdateContainer' collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation} collectionUID={newId} fetchCollectionElement={fetchCollectionElement} fetchElementInformations={fetchElementInformations}/>
+            {connectionAttributes.adminConnection && 
+              <UpdateCollectionElement  className='collectionElementUpdateContainer' collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation} collectionUID={newId} fetchCollectionElement={fetchCollectionElement} fetchElementInformations={fetchElementInformations}/>
+            } 
           </div>
         ) : (
           <p>Loading Data</p>

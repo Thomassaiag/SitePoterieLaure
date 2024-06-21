@@ -5,12 +5,13 @@ import { CollectionElementPicture } from '../collectionElementPicture/Collection
 import { NewPicture } from '../newPicture/NewPicture'
 import { useParams } from 'react-router-dom'
 import { useCollectionDeletionStatus } from '../contextProvider/CollectionDeletionStatusContextProvider'
-
+import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
 
 export const CollectionElementPictures = ({collection_uid}) => {
     const [currentPictures, setCurrentPictures]=useState([])
     const {collectionDeletionStatus, setCollectionDeletionStatus}=useCollectionDeletionStatus()
 
+    const {connectionAttributes}=useConnectionStatus()
 
     const fetchCurrentPictures=async()=>{
         try {
@@ -33,9 +34,11 @@ export const CollectionElementPictures = ({collection_uid}) => {
 
     return (
         <>
-            <div className='collectionElementSinglePictureContainer'>
-                <NewPicture collectionUID={collection_uid}/>
-            </div>
+            {connectionAttributes.adminStatus &&
+                <div className='collectionElementSinglePictureContainer'>
+                    <NewPicture collectionUID={collection_uid}/>
+                </div>
+            }
             {currentPictures ? (
                 currentPictures.map((currentPicture)=>{
                     let {collection_uid, collection_element_picture_url, collection_element_picture_alt, collection_element_picture_uid}=currentPicture
