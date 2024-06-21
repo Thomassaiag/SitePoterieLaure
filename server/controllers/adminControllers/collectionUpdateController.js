@@ -42,4 +42,29 @@ const addNewCollectionElementPicture=async(req, res, next)=>{
 }
 
 
-module.exports={addNewCollectionElementPicture}
+const deleteCollectionElementPicture=async(req, res, next)=>{
+    try {
+        const {collectionElementPictureToDeleteID}=req.body
+        console.log(`collectionElementPictureToDeleteID => ${collectionElementPictureToDeleteID}`)
+        let collectionElementPictureToDelete=await pool.query(
+            `UPDATE collection_element_pictures
+            SET collection_element_pictures_deletionflag=true
+            WHERE collection_element_picture_uid=$1`,[collectionElementPictureToDeleteID]
+        )
+        if(collectionElementPictureToDelete){
+            console.log(`Picture ${collectionElementPictureToDeleteID} successfully deleted`)
+            return res.status(200).json({message:`Picture ${collectionElementPictureToDeleteID} successfully deleted`})
+        }
+        else {
+            return res.status(201).json({message:"Picture didn't deleted"})
+        }
+    } catch (err) {
+        console.error('Error deleting collection Element Picture =>',err )
+        return res.status(400).json({message:"Collection Element Picture Deletion wasn't completed due to an error"})
+    }
+
+
+}
+
+
+module.exports={addNewCollectionElementPicture,deleteCollectionElementPicture}

@@ -30,29 +30,29 @@ app.use((req, res, next) => {
 
 
 
-//Delete 1 picture from 1 collection
-app.put('/admin/deleteElementPicture/',async(req, res, next)=>{
-    try {
-        const {collectionElementPictureToDeleteID}=req.body
-        console.log(`collectionElementPictureToDeleteID => ${collectionElementPictureToDeleteID}`)
-        let collectionElementPictureToDelete=await pool.query(
-            `UPDATE collection_element_pictures
-            SET collection_element_pictures_deletionflag=true
-            WHERE collection_element_picture_uid=$1`,[collectionElementPictureToDeleteID]
-        )
-        if(collectionElementPictureToDelete){
-            return res.status(200).json({message:"Picture deleted"})
-        }
-        else {
-            return res.status(201).json({message:"Picture didn't deleted"})
-        }
-    } catch (err) {
-        console.error('error deleting collection =>',err )
-        return res.status(400).json({message:"Deletion wasn't completed due to an error"})
-    }
+// //Delete 1 picture from 1 collection
+// app.put('/admin/deleteElementPicture/',async(req, res, next)=>{
+//     try {
+//         const {collectionElementPictureToDeleteID}=req.body
+//         console.log(`collectionElementPictureToDeleteID => ${collectionElementPictureToDeleteID}`)
+//         let collectionElementPictureToDelete=await pool.query(
+//             `UPDATE collection_element_pictures
+//             SET collection_element_pictures_deletionflag=true
+//             WHERE collection_element_picture_uid=$1`,[collectionElementPictureToDeleteID]
+//         )
+//         if(collectionElementPictureToDelete){
+//             return res.status(200).json({message:"Picture deleted"})
+//         }
+//         else {
+//             return res.status(201).json({message:"Picture didn't deleted"})
+//         }
+//     } catch (err) {
+//         console.error('error deleting collection =>',err )
+//         return res.status(400).json({message:"Deletion wasn't completed due to an error"})
+//     }
 
 
-})
+// })
 
 
 
