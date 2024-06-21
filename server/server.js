@@ -30,61 +30,6 @@ app.use((req, res, next) => {
 
 
 
-// //Delete 1 picture from 1 collection
-// app.put('/admin/deleteElementPicture/',async(req, res, next)=>{
-//     try {
-//         const {collectionElementPictureToDeleteID}=req.body
-//         console.log(`collectionElementPictureToDeleteID => ${collectionElementPictureToDeleteID}`)
-//         let collectionElementPictureToDelete=await pool.query(
-//             `UPDATE collection_element_pictures
-//             SET collection_element_pictures_deletionflag=true
-//             WHERE collection_element_picture_uid=$1`,[collectionElementPictureToDeleteID]
-//         )
-//         if(collectionElementPictureToDelete){
-//             return res.status(200).json({message:"Picture deleted"})
-//         }
-//         else {
-//             return res.status(201).json({message:"Picture didn't deleted"})
-//         }
-//     } catch (err) {
-//         console.error('error deleting collection =>',err )
-//         return res.status(400).json({message:"Deletion wasn't completed due to an error"})
-//     }
-
-
-// })
-
-
-
-//update collection Element attributes
-
-app.put('/admin/updateCollectionElementAttributes',async(req, res,next)=>{
-    try {
-        let {descriptionToUpdate, emailToUpdate, cookingToUpdate, recommandationToUpdate, collectionUID}=req.body
-
-        let collectionElementAttributesToUpdate=await pool.query(
-            `UPDATE collection_element
-            SET collection_element_description=$1,
-                collection_element_email=$2,
-                collection_element_recommandation=$3,
-                collection_element_cooking=$4
-            WHERE collection_UID=$5
-            `,[descriptionToUpdate,emailToUpdate, recommandationToUpdate,cookingToUpdate, collectionUID]
-        )
-
-        if (collectionElementAttributesToUpdate){
-            res.status(200).json({message: `collection ${collectionUID} updated `})        
-            console.log('Collection Element Attributes updated')
-        }
-        else res.status(201).json({message: `collection ${collectionUID} NOT updated` })
-    } catch (error) {
-        await pool.query('ROLLBACK')
-        console.error(`error updating collection => ${error} `)
-        return res.status(400).json({message:"Update wasn't completed due to an error"})
-    }
-
-})
-
 // update Collection Element information
 app.put('/admin/updateCollectionElementInformations',async(req,res,next)=>{
     try{

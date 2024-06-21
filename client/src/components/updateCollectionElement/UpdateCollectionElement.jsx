@@ -46,7 +46,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
 
   const udpateCollectionElementAttributesOnly = async (collectionElementDescriptionToUpdate, collectionElementEmailToUpdate, collectionElementCookingToUpdate, collectionElementRecommandationToUpdate, collectionUID)=>{
     try {
-      let response = await fetch('http://localhost:5000/admin/updateCollectionElementAttributes',{
+      let response = await fetch('http://localhost:5000/admin/editElement/updateCollectionElementAttributes',{
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

@@ -1,7 +1,7 @@
 const {pool}=require('../../config/db')
 
 
-
+//Add new picture to collection element pictures
 const addNewCollectionElementPicture=async(req, res, next)=>{
     const {collectionUID}=req.body
     try{
@@ -42,6 +42,8 @@ const addNewCollectionElementPicture=async(req, res, next)=>{
 }
 
 
+//Delete picture from collection element
+
 const deleteCollectionElementPicture=async(req, res, next)=>{
     try {
         const {collectionElementPictureToDeleteID}=req.body
@@ -62,9 +64,35 @@ const deleteCollectionElementPicture=async(req, res, next)=>{
         console.error('Error deleting collection Element Picture =>',err )
         return res.status(400).json({message:"Collection Element Picture Deletion wasn't completed due to an error"})
     }
+}
 
+
+const updateCollectionElementAttributes=async(req, res,next)=>{
+    try {
+        let {descriptionToUpdate, emailToUpdate, cookingToUpdate, recommandationToUpdate, collectionUID}=req.body
+
+        let collectionElementAttributesToUpdate=await pool.query(
+            `UPDATE collection_element
+            SET collection_element_description=$1,
+                collection_element_email=$2,
+                collection_element_recommandation=$3,
+                collection_element_cooking=$4
+            WHERE collection_UID=$5
+            `,[descriptionToUpdate,emailToUpdate, recommandationToUpdate,cookingToUpdate, collectionUID]
+        )
+
+        if (collectionElementAttributesToUpdate){
+            res.status(200).json({message: `collection ${collectionUID} Element Attribute successfully updated`})        
+            console.log(`collection ${collectionUID} Element Attribute successfully updated`)
+        }
+        else res.status(201).json({message: `collection ${collectionUID} Element NOT updated` })
+    } catch (error) {
+        await pool.query('ROLLBACK')
+        console.error(`Error updating collection Element Attribute=> ${error} `)
+        return res.status(400).json({message:"Error updating collection Element Attribute"})
+    }
 
 }
 
 
-module.exports={addNewCollectionElementPicture,deleteCollectionElementPicture}
+module.exports={addNewCollectionElementPicture,deleteCollectionElementPicture, updateCollectionElementAttributes}
