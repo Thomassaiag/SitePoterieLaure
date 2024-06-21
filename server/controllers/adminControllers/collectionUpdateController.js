@@ -128,4 +128,35 @@ const updateCollectionElementInformations=async(req,res,next)=>{
     }
 }
 
-module.exports={addNewCollectionElementPicture,deleteCollectionElementPicture, updateCollectionElementAttributes,updateCollectionElementInformations}
+
+const deleteCollectionElementInformationInput=async (req, res, next)=>{
+    
+    try{
+        const {informationIdToDeleteList}=req.body
+        await pool.query('BEGIN')
+
+        for (let informationIdToDelete of informationIdToDeleteList){
+            let {collectionElementInformationUID}=informationIdToDelete
+            let informationToDelete=await pool.query(
+                `DELETE FROM collection_element_informations
+                WHERE collection_element_information_uid=$1
+                `,[collectionElementInformationUID]
+            )
+            if(informationToDelete.rowCount===0){
+                console.log(`information with ID ${collectionElementInformationUID} did't get deleted`)
+            } else {
+                console.log(`information with ID ${collectionElementInformationUID} was deleted`)
+            }
+        }
+        await pool.query('COMMIT')
+        res.status(200).json({message:`All information was deleted`})
+        console.log(`All information was deleted`)
+        
+    } catch (error){
+        await pool.query('ROLLBACK')
+        console.log('something went wrong, information didn\' get deleted')
+        res.status(400).json({message: 'information didn\'t get deleted'})
+    }
+}
+
+module.exports={addNewCollectionElementPicture,deleteCollectionElementPicture, updateCollectionElementAttributes,updateCollectionElementInformations,deleteCollectionElementInformationInput}

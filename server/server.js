@@ -30,42 +30,6 @@ app.use((req, res, next) => {
 
 
 
-// update collection element information by deleting collection element informations
-
-app.delete('/admin/deleteInformationInput',async (req, res, next)=>{
-    
-    try{
-        const {informationIdToDeleteList}=req.body
-        console.log('informationList to delete =>',informationIdToDeleteList)
-        await pool.query('BEGIN')
-
-        for (let informationIdToDelete of informationIdToDeleteList){
-            let {collectionElementInformationUID}=informationIdToDelete
-            // console.log('informationIdToDelete =>',collectionElementInformationUID)
-            let informationToDelete=await pool.query(
-                `DELETE FROM collection_element_informations
-                WHERE collection_element_information_uid=$1
-                `,[collectionElementInformationUID]
-            )
-            console.log(informationToDelete)
-            if(informationToDelete.rowCount===0){
-                console.log(`information with ID ${collectionElementInformationUID} did't get deleted`)
-            } else {
-                console.log(`information with ID ${collectionElementInformationUID} was deleted`)
-            }
-        }
-        await pool.query('COMMIT')
-        res.status(200).json({message:`All information was deleted`})
-        console.log(`All information was deleted`)
-        
-    } catch (error){
-        await pool.query('ROLLBACK')
-        console.log('something went wrong, information didn\' get deleted')
-        res.status(400).json({message: 'information didn\'t get deleted'})
-
-    }
-})
-
 //----------------------------------------------------------------------
 
 //Login

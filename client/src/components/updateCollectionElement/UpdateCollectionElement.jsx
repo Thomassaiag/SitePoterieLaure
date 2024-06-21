@@ -88,7 +88,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
   const deleteCollectionElementInformations=async (currentInformationsToUpdateDelete)=>{
     if(currentInformationsToUpdateDelete.length>0){
       try {
-        let response= await fetch('http://localhost:5000/admin/deleteInformationInput',{
+        let response= await fetch('http://localhost:5000/admin/editElement/deleteInformationInput',{
           method:'DELETE',
           headers: {
               'Content-Type': 'application/json'
