@@ -1,5 +1,6 @@
 const {pool}=require("../config/db")
-
+const bcrypt=require('bcrypt')
+// const {hashPassword}=require('../passwordEncryption')
 
 const login=async(req, res, next)=>{
     const{userEmail, userPassword}=req.body

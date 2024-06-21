@@ -12,7 +12,7 @@ router.use('/contact',contactRoutes)
 router.use('/collections',collectionRoutes)
 router.use('/collectionElement',collectionElementRoutes)
 router.use('/admin',adminRoutes)
-route.use('user', userManagementRoutes)
+router.use('/user', userManagementRoutes)
 
 
 module.exports=router

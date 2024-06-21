@@ -1,12 +1,11 @@
 const express=require('express')
 
-const route=express.Router()
+const router=express.Router()
 const {login}=require('../controllers/userManagementController')
 
 
+router.post('/login',login)
 
-route.post(,login)
-
-module.exports={route}
+module.exports=router
 
 

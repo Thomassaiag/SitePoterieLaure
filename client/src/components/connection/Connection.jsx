@@ -47,7 +47,7 @@ export const Connection = () => {
         try {
             console.log(credentials.userEmail)
             console.log(credentials.userPassword)
-            let response= await fetch('http://localhost:5000/connection',{
+            let response= await fetch('http://localhost:5000/user/login',{
                 method:'POST',
                 headers: {
                     'Content-Type': 'application/json'

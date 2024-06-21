@@ -32,57 +32,6 @@ app.use((req, res, next) => {
 
 //----------------------------------------------------------------------
 
-//Login
-
-app.post('/connection', async(req, res, next)=>{
-    const{userEmail, userPassword}=req.body
-
-    console.log(userEmail)
-    console.log(userPassword)
-
-    try {
-        const userEmailDB= await pool.query(
-            'SELECT user_email, admin_status, user_firstname FROM user_account WHERE user_email=$1;',[userEmail]
-        )
-        if(userEmailDB.rowCount>0){
-            console.log("user exists")
-            let adminStatus=userEmailDB.rows[0].admin_status
-            let userFirstName=userEmailDB.rows[0].user_firstname
-            // console.log(userEmailDB)
-            // const userPasswordDB= await pool.query(
-            //     'SELECT user_password FROM user_account WHERE user_Password=$1 AND user_email=$2 ',[hashedPassword, userEmail]
-            // )
-            const hashedPasswordDB= await pool.query(
-                'SELECT user_password FROM user_account WHERE user_email=$1 ',[userEmail]
-            )
-            let hashedPassword=hashedPasswordDB.rows[0].user_password
-
-            console.log(`hashedPassword=> ${hashedPassword}`)
-            let doesPasswordMatch=await bcrypt.compare(userPassword,hashedPassword)
-            console.log("test bcrypt "+ doesPasswordMatch)
-            if(doesPasswordMatch){
-                console.log("password matches")
-                res.status(200).json({message: "password matches", adminStatus, userFirstName})
-            }
-            else{
-                console.log("password doesn't match")
-                res.status(400).json({message: "password doesn't match"})
-            }
-        }    
-        else{
-            console.log("user doesn't exist", userEmailDB)
-            res.status(400).json({message: "no mail in DB"})
-        }
-        
-        // await pool.query(
-        //     'INSERT INTO user_account (user_email, user_password) VALUES ($1,$2))',[userEmail, userPassword]
-        // )
-    } catch (error) {
-        
-    }
-
-})
-
 
 
 // Add new user account
