@@ -30,48 +30,6 @@ app.use((req, res, next) => {
 
 
 
-// update Collection Element information
-app.put('/admin/updateCollectionElementInformations',async(req,res,next)=>{
-    try{
-        const {informationsToUpdate}=req.body
-        console.log('informations to Update =>',informationsToUpdate)
-        await pool.query('BEGIN')
-
-        for (let informationToUpdate of informationsToUpdate) {
-
-            let {collection_element_information_uid, collection_element_information_text}=informationToUpdate
-            // console.log('uid => ',collection_element_information_uid)
-            // console.log('text => ',collection_element_information_text)
-            let result= await pool.query(
-                `UPDATE collection_element_informations
-                SET collection_element_information_text=$1
-                WHERE collection_element_information_uid=$2
-                AND collection_element_information_text<>$1;
-                `,[collection_element_information_text,collection_element_information_uid]
-            )
-            if(result.rowCount===0){
-                console.log(`No Update was done for uid ${collection_element_information_uid}`)
-            }
-            else {
-                console.log(`Update was successful for uid ${collection_element_information_uid}`)
-            }
-        }
-
-
-        await pool.query('COMMIT')
-
-
-        res.status(200).json({message: `collection Element Informations updated` })        
-        console.log('update information ok')
-
-    } catch (error) {
-        await pool.query('ROLLBACK')
-        console.error(`error updating collection => ${error} `)
-        return res.status(400).json({message:"Update wasn't completed due to an error"})
-    }
-})
-
-
 // update collection element information by deleting collection element informations
 
 app.delete('/admin/deleteInformationInput',async (req, res, next)=>{

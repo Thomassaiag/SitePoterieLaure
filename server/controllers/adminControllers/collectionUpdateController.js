@@ -66,7 +66,7 @@ const deleteCollectionElementPicture=async(req, res, next)=>{
     }
 }
 
-
+//update Collection Attributes
 const updateCollectionElementAttributes=async(req, res,next)=>{
     try {
         let {descriptionToUpdate, emailToUpdate, cookingToUpdate, recommandationToUpdate, collectionUID}=req.body
@@ -95,4 +95,37 @@ const updateCollectionElementAttributes=async(req, res,next)=>{
 }
 
 
-module.exports={addNewCollectionElementPicture,deleteCollectionElementPicture, updateCollectionElementAttributes}
+const updateCollectionElementInformations=async(req,res,next)=>{
+    try{
+        const {informationsToUpdate}=req.body
+        await pool.query('BEGIN')
+        for (let informationToUpdate of informationsToUpdate) {
+            let {collection_element_information_uid, collection_element_information_text}=informationToUpdate
+            let result= await pool.query(
+                `UPDATE collection_element_informations
+                SET collection_element_information_text=$1
+                WHERE collection_element_information_uid=$2
+                AND collection_element_information_text<>$1;
+                `,[collection_element_information_text,collection_element_information_uid]
+            )
+            if(result.rowCount===0){
+                console.log(`No Update was done for uid ${collection_element_information_uid}`)
+            }
+            else {
+                console.log(`Update for uid ${collection_element_information_uid} successfully done`)
+            }
+        }
+
+        await pool.query('COMMIT')
+
+        res.status(200).json({message: `All collection Element Informations successfully updated`})        
+        console.log('All collection Element Informations successfully updated')
+
+    } catch (error) {
+        await pool.query('ROLLBACK')
+        console.error(`Error updating collection Information=> ${error} `)
+        return res.status(400).json({message:"Error updating collection Information"})
+    }
+}
+
+module.exports={addNewCollectionElementPicture,deleteCollectionElementPicture, updateCollectionElementAttributes,updateCollectionElementInformations}
