@@ -20,6 +20,7 @@ export const Header = () => {
     navigate('/')
   }
 
+  
   const handleDisconnection=()=>{
     localStorage.clear()
     setConnectionAttributes(prevConnectionAttributes=>({
@@ -29,8 +30,8 @@ export const Header = () => {
         invalidConnection: true
     }))
     navigateToHomePage()
-
   }
+
 
   useEffect(()=>{
     console.log(`connectionAttributes => ${connectionAttributes.invalidConnection}`)
