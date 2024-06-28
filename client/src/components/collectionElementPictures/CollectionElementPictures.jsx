@@ -31,10 +31,14 @@ export const CollectionElementPictures = ({collection_uid}) => {
         setCollectionDeletionStatus(false)
     },[collection_uid,collectionDeletionStatus])
 
+    useEffect(()=>{
+        console.log('adminstatus',connectionAttributes.adminStatus)
+    },[connectionAttributes.adminStatus])
+
 
     return (
         <>
-            {connectionAttributes.adminStatus &&
+            {connectionAttributes.adminConnection &&
                 <div className='collectionElementSinglePictureContainer'>
                     <NewPicture collectionUID={collection_uid}/>
                 </div>
