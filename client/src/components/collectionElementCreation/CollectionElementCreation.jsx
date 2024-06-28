@@ -20,8 +20,46 @@ export const CollectionElementCreation = ({newCollectionUIDAndTitle}) => {
     })
 
 
-    const createCollectionElement=async(e)=>{
+    const createCollection=async(e)=>{
       e.preventDefault()
+
+        if(!collectionPicture){
+            alert('Merci de sélectionner une image')
+            return
+        }
+        try {
+            const response=await fetch('http://localhost:5000/admin/createCollection',{
+                method: 'POST',
+                // headers: {
+                //     'Content-Type': 'application/json'
+                // },
+                body: newCollectionData
+            })
+            
+            if(!response.ok){
+                throw new Error('Network response was not OK')
+            }
+            else {
+                console.log('New Entry Created Successfuly')
+                let data= await response.json()
+                let newCollectionUID=data.message.collection_uid
+                let newCollectionTitle=data.message.collection_title
+                console.log('collection created => ',data)
+                console.log('newCollectionUID => ',newCollectionUID)
+                setCollectionCreated(true)
+                setNewCollectionUIDAndTitle({...CollectionCreation,
+                     newCollectionUID: newCollectionUID,
+                     newCollectionTitle:newCollectionTitle
+                })
+
+            }    
+        } catch (err) {
+            console.error('Error adding New Collection', err)
+        }
+    
+    }
+
+
       try {
         let response = await fetch('http://localhost:5000/admin/createCollectionElement',{
           method: 'POST',
@@ -78,7 +116,7 @@ export const CollectionElementCreation = ({newCollectionUIDAndTitle}) => {
 
     return (
 
-        <form className='collectionElementInformationContainer' onSubmit={createCollectionElement}>
+        <form className='collectionElementInformationContainer' onSubmit={createCollection}>
           <div className='collectionElementLeftContainer'>
             <label
               htmlFor='collectionElementDescription'>Collection Description  

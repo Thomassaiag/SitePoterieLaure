@@ -17,7 +17,7 @@ export const CollectionCreation = () => {
         newCollectionTitle:''
     })
     
-
+    const[]=useState()
 
     const handleFileChange=(event)=>{
         event.preventDefault();
@@ -34,8 +34,21 @@ export const CollectionCreation = () => {
     
     const handleSubmit=(e)=>{
         e.preventDefault()
-        setCollectionCreated(true)
+
+        let newCollectionData= new FormData();
+        newCollectionData.append('file', collectionPicture)
+        newCollectionData.append('collectionTitle', collectionText.collectionTitle)
+        newCollectionData.append('collectionDescription', collectionText.collectionDescription)
+
+        if(!collectionPicture){
+            alert('Merci de sélectionner une image')
+            return
+        }
+        else setCollectionCreated(true)
     }    
+
+
+
     // const handleSubmit=async(event)=>{
     //     event.preventDefault();
 
