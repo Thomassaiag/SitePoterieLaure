@@ -32,49 +32,53 @@ export const CollectionCreation = () => {
         })
     }
     
-    const handleSubmit=async(event)=>{
-        event.preventDefault();
+    const handleSubmit=(e)=>{
+        e.preventDefault()
+        setCollectionCreated(true)
+    }    
+    // const handleSubmit=async(event)=>{
+    //     event.preventDefault();
 
-        let newCollectionData= new FormData();
-        newCollectionData.append('file', collectionPicture)
-        newCollectionData.append('collectionTitle', collectionText.collectionTitle)
-        newCollectionData.append('collectionDescription', collectionText.collectionDescription)
+    //     let newCollectionData= new FormData();
+    //     newCollectionData.append('file', collectionPicture)
+    //     newCollectionData.append('collectionTitle', collectionText.collectionTitle)
+    //     newCollectionData.append('collectionDescription', collectionText.collectionDescription)
 
-        if(!collectionPicture){
-            alert('Merci de sélectionner une image')
-            return
-        }
-        try {
-            const response=await fetch('http://localhost:5000/admin/createCollection',{
-                method: 'POST',
-                // headers: {
-                //     'Content-Type': 'application/json'
-                // },
-                body: newCollectionData
-            })
+    //     if(!collectionPicture){
+    //         alert('Merci de sélectionner une image')
+    //         return
+    //     }
+    //     try {
+    //         const response=await fetch('http://localhost:5000/admin/createCollection',{
+    //             method: 'POST',
+    //             // headers: {
+    //             //     'Content-Type': 'application/json'
+    //             // },
+    //             body: newCollectionData
+    //         })
             
-            if(!response.ok){
-                throw new Error('Network response was not OK')
-            }
-            else {
-                console.log('New Entry Created Successfuly')
-                let data= await response.json()
-                let newCollectionUID=data.message.collection_uid
-                let newCollectionTitle=data.message.collection_title
-                console.log('collection created => ',data)
-                console.log('newCollectionUID => ',newCollectionUID)
-                setCollectionCreated(true)
-                setNewCollectionUIDAndTitle({...CollectionCreation,
-                     newCollectionUID: newCollectionUID,
-                     newCollectionTitle:newCollectionTitle
-                })
+    //         if(!response.ok){
+    //             throw new Error('Network response was not OK')
+    //         }
+    //         else {
+    //             console.log('New Entry Created Successfuly')
+    //             let data= await response.json()
+    //             let newCollectionUID=data.message.collection_uid
+    //             let newCollectionTitle=data.message.collection_title
+    //             console.log('collection created => ',data)
+    //             console.log('newCollectionUID => ',newCollectionUID)
+    //             setCollectionCreated(true)
+    //             setNewCollectionUIDAndTitle({...CollectionCreation,
+    //                  newCollectionUID: newCollectionUID,
+    //                  newCollectionTitle:newCollectionTitle
+    //             })
 
-            }    
-        } catch (err) {
-            console.error('Error adding New Collection', err)
-        }
+    //         }    
+    //     } catch (err) {
+    //         console.error('Error adding New Collection', err)
+    //     }
     
-    }
+    // }
 
     return (
     <div>
@@ -115,15 +119,15 @@ export const CollectionCreation = () => {
             <br></br>
             <button className='createCollectionButton' type='submit'>Créer La Collection</button>
         </form>
-        {/* {collectionCreated ? 
+        <br />
+        {collectionCreated && 
             <>
                 <br />
-                <CollectionElementCreation newCollectionUIDAndTitle={newCollectionUIDAndTitle}/> 
-            </> : <></>
-        } */}
+                <CollectionElementCreation/> 
+            </>
+        }
 
-            <br />
-            <CollectionElementCreation newCollectionUIDAndTitle={newCollectionUIDAndTitle}/> 
+            {/* <CollectionElementCreation newCollectionUIDAndTitle={newCollectionUIDAndTitle}/>  */}
 
     </div>
     )
