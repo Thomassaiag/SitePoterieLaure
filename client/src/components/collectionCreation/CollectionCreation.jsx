@@ -64,7 +64,7 @@ export const CollectionCreation = () => {
                 console.log('collection created => ',data)
                 console.log('newCollectionUID => ',newCollectionUID)
                 setCollectionCreated(true)
-                setNewCollectionUIDAndTitle({...CollectionCreation,
+                setNewCollectionUIDAndTitle({...newCollectionUIDAndTitle,
                      newCollectionUID: newCollectionUID,
                      newCollectionTitle:newCollectionTitle
                 })
