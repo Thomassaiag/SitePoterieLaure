@@ -180,7 +180,8 @@ export const CollectionElementCreation = ({newCollectionData}) => {
           type='text'
           value={collectionElementAttributesToCreate.collectionElementDescriptionToCreate}
           onChange={handleChange}
-          name='collectionElementDescriptionToCreate'        
+          name='collectionElementDescriptionToCreate'
+          required     
         />
       </div >
       <div className='collectionElementRightContainer'>
@@ -198,7 +199,8 @@ export const CollectionElementCreation = ({newCollectionData}) => {
             type='text'
             value={collectionElementAttributesToCreate.collectionElementEmailToCreate}
             onChange={handleChange}
-            name='collectionElementEmailToCreate'    
+            name='collectionElementEmailToCreate'
+            required
             />
         </div>
         <br/>
@@ -208,7 +210,8 @@ export const CollectionElementCreation = ({newCollectionData}) => {
             type='text'
             value={collectionElementAttributesToCreate.collectionElementCookingToCreate}
             onChange={handleChange}
-            name='collectionElementCookingToCreate'        
+            name='collectionElementCookingToCreate'
+            required     
           />
         </div>
         <br/>
@@ -218,7 +221,8 @@ export const CollectionElementCreation = ({newCollectionData}) => {
             type='text'
             value={collectionElementAttributesToCreate.collectionElementRecommandationToCreate}
             onChange={handleChange}
-            name='collectionElementRecommandationToCreate'        
+            name='collectionElementRecommandationToCreate'
+            required        
           />
           </div>
       </div>
