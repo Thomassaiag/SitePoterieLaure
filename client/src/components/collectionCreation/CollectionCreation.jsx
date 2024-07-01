@@ -4,62 +4,37 @@ import { CollectionElementCreation } from '../collectionElementCreation/Collecti
 import './CollectionCreation.css'
 
 export const CollectionCreation = () => {
-    const [collectionText, setCollectionText]=useState({
-        collectionTitle:'',
-        collectionDescription:''
-    })
-    const [collectionPicture, setCollectionPicture]=useState(null)
+    // const [collectionText, setCollectionText]=useState({
+    //     collectionTitle:'',
+    //     collectionDescription:''
+    // })
+    // const [collectionPicture, setCollectionPicture]=useState(null)
 
     const [collectionCreated, setCollectionCreated]=useState(false)
 
-    const [newCollectionUIDAndTitle, setNewCollectionUIDAndTitle]=useState({
-        newCollectionUID:'',
-        newCollectionTitle:''
-    })
+    // const [newCollectionUIDAndTitle, setNewCollectionUIDAndTitle]=useState({
+    //     newCollectionUID:'',
+    //     newCollectionTitle:''
+    // })
     
     const[newCollectionData, setNewCollectionData]=useState(new FormData())
 
     const handleFileChange=(e)=>{
         e.preventDefault();
-        let newFormData=new FormData(newCollectionData)
-        newFormData.set('file',e.target.files[0])
-        // setCollectionPicture(e.target.files[0])
-        setNewCollectionData(newFormData)
-        
+        newCollectionData.set('file',e.target.files[0])
+        setNewCollectionData(newCollectionData)    
     }
 
 
     const handleTextChange=(e)=>{
         e.preventDefault()
-        let newFormData = new FormData(newCollectionData)
-        newFormData.set([e.target.name],e.target.value)
-        // setCollectionText({
-        //     ...collectionText,
-        //     [e.target.name]: e.target.value
-        // })
-        setNewCollectionData(newFormData)
+        const {name, value}=e.target
+        newCollectionData.set(name,value)
+        setNewCollectionData(newCollectionData)
     }
     
-    // const handleSubmit=(e)=>{
-    //     e.preventDefault()
-
-    //     let newCollectionData= new FormData();
-    //     newCollectionData.append('file', collectionPicture)
-    //     newCollectionData.append('collectionTitle', collectionText.collectionTitle)
-    //     newCollectionData.append('collectionDescription', collectionText.collectionDescription)
-
-    //     if(!collectionPicture){
-    //         alert('Merci de sélectionner une image')
-    //         return
-    //     }
-    //     else setCollectionCreated(true)
-    // }    
-
-
-
-    const handleSubmit=async(event)=>{
-        event.preventDefault();
-        let collectionPicture=newCollectionData.get('file')
+    const handleSubmit=(e)=>{
+        e.preventDefault()
 
         // let newCollectionData= new FormData();
         // newCollectionData.append('file', collectionPicture)
@@ -70,37 +45,45 @@ export const CollectionCreation = () => {
             alert('Merci de sélectionner une image')
             return
         }
-        try {
-            const response=await fetch('http://localhost:5000/admin/createCollection',{
-                method: 'POST',
-                // headers: {
-                //     'Content-Type': 'application/json'
-                // },
-                body: newCollectionData
-            })
-            
-            if(!response.ok){
-                throw new Error('Network response was not OK')
-            }
-            else {
-                console.log('New Entry Created Successfuly')
-                let data= await response.json()
-                let newCollectionUID=data.message.collection_uid
-                let newCollectionTitle=data.message.collection_title
-                console.log('collection created => ',data)
-                console.log('newCollectionUID => ',newCollectionUID)
-                setCollectionCreated(true)
-                setNewCollectionUIDAndTitle({...CollectionCreation,
-                     newCollectionUID: newCollectionUID,
-                     newCollectionTitle:newCollectionTitle
-                })
+        else setCollectionCreated(true)
+    }    
 
-            }    
-        } catch (err) {
-            console.error('Error adding New Collection', err)
-        }
+    // const handleSubmit=async(event)=>{
+    //     event.preventDefault();
+    //     let collectionPicture=newCollectionData.get('file')
+
+    //     if(!collectionPicture){
+    //         alert('Merci de sélectionner une image')
+    //         return
+    //     }
+    //     try {
+    //         const response=await fetch('http://localhost:5000/admin/createCollection',{
+    //             method: 'POST',
+    //             body: newCollectionData
+    //         })
+            
+    //         if(!response.ok){
+    //             throw new Error('Network response was not OK')
+    //         }
+    //         else {
+    //             console.log('New Entry Created Successfuly')
+    //             let data= await response.json()
+    //             let newCollectionUID=data.message.collection_uid
+    //             let newCollectionTitle=data.message.collection_title
+    //             console.log('collection created => ',data)
+    //             console.log('newCollectionUID => ',newCollectionUID)
+    //             setCollectionCreated(true)
+    //             setNewCollectionUIDAndTitle({...newCollectionUIDAndTitle,
+    //                  newCollectionUID: newCollectionUID,
+    //                  newCollectionTitle:newCollectionTitle
+    //             })
+
+    //         }    
+    //     } catch (err) {
+    //         console.error('Error adding New Collection', err)
+    //     }
     
-    }
+    // }
 
     return (
     <div>
@@ -142,14 +125,14 @@ export const CollectionCreation = () => {
             <button className='createCollectionButton' type='submit'>Créer La Collection</button>
         </form>
         <br />
-        {/* {collectionCreated && 
+        {collectionCreated && 
             <>
                 <br />
-                <CollectionElementCreation/> 
+                <CollectionElementCreation newCollectionData={newCollectionData}/> 
             </>
-        } */}
+        }
 
-            <CollectionElementCreation newCollectionUIDAndTitle={newCollectionUIDAndTitle}/> 
+            {/* <CollectionElementCreation newCollectionData={newCollectionData}/>  */}
 
     </div>
     )

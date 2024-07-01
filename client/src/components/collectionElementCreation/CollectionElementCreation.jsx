@@ -6,9 +6,10 @@ import './CollectionElementCreation.css'
 import { CollectionElementInformationsCreation } from '../collectionElementInformationsCreation/CollectionElementInformationsCreation'
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
 
-export const CollectionElementCreation = () => {
+export const CollectionElementCreation = ({newCollectionData}) => {
 
   const {currentInformations}=useCollectionElementInformations()
+  const [collectionCreated, setCollectionCreated]=useState(false)
 
   const[collectionElementAttributesToCreate, setCollectionElementAttributesToCreate]=useState({
     collectionElementDescriptionToCreate:'',
@@ -16,6 +17,7 @@ export const CollectionElementCreation = () => {
     collectionElementCookingToCreate: '',
     collectionElementRecommandationToCreate: '',
     collectionUID: '',
+    collectionTitle:'',
     collectionElementInformationsToCreate:''
   })
 
@@ -24,13 +26,10 @@ export const CollectionElementCreation = () => {
     newCollectionTitle:''
   })
 
+
   const createCollection=async(e)=>{
     e.preventDefault()
-
-    if(!collectionPicture){
-        alert('Merci de sélectionner une image')
-        return
-    }
+    console.log("createCollection")
     try {
       const response=await fetch('http://localhost:5000/admin/createCollection',{
         method: 'POST',
@@ -50,19 +49,40 @@ export const CollectionElementCreation = () => {
         let newCollectionTitle=data.message.collection_title
         console.log('collection created => ',data)
         console.log('newCollectionUID => ',newCollectionUID)
-        setCollectionCreated(true)
-        setNewCollectionUIDAndTitle({...CollectionCreation,
-              newCollectionUID: newCollectionUID,
-              newCollectionTitle:newCollectionTitle
-        })
-      }    
+        console.log('newCollectionTitle => ',newCollectionTitle)
+        // setCollectionCreated(true)
+        // setCollectionElementAttributesToCreate(prevCollectionElementAttributesToCreate=>({...prevCollectionElementAttributesToCreate,
+        //   collectionUID: newCollectionUID,
+        //   collectionTitle:newCollectionTitle
+        // }))
+        
+        return{
+          newCollectionUID,
+          newCollectionTitle
+        }
+        // console.log(collectionElementAttributesToCreate)
+        // return{newCollectionUID,newCollectionTitle}
+
+      }
+
     } catch (err) {
         console.error('Error adding New Collection', err)
-    }
-    
-    
+    }    
+  }
 
+  // const updateState=async(e,newCollectionUID,newCollectionTitle)=>{
+  //   let newCollectionAttributesToCreate=await {
 
+  //   }
+  //   setCollectionElementAttributesToCreate(prevCollectionElementAttributesToCreate=>({...prevCollectionElementAttributesToCreate,
+  //     collectionUID: newCollectionUID,
+  //     collectionTitle:newCollectionTitle
+  //   }))
+  // }
+
+  const createCollectionAttributes=async()=>{
+    // e.preventDefault()
+    console.log(collectionElementAttributesToCreate)
     try {
       let response = await fetch('http://localhost:5000/admin/createCollectionElement',{
         method: 'POST',
@@ -74,8 +94,8 @@ export const CollectionElementCreation = () => {
           emailToCreate:collectionElementAttributesToCreate.collectionElementEmailToCreate,
           cookingToCreate:collectionElementAttributesToCreate.collectionElementCookingToCreate,
           recommandationToCreate:collectionElementAttributesToCreate.collectionElementRecommandationToCreate,
-          collectionUID:newCollectionUIDAndTitle.newCollectionUID,
-          collectionTitle:newCollectionUIDAndTitle.newCollectionTitle,
+          collectionUID:collectionElementAttributesToCreate.collectionUID,
+          collectionTitle:collectionElementAttributesToCreate.collectionTitle,
         })
       })
       let data= await response.json()
@@ -89,7 +109,7 @@ export const CollectionElementCreation = () => {
           },
           body:JSON.stringify({
             informationsToCreate:currentInformations,
-            collectionUID:newCollectionUIDAndTitle.newCollectionUID,
+            collectionUID:collectionElementAttributesToCreate.collectionUID,
           })
         })
         let data=await response.json()
@@ -99,13 +119,20 @@ export const CollectionElementCreation = () => {
       }
     } catch (error) {
       console.error({message: error})
-    }
+    } 
+
   }
+
+  
    
 
-  useEffect(()=>{
-    console.log('newCollectionUIDAndTitle =>',newCollectionUIDAndTitle)
-  },[newCollectionUIDAndTitle])
+  // useEffect(()=>{
+  //   console.log('newCollectionData =>',newCollectionData)
+  // },[newCollectionData])
+
+  // useEffect(()=>{
+  //   console.log('collectionElementAttributesToCreate =>',collectionElementAttributesToCreate)
+  // },[collectionElementAttributesToCreate])
 
 
   const handleChange=(e)=>{
@@ -117,8 +144,34 @@ export const CollectionElementCreation = () => {
 
 
 
+  const handleSubmit=async(e)=>{
+    e.preventDefault()
+    try {
+      const {newCollectionUID, newCollectionTitle} = await createCollection(e)
+      // await createCollection(e)
+      setCollectionElementAttributesToCreate((prevCollectionElementAttributesToCreate)=>({...prevCollectionElementAttributesToCreate,
+        collectionUID: newCollectionUID,
+        collectionTitle:newCollectionTitle
+      }))
+      setCollectionCreated(true)
+      console.log(collectionElementAttributesToCreate)
+      
+      
+    } catch (error) {
+      console.log('collection did\'t get created', error)
+    }
+
+  }
+
+  useEffect(()=>{
+    if(collectionCreated){
+      createCollectionAttributes()
+      setCollectionCreated(false)
+    }
+  },[collectionCreated])
+
   return (
-    <form className='collectionElementInformationContainer' onSubmit={createCollection}>
+    <form className='collectionElementInformationContainer' onSubmit={handleSubmit}>
       <div className='collectionElementLeftContainer'>
         <label
           htmlFor='collectionElementDescription'>Collection Description  

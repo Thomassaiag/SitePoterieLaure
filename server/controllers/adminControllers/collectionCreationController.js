@@ -27,7 +27,7 @@ const createNewCollection= async(req, res, next)=>{
 //creation of collection element attributes, right after collection creation
 const createCollectionElement = async(req, res,next)=>{
     try {
-        console.log(req.body)
+        console.log('body =>',req.body)
         let {descriptionToCreate, emailToCreate, cookingToCreate, recommandationToCreate, collectionUID,collectionTitle}=req.body
 
         let collectionElementAttributesToCreate=await pool.query(
