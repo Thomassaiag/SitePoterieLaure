@@ -5,7 +5,8 @@ import { ContactButton } from '../contactButton/ContactButton'
 export const Newsletter = () => {
 
     const[email, setEmail]=useState('')
-    
+    const [emailSubmited, setEmailSubmited]=useState(false)
+    const [emailSubmitedIssue, setEmailSubmitedIssue]=useState(false)
 
     const postEmail=async (e)=>{
         e.preventDefault()
@@ -24,24 +25,25 @@ export const Newsletter = () => {
             })
             const data= await response.json()
             console.log(data.message)
+
             if(response.status==400){
                 alert('ce mail existe déjà dans notre base, veuillez en renseigner un autre')
                 
             }
+            else setEmailSubmited(true)
             setEmail('')
             
             
         } catch (err) {
             console.error('probleme', err)
+            setEmailSubmitedIssue(true)
         }
-
     }
 
     const handleChange=(e)=>{
         setEmail(e.target.value)
     }    
 
-    
     return (
         <div className='newsLetterContainer'>
             <h1>Newsletter</h1>
@@ -62,9 +64,12 @@ export const Newsletter = () => {
                     <div className="newsLetterButtonContainer">
                         <ContactButton/>
                     </div>
+    
                 </div>
             </form>
-
+            <br/>
+            {emailSubmited && <p>Votre email a été enregistré avec succès</p>}
+            {emailSubmitedIssue && <p>Votre email n'a été enregistré</p>}
         </div>
     )
 }
