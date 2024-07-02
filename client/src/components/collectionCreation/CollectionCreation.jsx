@@ -4,77 +4,86 @@ import { CollectionElementCreation } from '../collectionElementCreation/Collecti
 import './CollectionCreation.css'
 
 export const CollectionCreation = () => {
-    const [collectionText, setCollectionText]=useState({
-        collectionTitle:'',
-        collectionDescription:''
-    })
-    const [collectionPicture, setCollectionPicture]=useState(null)
+    // const [collectionText, setCollectionText]=useState({
+    //     collectionTitle:'',
+    //     collectionDescription:''
+    // })
+    // const [collectionPicture, setCollectionPicture]=useState(null)
 
     const [collectionCreated, setCollectionCreated]=useState(false)
 
-    const [newCollectionUIDAndTitle, setNewCollectionUIDAndTitle]=useState({
-        newCollectionUID:'',
-        newCollectionTitle:''
-    })
+    // const [newCollectionUIDAndTitle, setNewCollectionUIDAndTitle]=useState({
+    //     newCollectionUID:'',
+    //     newCollectionTitle:''
+    // })
     
+    const[newCollectionData, setNewCollectionData]=useState(new FormData())
 
-
-    const handleFileChange=(event)=>{
-        event.preventDefault();
-        setCollectionPicture(event.target.files[0])
+    const handleFileChange=(e)=>{
+        e.preventDefault();
+        newCollectionData.set('file',e.target.files[0])
+        setNewCollectionData(newCollectionData)    
     }
 
 
     const handleTextChange=(e)=>{
-        setCollectionText({
-            ...collectionText,
-            [e.target.name]: e.target.value
-        })
+        e.preventDefault()
+        const {name, value}=e.target
+        newCollectionData.set(name,value)
+        setNewCollectionData(newCollectionData)
     }
     
-    const handleSubmit=async(event)=>{
-        event.preventDefault();
+    const handleSubmit=(e)=>{
+        e.preventDefault()
 
-        let newCollectionData= new FormData();
-        newCollectionData.append('file', collectionPicture)
-        newCollectionData.append('collectionTitle', collectionText.collectionTitle)
-        newCollectionData.append('collectionDescription', collectionText.collectionDescription)
+        // let newCollectionData= new FormData();
+        // newCollectionData.append('file', collectionPicture)
+        // newCollectionData.append('collectionTitle', collectionText.collectionTitle)
+        // newCollectionData.append('collectionDescription', collectionText.collectionDescription)
 
         if(!collectionPicture){
             alert('Merci de sélectionner une image')
             return
         }
-        try {
-            const response=await fetch('http://localhost:5000/admin/createCollection',{
-                method: 'POST',
-                // headers: {
-                //     'Content-Type': 'application/json'
-                // },
-                body: newCollectionData
-            })
-            
-            if(!response.ok){
-                throw new Error('Network response was not OK')
-            }
-            else {
-                console.log('New Entry Created Successfuly')
-                let data= await response.json()
-                let newCollectionUID=data.message.collection_uid
-                let newCollectionTitle=data.message.collection_title
-                console.log('collection created => ',data)
-                console.log('newCollectionUID => ',newCollectionUID)
-                setCollectionCreated(true)
-                setNewCollectionUIDAndTitle({...newCollectionUIDAndTitle,
-                     newCollectionUID: newCollectionUID,
-                     newCollectionTitle:newCollectionTitle
-                })
+        else setCollectionCreated(true)
+    }    
 
-            }    
-        } catch (err) {
-            console.error('Error adding New Collection', err)
-        }
+    // const handleSubmit=async(event)=>{
+    //     event.preventDefault();
+    //     let collectionPicture=newCollectionData.get('file')
+
+    //     if(!collectionPicture){
+    //         alert('Merci de sélectionner une image')
+    //         return
+    //     }
+    //     try {
+    //         const response=await fetch('http://localhost:5000/admin/createCollection',{
+    //             method: 'POST',
+    //             body: newCollectionData
+    //         })
+            
+    //         if(!response.ok){
+    //             throw new Error('Network response was not OK')
+    //         }
+    //         else {
+    //             console.log('New Entry Created Successfuly')
+    //             let data= await response.json()
+    //             let newCollectionUID=data.message.collection_uid
+    //             let newCollectionTitle=data.message.collection_title
+    //             console.log('collection created => ',data)
+    //             console.log('newCollectionUID => ',newCollectionUID)
+    //             setCollectionCreated(true)
+    //             setNewCollectionUIDAndTitle({...newCollectionUIDAndTitle,
+    //                  newCollectionUID: newCollectionUID,
+    //                  newCollectionTitle:newCollectionTitle
+    //             })
+
+    //         }    
+    //     } catch (err) {
+    //         console.error('Error adding New Collection', err)
+    //     }
     
-    }
+    // }
 
     return (
     <div>
@@ -115,15 +124,15 @@ export const CollectionCreation = () => {
             <br></br>
             <button className='createCollectionButton' type='submit'>Créer La Collection</button>
         </form>
-        {/* {collectionCreated ? 
+        <br />
+        {collectionCreated && 
             <>
                 <br />
-                <CollectionElementCreation newCollectionUIDAndTitle={newCollectionUIDAndTitle}/> 
-            </> : <></>
-        } */}
+                <CollectionElementCreation newCollectionData={newCollectionData}/> 
+            </>
+        }
 
-            <br />
-            <CollectionElementCreation newCollectionUIDAndTitle={newCollectionUIDAndTitle}/> 
+            {/* <CollectionElementCreation newCollectionData={newCollectionData}/>  */}
 
     </div>
     )

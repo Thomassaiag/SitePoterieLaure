@@ -77,6 +77,7 @@ export const CollectionElementInformationsCreation = () => {
                             name={id}
                             onChange={(e)=>handleChange(e,id)}
                             value={currentInformations.informationInputText}
+                            required
                             />
                         <div className='deleteButtonContainer'>
                             <img src="../../../images/deleteCollection.jpg" alt="Delete Input" onClick={(e)=>deleteInformation(e, id)} style={{cursor:'pointer'}}></img>
