@@ -1,3 +1,9 @@
+
+.homePageContainer{
+    display: flex;
+    flex-direction: column;
+}
+
 .presentationContainer{
     position: relative;
     height: 20rem;
@@ -20,5 +26,17 @@
     height: 100%;
     object-fit: cover;
     z-index: -1;
+}
+
+
+.imageContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.imageContainer img{
+    width: 20rem;
+
 }
 

@@ -3,17 +3,17 @@
   z-index: 1;
 } */
 
-/* .webSiteLogo_Class{
+.webSiteLogo_Class{
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: -1;
-} */
+}
 
 
-/* .connectionButton_Class{
+.connectionButton_Class{
   border-radius: 10px;
   cursor: pointer;
   position: fixed;

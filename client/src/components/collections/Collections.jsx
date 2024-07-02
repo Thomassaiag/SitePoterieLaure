@@ -56,12 +56,9 @@ export const Collections =()=>{
             ) : (
               <p>Loading...</p>
             )
-
           }
           </div>
-          <div className='scrollToTopContainer'>
-            <ScrollToTop/>
-          </div>
+
     </div>
   )
 }

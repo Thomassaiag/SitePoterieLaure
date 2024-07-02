@@ -172,7 +172,6 @@ export const CollectionElement = () => {
             <CollectionMainPic imageUrl={previousCollectionPictureUrl} imageAlt={previousCollectionPictureAlt}/>
           </div>
         </div>
-        <ScrollToTop/>
         <div className='navigationElementButtonContainer'>
           <div className='navigationElementCollectionPicture'>
             <CollectionMainPic  imageUrl={nextCollectionPictureUrl} imageAlt={nextCollectionPictureAlt}/>

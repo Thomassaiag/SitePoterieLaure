@@ -1,4 +1,5 @@
 import React from 'react'
+import './ScrollToTop.css'
 
 export const ScrollToTop = () => {
 
@@ -10,7 +11,7 @@ export const ScrollToTop = () => {
     }
 
   return (
-    <div>
+    <div className='scrollToTopContainer'>
         <img src='/images/upChevron.jpg' alt='scroll-up'onClick={handleClick}/>
     </div>
   )
