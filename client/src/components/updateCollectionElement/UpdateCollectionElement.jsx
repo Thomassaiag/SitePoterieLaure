@@ -228,18 +228,23 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
           </div>
           <br></br>
           <div className='collectionElementEmailCookingRecoContainer'>
+            <label htmlFor='collectionElementEmail'>Émail :</label>
             <input id='collectionElementEmail'
               type='text'
               value={collectionElementAttributesToUpdate.collectionElementEmailToUpdate}
               onChange={handleChange}
               name='collectionElementEmailToUpdate'    
             />
+            <br/>
+            <label htmlFor='collectionElementCooking'>Cuisson :</label>
             <input id='collectionElementCooking'
               type='text'
               value={collectionElementAttributesToUpdate.collectionElementCookingToUpdate}
               onChange={handleChange}
               name='collectionElementCookingToUpdate'        
             />
+            <br/>
+            <label htmlFor='collectionElementRecommandation'>Recommandation :</label>
             <input id='collectionElementRecommandation'
               type='text'
               value={collectionElementAttributesToUpdate.collectionElementRecommandationToUpdate}

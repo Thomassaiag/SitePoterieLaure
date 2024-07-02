@@ -147,7 +147,7 @@ export const CollectionElementCreation = ({newCollectionData}) => {
         <CollectionElementInformationsCreation/>
         <br/>
         <div className='inputContainer'>
-          <label htmlFor='collectionElementEmail'>Email : </label>
+          <label htmlFor='collectionElementEmail'>Émail : </label>
           <input id='collectionElementEmail'
             type='text'
             value={collectionElementAttributesToCreate.collectionElementEmailToCreate}
