@@ -10,6 +10,7 @@ export const CollectionElementCreation = ({newCollectionData}) => {
 
   const {currentInformations}=useCollectionElementInformations()
   const [collectionCreated, setCollectionCreated]=useState(false)
+  const [collectionCreationIssue, setCollectionCreationIssue]=useState(false)
 
   const[collectionElementAttributesToCreate, setCollectionElementAttributesToCreate]=useState({
     collectionElementDescriptionToCreate:'',
@@ -21,25 +22,18 @@ export const CollectionElementCreation = ({newCollectionData}) => {
     collectionElementInformationsToCreate:''
   })
 
-  const [newCollectionUIDAndTitle, setNewCollectionUIDAndTitle]=useState({
-    newCollectionUID:'',
-    newCollectionTitle:''
-  })
-
-
   const createCollection=async(e)=>{
     e.preventDefault()
-    console.log("createCollection")
+    setCollectionCreated(false)
+    setCollectionCreationIssue(false)
     try {
       const response=await fetch('http://localhost:5000/admin/createCollection',{
         method: 'POST',
-        // headers: {
-        //     'Content-Type': 'application/json'
-        // },
         body: newCollectionData
       })
         
       if(!response.ok){
+          setCollectionCreationIssue(true)
           throw new Error('Network response was not OK')
       }
       else {
@@ -47,42 +41,19 @@ export const CollectionElementCreation = ({newCollectionData}) => {
         let data= await response.json()
         let newCollectionUID=data.message.collection_uid
         let newCollectionTitle=data.message.collection_title
-        console.log('collection created => ',data)
-        console.log('newCollectionUID => ',newCollectionUID)
-        console.log('newCollectionTitle => ',newCollectionTitle)
-        // setCollectionCreated(true)
-        // setCollectionElementAttributesToCreate(prevCollectionElementAttributesToCreate=>({...prevCollectionElementAttributesToCreate,
-        //   collectionUID: newCollectionUID,
-        //   collectionTitle:newCollectionTitle
-        // }))
-        
         return{
           newCollectionUID,
           newCollectionTitle
         }
-        // console.log(collectionElementAttributesToCreate)
-        // return{newCollectionUID,newCollectionTitle}
-
       }
 
     } catch (err) {
         console.error('Error adding New Collection', err)
+        setCollectionCreationIssue(true)
     }    
   }
 
-  // const updateState=async(e,newCollectionUID,newCollectionTitle)=>{
-  //   let newCollectionAttributesToCreate=await {
-
-  //   }
-  //   setCollectionElementAttributesToCreate(prevCollectionElementAttributesToCreate=>({...prevCollectionElementAttributesToCreate,
-  //     collectionUID: newCollectionUID,
-  //     collectionTitle:newCollectionTitle
-  //   }))
-  // }
-
   const createCollectionAttributes=async()=>{
-    // e.preventDefault()
-    console.log(collectionElementAttributesToCreate)
     try {
       let response = await fetch('http://localhost:5000/admin/createCollectionElement',{
         method: 'POST',
@@ -99,7 +70,6 @@ export const CollectionElementCreation = ({newCollectionData}) => {
         })
       })
       let data= await response.json()
-      console.log(data)
       
       try {
         let response=await fetch('http://localhost:5000/admin/createCollectionElementInformations',{
@@ -113,62 +83,48 @@ export const CollectionElementCreation = ({newCollectionData}) => {
           })
         })
         let data=await response.json()
-        console.log(data)
       } catch (error) {
+        setCollectionCreationIssue(true)
         console.error({message: error})  
       }
     } catch (error) {
+      setCollectionCreationIssue(true)
       console.error({message: error})
     } 
 
   }
 
-  
-   
-
-  // useEffect(()=>{
-  //   console.log('newCollectionData =>',newCollectionData)
-  // },[newCollectionData])
-
-  // useEffect(()=>{
-  //   console.log('collectionElementAttributesToCreate =>',collectionElementAttributesToCreate)
-  // },[collectionElementAttributesToCreate])
-
-
   const handleChange=(e)=>{
     e.preventDefault()
+    setCollectionCreated(false)
     setCollectionElementAttributesToCreate({...collectionElementAttributesToCreate,
       [e.target.name]:e.target.value
     })
   }
 
 
-
   const handleSubmit=async(e)=>{
     e.preventDefault()
     try {
       const {newCollectionUID, newCollectionTitle} = await createCollection(e)
-      // await createCollection(e)
       setCollectionElementAttributesToCreate((prevCollectionElementAttributesToCreate)=>({...prevCollectionElementAttributesToCreate,
         collectionUID: newCollectionUID,
         collectionTitle:newCollectionTitle
       }))
       setCollectionCreated(true)
-      console.log(collectionElementAttributesToCreate)
-      
-      
     } catch (error) {
       console.log('collection did\'t get created', error)
     }
 
   }
 
+
   useEffect(()=>{
     if(collectionCreated){
       createCollectionAttributes()
-      setCollectionCreated(false)
     }
   },[collectionCreated])
+
 
   return (
     <form className='collectionElementInformationContainer' onSubmit={handleSubmit}>
@@ -188,10 +144,7 @@ export const CollectionElementCreation = ({newCollectionData}) => {
         <label
           htmlFor='collectionElementEmail'>Informations techniques  
         </label>
-
         <CollectionElementInformationsCreation/>
-
-
         <br/>
         <div className='inputContainer'>
           <label htmlFor='collectionElementEmail'>Email : </label>
@@ -229,6 +182,8 @@ export const CollectionElementCreation = ({newCollectionData}) => {
       <br></br>
       <br></br>
       <button className='collectionElementCreationButton'>Ajouter les élements de la nouvelle Collection</button>
+      {collectionCreated && <p>La collection a été créée avec succès</p>}
+      {collectionCreationIssue && <p>La collection n'a été créée</p>}
     </form>
   )
 }
