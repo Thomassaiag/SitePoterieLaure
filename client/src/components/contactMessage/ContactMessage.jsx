@@ -17,6 +17,8 @@ export const ContactMessage = () => {
 
     const handleTextChange=(e)=>{
         e.preventDefault()
+        setMessageSent(false)
+        setMessageSentIssue(false)
         setEmailData({...emailData,
             [e.target.name]:e.target.value
         })
@@ -37,6 +39,8 @@ export const ContactMessage = () => {
 
     const sendMessage= async (e)=>{
         e.preventDefault()
+        setMessageSent(false)
+        setMessageSentIssue(false)
         console.log(emailData)
         try {
             const response=await fetch('http://localhost:5000/contact/message',{
@@ -83,6 +87,7 @@ export const ContactMessage = () => {
                             name='firstName'
                             placeholder='Votre Prénom'
                             onChange={handleTextChange}
+                            required
                         />
                         <label className="nameLabel" htmlFor='lastName'>Nom</label>
                         <input
@@ -91,16 +96,19 @@ export const ContactMessage = () => {
                             name='lastName'
                             placeholder='Votre Nom'
                             onChange={handleTextChange}
+                            required
                         />
                     </div>
                     <div className='emailContainer'>
                         <label htmlFor='senderEmail'>Adresse Email</label>
                         <input
+                            type='email'
                             id='senderEmail'
                             className='senderEmail'
                             name='senderEmail'
                             placeholder='Adresse email'
                             onChange={handleTextChange}
+                            required
                         />
                     </div>
                     <div className='objectContainer'>
@@ -111,6 +119,7 @@ export const ContactMessage = () => {
                             name='object'
                             placeholder='Objet du Message'
                             onChange={handleTextChange}
+                            required
                         />
                     </div>
                     <div className='messageContainer'>
@@ -123,6 +132,7 @@ export const ContactMessage = () => {
                             placeholder='Message'
                             onChange={handleTextChange}
                             onKeyDown={handleKeyDown}
+                            required
                         />
                     <div className='buttonContainer'>
                         <ContactButton/>

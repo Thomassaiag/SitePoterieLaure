@@ -3,13 +3,8 @@ const nodemailer =require('nodemailer')
 require('dotenv').config()
 
 
-
-
 const sendMessage=async (req, res,next)=>{
     const {firstName,lastName,object,senderEmail,senderMessage}=req.body
-    console.log(`req.body => ${req.body}`)
-    console.log(process.env.MAILUSER)
-    console.log(process.env.MAILPASSWORD)
     const transporter=nodemailer.createTransport({
         service:'gmail',
         host: "smtp.gmail.com",
@@ -22,14 +17,14 @@ const sendMessage=async (req, res,next)=>{
     })
 
     const mailOptions={
-        from: 'thomas.saiag@gmail.com',
+        from: senderEmail, 
         to: 'thomas.saiag@gmail.com',
         subject:object,
         text: `message from ${firstName} ${lastName} : ${senderMessage}`
     }
 
-    try
-    {  await transporter.sendMail(mailOptions)
+    try {
+        await transporter.sendMail(mailOptions)
         res.status(200).send({message: 'Email sent successfuly'})
     }
 
