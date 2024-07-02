@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import './PopUpPicture.css'
 
+
 export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose, collection_uid}) => {
   
   const [newPictureUid, setNewPictureUid]=useState(imageUid)
@@ -73,7 +74,14 @@ export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose, collection_
           <div className='chevronPictureContainer'>
             <img src='/images/leftChevron.jpg' alt='previous picture' onClick={displayPreviousPicture} style={{cursor:'pointer'}}/>
           </div>
-          <img className='popUpPicture' src={newImageUrl} alt={newImageAlt} onClick={onClose} style={{cursor:'pointer'}}/>
+          <div className='pictureContainer'>
+            <div className='closePopUpContainer'>
+              <picture className='positioned-picture'>
+                <img className='closePopUp' src='/images/deleteCollection.jpg' alt='closePopUp' onClick={onClose} style={{cursor: 'pointer'}}/>
+              </picture>
+            </div>
+            <img className='popUpPicture' src={newImageUrl} alt={newImageAlt}/>
+          </div>
           <div className='chevronPictureContainer'>
             <img src='/images/rightChevron.jpg' alt='next picture' onClick={displayNextPicture} style={{cursor:'pointer'}}/>
           </div>

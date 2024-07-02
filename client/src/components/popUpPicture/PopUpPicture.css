@@ -27,3 +27,23 @@
 .chevronPictureContainer img{
   height: 40px;
 }
+
+.pictureContainer{
+  display: flex;
+  flex-direction: column;
+}
+
+.closePopUpContainer{
+  position: relative;
+}
+.positioned-picture{
+  position:absolute;
+  bottom:0;
+  right:0;
+  transform: translate(50%,50%);
+}
+
+.closePopUp{
+  height:30px;
+  width: 30px;
+}
