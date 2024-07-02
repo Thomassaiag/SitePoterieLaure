@@ -12,6 +12,8 @@ export const ContactMessage = () => {
         senderMessage:"",
     })
 
+    const [messageSent, setMessageSent]=useState(false)
+    const [messageSentIssue, setMessageSentIssue]=useState(false)
 
     const handleTextChange=(e)=>{
         e.preventDefault()
@@ -35,7 +37,7 @@ export const ContactMessage = () => {
 
     const sendMessage= async (e)=>{
         e.preventDefault()
-        
+        console.log(emailData)
         try {
             const response=await fetch('http://localhost:5000/contact/message',{
                 method: 'POST',
@@ -53,11 +55,13 @@ export const ContactMessage = () => {
             const data = await response.json()
             
             if(!response.ok){
+                setMessageSentIssue(true)
                 throw new Error('NetWork response was not ok')
             }
-            else console.log(data)
+            else setMessageSent(true)
         } catch (err) {
             console.error(`Error sending Email => ${err}`)
+            setMessageSentIssue(true)
 
         }
     }
@@ -126,6 +130,8 @@ export const ContactMessage = () => {
                     </div>
                 </form>
             </div>
+            {messageSent && <p>Votre message a bien été envoyé</p>}
+            {messageSentIssue && <p>Votre message n'a pas été envoyé</p>}
         </div>
     )
 }

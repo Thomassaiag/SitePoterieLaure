@@ -1,9 +1,15 @@
 const {pool}=require('../config/db')
 const nodemailer =require('nodemailer')
+require('dotenv').config()
+
+
+
 
 const sendMessage=async (req, res,next)=>{
     const {firstName,lastName,object,senderEmail,senderMessage}=req.body
-    console.log(`firstName => ${firstName}`)
+    console.log(`req.body => ${req.body}`)
+    console.log(process.env.MAILUSER)
+    console.log(process.env.MAILPASSWORD)
     const transporter=nodemailer.createTransport({
         service:'gmail',
         host: "smtp.gmail.com",
@@ -36,19 +42,14 @@ const sendMessage=async (req, res,next)=>{
 
 const subscribeToMailingList= async(req,res, next)=>{
     const {email}=req.body
-    console.log(`contactEmail=>${email}`)
-    // console.log(`contactEmail keys=>${Object.keys(email)}`)
     try{
         const existingEmail= await pool.query(
             'SELECT * FROM newsletter_contact WHERE email=$1',[email]
         )
-        console.log(existingEmail.rowCount)
         if (existingEmail.rowCount>0){
-            console.log('email présent')
             return res.status(400).json({message:'email already exists'})
         }
         else{
-            console.log('email absent')
             await pool.query(
                 'INSERT INTO newsletter_contact (email) VALUES($1)',[email]
                 )
