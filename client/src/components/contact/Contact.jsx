@@ -27,9 +27,7 @@ export const Contact = () => {
       </div>
       <Newsletter/>
       <ContactMessage/>
-      <div className='scrollToTopContainer'>
-        <ScrollToTop/>
-      </div>
+
     </div>
   )
 }

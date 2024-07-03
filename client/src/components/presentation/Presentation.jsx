@@ -8,8 +8,8 @@ import image3 from '/images/Collections/terremoto.jpg'
 export const Presentation = () => {
   return (
     <>
-    <div className='presentationContainer'>
-      <img src="../../images/Page acceuil/mainPicture.jpg" alt="presentation"/>
+    <div className='presentationPictureContainer'>
+      <img className='welcomePagePicture'src="/images/Page acceuil/mainPicture.jpg" alt="presentation"/>
       <div>
         <p>Créations céramiques utilitaires et décoratives</p>
         <br/>
