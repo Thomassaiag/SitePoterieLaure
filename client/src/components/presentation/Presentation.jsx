@@ -1,26 +1,38 @@
 import React from 'react'
 import './Presentation.css'
 
-import image1 from '/images/Collections/porcelaine.jpg'
-import image2 from '/images/Collections/terracota.jpg'
-import image3 from '/images/Collections/terremoto.jpg'
+import {navigationElements} from '../../data/navigationElements.js'
+import {HomePageNavigationPicture} from '../homePageNavigationPicture/HomePageNavigationPicture'
+
+
 
 export const Presentation = () => {
   return (
     <>
-    <div className='presentationPictureContainer'>
-      <img className='welcomePagePicture'src="/images/Page acceuil/mainPicture.jpg" alt="presentation"/>
-      <div>
-        <p>Créations céramiques utilitaires et décoratives</p>
-        <br/>
-        <p>Fabriquées main en Normandie</p>
+      <div className='presentationPictureContainer'>
+        <img className='welcomePagePicture'src="/images/Page acceuil/mainPicture.jpg" alt="presentation"/>
+        <div>
+          <p>Créations céramiques utilitaires et décoratives</p>
+          <br/>
+          <p>Fabriquées main en Normandie</p>
+        </div>
       </div>
-    </div>
-    <div className='imageContainer'>
-      <img src={image1} alt='image1' />
-      <img src={image2} alt='image2' />
-      <img src={image3} alt='image2' />
-    </div>
+      <div className='imageContainer'>
+        {
+          navigationElements.map((navigationElement)=>{
+            const {id, picture, picDescription, navigation, buttonName}=navigationElement
+            return (
+              <HomePageNavigationPicture 
+                key={id}
+                picture={picture}
+                picDescription={picDescription}
+                navigation={navigation}
+                buttonName={buttonName}
+              />
+            )
+          })
+        }
+      </div>
     </>
   )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Description } from '../description/Description'
 import { portraitText } from '../../data/portraitText'
 import './Portrait.css'
@@ -6,6 +6,11 @@ const logo  ='../../images/logoLaureSansNom.jpg'
 const imageLeft='../../images/poteriePresentation.jpg'
 
 export const Portrait= () => {
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
+
   return (
     <div className="portraitContainer">
       <p className='titleText'>VL Céramique - Hand made by Laure</p>

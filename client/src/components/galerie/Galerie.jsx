@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { imagesGalerie } from '../../data/imagesGalerie'
 import './Galerie.css'
 import { ScrollToTop } from '../scrollToTop/ScrollToTop'
@@ -6,6 +6,11 @@ import { ScrollToTop } from '../scrollToTop/ScrollToTop'
 
 
 export const Galerie = () => {
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
+
   return (
     <div className='picturesContainer'>
       {imagesGalerie.map(image=>{

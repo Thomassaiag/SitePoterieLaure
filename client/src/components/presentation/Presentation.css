@@ -31,10 +31,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
 .imageContainer img{
     width: 20rem;
-
 }
 

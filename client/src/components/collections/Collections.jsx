@@ -2,13 +2,16 @@ import React,{useState, useEffect} from 'react'
 import { Collection } from '../collection/Collection'
 
 import './Collections.css'
-import { ScrollToTop } from '../scrollToTop/ScrollToTop'
 
 import { useCollectionDeletionStatus } from '../contextProvider/CollectionDeletionStatusContextProvider'
 
 export const Collections =()=>{
   const {collectionDeletionStatus, setCollectionDeletionStatus}=useCollectionDeletionStatus()
   const [collectionData, setCollectionData]=useState(null)
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
 
   const fetchCollections=async ()=>{
     try {
