@@ -28,9 +28,7 @@ export const UpdatePortrait = ({portraitTextProp}) => {
                 onChange={handleChange}
             >    
             </textarea>
-            <button className='' >Mettre à jour le portrait
-
-            </button>
+            <button className='' >Mettre à jour le portrait</button>
         </form>
         
     )
