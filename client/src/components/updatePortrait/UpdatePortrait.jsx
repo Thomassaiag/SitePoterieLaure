@@ -7,6 +7,7 @@ export const UpdatePortrait = ({portraitTextProp}) => {
         portraitTextInput:portraitTextProp
     })
     
+    
     const handleChange=(e)=>{
         e.preventDefault()
         setPortraitText(prevPortraitText=>({
@@ -14,12 +15,26 @@ export const UpdatePortrait = ({portraitTextProp}) => {
             [e.target.name]:e.target.value
         }))
     }
-    const updatePortrait=()=>{
-        return
+    const handleSubmit=async()=>{
+        try {
+            let response=await fetch('http://localhost:5000/admin/udpatePortrait',{
+                method:'PUT',
+                headers:'',
+                body:JSON.stringify({
+                    portraitText:portraitTextInput
+                })
+            })
+            if(!response.ok){
+                console.log("Portrait text couldn\' be updated")
+            }
+        } catch (error) {
+            
+        }
+        
     }
 
     return (
-        <form className='UpdatePortraitContainer' onSubmit={updatePortrait}>
+        <form className='UpdatePortraitContainer' onSubmit={handleSubmit}>
             <NewPicture/>
             <textarea
                 name='portraitTextInput'

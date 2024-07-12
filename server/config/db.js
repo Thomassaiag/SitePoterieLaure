@@ -16,8 +16,6 @@ const connectToDatabase=async()=>{
     } catch (error) {
         console.error('Database connection error', error.stack)
     }
-    
-
 }
 
 module.exports = {pool, connectToDatabase}
