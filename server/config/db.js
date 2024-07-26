@@ -2,11 +2,12 @@ const Pool= require("pg").Pool
 require('dotenv').config()
 
 const pool = new Pool({
-    user:"postgres",
+    user:process.env.DBUSER,
     password:process.env.DBPASSWORD,
-    host: "localhost",
+    host: process.env.DBHOST,
     database: process.env.DBNAME
 })
+
 
 const connectToDatabase=async()=>{
     try {

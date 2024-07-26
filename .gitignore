@@ -10,7 +10,7 @@ lerna-debug.log*
 node_modules
 
 public
-.env
+**.env
 
 
 dist
