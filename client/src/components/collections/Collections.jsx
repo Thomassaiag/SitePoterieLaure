@@ -17,6 +17,7 @@ export const Collections =()=>{
     try {
       const response = await fetch('http://localhost:5000/collections')
       const JsonData=await response.json()
+      if(!response==ok)
       setCollectionData(JsonData)
       setCollectionDeletionStatus(false)
     }

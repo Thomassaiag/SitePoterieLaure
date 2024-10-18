@@ -14,8 +14,15 @@ export const UpdatePortrait = ({portraitTextProp}) => {
             [e.target.name]:e.target.value
         }))
     }
-    const updatePortrait=()=>{
-        return
+    const updatePortrait=async()=>{
+        try {
+            //TODO: create update fetch request to DB
+            const response= await fetch('http://localhost/admin/portrait')
+            const jsonData=response.json()
+            console.log(jsonData)
+        } catch (err) {
+            console.log('message couldn\'t be updated',err)
+        }
     }
 
     return (
