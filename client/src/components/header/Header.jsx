@@ -48,14 +48,13 @@ export const Header = () => {
           </>
         }
       </div>
-      <div>
-        <Link className='logoAndTitleContainer'to='/'>
-            <img className='logo'src={logoLaureSansNom} alt='webSiteLogo'/>
-            <div className='titleContainer'>
-              <p>Laure Videau</p>
-            </div>
-        </Link>
-      </div>
+      <Link className='logoAndTitleContainer'to='/'>
+          <img className='logo'src={logoLaureSansNom} alt='webSiteLogo'/>
+          <div className='titleContainer'>
+            <p>Laure Videau</p>
+          </div>
+      </Link>
+
       <div className='headerLinks'>
         <Link to='/collections'>collections</Link>
         {/* <Link to=''>boutique</Link> */}
@@ -64,8 +63,8 @@ export const Header = () => {
         {/* <Link to=''>blog</Link> */}
         <Link to='/contact'>contact</Link>
         {connectionAttributes.adminConnection && <Link to='/admin'>admin</Link>}
-
       </div>
+      
       <div className='collectionsSeparatorContainer'>
         <hr className='collectionsSeparator'></hr>
       </div>
