@@ -79,13 +79,16 @@ a:hover{
 .collectionsSeparatorContainer{
   width: 100%;
   margin-top: 1rem;
-  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  
 }
 .collectionsSeparator{
     border:none;
     height: 1px;
     background-color: #E4DCD1;
-    margin: 1rem 5rem 1rem 5rem;
+    margin-top: 1rem;
+    width: 65%;
 }
 
 .buttonContainer{
