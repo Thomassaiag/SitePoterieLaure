@@ -8,7 +8,6 @@ import { CollectionElementInformationsToUpdateContextProvider } from './componen
 import { CollectionElementInformationsToUpdateDeleteContextProvider } from './components/contextProvider/CollectionElementInformationsToUpdateDeleteContextProvider.jsx'
 import { CollectionDeletionStatusContextProvider } from './components/contextProvider/CollectionDeletionStatusContextProvider.jsx'
 
-
 ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <ConnectionStatusContextProvider>
@@ -16,7 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <CollectionElementInformationsToUpdateDeleteContextProvider>
             <CollectionElementInformationsContextProvider>
               <CollectionElementInformationsToUpdateContextProvider>
-                <App/>
+                  <App/>
               </CollectionElementInformationsToUpdateContextProvider>
             </CollectionElementInformationsContextProvider>
           </CollectionElementInformationsToUpdateDeleteContextProvider>

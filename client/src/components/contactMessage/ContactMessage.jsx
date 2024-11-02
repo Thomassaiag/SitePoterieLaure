@@ -43,7 +43,7 @@ export const ContactMessage = () => {
         setMessageSentIssue(false)
         console.log(emailData)
         try {
-            const response=await fetch('http://localhost:5000/contact/message',{
+            const response=await fetch('http://localhost:14001/contact/message',{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

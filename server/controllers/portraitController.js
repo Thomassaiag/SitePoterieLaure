@@ -9,8 +9,6 @@ const getPortrait=async (req, res, next)=>{
             `
         )
         if(rows){
-            console.log('Portrait retrieved')
-            console.log(rows)
             res.status(200).json(rows)
         }
     }

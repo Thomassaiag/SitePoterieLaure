@@ -27,7 +27,7 @@ export const CollectionElementCreation = ({newCollectionData}) => {
     setCollectionCreated(false)
     setCollectionCreationIssue(false)
     try {
-      const response=await fetch('http://localhost:5000/admin/createCollection',{
+      const response=await fetch('http://localhost:14001/admin/createCollection',{
         method: 'POST',
         body: newCollectionData
       })
@@ -55,7 +55,7 @@ export const CollectionElementCreation = ({newCollectionData}) => {
 
   const createCollectionAttributes=async()=>{
     try {
-      let response = await fetch('http://localhost:5000/admin/createCollectionElement',{
+      let response = await fetch('http://localhost:14001/admin/createCollectionElement',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -72,7 +72,7 @@ export const CollectionElementCreation = ({newCollectionData}) => {
       let data= await response.json()
       
       try {
-        let response=await fetch('http://localhost:5000/admin/createCollectionElementInformations',{
+        let response=await fetch('http://localhost:14001/admin/createCollectionElementInformations',{
           method:'POST',
           headers: {
             'Content-Type': 'application/json'

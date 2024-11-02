@@ -29,7 +29,7 @@ export const CollectionElementPicture = ({collection_uid, collection_element_pic
   const deleteCollectionElementPicture=async(elementToDeleteID)=>{
     setCollectionElementPictureToDeleteID(elementToDeleteID)
     try {
-      let response=await fetch('http://localhost:5000/admin/editElement/deleteElementPicture',{
+      let response=await fetch('http://localhost:14001/admin/editElement/deleteElementPicture',{
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'

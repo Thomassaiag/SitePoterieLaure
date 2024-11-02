@@ -28,7 +28,7 @@ export const NewPicture = ({collectionUID}) => {
         collectionPictureElement.append('collectionUID', collectionUID)
 
         if(newCollectionElementPicture){
-            let response=await fetch('http://localhost:5000/admin/editElement/addNewPicture',{
+            let response=await fetch('http://localhost:14001/admin/editElement/addNewPicture',{
                 method:'POST',
                 // headers: {
                 //     'Content-Type': 'application/json'

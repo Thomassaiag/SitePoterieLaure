@@ -4,6 +4,7 @@ require('dotenv').config()
 
 const collectionPath=process.env.COLLECTIONPICTUREPATH
 const collectionElementPath=process.env.COLLECTIONELEMENTPICTURESPATH
+const portraitPath=process.env.PORTRAITPICTURESPATH
 
 const storage=multer.diskStorage({
     destination: function(req, file, cb){
@@ -14,10 +15,7 @@ const storage=multer.diskStorage({
     }
 })
 
-
 const upload=multer({storage:storage})
-
-
 
 
 const storageCollectionElementPicture=multer.diskStorage({
@@ -29,7 +27,18 @@ const storageCollectionElementPicture=multer.diskStorage({
     }
 })
 
-
 const uploadCollectionElementPicture=multer({storage:storageCollectionElementPicture})
 
-module.exports={upload, uploadCollectionElementPicture}
+
+const storagePortraitPicture=multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null, portraitPath);
+    },
+    filename:function(req, file, cb){
+        cb(null, file.originalname)
+    }
+})
+
+const updatePortraitPicture=multer({storage:storagePortraitPicture})
+
+module.exports={upload, uploadCollectionElementPicture, updatePortraitPicture}

@@ -1,33 +1,101 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './UpdatePortrait.css'
-import { NewPicture } from '../newPicture/NewPicture'
 
-export const UpdatePortrait = ({portraitTextProp}) => {
-    const [newPortraitText, setPortraitText]=useState({
+
+export const UpdatePortrait = ({portraitTextProp, fetchPortraitInformation}) => {
+
+
+    const [newPortraitText, setNewPortraitText]=useState({
         portraitTextInput:portraitTextProp
     })
-    
+
+
+    useEffect(()=>{
+        console.log(newPortraitText.portraitTextInput)
+    },[])
+
+    const [newPortraitData, setNewPortraitData]=useState(new FormData())
+
     const handleChange=(e)=>{
         e.preventDefault()
-        setPortraitText(prevPortraitText=>({
+        setNewPortraitText(prevPortraitText=>({
             ...prevPortraitText,
             [e.target.name]:e.target.value
         }))
     }
-    const updatePortrait=async()=>{
-        try {
-            //TODO: create update fetch request to DB
-            const response= await fetch('http://localhost/admin/portrait')
-            const jsonData=response.json()
-            console.log(jsonData)
-        } catch (err) {
-            console.log('message couldn\'t be updated',err)
+
+    const handleFileChange=(e)=>{
+        e.preventDefault();
+        newPortraitData.set('portraitPictureFile',e.target.files[0])
+        setNewPortraitData(newPortraitData)
+    }
+
+    const updatePortrait=async(e)=>{
+        e.preventDefault();
+        const portraitPicture=newPortraitData.get("portraitPictureFile")
+        newPortraitData.set('portraitText',newPortraitText.portraitTextInput)
+        const portraitText=newPortraitData.get("portraitText")
+
+        if(!portraitPicture){
+            if(!confirm("Vous ne mettez pas à jour l'image")){
+                return
+            } else {
+                try {
+                    const response= await fetch('http://localhost:14001/admin/updatePortraitText',{
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body:JSON.stringify({
+                            portraitText:portraitText
+                        })
+                    })
+                    if(response.ok){
+                        fetchPortraitInformation()
+                    } else if (response.status===404){
+                        console.error('The element you were trying to update wasn\'t found')
+                        alert("L\'element à mettre à jour n'a pas été trouvé")
+                    } else {
+                        console.error(`Erreur : ${response.status}`)
+                    }
+                } catch (err) {
+                    console.log('message couldn\'t be updated',err)
+                }
+            }
+        } else {
+            try {
+                console.log("all portrait change")
+                const response= await fetch('http://localhost:14001/admin/updatePortrait',{
+                    method: 'PUT',
+                    body:newPortraitData
+                })
+                if(response.ok){
+                    fetchPortraitInformation()
+                } else if (response.status===404){
+                    console.error('The element you were trying to update wasn\'t found')
+                    alert("L\'element à mettre à jour n'a pas été trouvé")
+                } else {
+                    console.error(`Erreur : ${response.status}`)
+                }
+            } catch (err) {
+                console.log('message couldn\'t be updated',err)
+            }
         }
+
     }
 
     return (
         <form className='UpdatePortraitContainer' onSubmit={updatePortrait}>
-            <NewPicture/>
+            <div className='portraitPictureUpdate'>
+                <label htmlFor='portraitPicture'>Image pour le Portrait : </label> 
+                <input
+                    id='portraitPicture'
+                    type='file'
+                    name='portraitPicture'
+                    accept="image/*"
+                    onChange={handleFileChange}
+                />
+            </div>
             <textarea
                 name='portraitTextInput'
                 value={newPortraitText.portraitTextInput}

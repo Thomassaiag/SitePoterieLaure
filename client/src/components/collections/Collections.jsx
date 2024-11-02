@@ -15,11 +15,14 @@ export const Collections =()=>{
 
   const fetchCollections=async ()=>{
     try {
-      const response = await fetch('http://localhost:5000/collections')
+      const response = await fetch('http://localhost:14001/collections')
       const JsonData=await response.json()
-      if(!response==ok)
-      setCollectionData(JsonData)
-      setCollectionDeletionStatus(false)
+      if(!response.ok){
+        const errorData= await response.json();
+        throw new Error(errorData.message || "something went wrong when fetching Collections")
+      }
+        setCollectionData(JsonData)
+        setCollectionDeletionStatus(false)
     }
     catch (error) {
       console.log(error.message)

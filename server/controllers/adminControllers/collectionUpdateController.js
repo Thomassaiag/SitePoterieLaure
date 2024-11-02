@@ -82,14 +82,14 @@ const updateCollectionElementAttributes=async(req, res,next)=>{
         )
 
         if (collectionElementAttributesToUpdate){
-            res.status(200).json({message: `collection ${collectionUID} Element Attribute successfully updated`})        
+            res.status(204).json({message: `collection ${collectionUID} Element Attribute successfully updated`})        
             console.log(`collection ${collectionUID} Element Attribute successfully updated`)
         }
-        else res.status(201).json({message: `collection ${collectionUID} Element NOT updated` })
+        else res.status(404).json({message: `collection ${collectionUID} Element NOT updated` })
     } catch (error) {
         await pool.query('ROLLBACK')
         console.error(`Error updating collection Element Attribute=> ${error} `)
-        return res.status(400).json({message:"Error updating collection Element Attribute"})
+        return res.status(500).json({message:"Error updating collection Element Attribute"})
     }
 
 }

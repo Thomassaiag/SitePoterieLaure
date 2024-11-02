@@ -49,7 +49,7 @@ export const CollectionElement = () => {
 
   const fetchCollectionElement=async()=>{
     try {
-      let response= await fetch(`http://localhost:5000/collectionElement/${newId}`)
+      let response= await fetch(`http://localhost:14001/collectionElement/${newId}`)
       let jsonData= await response.json()
       setCollectionElement(jsonData[0])
     } catch (error) {
@@ -59,14 +59,14 @@ export const CollectionElement = () => {
 
 
   const fetchElementInformations=async(collectionUid)=>{
-    let response=await fetch(`http://localhost:5000/collectionElement/${collectionUid}/information`)
+    let response=await fetch(`http://localhost:14001/collectionElement/${collectionUid}/information`)
     let jsonData=await response.json()
     setCurrentInformations(jsonData)
 }
   
   const fetchAllCollectionUids=async()=>{
     try {
-      let response=await fetch(`http://localhost:5000/collections/allCollectionsUids`)
+      let response=await fetch(`http://localhost:14001/collections/allCollectionsUids`)
       let jsonData= await response.json()
       jsonData= await jsonData.map(element=>element.collection_uid)
       setCollectionUids(jsonData)
@@ -77,7 +77,7 @@ export const CollectionElement = () => {
 
   const fetchNextPreviousCollection=async()=>{
     try {
-      let response= await fetch(`http://localhost:5000/collections/${newId}/collection`)
+      let response= await fetch(`http://localhost:14001/collections/${newId}/collection`)
       let jsonData= await response.json()
       setPreviousCollectionPicture(jsonData[0])
       setNextCollectionPicture(jsonData[1])

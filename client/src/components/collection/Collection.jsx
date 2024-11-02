@@ -26,7 +26,7 @@ export const Collection = ({imageUrl, imageAlt, title, collectionUid}) => {
     setCollectionToDelete(id)
     setCollectionDeletionStatus(true)
     try {
-      const response=await fetch(`http://localhost:5000/admin/deleteCollection/`,{
+      const response=await fetch(`http://localhost:14001/admin/deleteCollection/`,{
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'

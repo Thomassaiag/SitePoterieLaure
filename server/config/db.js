@@ -5,7 +5,8 @@ const pool = new Pool({
     user:"postgres",
     password:process.env.DBPASSWORD,
     host: "localhost",
-    database: process.env.DBNAME
+    database: process.env.DBNAME,
+    port: process.env.DBPORT
 })
 
 const connectToDatabase=async()=>{
