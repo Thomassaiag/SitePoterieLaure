@@ -1,21 +1,31 @@
-.homePageContainer{
+/* .homePageContainer{
     display: flex;
     flex-direction: column;
-}
+} */
 
 
 .presentationPictureContainer{
     position: relative;
     height: 20rem;
-    font-family: 'Questrial';
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     margin-top: 5rem;
     margin-bottom: 5rem;
-    font-size: 30px;
 }
+
+.presentationTitle h1{
+    font-size: 40px;
+    text-transform: uppercase;
+    font-family: 'Hind Vadodara';
+}
+
+.presentationTitle p{
+    font-size: 30px;
+    font-family: 'Questrial';
+}
+
 
 
 .welcomePagePicture{
