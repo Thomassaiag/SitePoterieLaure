@@ -4,6 +4,7 @@
   justify-content: center;
   flex-direction: column;
   font-family: "Questrial";
+  margin-bottom: 5em;
 }
 
 .connectionButton{
