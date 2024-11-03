@@ -10,12 +10,9 @@ export const Presentation = () => {
   return (
     <>
       <div className='presentationPictureContainer'>
-        <img className='welcomePagePicture'src="/images/Page acceuil/mainPicture.jpg" alt="presentation"/>
-        <div className='presentationTitle'>
           <h1>Créations céramiques utilitaires et décoratives</h1>
           <br/>
           <p>Fabriquées main en Normandie</p>
-        </div>
       </div>
       <div className='navigationPicturesContainer'>
         {
