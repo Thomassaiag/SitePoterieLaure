@@ -17,18 +17,20 @@ export const Presentation = () => {
           <p>Fabriquées main en Normandie</p>
         </div>
       </div>
-      <div className='imageContainer'>
+      <div className='navigationPicturesContainer'>
         {
           navigationElements.map((navigationElement)=>{
             const {id, picture, picDescription, navigation, buttonName}=navigationElement
             return (
-              <HomePageNavigationPicture 
-                key={id}
-                picture={picture}
-                picDescription={picDescription}
-                navigation={navigation}
-                buttonName={buttonName}
-              />
+              <div className='navigationElementContainer'>
+                <HomePageNavigationPicture 
+                  key={id}
+                  picture={picture}
+                  picDescription={picDescription}
+                  navigation={navigation}
+                  buttonName={buttonName}
+                />
+              </div>
             )
           })
         }
