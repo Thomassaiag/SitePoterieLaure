@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import './ContactMessage.css'
 import { ContactButton } from '../contactButton/ContactButton'
 
-export const ContactMessage = () => {
+export const ContactMessage = ({locationHash}) => {
 
     const [emailData, setEmailData]=useState({
         firstName:"",
@@ -32,10 +32,21 @@ export const ContactMessage = () => {
             })
         }
     }
-    useEffect(()=>{
-        console.log(emailData.senderMessage)
-    },[emailData])
 
+    useEffect(()=>{
+        if(locationHash){
+            let sectionid=locationHash.replace("#","")
+            const scrollToSection=()=>{
+                let section=document.getElementById(sectionid)
+                if(section){
+                    section.scrollIntoView({behavior:"smooth",block:'start'})
+                }
+            }
+            scrollToSection()
+        } else {
+            window.scrollTo({top:0, behavior: "smooth"})
+        }
+    },[locationHash])
 
     const sendMessage= async (e)=>{
         e.preventDefault()

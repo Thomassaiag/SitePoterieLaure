@@ -19,9 +19,8 @@ export const Presentation = () => {
           navigationElements.map((navigationElement)=>{
             const {id, picture, picDescription, navigation, buttonName}=navigationElement
             return (
-              <div className='navigationElementContainer'>
+              <div className='navigationElementContainer' key={id}>
                 <HomePageNavigationPicture 
-                  key={id}
                   picture={picture}
                   picDescription={picDescription}
                   navigation={navigation}

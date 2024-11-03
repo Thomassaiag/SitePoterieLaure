@@ -11,7 +11,7 @@ const logoFacebook='/images/logoFacebook.jpg'
 
 
 
-export const Contact = () => {
+export const Contact = ({locationHash}) => {
   return (
     <div className='contactContainer'>
       <div className='socialMediaContainer'>
@@ -26,7 +26,7 @@ export const Contact = () => {
         </div>
       </div>
       <Newsletter/>
-      <ContactMessage/>
+      <ContactMessage id='contactMessage'locationHash={locationHash}/>
 
     </div>
   )
