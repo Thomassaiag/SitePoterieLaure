@@ -10,25 +10,25 @@ let mailLogo="../../images/LogoEmail.jpg"
 
 export const Footer = () => {
   return (
-    <div className='footerContainer'>
-    <ScrollToTop/>
-    <footer className='footer_Class'>
-      <span className='footerImageSpan_Class'>
-          <img className='instagramLogo_Class'src={instagramLogo} alt="instagram"></img>
-          <img className='facebookLogo_Class'src={facebookLogo} alt="facebook"></img>
-          <img className='mailLogo_Class'src={mailLogo} alt="mail"></img>
-      </span>
-      <span className='footerTextSpan_Class'>
-          <p>Condition Générales de Vente</p>
-          <p>/</p>
-          <p>Mentions Légales</p>
-          <p>/</p>
-          <p>Emballages et Livraisons</p>
-          <p>/</p>
-          <p>Confidentialité</p>
-      </span>
-      <p>@VL Céramique {copyrightYear}. Powered by Tom</p>
-    </footer>
+    <div className='footerWithScrollContainer'>
+      <ScrollToTop/>
+      <div className='footerContainer'>
+        <div className='footerImageSpan_Class'>
+            <img className='instagramLogo_Class'src={instagramLogo} alt="instagram"></img>
+            <img className='facebookLogo_Class'src={facebookLogo} alt="facebook"></img>
+            <img className='mailLogo_Class'src={mailLogo} alt="mail"></img>
+        </div>
+        <div className='footerTextContainer'>
+            <p>Condition Générales de Vente</p>
+            <p>/</p>
+            <p>Mentions Légales</p>
+            <p>/</p>
+            <p>Emballages et Livraisons</p>
+            <p>/</p>
+            <p>Confidentialité</p>
+        </div>
+        <p>@VL Céramique {copyrightYear}. Powered by Tom</p>
+      </div>
     </div>
   )
 }

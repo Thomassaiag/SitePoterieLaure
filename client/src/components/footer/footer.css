@@ -1,9 +1,11 @@
-.footerContainer{
-    margin-top: 5rem;
-    margin-bottom: 0rem;
-}
+/* .footerWithScrollContainer{
+    margin-top: 3rem;
+} */
 
-.footer_Class{
+.footerContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     background-color: #E4DCD1;
@@ -11,13 +13,13 @@
     font-size: 12px;
 }
   
-.footerTextSpan_Class{
+.footerTextContainer{
     display: flex;
     align-items: center;
     justify-content: center;
 }
   
-.footerTextSpan_Class p{
+.footerTextContainer p{
     padding-left: 2rem;
 }
 
