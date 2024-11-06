@@ -10,6 +10,21 @@ export const Header = () => {
   let navigate=useNavigate()
   let location=useLocation()
 
+  const navigationLinks=[
+    {link:'collections',
+      pathname:'/collections'
+    },
+    {link:'galerie',
+      pathname:'/galerie'
+    },
+    {link:'portrait',
+      pathname:'/portrait'
+    },
+    {link:'contact',
+      pathname:'/contact'
+    },
+  ]
+
 
   const {connectionAttributes, setConnectionAttributes}=useConnectionStatus()
 
@@ -34,7 +49,6 @@ export const Header = () => {
     navigateToHomePage()
   }
 
-
   useEffect(()=>{
     console.log(`connectionAttributes => ${connectionAttributes.invalidConnection}`)
   },[connectionAttributes])
@@ -56,37 +70,26 @@ export const Header = () => {
             <p>Laure Videau</p>
           </div>
       </Link>
-
       <nav className='headerLinks'>
-        <Link 
-          to='/collections'
-          className={`nav-link ${location.pathname === '/collections' ? 'active' : ''}`}
-        >
-          collections
-        </Link>
-        {/* <Link to=''>boutique</Link> */}
-        <Link 
-          to='/galerie'
-          className={`nav-link ${location.pathname==='/galerie' ? 'active' : ''}`}
-        >
-          galerie
-        </Link>
-        <Link
-          to='/portrait'
-          className={`nav-link ${location.pathname==='/portrait' ? 'active' : ''}`}
+        {navigationLinks.map(navigationLink=>{
+          return (
+            <Link 
+              to={navigationLink.pathname}
+              className={`nav-link ${location.pathname === navigationLink.pathname ? 'active' : ''}`}
+            >
+              {navigationLink.link}
+            </Link>
+          )
+          
+        })}
+        {connectionAttributes.adminConnection && <Link 
+          to='/admin'
+          className={`nav-link ${location.pathname === '/admin' ? 'active' : ''}`}
           >
-            portrait
+            admin
           </Link>
-        {/* <Link to=''>blog</Link> */}
-        <Link
-          to='/contact'
-          className={`nav-link ${location.pathname==='/contact' ? 'active' : ''}`}
-          >
-            contact
-        </Link>
-        {connectionAttributes.adminConnection && <Link to='/admin'>admin</Link>}
-      </nav>
-      
+        }
+      </nav>      
       <div className='collectionsSeparatorContainer'>
         <hr className='collectionsSeparator'></hr>
       </div>
