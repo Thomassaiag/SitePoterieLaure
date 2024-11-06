@@ -1,5 +1,5 @@
 import {React, useEffect} from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate,useLocation } from 'react-router-dom'
 import "./header.css"
 import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
 
@@ -8,6 +8,8 @@ const logoLaureSansNom = '../../images/logoLaureSansNom.jpg'
 
 export const Header = () => {
   let navigate=useNavigate()
+  let location=useLocation()
+
 
   const {connectionAttributes, setConnectionAttributes}=useConnectionStatus()
 
@@ -55,15 +57,35 @@ export const Header = () => {
           </div>
       </Link>
 
-      <div className='headerLinks'>
-        <Link to='/collections'>collections</Link>
+      <nav className='headerLinks'>
+        <Link 
+          to='/collections'
+          className={`nav-link ${location.pathname === '/collections' ? 'active' : ''}`}
+        >
+          collections
+        </Link>
         {/* <Link to=''>boutique</Link> */}
-        <Link to='/galerie'>galerie</Link>
-        <Link to='/portrait'>portrait</Link>
+        <Link 
+          to='/galerie'
+          className={`nav-link ${location.pathname==='/galerie' ? 'active' : ''}`}
+        >
+          galerie
+        </Link>
+        <Link
+          to='/portrait'
+          className={`nav-link ${location.pathname==='/portrait' ? 'active' : ''}`}
+          >
+            portrait
+          </Link>
         {/* <Link to=''>blog</Link> */}
-        <Link to='/contact'>contact</Link>
+        <Link
+          to='/contact'
+          className={`nav-link ${location.pathname==='/contact' ? 'active' : ''}`}
+          >
+            contact
+        </Link>
         {connectionAttributes.adminConnection && <Link to='/admin'>admin</Link>}
-      </div>
+      </nav>
       
       <div className='collectionsSeparatorContainer'>
         <hr className='collectionsSeparator'></hr>

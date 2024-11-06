@@ -22,14 +22,3 @@
     height:30rem;
     /* width: 15rem; */
 }
-
-a,
-a:link,
-a:visited,
-a:hover,
-a:focus,
-a:active{
-    outline: none; /* Remove outline on focus */
-    text-decoration: none !important; /* Remove underline */
-    color: inherit !important; /* Use inherited color */  
-}
