@@ -1,4 +1,6 @@
 .collectionElementSinglePictureContainer{
-    width: calc(25% - 20px);
+    width: 100%;
+    display: grid;
+    place-items: center;
     margin:10px 10px 10px 10px;
 }

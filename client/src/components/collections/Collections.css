@@ -13,6 +13,14 @@
 }
 
 
+.collectionItemsContainer{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    width: 100%;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
 .collectionItem{
     width: 100%;
     margin-top:2rem;
@@ -23,10 +31,3 @@
 }
 
 
-.collectionItemsContainer{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-    width: 100%;
-    margin-left: 2rem;
-    margin-right: 2rem;
-}

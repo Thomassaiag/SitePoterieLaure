@@ -1,6 +1,8 @@
 .collectionElementContainer{
     font-family: "Questrial";
     margin-bottom:5rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
 .collectionElementTitleContainer{
@@ -10,10 +12,16 @@
     font-size: 15px;
 }
 
-.collectionElementPicturesContainer{
+/* .collectionElementPicturesContainer{
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+} */
+
+
+.collectionElementPicturesContainer{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
 }
 
 
