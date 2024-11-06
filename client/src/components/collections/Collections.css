@@ -1,6 +1,6 @@
 .collectionsContainer{
     font-family: "Questrial";
-    color:black
+    color:black;
 }
 
 
@@ -10,15 +10,20 @@
     padding: 0 5rem 5px 0;
 }
 
-.collectionItemsContainer{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-}
 
 .collectionItem{
-    width: calc(33.33% - 20px);
-    margin:10px;
-    height:30rem;
+    width: 100%;
+    margin-top:2rem;
+    margin-bottom:2rem;
+    height:auto;
     /* width: 15rem; */
+}
+
+
+.collectionItemsContainer{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    width: 100%;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
