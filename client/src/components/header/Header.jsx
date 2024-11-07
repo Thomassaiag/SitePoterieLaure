@@ -75,7 +75,7 @@ export const Header = () => {
           return (
             <Link 
               to={navigationLink.pathname}
-              className={`nav-link ${location.pathname === navigationLink.pathname ? 'active' : ''}`}
+              className={`nav-link ${location.pathname.startsWith(navigationLink.pathname) ? 'active' : ''}`}
             >
               {navigationLink.link}
             </Link>

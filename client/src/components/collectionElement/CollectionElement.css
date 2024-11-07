@@ -24,6 +24,7 @@
 .collectionElementInformationContainer{
     display: grid;
     grid-template-columns: 2fr 1fr;
+
 }
 
 form{
@@ -54,9 +55,12 @@ form{
 
 .navigationElementContainer{
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 5rem;
 }
 
 .navigationElementContainer button{
@@ -67,6 +71,14 @@ form{
 .navigationElementButtonContainer{
     display: flex;
     align-items: center;
+}
+
+.previousNextCollection{
+    height: 2rem;
+    width: auto;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
 }
 
 .navigationElementCollectionPicture img{

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { CollectionElementPictures } from '../collectionElementPictures/CollectionElementPictures'
 import { CollectionElementInformations } from '../collectionElementInformations/CollectionElementInformations'
-import { ScrollToTop } from '../scrollToTop/ScrollToTop'
+
 import './CollectionElement.css'
 import { CollectionMainPic } from '../collectionMainPic/CollectionMainPic'
 import { UpdateCollectionElement } from '../updateCollectionElement/UpdateCollectionElement'
@@ -167,7 +167,7 @@ export const CollectionElement = () => {
 
       <div className='navigationElementContainer'>
         <div className='navigationElementButtonContainer'>
-          <img onClick={handleLeftClick} src='/images/leftChevron.jpg' alt='previousCollection'/>
+          <img className='previousNextCollection' onClick={handleLeftClick} src='/images/previousCollection.jpg' alt='previousCollection'/>
           <div className='navigationElementCollectionPicture'>
             <CollectionMainPic imageUrl={previousCollectionPictureUrl} imageAlt={previousCollectionPictureAlt}/>
           </div>
@@ -176,7 +176,7 @@ export const CollectionElement = () => {
           <div className='navigationElementCollectionPicture'>
             <CollectionMainPic  imageUrl={nextCollectionPictureUrl} imageAlt={nextCollectionPictureAlt}/>
           </div>
-          <img onClick={handleRightClick} src='/images/rightChevron.jpg' alt='nextCollection'/>
+          <img className='previousNextCollection' onClick={handleRightClick} src='/images/nextCollection.jpg' alt='nextCollection'/>
         </div>
       </div>
     </div>
