@@ -53,6 +53,7 @@ export const Header = () => {
     console.log(`connectionAttributes => ${connectionAttributes.invalidConnection}`)
   },[connectionAttributes])
 
+
   return (
     <div className='headerContainer'>
       <div className='buttonContainer'>
