@@ -3,7 +3,6 @@ import React,{useState, useEffect} from 'react'
 import './CollectionElementPictures.css'
 import { CollectionElementPicture } from '../collectionElementPicture/CollectionElementPicture'
 import { NewPicture } from '../newPicture/NewPicture'
-import { useParams } from 'react-router-dom'
 import { useCollectionDeletionStatus } from '../contextProvider/CollectionDeletionStatusContextProvider'
 import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
 

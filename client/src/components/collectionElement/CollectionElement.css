@@ -15,6 +15,7 @@
 
 
 .collectionElementPicturesContainer{
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
 }
@@ -24,7 +25,7 @@
 .collectionElementInformationContainer{
     display: grid;
     grid-template-columns: 2fr 1fr;
-
+    margin-left: 2rem;
 }
 
 form{
@@ -71,6 +72,8 @@ form{
 .navigationElementButtonContainer{
     display: flex;
     align-items: center;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
 .previousNextCollection{

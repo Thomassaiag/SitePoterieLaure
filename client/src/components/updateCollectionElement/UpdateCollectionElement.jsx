@@ -207,7 +207,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
 
   return (
     <>
-      <form  className='collectionElementInformationContainer'onSubmit={updateCollectionElement}>
+      <form  className='collectionElementUpdateInformationContainer'onSubmit={updateCollectionElement}>
         <div className='collectionElementLeftContainer'>
           <label
             htmlFor='collectionElementDescription'>          
