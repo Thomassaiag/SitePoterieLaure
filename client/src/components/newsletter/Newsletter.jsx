@@ -49,24 +49,31 @@ export const Newsletter = () => {
             <h1>Newsletter</h1>
             <p>Pour recevoir la newsletter renseignez votre e-mail ci-dessous.</p>
             <p>La newsletter vous informera de l'ouverture de la boutique, de ma participation aux marchés etc. Elle n'a pas pour vocation d'être un envoi régulier.</p>
-
+           
             <form className='newsletterForm' onSubmit={postEmail}>
-                    <div className="emailInputContainer">
-                        <input className="emailInput"
-                            type="email"
-                            placeholder={email ? "":"Entrer votre email"}
-                            name='email'
-                            value={email}
-                            onChange={handleChange}
-                            />
-                    </div>
-                    <div className="newsLetterButtonContainer">
-                        <ContactButton/>
-                    </div>
+                <div className="emailInputContainer">
+                    <label htmlFor='emailInput'>Votre Email :</label>
+                    <input
+                        id='emailInput'
+                        className="emailInput"
+                        type="email"
+                        placeholder={email ? "":"Entrer votre email"}
+                        name='email'
+                        value={email}
+                        onChange={handleChange}
+                        />
+                </div>
+                <div className="newsLetterButtonContainer">
+                    <ContactButton/>
+                </div>
             </form>
-            <br/>
-            {emailSubmited && <p>Votre email a été enregistré avec succès</p>}
-            {emailSubmitedIssue && <p>Votre email n'a été enregistré</p>}
+
+            {(emailSubmited || emailSubmitedIssue) && <br/>}
+            {emailSubmited && 
+                <p>Votre email a été enregistré avec succès</p>
+            }
+            {emailSubmitedIssue && 
+                <p>Votre email n'a été enregistré</p>}
         </div>
     )
 }
