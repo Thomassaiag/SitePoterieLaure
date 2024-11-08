@@ -1,10 +1,11 @@
 .contactMessageContainer{
     background-color:  rgba(228, 220, 209, 0.4);
     margin-bottom: 5rem;
+    display: flex;
+    flex-direction:column ;
 }
 
 .contactezMoiContainer{
-    text-align: center;
     margin: 1rem 2rem 2rem 2rem;
 }
 
@@ -19,7 +20,8 @@
 
 .contactFormContainer{
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    /* align-items: center; */
     justify-content: center;
     margin-left: 2rem;
     margin-right: 2rem;
@@ -98,6 +100,11 @@
     margin-bottom: 1rem;
     margin-top: 2rem;
     flex-wrap: wrap;
+    width: 80%;
+}
+
+.messageOnlyContainer{
+    margin-bottom: 2rem;
 }
 
 .senderMessage{
@@ -111,7 +118,12 @@
     box-sizing: border-box;
 }
 
-.buttonContainer{
+.messageButtonContainer{
     align-self: flex-end;
-    padding-top: 1rem;
+    display: flex;
+    height: 3rem;
+    max-width: 10rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    
 }

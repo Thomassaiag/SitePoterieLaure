@@ -138,21 +138,24 @@ export const ContactMessage = ({locationHash}) => {
                         />
                     </div>
                     <div className='messageContainer'>
-                        <label className= "messageLabel" htmlFor='senderMessage'>Message</label>
-                        <textarea
-                            id='senderMessage'
-                            value={emailData.senderMessage}
-                            className='senderMessage'
-                            name='senderMessage'
-                            placeholder='Message'
-                            onChange={handleTextChange}
-                            onKeyDown={handleKeyDown}
-                            required
-                        />
-                    <div className='buttonContainer'>
-                        <ContactButton/>
+                        <div className='messageOnlyContainer'>
+                            <label className= "messageLabel" htmlFor='senderMessage'>Message</label>
+                            <textarea
+                                id='senderMessage'
+                                value={emailData.senderMessage}
+                                className='senderMessage'
+                                name='senderMessage'
+                                placeholder='Message'
+                                onChange={handleTextChange}
+                                onKeyDown={handleKeyDown}
+                                required
+                            />
+                        </div>
+                        <div className='messageButtonContainer'>
+                            <ContactButton/>
+                        </div>  
                     </div>
-                    </div>
+
                 </form>
             </div>
             {messageSent && <p>Votre message a bien été envoyé</p>}
