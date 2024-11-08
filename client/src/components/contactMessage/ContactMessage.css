@@ -1,5 +1,5 @@
 .contactMessageContainer{
-    background-color:  #E4DCD1;
+    background-color:  rgba(228, 220, 209, 0.4);
     margin-bottom: 5rem;
     padding: 1rem 2rem 2rem 2rem;
 }
@@ -13,6 +13,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.contactFormContainer form{
+    background-color: transparent;
 }
 
 .contactFormContainer label{

@@ -50,8 +50,7 @@ export const Newsletter = () => {
             <p>Pour recevoir la newsletter renseignez votre e-mail ci-dessous.</p>
             <p>La newsletter vous informera de l'ouverture de la boutique, de ma participation aux marchés etc. Elle n'a pas pour vocation d'être un envoi régulier.</p>
 
-            <form onSubmit={postEmail}>
-                <div className='newsletterForm'>
+            <form className='newsletterForm' onSubmit={postEmail}>
                     <div className="emailInputContainer">
                         <input className="emailInput"
                             type="email"
@@ -64,8 +63,6 @@ export const Newsletter = () => {
                     <div className="newsLetterButtonContainer">
                         <ContactButton/>
                     </div>
-    
-                </div>
             </form>
             <br/>
             {emailSubmited && <p>Votre email a été enregistré avec succès</p>}

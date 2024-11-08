@@ -4,3 +4,9 @@ body{
   box-sizing: border-box;
   overflow-x: hidden;  
 }
+
+
+@font-face {
+  font-family: 'Somber';
+  src: url('./assets/Somber_Sans_Demo.ttf') format('truetype');
+}
