@@ -1,78 +1,114 @@
 .contactMessageContainer{
     background-color:  rgba(228, 220, 209, 0.4);
     margin-bottom: 5rem;
-    padding: 1rem 2rem 2rem 2rem;
 }
 
 .contactezMoiContainer{
     text-align: center;
+    margin: 1rem 2rem 2rem 2rem;
 }
 
+.contactezMoiContainer p{
+    text-align: justify;
+}
+
+.contactezMoiContainer input label{
+    display: block;
+    box-sizing: border-box
+}
 
 .contactFormContainer{
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
 .contactFormContainer form{
     background-color: transparent;
+    width: 100%;
 }
 
 .contactFormContainer label{
     margin-right: 1rem;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 1rem;
 }
 
 .contactFormContainer input{
-    margin-right: 1rem;
+    width: 100%;
+    max-width: 10rem;    
 }
 
-.NameFirstNameContainer{
+.contactFormContainer label{
+    width: 100%;
+    max-width: 10rem;    
+}
+
+.nameFirstNameContainer{
     display: flex;
     align-items: center;
     justify-content: left;
-    padding-bottom: 1rem;
-    padding-top: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap:2rem
+}
+
+.nameContainer{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    width: 100%;
+    max-width: 10rem;   
+}
+
+.nameContainer input{
+    width: 100%;
+    max-width: 10rem;    
 }
 
 
 .emailContainer{
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: left;
     justify-content: left;
-    padding-bottom: 1rem;
-    padding-top: 1rem;
-    
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;    
 }
 
 .objectContainer{
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: left;
     justify-content: left;
-    padding-bottom: 1rem;
-    padding-top: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
 }
 
 .messageContainer{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding-bottom: 1rem;
-    padding-top: 1rem;
-}
-
-.messageLabel{
-    align-self: flex-start;
+    align-items: left;
     margin-bottom: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
 }
 
 .senderMessage{
     align-self: flex-start;
     width: 100%;
+    display: block;
     height: 20rem;
     font-family: "Questrial";
     padding-top: 1rem;
     padding-left: 1rem;
+    box-sizing: border-box;
 }
 
 .buttonContainer{

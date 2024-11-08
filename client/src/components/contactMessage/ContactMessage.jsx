@@ -90,25 +90,29 @@ export const ContactMessage = ({locationHash}) => {
             </div>
             <div className='contactFormContainer'>
                 <form className='contactForm' onSubmit={sendMessage}>
-                    <div className='NameFirstNameContainer'>
-                        <label className="nameLabel" htmlFor='firstName'>Prénom</label>
-                        <input
-                            id='firstName'
-                            className='name'
-                            name='firstName'
-                            placeholder='Votre Prénom'
-                            onChange={handleTextChange}
-                            required
-                        />
-                        <label className="nameLabel" htmlFor='lastName'>Nom</label>
-                        <input
-                            id='lastName'
-                            className='name'
-                            name='lastName'
-                            placeholder='Votre Nom'
-                            onChange={handleTextChange}
-                            required
-                        />
+                    <div className='nameFirstNameContainer'>
+                        <div className='nameContainer'>
+                            <label className="nameLabel" htmlFor='firstName'>Prénom</label>
+                            <input
+                                id='firstName'
+                                className='name'
+                                name='firstName'
+                                placeholder='Votre Prénom'
+                                onChange={handleTextChange}
+                                required
+                                />
+                        </div>
+                        <div className='nameContainer'>
+                            <label className="nameLabel" htmlFor='lastName'>Nom</label>
+                            <input
+                                id='lastName'
+                                className='name'
+                                name='lastName'
+                                placeholder='Votre Nom'
+                                onChange={handleTextChange}
+                                required
+                                />
+                        </div>
                     </div>
                     <div className='emailContainer'>
                         <label htmlFor='senderEmail'>Adresse Email</label>
