@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import './ContactMessage.css'
 import { ContactButton } from '../contactButton/ContactButton'
+const apiUrl=import.meta.env.VITE_API_URL
 
 export const ContactMessage = ({locationHash}) => {
 
@@ -54,7 +55,7 @@ export const ContactMessage = ({locationHash}) => {
         setMessageSentIssue(false)
         console.log(emailData)
         try {
-            const response=await fetch('http://localhost:14001/contact/message',{
+            const response=await fetch(`http://${apiUrl}/contact/message`,{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

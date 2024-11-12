@@ -4,7 +4,7 @@ import './Portrait.css'
 import { UpdatePortrait } from '../updatePortrait/UpdatePortrait'
 const logo  ='../../images/logoLaureSansNom.jpg'
 import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
-
+const apiUrl=import.meta.env.VITE_API_URL
 
 export const Portrait= () => {
 
@@ -14,7 +14,7 @@ export const Portrait= () => {
 
   const fetchPortraitInformation=async()=>{
     try {
-      let response=await fetch('http://localhost:14001/portrait')
+      let response=await fetch(`http://${apiUrl}/portrait`)
       if(!response.ok){
         const errorData= await response.json();
         throw new Error(errorData.message || "something went wrong when fetching portrait")

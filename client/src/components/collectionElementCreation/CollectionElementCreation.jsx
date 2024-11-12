@@ -5,6 +5,7 @@ import './CollectionElementCreation.css'
 
 import { CollectionElementInformationsCreation } from '../collectionElementInformationsCreation/CollectionElementInformationsCreation'
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
+const apiUrl=import.meta.env.VITE_API_URL
 
 export const CollectionElementCreation = ({newCollectionData}) => {
 
@@ -27,7 +28,7 @@ export const CollectionElementCreation = ({newCollectionData}) => {
     setCollectionCreated(false)
     setCollectionCreationIssue(false)
     try {
-      const response=await fetch('http://localhost:14001/admin/createCollection',{
+      const response=await fetch(`http://${apiUrl}/admin/createCollection`,{
         method: 'POST',
         body: newCollectionData
       })
@@ -55,7 +56,7 @@ export const CollectionElementCreation = ({newCollectionData}) => {
 
   const createCollectionAttributes=async()=>{
     try {
-      let response = await fetch('http://localhost:14001/admin/createCollectionElement',{
+      let response = await fetch(`http://${apiUrl}/admin/createCollectionElement`,{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -72,7 +73,7 @@ export const CollectionElementCreation = ({newCollectionData}) => {
       let data= await response.json()
       
       try {
-        let response=await fetch('http://localhost:14001/admin/createCollectionElementInformations',{
+        let response=await fetch(`http://${apiUrl}/admin/createCollectionElementInformations`,{
           method:'POST',
           headers: {
             'Content-Type': 'application/json'

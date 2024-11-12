@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './UpdatePortrait.css'
-
+const apiUrl=import.meta.env.VITE_API_URL
 
 export const UpdatePortrait = ({portraitTextProp, fetchPortraitInformation}) => {
 
@@ -41,7 +41,7 @@ export const UpdatePortrait = ({portraitTextProp, fetchPortraitInformation}) => 
                 return
             } else {
                 try {
-                    const response= await fetch('http://localhost:14001/admin/updatePortraitText',{
+                    const response= await fetch(`http://${apiUrl}/admin/updatePortraitText`,{
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json'
@@ -65,7 +65,7 @@ export const UpdatePortrait = ({portraitTextProp, fetchPortraitInformation}) => 
         } else {
             try {
                 console.log("all portrait change")
-                const response= await fetch('http://localhost:14001/admin/updatePortrait',{
+                const response= await fetch(`http://${apiUrl}/admin/updatePortrait`,{
                     method: 'PUT',
                     body:newPortraitData
                 })

@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import './Newsletter.css'
 import { ContactButton } from '../contactButton/ContactButton'
+const apiUrl=import.meta.env.VITE_API_URL
+
 
 export const Newsletter = () => {
 
@@ -16,7 +18,7 @@ export const Newsletter = () => {
             return
         }
         try {
-            const response=await fetch('http://localhost:14001/contact/subscribe',{
+            const response=await fetch(`http://${apiUrl}/contact/subscribe`,{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
