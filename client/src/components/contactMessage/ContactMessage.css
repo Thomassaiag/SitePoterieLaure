@@ -76,7 +76,6 @@
 .emailContainer{
     display: flex;
     flex-direction: column;
-    align-items: left;
     justify-content: left;
     margin-bottom: 1rem;
     margin-top: 1rem;
@@ -96,7 +95,6 @@
 .messageContainer{
     display: flex;
     flex-direction: column;
-    align-items: left;
     margin-bottom: 1rem;
     margin-top: 2rem;
     flex-wrap: wrap;
@@ -105,10 +103,16 @@
 
 .messageOnlyContainer{
     margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.messageLabel{
+    justify-content: flex-start;
 }
 
 .senderMessage{
-    align-self: flex-start;
+    justify-content: flex-start;
     width: 100%;
     display: block;
     height: 20rem;
@@ -120,10 +124,8 @@
 
 .messageButtonContainer{
     align-self: flex-end;
-    display: flex;
     height: 3rem;
     max-width: 10rem;
     width: 100%;
-    margin-bottom: 1rem;
-    
+    margin-bottom: 1rem;    
 }
