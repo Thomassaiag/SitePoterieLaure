@@ -1,0 +1,11 @@
+.adminHeaderContainer{
+    font-family: 'Questrial';
+    display: flex;
+    align-items: center;
+}
+
+.adminHeaderContainer :Link{
+  padding-left: 2rem;
+  padding-right: 2rem;
+  color:black;
+}

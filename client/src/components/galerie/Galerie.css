@@ -1,0 +1,27 @@
+.galerieContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 6rem;
+
+}
+
+.picturesContainer{
+    display: flex;
+    gap: 20px;
+    width: 90%;
+    
+}
+
+.pictureContainerColumn{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    flex:1;
+}
+
+.picturesContainer img{
+    
+    width: 100%;
+    object-fit: cover;
+}

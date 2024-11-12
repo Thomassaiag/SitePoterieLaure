@@ -1,0 +1,23 @@
+.deleteButtonContainer{
+    margin: 0 auto;
+    width:100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.collectionItemLink {
+    height: 100%;
+    width: auto;
+}
+
+p{
+    font-size: 28.8;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.deleteCollectionButton{
+    width: auto;
+    height: 20px;
+}

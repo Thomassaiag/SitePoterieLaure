@@ -1,0 +1,10 @@
+.collectionPictureContainer img{
+    height: 15rem;
+}
+
+
+.collectionElementPicture{
+    display: block;
+    margin: 0 auto;
+    max-width:100%;
+}

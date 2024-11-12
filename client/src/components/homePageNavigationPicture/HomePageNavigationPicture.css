@@ -1,0 +1,19 @@
+.navigationButtonContainer{
+    position: relative
+}
+
+.navigationButton{
+    font-family: "Questrial";
+    font-size: 16px;
+    border: none;
+    border-radius: 30px;
+    background-color: #E4DCD1;
+    width: 6rem;
+    height: 3rem;
+    position: relative;
+    top:0;
+    right: 0;
+    cursor: pointer;
+    transform: translate(260%,-50%);
+    color: white;
+}

@@ -1,0 +1,21 @@
+.navigationElementContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.navigationElementContainer button{
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.navigationElementButtonContainer{
+    display: flex;
+    align-items: center;
+}
+
+.navigationElementCollectionPicture img{
+    height: 70px;
+    width: 70px;
+}

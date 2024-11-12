@@ -1,0 +1,43 @@
+/* .footerWithScrollContainer{
+    margin-top: 3rem;
+} */
+
+.footerContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(228, 220, 209, 0.23);
+    font-family: "Questrial";
+    font-size: 12px;
+    padding-top: 2rem;
+    color: #c7bdb1;
+}
+  
+.footerTextContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.footerTextContainer p{
+    padding-left: 0.5rem;
+}
+
+.footerLogoContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footerLogoContainer img{
+    width: 2rem;
+    height: auto;
+    margin: 1rem;
+    cursor: pointer;
+}
+
+.footerCopyright{
+    margin-top: 2rem;
+}

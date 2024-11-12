@@ -1,0 +1,49 @@
+.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+  display: flex;
+  justify-content: center;
+}
+
+.popup{
+  top: 50%;
+  left: 50%;
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+}
+
+.popUpPicture{
+  height: 35rem;
+  width: auto;
+}
+
+.chevronPictureContainer img{
+  height: 40px;
+}
+
+.pictureContainer{
+  display: flex;
+  flex-direction: column;
+}
+
+.closePopUpContainer{
+  position: relative;
+}
+.positioned-picture{
+  position:absolute;
+  bottom:0;
+  right:0;
+  transform: translate(50%,50%);
+}
+
+.closePopUp{
+  height:30px;
+  width: 30px;
+}

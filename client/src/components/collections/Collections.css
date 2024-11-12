@@ -1,0 +1,33 @@
+.collectionsContainer{
+    font-family: "Questrial";
+    color:black;
+    margin-bottom: 6rem;
+}
+
+
+.collectionsTitleContainer{
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 0 5rem 0 5rem;
+    margin-bottom: 5rem;
+}
+
+
+.collectionItemsContainer{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    width: 100%;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.collectionItem{
+    width: 100%;
+    margin-top:2rem;
+    margin-bottom:2rem;
+    height:auto;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+
