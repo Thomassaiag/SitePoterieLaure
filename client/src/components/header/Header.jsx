@@ -1,7 +1,8 @@
 import {React, useEffect} from 'react'
 import { Link, useNavigate,useLocation } from 'react-router-dom'
-import "./header.css"
 import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
+import "./header.css"
+import {nanoid} from  'nanoid'
 
 
 const logoLaureSansNom = '../../images/logoLaureSansNom.jpg'
@@ -74,7 +75,7 @@ export const Header = () => {
       <nav className='headerLinks'>
         {navigationLinks.map(navigationLink=>{
           return (
-            <Link 
+            <Link key={nanoid()}
               to={navigationLink.pathname}
               className={`nav-link ${location.pathname.startsWith(navigationLink.pathname) ? 'active' : ''}`}
             >
