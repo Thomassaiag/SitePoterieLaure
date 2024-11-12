@@ -1,6 +1,6 @@
 import {React, useState} from 'react'
 import './AccountCreation.css'
-
+const apiUrl=import.meta.env.VITE_API_URL
 
 
 export const AccountCreation = () => {
@@ -36,7 +36,7 @@ const [credentials, setCredentials]=useState({
             try {
                 console.log(credentials.userEmail)
                 console.log(credentials.userPassword)
-                let response= await fetch('http://localhost:14001/user/createUserAccount',{
+                let response= await fetch(`http://${apiUrl}}/user/createUserAccount`,{
                     method:'POST',
                     headers: {
                         'Content-Type': 'application/json'

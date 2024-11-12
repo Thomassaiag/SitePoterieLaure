@@ -1,6 +1,5 @@
 import React,{useState, useEffect} from 'react'
 import { CollectionElementCreation } from '../collectionElementCreation/CollectionElementCreation'
-
 import './CollectionCreation.css'
 
 export const CollectionCreation = () => {
