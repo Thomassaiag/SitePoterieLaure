@@ -29,28 +29,33 @@ export const Portrait= () => {
 
   return (
     <>
+
     <div className="portraitContainer">
-      <p className='titleText'>VL Céramique - Hand made by Laure</p>
-      <div className='portraitPresentationContainer'>
-        <div className='portraitPresentationPictureContainer'>
-          {
-            portraitData ? (
+      <div className='portraitGridContainer'>
 
-              <img className='presentationPicture' src={portraitData.portrait_picture_url} alt={portraitData.portrait_picture_alt} />
-              
-            ) : <p>Data Loading</p>
-          }
-        </div>
-        <div className='presentationContainerRight'>
-          {
-            portraitData?.portrait_description ? (
-              <Description descriptionText={portraitData.portrait_description ? portraitData.portrait_description : ""}/>
 
-            ) : <p>Pas d'information de Portrait</p>
-          }
-          <img src={logo} alt="logo"/>
-        </div>
+      <h1 className='titleText'>VL Céramique - Hand made by Laure</h1>
+      <div className='portraitPresentationPictureContainer'>
+        {
+          portraitData ? (
+
+            <img className='presentationPicture' src={portraitData.portrait_picture_url} alt={portraitData.portrait_picture_alt} />
+            
+          ) : <p>Data Loading</p>
+        }
       </div>
+      <div className='portraitPresentationContainer'>
+        {
+          portraitData?.portrait_description ? (
+            <Description descriptionText={portraitData.portrait_description ? portraitData.portrait_description : ""}/>
+
+          ) : <p>Pas d'information de Portrait</p>
+        }
+      </div>
+      <div className='logoContainer'>
+        <img src={logo} alt="logo"/>
+      </div>
+    </div>
     </div>
     {portraitData && portraitData.portrait_description !== undefined && <UpdatePortrait portraitTextProp={portraitData.portrait_description} fetchPortraitInformation={fetchPortraitInformation} /> }
     </>
