@@ -3,10 +3,14 @@ import { Description } from '../description/Description'
 import './Portrait.css'
 import { UpdatePortrait } from '../updatePortrait/UpdatePortrait'
 const logo  ='../../images/logoLaureSansNom.jpg'
+import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
+
 
 export const Portrait= () => {
 
   let [portraitData, setPortraitData]=useState()
+  const {connectionAttributes}=useConnectionStatus()
+
 
   const fetchPortraitInformation=async()=>{
     try {
@@ -57,7 +61,7 @@ export const Portrait= () => {
       </div>
     </div>
     </div>
-    {portraitData && portraitData.portrait_description !== undefined && <UpdatePortrait portraitTextProp={portraitData.portrait_description} fetchPortraitInformation={fetchPortraitInformation} /> }
+    {connectionAttributes.adminConnection && portraitData && portraitData.portrait_description !== undefined && <UpdatePortrait portraitTextProp={portraitData.portrait_description} fetchPortraitInformation={fetchPortraitInformation} /> }
     </>
   )
 }
