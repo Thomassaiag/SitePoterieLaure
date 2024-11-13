@@ -28,6 +28,7 @@ const getPrevAndNextCollections=async (req, res, next)=>{
             SELECT collection_picture_url, collection_picture_alt, collection_uid
             FROM collection
             WHERE collection_uid > $1
+            AND collection_deletionflag=false
             ORDER BY collection_uid ASC
             LIMIT 1
             ),
@@ -35,18 +36,21 @@ const getPrevAndNextCollections=async (req, res, next)=>{
                 SELECT collection_picture_url, collection_picture_alt, collection_uid
                 FROM collection
                 WHERE collection_uid < $1
+                AND collection_deletionflag=false
                 ORDER BY collection_uid DESC
                 LIMIT 1
             ),
             FirstRow AS (
                 SELECT collection_picture_url, collection_picture_alt, collection_uid
                 FROM collection
+                WHERE collection_deletionflag=false
                 ORDER BY collection_uid ASC
                 LIMIT 1
             ),
             LastRow AS (
                 SELECT collection_picture_url, collection_picture_alt, collection_uid
                 FROM collection
+                WHERE collection_deletionflag=false
                 ORDER BY collection_uid DESC
                 LIMIT 1
             )

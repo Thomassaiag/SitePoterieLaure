@@ -23,7 +23,7 @@ function App() {
         <Route path='/galerie' element={<GaleriePage/>}/>
         <Route path='/portrait' element={<PortraitPage/>}/>
         <Route path='/collections/:id' element={<CollectionElementPage/>}/>
-        <Route path='/contact/' element={<ContactPage/>}/>
+        <Route path='/contact' element={<ContactPage/>}/>
         <Route path='/admin' element={<AdminPage/>}/>
         <Route path='/admin/creationcollection' element={<AdminPage/>}/>
         <Route path='connection/' element={<ConnectionPage/>}/>

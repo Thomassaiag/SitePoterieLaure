@@ -2,12 +2,14 @@ import React, {useState, useEffect} from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { CollectionElementPictures } from '../collectionElementPictures/CollectionElementPictures'
 import { CollectionElementInformations } from '../collectionElementInformations/CollectionElementInformations'
-import { ScrollToTop } from '../scrollToTop/ScrollToTop'
+
 import './CollectionElement.css'
 import { CollectionMainPic } from '../collectionMainPic/CollectionMainPic'
 import { UpdateCollectionElement } from '../updateCollectionElement/UpdateCollectionElement'
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
 import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
+const apiUrl=import.meta.env.VITE_API_URL
+
 
 export const CollectionElement = () => {
   let navigate=useNavigate()
@@ -49,7 +51,7 @@ export const CollectionElement = () => {
 
   const fetchCollectionElement=async()=>{
     try {
-      let response= await fetch(`http://localhost:5000/collectionElement/${newId}`)
+      let response= await fetch(`http://${apiUrl}/collectionElement/${newId}`)
       let jsonData= await response.json()
       setCollectionElement(jsonData[0])
     } catch (error) {
@@ -59,14 +61,14 @@ export const CollectionElement = () => {
 
 
   const fetchElementInformations=async(collectionUid)=>{
-    let response=await fetch(`http://localhost:5000/collectionElement/${collectionUid}/information`)
+    let response=await fetch(`http://${apiUrl}/collectionElement/${collectionUid}/information`)
     let jsonData=await response.json()
     setCurrentInformations(jsonData)
 }
   
   const fetchAllCollectionUids=async()=>{
     try {
-      let response=await fetch(`http://localhost:5000/collections/allCollectionsUids`)
+      let response=await fetch(`http://${apiUrl}/collections/allCollectionsUids`)
       let jsonData= await response.json()
       jsonData= await jsonData.map(element=>element.collection_uid)
       setCollectionUids(jsonData)
@@ -77,7 +79,7 @@ export const CollectionElement = () => {
 
   const fetchNextPreviousCollection=async()=>{
     try {
-      let response= await fetch(`http://localhost:5000/collections/${newId}/collection`)
+      let response= await fetch(`http://${apiUrl}/collections/${newId}/collection`)
       let jsonData= await response.json()
       setPreviousCollectionPicture(jsonData[0])
       setNextCollectionPicture(jsonData[1])
@@ -167,7 +169,7 @@ export const CollectionElement = () => {
 
       <div className='navigationElementContainer'>
         <div className='navigationElementButtonContainer'>
-          <img onClick={handleLeftClick} src='/images/leftChevron.jpg' alt='previousCollection'/>
+          <img className='previousNextCollection' onClick={handleLeftClick} src='/images/previousCollection.jpg' alt='previousCollection'/>
           <div className='navigationElementCollectionPicture'>
             <CollectionMainPic imageUrl={previousCollectionPictureUrl} imageAlt={previousCollectionPictureAlt}/>
           </div>
@@ -176,7 +178,7 @@ export const CollectionElement = () => {
           <div className='navigationElementCollectionPicture'>
             <CollectionMainPic  imageUrl={nextCollectionPictureUrl} imageAlt={nextCollectionPictureAlt}/>
           </div>
-          <img onClick={handleRightClick} src='/images/rightChevron.jpg' alt='nextCollection'/>
+          <img className='previousNextCollection' onClick={handleRightClick} src='/images/nextCollection.jpg' alt='nextCollection'/>
         </div>
       </div>
     </div>

@@ -1,9 +1,8 @@
 import React,{useState, useEffect} from 'react'
 import { Collection } from '../collection/Collection'
-
 import './Collections.css'
-
 import { useCollectionDeletionStatus } from '../contextProvider/CollectionDeletionStatusContextProvider'
+const apiUrl=import.meta.env.VITE_API_URL
 
 export const Collections =()=>{
   const {collectionDeletionStatus, setCollectionDeletionStatus}=useCollectionDeletionStatus()
@@ -15,10 +14,14 @@ export const Collections =()=>{
 
   const fetchCollections=async ()=>{
     try {
-      const response = await fetch('http://localhost:5000/collections')
+      const response = await fetch(`http://${apiUrl}/collections`)
       const JsonData=await response.json()
-      setCollectionData(JsonData)
-      setCollectionDeletionStatus(false)
+      if(!response.ok){
+        const errorData= await response.json();
+        throw new Error(errorData.message || "something went wrong when fetching Collections")
+      }
+        setCollectionData(JsonData)
+        setCollectionDeletionStatus(false)
     }
     catch (error) {
       console.log(error.message)

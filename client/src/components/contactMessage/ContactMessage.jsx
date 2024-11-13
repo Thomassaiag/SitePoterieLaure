@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import './ContactMessage.css'
 import { ContactButton } from '../contactButton/ContactButton'
+const apiUrl=import.meta.env.VITE_API_URL
 
-export const ContactMessage = () => {
+export const ContactMessage = ({locationHash}) => {
 
     const [emailData, setEmailData]=useState({
         firstName:"",
@@ -32,10 +33,21 @@ export const ContactMessage = () => {
             })
         }
     }
-    useEffect(()=>{
-        console.log(emailData.senderMessage)
-    },[emailData])
 
+    useEffect(()=>{
+        if(locationHash){
+            let sectionid=locationHash.replace("#","")
+            const scrollToSection=()=>{
+                let section=document.getElementById(sectionid)
+                if(section){
+                    section.scrollIntoView({behavior:"smooth",block:'start'})
+                }
+            }
+            scrollToSection()
+        } else {
+            window.scrollTo({top:0, behavior: "smooth"})
+        }
+    },[locationHash])
 
     const sendMessage= async (e)=>{
         e.preventDefault()
@@ -43,7 +55,7 @@ export const ContactMessage = () => {
         setMessageSentIssue(false)
         console.log(emailData)
         try {
-            const response=await fetch('http://localhost:5000/contact/message',{
+            const response=await fetch(`http://${apiUrl}/contact/message`,{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -73,31 +85,35 @@ export const ContactMessage = () => {
     return (
         <div className='contactMessageContainer'>
             <div className='contactezMoiContainer'>
-                <h1>Contactez Moi</h1>
+                <h1>Contactez moi</h1>
                 <p>Si vous avez des questions n'hésitez pas à me contacter via le formulaire si dessous, je répondrais dans les meilleurs délais.</p> 
                 <p>Il est possible que votre question soit déjà abordée dans la FAQ.</p>
             </div>
             <div className='contactFormContainer'>
                 <form className='contactForm' onSubmit={sendMessage}>
-                    <div className='NameFirstNameContainer'>
-                        <label className="nameLabel" htmlFor='firstName'>Prénom</label>
-                        <input
-                            id='firstName'
-                            className='name'
-                            name='firstName'
-                            placeholder='Votre Prénom'
-                            onChange={handleTextChange}
-                            required
-                        />
-                        <label className="nameLabel" htmlFor='lastName'>Nom</label>
-                        <input
-                            id='lastName'
-                            className='name'
-                            name='lastName'
-                            placeholder='Votre Nom'
-                            onChange={handleTextChange}
-                            required
-                        />
+                    <div className='nameFirstNameContainer'>
+                        <div className='nameContainer'>
+                            <label className="nameLabel" htmlFor='firstName'>Prénom</label>
+                            <input
+                                id='firstName'
+                                className='name'
+                                name='firstName'
+                                placeholder='Votre Prénom'
+                                onChange={handleTextChange}
+                                required
+                                />
+                        </div>
+                        <div className='nameContainer'>
+                            <label className="nameLabel" htmlFor='lastName'>Nom</label>
+                            <input
+                                id='lastName'
+                                className='name'
+                                name='lastName'
+                                placeholder='Votre Nom'
+                                onChange={handleTextChange}
+                                required
+                                />
+                        </div>
                     </div>
                     <div className='emailContainer'>
                         <label htmlFor='senderEmail'>Adresse Email</label>
@@ -123,21 +139,24 @@ export const ContactMessage = () => {
                         />
                     </div>
                     <div className='messageContainer'>
-                        <label className= "messageLabel" htmlFor='senderMessage'>Message</label>
-                        <textarea
-                            id='senderMessage'
-                            value={emailData.senderMessage}
-                            className='senderMessage'
-                            name='senderMessage'
-                            placeholder='Message'
-                            onChange={handleTextChange}
-                            onKeyDown={handleKeyDown}
-                            required
-                        />
-                    <div className='buttonContainer'>
-                        <ContactButton/>
+                        <div className='messageOnlyContainer'>
+                            <label className= "messageLabel" htmlFor='senderMessage'>Message</label>
+                            <textarea
+                                id='senderMessage'
+                                value={emailData.senderMessage}
+                                className='senderMessage'
+                                name='senderMessage'
+                                placeholder='Message'
+                                onChange={handleTextChange}
+                                onKeyDown={handleKeyDown}
+                                required
+                            />
+                        </div>
+                        <div className='messageButtonContainer'>
+                            <ContactButton/>
+                        </div>  
                     </div>
-                    </div>
+
                 </form>
             </div>
             {messageSent && <p>Votre message a bien été envoyé</p>}

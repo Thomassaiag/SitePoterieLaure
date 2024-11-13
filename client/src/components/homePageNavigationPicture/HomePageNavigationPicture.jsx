@@ -13,7 +13,7 @@ export const HomePageNavigationPicture = ({picture, alt, navigation, buttonName}
   }
 
   return (
-    <div className='pictureContainer'>
+    <div>
       <img src={picture} alt={alt}/>
       <div className='navigationButtonContainer'>
         <button className='navigationButton' onClick={handleClick}>{buttonName}</button>

@@ -1,4 +1,11 @@
+:root{
+    --pictureMargin: 20px
+}
+
 .collectionElementSinglePictureContainer{
-    width: calc(25% - 20px);
-    margin:10px 10px 10px 10px;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    margin-top:var(--pictureMargin);
+    margin-bottom:var(--pictureMargin);
 }

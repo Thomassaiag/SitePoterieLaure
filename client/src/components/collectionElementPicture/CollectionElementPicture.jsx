@@ -1,10 +1,10 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './CollectionElementPicture.css'
 import { PopUpPicture } from '../popUpPicture/PopUpPicture'
 import { DeleteCollectionElement } from '../deleteCollectionElement/DeleteCollectionElement'
 import { useCollectionDeletionStatus } from '../contextProvider/CollectionDeletionStatusContextProvider'
 import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
-
+const apiUrl=import.meta.env.VITE_API_URL
 
 export const CollectionElementPicture = ({collection_uid, collection_element_picture_url, collection_element_picture_alt, collection_element_picture_uid}) => {
   const buttonName='Effacer l\'image'
@@ -29,7 +29,7 @@ export const CollectionElementPicture = ({collection_uid, collection_element_pic
   const deleteCollectionElementPicture=async(elementToDeleteID)=>{
     setCollectionElementPictureToDeleteID(elementToDeleteID)
     try {
-      let response=await fetch('http://localhost:5000/admin/editElement/deleteElementPicture',{
+      let response=await fetch(`http://${apiUrl}/admin/editElement/deleteElementPicture`,{
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -48,9 +48,7 @@ export const CollectionElementPicture = ({collection_uid, collection_element_pic
 
   return (
     <>
-    <div className='collectionPictureContainer'>
-      <img className='collectionElementPicture' src={collection_element_picture_url} alt={collection_element_picture_alt} onClick={togglePopUpPicture} style={{cursor:'pointer'}}/>
-    </div>
+    <img className='collectionElementPicture' src={collection_element_picture_url} alt={collection_element_picture_alt} onClick={togglePopUpPicture} style={{cursor:'pointer'}}/>
     {connectionAttributes.adminConnection && <div className='deleteButtonContainer'>
       <DeleteCollectionElement buttonName={buttonName} elementToDeleteID={collection_element_picture_uid} handleDeleteClick={handleDeleteClick}/>
     </div>}

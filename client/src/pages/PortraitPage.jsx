@@ -5,10 +5,10 @@ import {Portrait} from '../components/portrait/Portrait'
 
 export const PortraitPage = () => {
   return (
-    <div className="portraitPage_Class">
+    <div>
         <Header/>
         <Portrait/>
-        <Footer className='footer'/>
+        <Footer/>
     </div>
   )
 }

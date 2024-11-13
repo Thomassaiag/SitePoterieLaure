@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState, Fragment} from 'react'
 import './NewPicture'
 import { useCollectionDeletionStatus } from '../contextProvider/CollectionDeletionStatusContextProvider'
-
+const apiUrl=import.meta.env.VITE_API_URL
 
 export const NewPicture = ({collectionUID}) => {
     const fileInputRef=useRef(null)
@@ -28,7 +28,7 @@ export const NewPicture = ({collectionUID}) => {
         collectionPictureElement.append('collectionUID', collectionUID)
 
         if(newCollectionElementPicture){
-            let response=await fetch('http://localhost:5000/admin/editElement/addNewPicture',{
+            let response=await fetch(`http://${apiUrl}/admin/editElement/addNewPicture`,{
                 method:'POST',
                 // headers: {
                 //     'Content-Type': 'application/json'

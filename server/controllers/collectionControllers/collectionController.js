@@ -11,6 +11,7 @@ const getAllCollections=async (req, res, next)=>{
         )
         if(rows){
             console.log('All Collections retrieved')
+            console.log(rows)
             res.status(200).json(rows)
         }
     }

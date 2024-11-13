@@ -6,7 +6,7 @@ import { useCollectionElementInformationsToUpdateDelete } from '../contextProvid
 
 import '../collectionElement/CollectionElement.css'
 import './UpdateCollectionElement.css'
-
+const apiUrl=import.meta.env.VITE_API_URL
 
 export const UpdateCollectionElement = ({collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID, fetchCollectionElement, fetchElementInformations}) => {
 
@@ -46,7 +46,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
 
   const udpateCollectionElementAttributesOnly = async (collectionElementDescriptionToUpdate, collectionElementEmailToUpdate, collectionElementCookingToUpdate, collectionElementRecommandationToUpdate, collectionUID)=>{
     try {
-      let response = await fetch('http://localhost:5000/admin/editElement/updateCollectionElementAttributes',{
+      let response = await fetch(`http://${apiUrl}/admin/editElement/updateCollectionElementAttributes`,{
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -68,7 +68,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
 
   const updateCollectionElementInformations=async(informationsToUpdate)=>{
     try {
-      let response=await fetch('http://localhost:5000/admin/editElement/updateCollectionElementInformations',{
+      let response=await fetch(`http://${apiUrl}/admin/editElement/updateCollectionElementInformations`,{
         method:'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -88,7 +88,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
   const deleteCollectionElementInformations=async (currentInformationsToUpdateDelete)=>{
     if(currentInformationsToUpdateDelete.length>0){
       try {
-        let response= await fetch('http://localhost:5000/admin/editElement/deleteInformationInput',{
+        let response= await fetch(`http://${apiUrl}/admin/editElement/deleteInformationInput`,{
           method:'DELETE',
           headers: {
               'Content-Type': 'application/json'
@@ -111,7 +111,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
   const createCollectionElementInformation=async(collectionElementInformationToCreate, collectionUID)=>{
     if(collectionElementInformationToCreate.length>0){
       try {  
-        let response=await fetch('http://localhost:5000/admin/createCollectionElementInformations',{
+        let response=await fetch(`http://${apiUrl}/admin/createCollectionElementInformations`,{
           method:'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -207,7 +207,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
 
   return (
     <>
-      <form  className='collectionElementInformationContainer'onSubmit={updateCollectionElement}>
+      <form  className='collectionElementUpdateInformationContainer'onSubmit={updateCollectionElement}>
         <div className='collectionElementLeftContainer'>
           <label
             htmlFor='collectionElementDescription'>          

@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import './Collection.css'
 import { CollectionMainPic } from '../collectionMainPic/CollectionMainPic'
 import { DeleteCollectionElement } from '../deleteCollectionElement/DeleteCollectionElement'
+const apiUrl=import.meta.env.VITE_API_URL
 
 import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
 import { Link } from 'react-router-dom'
@@ -26,7 +27,7 @@ export const Collection = ({imageUrl, imageAlt, title, collectionUid}) => {
     setCollectionToDelete(id)
     setCollectionDeletionStatus(true)
     try {
-      const response=await fetch(`http://localhost:5000/admin/deleteCollection/`,{
+      const response=await fetch(`http://${apiUrl}/admin/deleteCollection/`,{
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'

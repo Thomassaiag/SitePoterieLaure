@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import './Newsletter.css'
 import { ContactButton } from '../contactButton/ContactButton'
+const apiUrl=import.meta.env.VITE_API_URL
+
 
 export const Newsletter = () => {
 
@@ -16,7 +18,7 @@ export const Newsletter = () => {
             return
         }
         try {
-            const response=await fetch('http://localhost:5000/contact/subscribe',{
+            const response=await fetch(`http://${apiUrl}/contact/subscribe`,{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,27 +51,31 @@ export const Newsletter = () => {
             <h1>Newsletter</h1>
             <p>Pour recevoir la newsletter renseignez votre e-mail ci-dessous.</p>
             <p>La newsletter vous informera de l'ouverture de la boutique, de ma participation aux marchés etc. Elle n'a pas pour vocation d'être un envoi régulier.</p>
-
-            <form onSubmit={postEmail}>
-                <div className='newsletterForm'>
-                    <div className="emailInputContainer">
-                        <input className="emailInput"
-                            type="email"
-                            placeholder={email ? "":"Entrer votre email"}
-                            name='email'
-                            value={email}
-                            onChange={handleChange}
-                            />
-                    </div>
-                    <div className="newsLetterButtonContainer">
-                        <ContactButton/>
-                    </div>
-    
+           
+            <form className='newsletterForm' onSubmit={postEmail}>
+                <div className="emailInputContainer">
+                    <label htmlFor='emailInput'>Votre Email :</label>
+                    <input
+                        id='emailInput'
+                        className="emailInput"
+                        type="email"
+                        placeholder={email ? "":"Entrer votre email"}
+                        name='email'
+                        value={email}
+                        onChange={handleChange}
+                        />
+                </div>
+                <div className="newsLetterButtonContainer">
+                    <ContactButton/>
                 </div>
             </form>
-            <br/>
-            {emailSubmited && <p>Votre email a été enregistré avec succès</p>}
-            {emailSubmitedIssue && <p>Votre email n'a été enregistré</p>}
+
+            {(emailSubmited || emailSubmitedIssue) && <br/>}
+            {emailSubmited && 
+                <p>Votre email a été enregistré avec succès</p>
+            }
+            {emailSubmitedIssue && 
+                <p>Votre email n'a été enregistré</p>}
         </div>
     )
 }

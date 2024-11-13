@@ -10,25 +10,23 @@ export const Presentation = () => {
   return (
     <>
       <div className='presentationPictureContainer'>
-        <img className='welcomePagePicture'src="/images/Page acceuil/mainPicture.jpg" alt="presentation"/>
-        <div>
-          <p>Créations céramiques utilitaires et décoratives</p>
+          <h1>Créations céramiques utilitaires et décoratives</h1>
           <br/>
           <p>Fabriquées main en Normandie</p>
-        </div>
       </div>
-      <div className='imageContainer'>
+      <div className='navigationPicturesContainer'>
         {
           navigationElements.map((navigationElement)=>{
             const {id, picture, picDescription, navigation, buttonName}=navigationElement
             return (
-              <HomePageNavigationPicture 
-                key={id}
-                picture={picture}
-                picDescription={picDescription}
-                navigation={navigation}
-                buttonName={buttonName}
-              />
+              <div className='navigationElementContainer' key={id}>
+                <HomePageNavigationPicture 
+                  picture={picture}
+                  picDescription={picDescription}
+                  navigation={navigation}
+                  buttonName={buttonName}
+                />
+              </div>
             )
           })
         }

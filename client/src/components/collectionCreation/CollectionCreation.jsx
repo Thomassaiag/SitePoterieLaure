@@ -1,6 +1,5 @@
 import React,{useState, useEffect} from 'react'
 import { CollectionElementCreation } from '../collectionElementCreation/CollectionElementCreation'
-
 import './CollectionCreation.css'
 
 export const CollectionCreation = () => {
@@ -25,6 +24,7 @@ export const CollectionCreation = () => {
     
     const handleSubmit=(e)=>{
         e.preventDefault()
+        let collectionPicture=newCollectionData.get('file')
 
         if(!collectionPicture){
             alert('Merci de sélectionner une image')
@@ -32,6 +32,7 @@ export const CollectionCreation = () => {
         }
         else setCollectionCreated(true)
     }
+
 
     return (
     <div>

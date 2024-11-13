@@ -1,34 +1,43 @@
-.footerContainer{
-    margin-top: 5rem;
-    margin-bottom: 0rem;
-}
+/* .footerWithScrollContainer{
+    margin-top: 3rem;
+} */
 
-.footer_Class{
+.footerContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    background-color: #E4DCD1;
+    background-color: rgba(228, 220, 209, 0.23);
     font-family: "Questrial";
     font-size: 12px;
+    padding-top: 2rem;
+    color: #c7bdb1;
 }
   
-.footerTextSpan_Class{
+.footerTextContainer{
     display: flex;
     align-items: center;
     justify-content: center;
 }
   
-.footerTextSpan_Class p{
-    padding-left: 2rem;
+.footerTextContainer p{
+    padding-left: 0.5rem;
 }
 
-.footerImageSpan_Class{
+.footerLogoContainer{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.footerImageSpan_Class img{
+.footerLogoContainer img{
     width: 2rem;
-    height: 2rem;
-    margin: 4px 4px 4px 4px;
+    height: auto;
+    margin: 1rem;
+    cursor: pointer;
+}
+
+.footerCopyright{
+    margin-top: 2rem;
 }

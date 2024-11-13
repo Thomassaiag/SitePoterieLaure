@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
 import './Connection.css'
+const apiUrl=import.meta.env.VITE_API_URL
 
 export const Connection = () => {
     const [credentials, setCredentials]=useState({
@@ -47,7 +48,7 @@ export const Connection = () => {
         try {
             console.log(credentials.userEmail)
             console.log(credentials.userPassword)
-            let response= await fetch('http://localhost:5000/user/login',{
+            let response= await fetch(`http://${apiUrl}/user/login`,{
                 method:'POST',
                 headers: {
                     'Content-Type': 'application/json'

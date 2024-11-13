@@ -12,7 +12,7 @@ export const ScrollToTop = () => {
 
   return (
     <div className='scrollToTopContainer'>
-        <img src='/images/upChevron.jpg' alt='scroll-up'onClick={handleClick}/>
+        <img src='/images/scrollUp.jpg' alt='scroll-up'onClick={handleClick}/>
     </div>
   )
 }

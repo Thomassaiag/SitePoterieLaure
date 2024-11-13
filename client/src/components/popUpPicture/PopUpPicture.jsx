@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import './PopUpPicture.css'
-
+const apiUrl=import.meta.env.VITE_API_URL
 
 export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose, collection_uid}) => {
   
@@ -12,7 +12,7 @@ export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose, collection_
   
 
   const fetchAllPicturesUID= async () =>{
-    let response=await fetch(`http://localhost:5000/collectionElement/${collection_uid}/pictures`)
+    let response=await fetch(`http://${apiUrl}/collectionElement/${collection_uid}/pictures`)
     let jsonData = await response.json()
     jsonData= await jsonData.map((element)=>{
       return element.collection_element_picture_uid
@@ -21,7 +21,7 @@ export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose, collection_
   }
   
   const fetchPicture= async () =>{
-    let response=await fetch(`http://localhost:5000/collectionElement/${collection_uid}/pictures/${newPictureUid}`)
+    let response=await fetch(`http://${apiUrl}/collectionElement/${collection_uid}/pictures/${newPictureUid}`)
     let jsonData = await response.json()
     setNewPicture(jsonData[0])
   }

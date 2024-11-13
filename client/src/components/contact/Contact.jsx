@@ -2,7 +2,6 @@ import React from 'react'
 import './Contact.css'
 import { Newsletter } from '../newsletter/Newsletter'
 import { ContactMessage } from '../contactMessage/ContactMessage'
-import { ScrollToTop } from '../scrollToTop/ScrollToTop'
 
 
 const logoInstragram='/images/logoInstagram.jpg'
@@ -11,7 +10,7 @@ const logoFacebook='/images/logoFacebook.jpg'
 
 
 
-export const Contact = () => {
+export const Contact = ({locationHash}) => {
   return (
     <div className='contactContainer'>
       <div className='socialMediaContainer'>
@@ -26,7 +25,7 @@ export const Contact = () => {
         </div>
       </div>
       <Newsletter/>
-      <ContactMessage/>
+      <ContactMessage id='contactMessage'locationHash={locationHash}/>
 
     </div>
   )
