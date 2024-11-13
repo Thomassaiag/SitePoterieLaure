@@ -2,7 +2,7 @@
 FROM node:20.10.0
 
 # Set the working directory inside the container
-WORKDIR /usr/src/app
+WORKDIR /app/server
 
 COPY package*.json ./
 
@@ -14,7 +14,7 @@ COPY . .
 
 
 # Expose the port the app runs on
-EXPOSE 5000
+ENV PORT=14001
 
 
 # Command to run the application

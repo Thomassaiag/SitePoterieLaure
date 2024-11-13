@@ -1,7 +1,7 @@
 # Use the official Node.js image as a base
-FROM node:20.10.0 as build
+FROM node:20.10.0
 
-WORKDIR /usr/src/app
+WORKDIR /app/client
 
 COPY package*.json ./
 
@@ -11,10 +11,6 @@ COPY . .
 
 RUN npm run build
 
-FROM nginx:alpine
+ENV PORT=14000
 
-COPY --from=build /usr/src/app/dist /user/share/nginx/html
-
-EXPOSE 80
-
-CMD ["nginx","-g","daemon off;"]
+CMD ["npm","run","preview","--","--port","14000",  "--host"]
