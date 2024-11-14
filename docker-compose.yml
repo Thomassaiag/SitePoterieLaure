@@ -13,7 +13,7 @@ services:
     # volumes:
     #   - ./server/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - "5432:5432"
+      - "5439:5439"
     networks:
       - laure-network
 
@@ -26,7 +26,7 @@ services:
       - DBUSER=${DBUSER}
       - DBPASSWORD=${DBPASSWORD}
       - DBNAME=${DBNAME}
-      - DBPORT=5432
+      - DBPORT=5439
     ports:
       - "14001:14001"
     depends_on:
