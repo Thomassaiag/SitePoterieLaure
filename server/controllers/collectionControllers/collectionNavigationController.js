@@ -61,16 +61,13 @@ const getPrevAndNextCollections=async (req, res, next)=>{
                 UNION ALL
                 SELECT * FROM PrevRow
                 UNION ALL
-                SELECT * FROM FirstRow
-                WHERE NOT EXISTS (SELECT 1 FROM NextRow)
+                SELECT * FROM FirstRow WHERE NOT EXISTS (SELECT 1 FROM NextRow)
                 UNION ALL
-                SELECT * FROM LastRow
-                WHERE NOT EXISTS (SELECT 1 FROM PrevRow)
-                
-            )
+                SELECT * FROM LastRow WHERE NOT EXISTS (SELECT 1 FROM PrevRow)    
+            ) AS CombinedRows
             ORDER BY
 				CASE 
-					WHEN 1 =(SELECT MIN (collection_uid) FROM collection)
+					WHEN 1 = (SELECT MIN (collection_uid) FROM collection)
 					OR 1 = (SELECT MAX (collection_uid) FROM collection)
 					THEN collection_uid*-1
 					ELSE collection_uid
