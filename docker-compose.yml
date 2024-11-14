@@ -10,8 +10,6 @@ services:
       - POSTGRES_USER=${DBUSER}
       - POSTGRES_PASSWORD=${DBPASSWORD}
       - POSTGRES_DB=${DBNAME}
-    # volumes:
-    #   - ./server/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5439:5439"
     networks:
