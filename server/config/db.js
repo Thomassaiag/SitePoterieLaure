@@ -9,6 +9,7 @@ const pool = new Pool({
     port: process.env.DBPORT
 })
 
+
 const connectToDatabase=async()=>{
     try {
         const client=await pool.connect()
@@ -17,8 +18,6 @@ const connectToDatabase=async()=>{
     } catch (error) {
         console.error('Database connection error', error.stack)
     }
-    
-
 }
 
 module.exports = {pool, connectToDatabase}

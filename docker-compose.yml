@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+
+  postgres:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.postgres
+    environment:
+      - POSTGRES_USER=${DBUSER}
+      - POSTGRES_PASSWORD=${DBPASSWORD}
+      - POSTGRES_DB=${DBNAME}
+    # volumes:
+    #   - ./server/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - laure-network
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      - DBHOST=postgres
+      - DBUSER=${DBUSER}
+      - DBPASSWORD=${DBPASSWORD}
+      - DBNAME=${DBNAME}
+      - DBPORT=5432
+    ports:
+      - "14001:14001"
+    depends_on:
+      - postgres
+    networks:
+      - laure-network
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    environment:
+      - PORT=14000
+    ports:
+      - "14000:14000"
+    depends_on:
+      - server
+    networks:
+      - laure-network
+
+volumes:
+  postgres-data:
+
+networks:
+  laure-network:
