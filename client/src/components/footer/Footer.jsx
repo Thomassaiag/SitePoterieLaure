@@ -5,9 +5,9 @@ import { ScrollToTop } from '../scrollToTop/ScrollToTop'
 
 
 let copyrightYear=new Date().getFullYear()
-let instagramLogo="../../images/logoInstagram.jpg"
-let facebookLogo="../../images/logoFacebook.jpg"
-let mailLogo="../../images/LogoEmail.jpg"
+import {instagramLogo} from  '../../data/logos'
+import {facebookLogo} from '../../data/logos'
+import {mailLogo} from '../../data/logos'
 
 
 export const Footer = () => {
