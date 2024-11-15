@@ -8,6 +8,9 @@ import { CollectionMainPic } from '../collectionMainPic/CollectionMainPic'
 import { UpdateCollectionElement } from '../updateCollectionElement/UpdateCollectionElement'
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
 import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
+
+import { nextCollection } from '../../data/logos'
+import { previousCollection } from '../../data/logos'
 const apiUrl=import.meta.env.VITE_API_URL
 
 
@@ -169,7 +172,7 @@ export const CollectionElement = () => {
 
       <div className='navigationElementContainer'>
         <div className='navigationElementButtonContainer'>
-          <img className='previousNextCollection' onClick={handleLeftClick} src='/images/previousCollection.jpg' alt='previousCollection'/>
+          <img className='previousNextCollection' onClick={handleLeftClick} src={previousCollection} alt='previousCollection'/>
           <div className='navigationElementCollectionPicture'>
             <CollectionMainPic imageUrl={previousCollectionPictureUrl} imageAlt={previousCollectionPictureAlt}/>
           </div>
@@ -178,7 +181,7 @@ export const CollectionElement = () => {
           <div className='navigationElementCollectionPicture'>
             <CollectionMainPic  imageUrl={nextCollectionPictureUrl} imageAlt={nextCollectionPictureAlt}/>
           </div>
-          <img className='previousNextCollection' onClick={handleRightClick} src='/images/nextCollection.jpg' alt='nextCollection'/>
+          <img className='previousNextCollection' onClick={handleRightClick} src={nextCollection} alt='nextCollection'/>
         </div>
       </div>
     </div>
