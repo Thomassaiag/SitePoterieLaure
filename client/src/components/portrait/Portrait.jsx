@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react'
 import { Description } from '../description/Description'
 import './Portrait.css'
 import { UpdatePortrait } from '../updatePortrait/UpdatePortrait'
-const logo  ='../../images/logoLaureSansNom.jpg'
+import { laureLogo } from '../../data/logos'
+
 import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
 const apiUrl=import.meta.env.VITE_API_URL
 
@@ -57,7 +58,7 @@ export const Portrait= () => {
         }
       </div>
       <div className='logoContainer'>
-        <img src={logo} alt="logo"/>
+        <img src={laureLogo} alt="logo"/>
       </div>
     </div>
     </div>
