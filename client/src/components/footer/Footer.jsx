@@ -5,9 +5,9 @@ import { ScrollToTop } from '../scrollToTop/ScrollToTop'
 
 
 let copyrightYear=new Date().getFullYear()
-let instagramLogo="../../images/logoInstagram.jpg"
-let facebookLogo="../../images/logoFacebook.jpg"
-let mailLogo="../../images/LogoEmail.jpg"
+import {logoInstagram} from  '../../data/logos'
+import {logoFacebook} from '../../data/logos'
+import {logoEmail} from '../../data/logos'
 
 
 export const Footer = () => {
@@ -26,12 +26,12 @@ export const Footer = () => {
       <div className='footerContainer'>
         <div className='footerLogoContainer'>
           <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer"> 
-            <img src={instagramLogo} alt="instagram"></img>
+            <img src={logoInstagram} alt="instagram"></img>
           </a>
           <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">     
-            <img src={facebookLogo} alt="facebook"></img>
+            <img src={logoFacebook} alt="facebook"></img>
           </a>
-            <img src={mailLogo} alt="mail" onClick={handleClick}></img>
+            <img src={logoEmail} alt="mail" onClick={handleClick}></img>
         </div>
         <div className='footerTextContainer'>
             <p>Condition Générales de Vente</p>

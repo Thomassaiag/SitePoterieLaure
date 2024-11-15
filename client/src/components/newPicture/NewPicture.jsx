@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState, Fragment} from 'react'
 import './NewPicture'
 import { useCollectionDeletionStatus } from '../contextProvider/CollectionDeletionStatusContextProvider'
+import { addInfo } from '../../data/logos'
 const apiUrl=import.meta.env.VITE_API_URL
 
 export const NewPicture = ({collectionUID}) => {
@@ -57,7 +58,7 @@ export const NewPicture = ({collectionUID}) => {
     return (
         <>
             <div className='collectionPictureContainer' onClick={addNewCollectionElementPicture}>
-                <img className='collectionElementPicture' src='../../../public/images/addPicture.jpg' alt='Ajouter une Photo' style={{cursor: 'pointer'}}/>
+                <img className='collectionElementPicture' src={addInfo} alt='Ajouter une Photo' style={{cursor: 'pointer'}}/>
             </div>
             <div>
                 <p>Ajouter une Photo</p>

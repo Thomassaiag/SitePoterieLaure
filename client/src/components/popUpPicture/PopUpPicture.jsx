@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import './PopUpPicture.css'
+import { deleteInfo } from '../../data/logos'
 const apiUrl=import.meta.env.VITE_API_URL
 
 export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose, collection_uid}) => {
@@ -77,7 +78,7 @@ export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose, collection_
           <div className='pictureContainer'>
             <div className='closePopUpContainer'>
               <picture className='positioned-picture'>
-                <img className='closePopUp' src='/images/deleteCollection.jpg' alt='closePopUp' onClick={onClose} style={{cursor: 'pointer'}}/>
+                <img className='closePopUp' src={deleteInfo} alt='closePopUp' onClick={onClose} style={{cursor: 'pointer'}}/>
               </picture>
             </div>
             <img className='popUpPicture' src={newImageUrl} alt={newImageAlt}/>
