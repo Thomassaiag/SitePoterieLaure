@@ -342,11 +342,11 @@ COPY public.collection_element_pictures (collection_element_picture_uid, collect
 12	3	/images/Collection_terracotta/terracotta12.jpg	Image Terracotta 12	f
 11	3	/images/Collection_terracotta/terracotta11.jpg	Image Terracotta 11	f
 10	3	/images/Collection_terracotta/terracotta10.jpg	Image Terracotta 10	t
-13	4	/images/poterie3.jpeg	Image poterie3.jpeg	f
-14	4	/images/poterie4.jpeg	Image poterie4.jpeg	f
-15	3	/images/poterie3.jpeg	Image poterie3.jpeg	t
-16	5	/images/poterie3.jpeg	Image poterie3.jpeg	f
-17	1	/images/poterie4.jpeg	Image poterie4.jpeg	t
+13	4	/images/Collections/poterie3.jpeg	Image poterie3.jpeg	f
+14	4	/images/Collections/poterie4.jpeg	Image poterie4.jpeg	f
+15	3	/images/Collections/poterie3.jpeg	Image poterie3.jpeg	t
+16	5	/images/Collections/poterie3.jpeg	Image poterie3.jpeg	f
+17	1	/images/Collections/poterie4.jpeg	Image poterie4.jpeg	t
 2	3	/images/Collection_terracotta/terracotta2.jpg	Image Terracotta 2	f
 3	3	/images/Collection_terracotta/terracotta3.jpg	Image Terracotta 3	f
 4	3	/images/Collection_terracotta/terracotta4.jpg	Image Terracotta 4	f
