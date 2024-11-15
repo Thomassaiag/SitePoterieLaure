@@ -3,9 +3,8 @@ import './Contact.css'
 import { Newsletter } from '../newsletter/Newsletter'
 import { ContactMessage } from '../contactMessage/ContactMessage'
 
-
-const logoInstragram='/images/logoInstagram.jpg'
-const logoFacebook='/images/logoFacebook.jpg'
+import {logoInstragram} from '../../data/logos'
+import {logoFacebook} from '../../data/logos'
 
 
 
