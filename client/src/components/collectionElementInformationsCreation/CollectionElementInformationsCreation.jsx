@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from 'react'
 import {nanoid} from  'nanoid'
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
 import './CollectionElementInformationsCreation.css'
+import { addInfo } from '../../data/logos'
+import { deleteInfo } from '../../data/logos'
 
 
 export const CollectionElementInformationsCreation = () => {
@@ -80,14 +82,14 @@ export const CollectionElementInformationsCreation = () => {
                             required
                             />
                         <div className='deleteButtonContainer'>
-                            <img src="../../../images/deleteCollection.jpg" alt="Delete Input" onClick={(e)=>deleteInformation(e, id)} style={{cursor:'pointer'}}></img>
+                            <img src={deleteInfo} alt="Delete Input" onClick={(e)=>deleteInformation(e, id)} style={{cursor:'pointer'}}></img>
                         </div>
                     </div>
                 )
             })}
             <div className='AddInputButtonContainer'>
                 <p>Ajouter Une Information</p>
-                <img className='AddInputButton' src="../../../images/addPicture.jpg" alt="Add Information Collection" onClick={addNewInformation} style={{cursor: 'pointer'}}/>
+                <img className='AddInputButton' src={addInfo} alt="Add Information Collection" onClick={addNewInformation} style={{cursor: 'pointer'}}/>
             </div>
         </>
     )

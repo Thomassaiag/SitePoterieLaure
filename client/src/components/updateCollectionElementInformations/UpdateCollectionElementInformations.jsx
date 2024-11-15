@@ -1,6 +1,8 @@
 import React, {useEffect, useRef} from 'react'
 import {nanoid} from 'nanoid'
 import './UpdateCollectionElementInformations.css'
+import { addInfo } from '../../data/logos'
+import { deleteInfo } from '../../data/logos'
 
 
 
@@ -90,7 +92,7 @@ export const UpdateCollectionElementInformations = ({collectionUID}) => {
                             onChange={(e)=>updateCollectionElementInformations(e)}
                         />
                         <div className='deleteButtonContainer'>
-                            <img src="../../../images/deleteCollection.jpg" alt="Delete Input" onClick={(e)=>discardInformationInput(e,collection_element_information_uid)} style={{cursor: 'pointer'}}/>
+                            <img src={deleteInfo} alt="Delete Input" onClick={(e)=>discardInformationInput(e,collection_element_information_uid)} style={{cursor: 'pointer'}}/>
                         </div>
                     </div>
                 )
@@ -101,7 +103,7 @@ export const UpdateCollectionElementInformations = ({collectionUID}) => {
         }
         <div className='AddInputButtonContainer'>
             <p>Ajouter Une Information</p>
-            <img className='AddInputButton' src="../../../images/addPicture.jpg" alt="Add Information Collection" onClick={addInformationInput} style={{cursor: 'pointer'}}/>
+            <img className='AddInputButton' src={addInfo} alt="Add Information Collection" onClick={addInformationInput} style={{cursor: 'pointer'}}/>
             {/* <img button onClick={addInformationInput}>Ajouter une information</button> */}
         </div>
     </>
