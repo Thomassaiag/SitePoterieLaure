@@ -3,9 +3,8 @@ import { Link, useNavigate,useLocation } from 'react-router-dom'
 import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
 import "./header.css"
 import {nanoid} from  'nanoid'
+import { laureLogo } from '../../data/logos'
 
-
-const logoLaureSansNom = '../../images/logoLaureSansNom.jpg'
 
 export const Header = () => {
   let navigate=useNavigate()
@@ -67,7 +66,7 @@ export const Header = () => {
         }
       </div>
       <Link className='logoAndTitleContainer'to='/'>
-          <img className='logo'src={logoLaureSansNom} alt='webSiteLogo'/>
+          <img className='logo'src={laureLogo} alt='webSiteLogo'/>
           <div className='titleContainer'>
             <p>Laure Videau</p>
           </div>

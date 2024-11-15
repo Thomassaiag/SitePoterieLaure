@@ -1,6 +1,6 @@
-import image1 from '/images/Collections/porcelaine.jpg'
-import image2 from '/images/Collections/terracota.jpg'
-import image3 from '/images/Collections/terremoto.jpg'
+import image1 from '/images/Static_images/Collections/porcelaine.jpg'
+import image2 from '/images/Static_images/Collections/terracota.jpg'
+import image3 from '/images/Static_images/Collections/terremoto.jpg'
 
 export const navigationElements=[
     {
