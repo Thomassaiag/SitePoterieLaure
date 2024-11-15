@@ -1,5 +1,6 @@
 import React from 'react'
 import './ScrollToTop.css'
+import { scrollUp } from '../../data/logos'
 
 export const ScrollToTop = () => {
 
@@ -12,7 +13,7 @@ export const ScrollToTop = () => {
 
   return (
     <div className='scrollToTopContainer'>
-        <img src='/images/scrollUp.jpg' alt='scroll-up'onClick={handleClick}/>
+        <img src={scrollUp} alt='scroll-up'onClick={handleClick}/>
     </div>
   )
 }
