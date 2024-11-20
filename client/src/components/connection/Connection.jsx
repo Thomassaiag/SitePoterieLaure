@@ -88,7 +88,7 @@ export const Connection = () => {
     return (
         <div className='connectionContainer'>
             {connectionAttributes.invalidConnection && 
-            <div className='credentialContainer'>
+            // <div className='credentialContainer'>
                 <form className='credentialForm' onSubmit={handleClick}>
                     <div className='formInput'>
                         <div className='labelContainer'>
@@ -118,12 +118,13 @@ export const Connection = () => {
                         <button className='loginButton' >Login</button>
                     </div>
                 </form>
-            </div>}
+            // </div>
+            }
             {loginClicked && connectionAttributes.invalidConnection && <p>Compte Inconnu ou password Incorrect, veuillez réessayer ou créer un comte</p>}
             {!connectionAttributes.invalidConnection && !connectionAttributes.adminConnection && <p>Vous êtes Connecté.e</p>}
             {loginClicked && connectionAttributes.adminConnection && <p>Vous êtes Connecté.e en tant qu'administrateur</p>}
             {connectionAttributes.invalidConnection && <div>
-                <p>Si vous n'avez pas de compte, vous pouvez en créer un : <a href='/accountCreation' style={{fontSize:20, fontWeight: "bold"}}>Créer un compte</a></p>
+                <p>Si vous n'avez pas de compte, vous pouvez en créer un : <a classeName='accountCreationLink' href='/accountCreation'>Créer un compte</a></p>
             </div>}
             
         </div>
