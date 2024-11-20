@@ -71,7 +71,6 @@ const [credentials, setCredentials]=useState({
 
     return (
         <div className='accountCreationContainer'>
-            <div className='credentialContainer'>
                 <form className='credentialForm' onSubmit={handleClick}>
                     <div className='formInput'>
                         <div className='labelContainer'>
@@ -132,7 +131,7 @@ const [credentials, setCredentials]=useState({
                         <button className='accountCreationButton' >Créer mon Compte</button>
                     </div>
                 </form>
-            </div>
+
             {buttonClicked && invalidCreation && <p>Ce compte existe déjà</p>}
             {buttonClicked && !invalidCreation && <p>Compte créé avec succès !</p>}
             

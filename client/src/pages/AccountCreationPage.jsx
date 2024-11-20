@@ -5,7 +5,7 @@ import {Footer} from '../components/footer/Footer'
 
 export const AccountCreationPage = () => {
   return (
-    <div>AccountCreation
+    <div>
         <Header/>
         <AccountCreation/>
         <Footer/>
