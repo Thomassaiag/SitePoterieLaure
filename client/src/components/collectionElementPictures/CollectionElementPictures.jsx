@@ -39,7 +39,7 @@ export const CollectionElementPictures = ({collection_uid}) => {
     return (
         <>
             {connectionAttributes.adminConnection &&
-                <div className='collectionElementSinglePictureContainer'>
+                <div className='collectionElementNewPictureContainer'>
                     <NewPicture collectionUID={collection_uid}/>
                 </div>
             }
