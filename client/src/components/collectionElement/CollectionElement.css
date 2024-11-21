@@ -24,15 +24,12 @@
 /* information CSS */
 .collectionElementInformationContainer{
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: minmax(200px, 2fr) minmax(100px, 1fr);;
     margin-left: 2rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-form{
-    background-color:  #E4DCD1;
-    margin-bottom:10px;
-    font-family: 'Questrial';
-}
 
 
 .collectionElementLeftContainer{
