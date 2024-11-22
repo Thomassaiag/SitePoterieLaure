@@ -162,14 +162,14 @@ export const CollectionElement = () => {
                 <p style={{textAlign:'left'}}>{collectionElementRecommandation}</p>
               </div>
             </div>
-            {connectionAttributes.adminConnection && 
-              <UpdateCollectionElement collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation} collectionUID={newId} fetchCollectionElement={fetchCollectionElement} fetchElementInformations={fetchElementInformations}/>
-            } 
           </div>
         ) : (
           <p>Loading Data</p>
         )
       }
+      {connectionAttributes.adminConnection && 
+        <UpdateCollectionElement collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation} collectionUID={newId} fetchCollectionElement={fetchCollectionElement} fetchElementInformations={fetchElementInformations}/>
+      } 
 
 
       <div className='navigationElementContainer'>

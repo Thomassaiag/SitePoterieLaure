@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState, Fragment} from 'react'
-import './NewPicture'
+import './NewPicture.css'
 import { useCollectionDeletionStatus } from '../contextProvider/CollectionDeletionStatusContextProvider'
 import { addInfo } from '../../data/logos'
 const apiUrl=import.meta.env.VITE_API_URL

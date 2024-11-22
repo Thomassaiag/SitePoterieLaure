@@ -206,7 +206,6 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
 
 
   return (
-    <>
       <form  className='collectionElementUpdateInformationContainer'onSubmit={updateCollectionElement}>
         <div className='collectionElementLeftRightContainer'>
           <div className='collectionElementLeftContainer'>
@@ -260,6 +259,6 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
           <button className='updateCollectionButton'>Mise à jour collection</button>
         </div>
       </form>
-    </>
+
   )
 }

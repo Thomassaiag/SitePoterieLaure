@@ -1,16 +1,13 @@
 .collectionElementInformationUpdateContainer{
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     align-items: center;
-    width: 100%;
-    gap: 1rem;
 }
 
 
 .collectionElementInformationUpdateContainer input{
-    width:60%;
     height: 1rem;
+    margin-right: 10px;
     
 }
 
@@ -24,8 +21,5 @@
 .AddInputContainer{
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     align-items: center;
-    width: 100%;
-    gap: 1rem;
 }

@@ -1,4 +1,10 @@
 .collectionElementPicture{
-    display: block;
-    margin: 0 auto;
+    width: 20rem;
+}
+
+@media (max-width: 650px) {
+    .collectionElementPicture{
+        width: 7rem;
+        height: auto;
+    }
 }

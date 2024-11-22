@@ -4,16 +4,17 @@
     background-color: rgba(228, 220, 209, 0.4);
     width: 100%;
     margin-top: 2rem;
-    padding-left: 2rem;
-    margin-right: 2rem;
+    margin-bottom: 2rem;
+    font-family: "Questrial";
 }
 
 .collectionElementLeftRightContainer{
     display: grid;
-    grid-template-columns: minmax(200px, 2fr) minmax(100px, 1fr);
-    width: 100%;
-    gap: 1rem;
+    gap: 2rem;
+    grid-template-columns: minmax(100px, 2fr) minmax(50px, 1fr);
     box-sizing: border-box;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
 
@@ -25,7 +26,6 @@
 .collectionElementInformationsContainer{
     display: flex;
     flex-direction: column;
-    width: 100%;
     box-sizing: border-box;
     align-items: flex-start;
     justify-items: start;
@@ -39,13 +39,29 @@
 .collectionElementEmailCookingRecoContainer{
     display: flex;
     flex-direction: column;
-    width: 100%;
+
 }
 
-.collectionElementEmailCookingRecoContainer input{
-    display:block;
-    width:80%;
+.collectionElementEmailCookingRecoContainer input,
+.collectionElementEmailCookingRecoContainer label
+{
+    max-width:40rem;
 }
+
+@media (max-width:630px ) {
+    .collectionElementInformationsContainer input,
+    .collectionElementInformationsContainer label,
+    .collectionElementEmailCookingRecoContainer input,
+    .collectionElementEmailCookingRecoContainer label,
+    .AddInputContainer p
+    {
+        width:4rem;
+        font-size: 10px;
+    }
+    
+}
+
+
 
 .updateCollectionButtonContainer{
     margin-top: 3rem;

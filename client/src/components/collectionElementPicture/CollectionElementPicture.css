@@ -1,6 +1,6 @@
-/* @import '../collectionElement/CollectionElement.css'; */
 
 .collectionElementPicture{
-    width: 80%;
+    justify-self: center;
+    width: 20rem;
     height: auto;
 }
