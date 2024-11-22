@@ -4,11 +4,9 @@
 
 
 .collectionElementNewPictureContainer{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-items: center;
+    max-width: 15rem;
+    display: grid;
+    place-items: center;
     margin-top:var(--pictureMargin);
     margin-bottom:var(--pictureMargin); 
 }

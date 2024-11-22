@@ -84,16 +84,14 @@ export const UpdateCollectionElementInformations = ({collectionUID}) => {
             currentInformationsToUpdate.map((currentInformationToUpdate)=>{
                 let {collection_element_information_text, collection_element_information_uid}=currentInformationToUpdate
                 return(
-                    <div className='collectionElementInformationContainer' key={collection_element_information_uid}>
+                    <div className='collectionElementInformationUpdateContainer' key={collection_element_information_uid}>
                         <input className='collectionElementInformation'
                             ref={inputRef}
                             name={collection_element_information_uid}
                             value={collection_element_information_text}
                             onChange={(e)=>updateCollectionElementInformations(e)}
                         />
-                        <div className='deleteButtonContainer'>
-                            <img className='deleteButtonImage' src={deleteInfo} alt="Delete Input" onClick={(e)=>discardInformationInput(e,collection_element_information_uid)} style={{cursor: 'pointer'}}/>
-                        </div>
+                        <img src={deleteInfo} alt="Delete Input" onClick={(e)=>discardInformationInput(e,collection_element_information_uid)} style={{cursor: 'pointer'}}/>
                     </div>
                 )
             })
@@ -101,9 +99,9 @@ export const UpdateCollectionElementInformations = ({collectionUID}) => {
                 <p>Loading...</p>
             )
         }
-        <div className='AddInputButtonContainer'>
+        <div className='AddInputContainer'>
             <p>Ajouter Une Information</p>
-            <img className='AddInputButton' src={addInfo} alt="Add Information Collection" onClick={addInformationInput} style={{cursor: 'pointer'}}/>
+            <img  src={addInfo} alt="Add Information Collection" onClick={addInformationInput} style={{cursor: 'pointer'}}/>
             {/* <img button onClick={addInformationInput}>Ajouter une information</button> */}
         </div>
     </>

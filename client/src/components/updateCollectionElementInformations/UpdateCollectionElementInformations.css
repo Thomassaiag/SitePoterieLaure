@@ -1,41 +1,31 @@
-li {
-    list-style: none;
-}
-
-.collectionElementInformationContainer{
-    width:100%;
+.collectionElementInformationUpdateContainer{
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
 }
 
-.collectionElementInformation{
-    width:100%;
+
+.collectionElementInformationUpdateContainer input{
+    width:60%;
+    height: 1rem;
+    
+}
+
+.collectionElementInformationUpdateContainer img,
+.AddInputContainer img
+{
     height: 1rem;
 }
 
 
-.deleteButtonContainer{
-    width:100%;
+.AddInputContainer{
     display: flex;
-    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
-}
-
-.deleteButtonContainer img{
-    width:20px;
-    height: auto;
-
-}
-
-
-.AddInputButtonContainer{
-    margin: 0 auto;
-    width:100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.AddInputButtonContainer img{
-    width:20px;
-    height: auto;
+    width: 100%;
+    gap: 1rem;
 }

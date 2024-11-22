@@ -28,6 +28,7 @@
 .collectionElementPicturesContainer{
     width: 100%;
     display: grid;
+    place-items: center;
     grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
 }
 
@@ -83,6 +84,7 @@
     margin-left: 2rem;
     margin-right: 2rem;
     margin-bottom: 5rem;
+    width: 100%;
 }
 
 .navigationElementContainer button{
