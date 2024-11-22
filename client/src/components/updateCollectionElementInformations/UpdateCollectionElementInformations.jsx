@@ -92,7 +92,7 @@ export const UpdateCollectionElementInformations = ({collectionUID}) => {
                             onChange={(e)=>updateCollectionElementInformations(e)}
                         />
                         <div className='deleteButtonContainer'>
-                            <img src={deleteInfo} alt="Delete Input" onClick={(e)=>discardInformationInput(e,collection_element_information_uid)} style={{cursor: 'pointer'}}/>
+                            <img className='deleteButtonImage' src={deleteInfo} alt="Delete Input" onClick={(e)=>discardInformationInput(e,collection_element_information_uid)} style={{cursor: 'pointer'}}/>
                         </div>
                     </div>
                 )

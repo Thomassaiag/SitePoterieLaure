@@ -11,7 +11,6 @@
 .collectionElementContainer{
     font-family: "Questrial";
     margin-bottom:5rem;
-
     width: 100%;
 
 }
@@ -36,7 +35,7 @@
 /* information CSS */
 .collectionElementInformationContainer{
     display: grid;
-    grid-template-columns: minmax(200px, 2fr) minmax(100px, 1fr);;
+    grid-template-columns: minmax(200px, 2fr) minmax(100px, 1fr);
     width: 100%;
     box-sizing: border-box;
 }
@@ -44,23 +43,35 @@
 
 
 .collectionElementLeftContainer{
+    display: flex;
+    flex-direction: column;
     padding-left: 1rem;
     padding-right: 1rem;
     box-sizing: border-box;
+    width: 100%;
 }
 
-.collectionElementLeftContainer h2{
-    font-size: 30px;
+.collectionElementLeftContainer h2,
+.collectionElementRightContainer h2
+{
+    font-size: 2rem;
+}
+
+@media (max-width: 780px) {
+    .collectionElementLeftContainer h2,
+    .collectionElementRightContainer h2
+    {
+        font-size: 1rem;
+    }
+    
 }
 
 .collectionElementRightContainer{
-    padding-left: 1rem;
-    padding-right: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
     box-sizing: border-box;
-}
-
-.collectionElementRightContainer h2{
-    font-size: 30px;
 }
 
 
