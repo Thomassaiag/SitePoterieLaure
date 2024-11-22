@@ -3,12 +3,17 @@
     flex-direction: column;
     background-color: rgba(228, 220, 209, 0.4);
     width: 100%;
+    margin-top: 2rem;
+    padding-left: 2rem;
+    margin-right: 2rem;
 }
 
 .collectionElementLeftRightContainer{
     display: grid;
     grid-template-columns: minmax(200px, 2fr) minmax(100px, 1fr);
     width: 100%;
+    gap: 1rem;
+    box-sizing: border-box;
 }
 
 
@@ -31,24 +36,33 @@
     height: 30rem;
 }
 
+.collectionElementEmailCookingRecoContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 .collectionElementEmailCookingRecoContainer input{
     display:block;
-    width:auto;
-    min-width:75%;
+    width:80%;
 }
 
 .updateCollectionButtonContainer{
-    padding-right: 1rem;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    height: 3rem;
 }
 
 .updateCollectionButton{
-    font-family: "Questrial";
-    font-size: 19px;
-    background-color: #E4DCD1;
+    font-family: "Somber";
+    font-size: 1.5rem;
+    background-color:transparent;
     border-color: black;
     border-style: solid;
-    width:30%;
+    width:auto;
     height: 100%;
+    margin-right: 2rem;
 }

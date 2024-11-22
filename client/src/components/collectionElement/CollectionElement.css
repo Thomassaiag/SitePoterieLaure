@@ -39,6 +39,9 @@
     grid-template-columns: minmax(200px, 2fr) minmax(100px, 1fr);
     width: 100%;
     box-sizing: border-box;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    gap: 1rem;
 }
 
 
@@ -46,8 +49,6 @@
 .collectionElementLeftContainer{
     display: flex;
     flex-direction: column;
-    padding-left: 1rem;
-    padding-right: 1rem;
     box-sizing: border-box;
     width: 100%;
 }
@@ -95,19 +96,18 @@
 .navigationElementButtonContainer{
     display: flex;
     align-items: center;
-    margin-left: 2rem;
-    margin-right: 2rem;
 }
 
 .previousNextCollection{
     height: 2rem;
     width: auto;
-    margin-left: 1rem;
-    margin-right: 1rem;
+
     cursor: pointer;
 }
 
 .navigationElementCollectionPicture img{
     height: 70px;
     width: 70px;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }

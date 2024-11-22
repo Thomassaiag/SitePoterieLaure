@@ -33,14 +33,12 @@ export const Collections =()=>{
   },[collectionDeletionStatus])
   
   return (
-
     <div className='collectionsContainer'>
-
       <div className='collectionsTitleContainer'>
         <p>Ici vous trouverez mes collections passées et actuelles</p>
-
         <p>Certaines ne sont plus en vente mais vous donneront un aperçu de mon approche artistique, mon univers. </p>
       </div>
+      <div className='collectionGridContainer'>
       <div className='collectionItemsContainer'>
         {
       
@@ -63,8 +61,8 @@ export const Collections =()=>{
               <p>Loading...</p>
             )
           }
-          </div>
-
+        </div>
+      </div>
     </div>
   )
 }

@@ -257,7 +257,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
           </div>         
         </div>
         <div className='updateCollectionButtonContainer'>
-          <button className='updateCollectionButton'>Update Collection</button>
+          <button className='updateCollectionButton'>Mise à jour collection</button>
         </div>
       </form>
     </>
