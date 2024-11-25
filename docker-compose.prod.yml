@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+
+  postgres:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.postgres
+    environment:
+      - POSTGRES_USER=${DBUSER}
+      - POSTGRES_PASSWORD=${DBPASSWORD}
+      - POSTGRES_DB=${DBNAME}
+      - POSTGRES_PORT=5432
+    ports:
+      - "5439:5432"
+    command: -p 5432
+    networks:
+      - laure-network
+
+  server:
+    image: thomassaiag/siteweblaure-server:latest
+    environment:
+      - DBHOST=postgres
+      - DBUSER=${DBUSER}
+      - DBPASSWORD=${DBPASSWORD}
+      - DBNAME=${DBNAME}
+      - DBPORT=5432
+    ports:
+      - "14001:14001"
+    depends_on:
+      - postgres
+    networks:
+      - laure-network
+
+  client:
+    image: thomassaiag/siteweblaure-client:latest
+    environment:
+      - PORT=14000
+    ports:
+      - "14000:14000"
+    depends_on:
+      - server
+    networks:
+      - laure-network
+
+volumes:
+  postgres-data:
+
+networks:
+  laure-network:
+    driver: bridge
