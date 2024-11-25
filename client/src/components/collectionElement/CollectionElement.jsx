@@ -80,10 +80,12 @@ export const CollectionElement = () => {
     }
   }
 
+
   const fetchNextPreviousCollection=async()=>{
     try {
       let response= await fetch(`http://${apiUrl}/collections/${newId}/collection`)
       let jsonData= await response.json()
+      console.log('jsonData => ',jsonData)
       setPreviousCollectionPicture(jsonData[0])
       setNextCollectionPicture(jsonData[1])
     } catch (error) {

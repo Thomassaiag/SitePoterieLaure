@@ -2,12 +2,22 @@
     display: flex;
     flex-direction: column;
     font-family: "Questrial";
+    margin-left: 8rem;
+    margin-right: 8rem;
+    margin-bottom: 8rem;
+    background-color:  rgba(228, 220, 209, 0.4);
 }
+
+/* .credentialContainer{
+    margin: 1rem 2rem 2rem 2rem;
+} */
+
 
 .credentialForm{
     display: flex;
     flex-direction: column;
-    margin-bottom: 2rem;
+    margin: 1rem 2rem 2rem 2rem;
+    background-color: transparent;
 }
 
 .labelContainer{
@@ -17,6 +27,16 @@
 .formInput{
     display: flex;
     margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.formInput input{
+    max-width: 15rem;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+
 }
 
 .formInput label{
@@ -33,4 +53,17 @@
     background-color: #E4DCD1;
     width: 6rem;
     height: 2rem;
+    max-width: 100%;
 }
+
+.accountCreationLink{
+    font-size: 20;
+    font-weight: "bold";
+    text-decoration: "none"
+}
+
+
+.accountCreationLink .accountCreationLink:link .accountCreationLink:visited .accountCreationLink:hover .accountCreationLink:active .accountCreationLink:focus {
+    all: unset; /* Resets all inheritable and non-inheritable properties */
+    display: inline; /* Reapply inline display to make it behave like a standard link */
+  }
