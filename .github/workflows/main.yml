@@ -66,10 +66,6 @@ jobs:
           sudo apt-get install -y sshpass
       
 
-      #Add Server to known hosts
-      - name: Add Server to known hosts
-        run: ssh-keyscan -H 188.165.238.74 >> ~/.ssh/known_hosts
-
       #login to Docker Hub from Server
       - name: Docker Login from Server
         env: 
