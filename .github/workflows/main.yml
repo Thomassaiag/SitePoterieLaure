@@ -59,49 +59,49 @@ jobs:
     if: github.ref=='refs/heads/main'
 
     steps:
-      #install SSH Key
-    - name: Install SSH Key
-      uses: shimataro/ssh-key-action@v2
-      with:
-        key: ${{secrets.SSH_PRIVATE_KEY}}
-        known_hosts: unnecessary
-    
+      # Install sshpass
+      - name: Install sshpass
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+      
 
-    #Add Server to known hosts
-    - name: Add Server to known hosts
-      run: ssh-keyscan -H 188.165.238.74 >> ~/.ssh/known_hosts
+      #Add Server to known hosts
+      - name: Add Server to known hosts
+        run: ssh-keyscan -H 188.165.238.74 >> ~/.ssh/known_hosts
 
-    #login to Docker Hub from Server
-    - name: Docker Login from Server
-      env: 
-        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-        DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-      run: |
-        ssh debian@188.165.238.74 "echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin"
+      #login to Docker Hub from Server
+      - name: Docker Login from Server
+        env: 
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh debian@188.165.238.74 << EOF
+            # Login to Docker Hub
+            echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin
 
+      # Pull and run Docker images
+      - name: Deploy with Docker
+        run: |
+          ssh debian@188.165.238.74 << EOF
+            # Pull the latest images
+            docker pull thomassaiag/siteweblaure-server:latest
+            docker pull thomassaiag/sitweblaure-client:latest
 
-    # Pull and run Docker images
-    - name: Deploy with Docker
-      run: |
-        ssh debian@188.165.238.74 << EOF
-          # Pull the latest images
-          docker pull thomassaiag/siteweblaure-server:latest
-          docker pull thomassaiag/sitweblaure-client:latest
+            # Stop and remove existing containers if they exist
+            docker stop siteweblaure-server || true
+            docker stop siteweblaure-client || true
+            docker rm siteweblaure-server || true
+            docker rm siteweblaure-client || true
 
-          # Stop and remove existing containers if they exist
-          docker stop siteweblaure-server || true
-          docker stop siteweblaure-client || true
-          docker rm siteweblaure-server || true
-          docker rm siteweblaure-client || true
+            # Run new containers
+            docker run -d --name siteweblaure-server \
+              -p 14001:14001 \
+              -e NODE_ENV=production \
+              thomassaiag/siteweblaure-server:latest
 
-          # Run new containers
-          docker run -d --name siteweblaure-server \
-            -p 14001:14001 \
-            -e NODE_ENV=production \
-            thomassaiag/siteweblaure-server:latest
-
-          docker run -d --name siteweblaure-client \
-            -p 14000:14000 \
-            thomassaiag/sitweblaure-client:latest
-        EOF
+            docker run -d --name siteweblaure-client \
+              -p 14000:14000 \
+              thomassaiag/sitweblaure-client:latest
+          EOF
 
