@@ -66,20 +66,25 @@ jobs:
           sudo apt-get install -y sshpass
       
 
+      #Add Server to known hosts
+      - name: Add Server to known hosts
+        run: ssh-keyscan -H 188.165.238.74 >> ~/.ssh/known_hosts
+
       #login to Docker Hub from Server
       - name: Docker Login from Server
         env: 
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
-          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh debian@188.165.238.74 << EOF
-            # Login to Docker Hub
-            echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no debian@188.165.238.74 \
+          "echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin"
 
       # Pull and run Docker images
       - name: Deploy with Docker
+        env: 
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
         run: |
-          ssh debian@188.165.238.74 << EOF
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no debian@188.165.238.74 << 'EOF'
             # Pull the latest images
             docker pull thomassaiag/siteweblaure-server:latest
             docker pull thomassaiag/sitweblaure-client:latest
