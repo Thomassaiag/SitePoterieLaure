@@ -84,25 +84,12 @@ jobs:
         env: 
           SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
         run: |
-          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no debian@188.165.238.74 << 'EOF'
-            # Pull the latest images
-            docker pull thomassaiag/siteweblaure-server:latest
-            docker pull thomassaiag/sitweblaure-client:latest
-
-            # Stop and remove existing containers if they exist
-            docker stop siteweblaure-server || true
-            docker stop siteweblaure-client || true
-            docker rm siteweblaure-server || true
-            docker rm siteweblaure-client || true
-
-            # Run new containers
-            docker run -d --name siteweblaure-server \
-              -p 14001:14001 \
-              -e NODE_ENV=production \
-              thomassaiag/siteweblaure-server:latest
-
-            docker run -d --name siteweblaure-client \
-              -p 14000:14000 \
-              thomassaiag/sitweblaure-client:latest
-          EOF
-
+          sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no debian@188.165.238.74 \
+          "docker pull thomassaiag/siteweblaure-server:latest && \
+          docker pull thomassaiag/siteweblaure-client:latest && \
+          docker stop siteweblaure-server || true && \
+          docker stop siteweblaure-client || true && \
+          docker rm siteweblaure-server || true && \
+          docker rm siteweblaure-client || true && \
+          docker run -d --name siteweblaure-server -p 14001:14001 -e NODE_ENV=production thomassaiag/siteweblaure-server:latest && \
+          docker run -d --name siteweblaure-client -p 14000:14000 thomassaiag/siteweblaure-client:latest"
