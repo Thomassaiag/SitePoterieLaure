@@ -96,12 +96,12 @@ jobs:
 
           # Run new containers
           docker run -d --name siteweblaure-server \
-            -p 3001:3001 \
+            -p 14001:14001 \
             -e NODE_ENV=production \
             thomassaiag/siteweblaure-server:latest
 
           docker run -d --name siteweblaure-client \
-            -p 3000:3000 \
+            -p 14000:14000 \
             thomassaiag/sitweblaure-client:latest
         EOF
 
