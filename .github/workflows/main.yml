@@ -74,7 +74,7 @@ jobs:
       #Copy Docker compose to server
       - name: Copy Docker compose file to server
         run: |
-          sshpass -p "${{ secrets.SSH_PASSWORD }}" scp -o StrictHostKeyChecking=no docker-compose.prod.yml debian@188.165.238.74:~/siteweblaure/docker-compose.prod.yml
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" scp -o StrictHostKeyChecking=no docker-compose.prod.yml debian@188.165.238.74:~/ThomasS/SitePoterie/
       
       
       #login to Docker Hub from Server
@@ -84,7 +84,7 @@ jobs:
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no debian@188.165.238.74 \
-          "mkdir -p ~/siteweblaure && \
+          "mkdir -p ~/ThomasS/SitePoterie && \
           echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin
 
       # deploy using Docker Compose file
@@ -93,7 +93,7 @@ jobs:
           SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
         run: |
           sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no debian@188.165.238.74 << EOF
-            cd ~/siteweblaure
+            cd ~/ThomasS/SitePoterie
             docker compose -f docker-compose.prod.yml pull
             docker compose -f docker-compose.prod.yml down
             docker compose -f docker-compose.prod.yml up -d
