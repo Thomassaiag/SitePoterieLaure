@@ -36,7 +36,9 @@ jobs:
           username: ${{secrets.DOCKERHUB_USERNAME}}
           password: ${{secrets.DOCKERHUB_TOKEN}}
 
-
+      - name: List server directory contents
+        run: ls -la ./server
+        
       #build and push DB image
       - name: Build and push DB image
         uses: docker/build-push-action@v4
@@ -52,6 +54,7 @@ jobs:
         uses: docker/build-push-action@v4
         with: 
           context: ./server
+          file: Dockerfile
           push: true
           tags: thomassaiag/siteweblaure-server:latest
 
