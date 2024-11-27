@@ -3,9 +3,7 @@ version: '3'
 services:
 
   postgres:
-    build:
-      context: ./server
-      dockerfile: Dockerfile.postgres
+    image: thomassaiag/siteweblaure-postgres:latest
     environment:
       - POSTGRES_USER=${DBUSER}
       - POSTGRES_PASSWORD=${DBPASSWORD}
