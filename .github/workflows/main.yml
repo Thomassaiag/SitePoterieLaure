@@ -74,7 +74,7 @@ jobs:
       #Copy Docker compose to server
       - name: Copy Docker compose file to server
         run: |
-          sshpass -p "${{ secrets.SSH_PASSWORD }}" scp -o StrictHostKeyChecking=no docker-compose.prod.yml debian@188.165.238.74:~/siteweblaure/
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" scp -o StrictHostKeyChecking=no docker-compose.prod.yml debian@188.165.238.74:~/siteweblaure/docker-compose.prod.yml
       
       
       #login to Docker Hub from Server
