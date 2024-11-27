@@ -60,16 +60,22 @@ jobs:
 
     steps:
       # Install sshpass
-      - name: Install sshpass
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y sshpass
+      # - name: Install sshpass
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y sshpass
       
 
       # #Add Server to known hosts
       # - name: Add Server to known hosts
       #   run: ssh-keyscan -H 188.165.238.74 >> ~/.ssh/known_hosts
-
+      
+      #Copy Docker compose to server
+      - name: Copy Docker compose file to server
+        run: |
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" scp -o StrictHostKeyChecking=no docker.compose.prod.yml debian@188.165.238.74:~/siteweblaure/
+      
+      
       #login to Docker Hub from Server
       - name: Docker Login from Server
         env: 
@@ -77,19 +83,17 @@ jobs:
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no debian@188.165.238.74 \
-          "echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin"
+          "mkdir -p ~/siteweblaure && \
+          echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin
 
-      # Pull and run Docker images
-      - name: Deploy with Docker
+      # deploy using Docker Compose file
+      - name: Deploy with Docker Compose
         env: 
           SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
         run: |
-          sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no debian@188.165.238.74 \
-          "docker pull thomassaiag/siteweblaure-server:latest && \
-          docker pull thomassaiag/siteweblaure-client:latest && \
-          docker stop siteweblaure-server || true && \
-          docker stop siteweblaure-client || true && \
-          docker rm siteweblaure-server || true && \
-          docker rm siteweblaure-client || true && \
-          docker run -d --name siteweblaure-server -p 14001:14001 -e NODE_ENV=production thomassaiag/siteweblaure-server:latest && \
-          docker run -d --name siteweblaure-client -p 14000:14000 thomassaiag/siteweblaure-client:latest"
+          sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no debian@188.165.238.74 << EOF
+            cd ~/siteweblaure
+            docker compose -f docker-compose.prod.yml pull
+            docker compose -f docker-compose.prod.yml down
+            docker compose -f docker-compose.prod.yml up -d
+          EOF
