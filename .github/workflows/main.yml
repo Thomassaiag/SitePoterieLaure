@@ -35,6 +35,15 @@ jobs:
           password: ${{secrets.DOCKERHUB_TOKEN}}
 
 
+      #build and push DB image
+      - name: Build and push server image
+        uses: docker/build-push-action@v4
+        with: 
+          context: ./server
+          file: Dockerfile.postgres
+          push: true
+          tags: thomassaiag/siteweblaure-postgres:latest
+
       #build and push server image
       - name: Build and push server image
         uses: docker/build-push-action@v4
