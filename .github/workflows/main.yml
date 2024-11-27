@@ -59,6 +59,7 @@ jobs:
     if: github.ref=='refs/heads/main'
 
     steps:
+      - uses: actions/checkout@v3
       # Install sshpass
       # - name: Install sshpass
       #   run: |
