@@ -51,7 +51,7 @@ jobs:
         uses: docker/build-push-action@v4
         with: 
           context: .
-          file: ./serverDockerfile.postgres
+          file: ./server/Dockerfile.postgres
           push: true
           tags: thomassaiag/siteweblaure-postgres:latest
           no-cache: true
