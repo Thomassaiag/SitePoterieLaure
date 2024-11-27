@@ -85,7 +85,7 @@ jobs:
         run: |
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no debian@188.165.238.74 \
           "mkdir -p ~/ThomasS/SitePoterie && \
-          echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin
+          echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin"
 
       # deploy using Docker Compose file
       - name: Deploy with Docker Compose
