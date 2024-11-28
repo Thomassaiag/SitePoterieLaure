@@ -36,7 +36,8 @@ const [credentials, setCredentials]=useState({
             try {
                 console.log(credentials.userEmail)
                 console.log(credentials.userPassword)
-                let response= await fetch(`http://${apiUrl}}/user/createUserAccount`,{
+                console.log(apiUrl)
+                let response= await fetch(`http://${apiUrl}/user/createUserAccount`,{
                     method:'POST',
                     headers: {
                         'Content-Type': 'application/json'

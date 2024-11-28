@@ -1,6 +1,8 @@
 const {pool}=require("../config/db")
 const bcrypt=require('bcrypt')
+const jwt=require('jsonwebtoken')
 const {hashPassword}=require('../middleware/passwordEncryption')
+require('dotenv').config()
 
 
 //Login
@@ -21,7 +23,12 @@ const login=async(req, res, next)=>{
             let doesPasswordMatch=await bcrypt.compare(userPassword,hashedPassword)
             if(doesPasswordMatch){
                 console.log("password matches")
-                res.status(200).json({message: "password matches", adminStatus, userFirstName})
+                const token=jwt.sign(
+                    {userEmail:userEmailDB.rows[0].user_email},
+                    process.env.JWT_SECRET,
+                    {expiresIn: process.env.JWT_EXPIRATION}
+                )
+                res.status(200).json({message: "password matches", adminStatus, userFirstName, token})
             }
             else{
                 console.log("password doesn't match")
@@ -30,7 +37,7 @@ const login=async(req, res, next)=>{
         }    
         else{
             console.log("user doesn't exist", userEmailDB)
-            res.status(400).json({message: "no mail in DB"})
+            res.status(401).json({message: "no mail in DB"})
         }
 
     } catch (error) {
@@ -54,13 +61,24 @@ const createUserAccount=async (req, res, next)=>{
         }
         else{
             const newUser=await pool.query(
-                'INSERT INTO user_account(user_email, user_password, user_firstName, user_lastName, admin_status) VALUEs($1,$2,$3,$4, $5)',[userEmail, hashedPassword,userFirstName, userLastName, false]
+                'INSERT INTO user_account(user_email, user_password, user_firstName, user_lastName, admin_status) VALUES ($1,$2,$3,$4, $5)',[userEmail, hashedPassword,userFirstName, userLastName, false]
             )
             const newUserEmailDB= await pool.query(
                 'SELECT user_email FROM user_account WHERE user_email=$1',[userEmail]
             ) 
+            console.log(newUserEmailDB)
             if(newUserEmailDB.rowCount==1){
-                res.status(200).json({message: "account successfuly created"})
+
+                //set JWT
+                const token=jwt.sign(
+                    { userEmail: userEmail},
+                    process.env.JWT_SECRET,
+                    {expiresIn: process.env.JWT_EXPIRATION}
+                )
+
+                //
+
+                res.status(200).json({message: "account successfuly created", token})
             }
             else res.status(400).json({message : "account not created"})
         }

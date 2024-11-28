@@ -19,6 +19,8 @@ public
 
 dist
 
+securedJWTSecret.js
+
 distgit 
 dist-ssr
 *.local

@@ -47,8 +47,6 @@ export const Connection = () => {
         e.preventDefault()
         setLoginClicked(true)
         try {
-            console.log(credentials.userEmail)
-            console.log(credentials.userPassword)
             let response= await fetch(`http://${apiUrl}/user/login`,{
                 method:'POST',
                 headers: {
@@ -57,7 +55,7 @@ export const Connection = () => {
                 body: JSON.stringify({
                     userEmail:credentials.userEmail,
                     userPassword:credentials.userPassword
-            })
+                })
             })
             let data= await response.json()
             console.log(`data => ${data}`)
