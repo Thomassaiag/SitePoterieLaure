@@ -57,8 +57,8 @@ export const Connection = () => {
                     userPassword:credentials.userPassword
                 })
             })
-            let data= await response.json()
-            console.log(`data => ${data}`)
+
+
             if(!response){
                 console.log("something went wrong")
             }
@@ -70,13 +70,15 @@ export const Connection = () => {
                 }))
             }
             else {
+                let {user, token }= await response.json()
                 const newConnectionAttributes={
                     invalidConnection:false,
-                    connectedUserFirstName: data.userFirstName,
-                    adminConnection: data.adminStatus || false
+                    connectedUserFirstName: user.userFirstName,
+                    adminConnection: user.adminStatus || false
                 }
                 setConnectionAttributes(newConnectionAttributes)
                 localStorage.setItem('connectionAttributes',JSON.stringify(newConnectionAttributes))
+                localStorage.setItem('token',token)
             }    
         } catch (error) {
             console.log(('Error during login',error))

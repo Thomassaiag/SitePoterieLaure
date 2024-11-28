@@ -27,9 +27,13 @@ export const CollectionElementCreation = ({newCollectionData}) => {
     e.preventDefault()
     setCollectionCreated(false)
     setCollectionCreationIssue(false)
+    const token=localStorage.getItem('token')
     try {
       const response=await fetch(`http://${apiUrl}/admin/createCollection`,{
         method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: newCollectionData
       })
         
