@@ -1,8 +1,12 @@
 import React, {Fragment, useEffect, useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
 import { UpdateCollectionElementInformations } from '../updateCollectionElementInformations/UpdateCollectionElementInformations'
 import { useCollectionElementInformationsToUpdate } from '../contextProvider/CollectionElementInformationsToUpdateContextProvider'
 import { useCollectionElementInformationsToUpdateDelete } from '../contextProvider/CollectionElementInformationsToUpdateDeleteContextProvider'
+
+import { handleInvalidToken } from '../../utils/auth'
+
 
 import '../collectionElement/CollectionElement.css'
 import './UpdateCollectionElement.css'
@@ -10,7 +14,7 @@ const apiUrl=import.meta.env.VITE_API_URL
 
 export const UpdateCollectionElement = ({collectionElementDescription, collectionElementEmail, collectionElementCooking, collectionElementRecommandation, collectionUID, fetchCollectionElement, fetchElementInformations}) => {
 
-
+  const navigate=useNavigate()
   const {currentInformations}=useCollectionElementInformations()
   const {currentInformationsToUpdate}=useCollectionElementInformationsToUpdate()
   const {currentInformationsToUpdateDelete, setCurrentInformationsToUpdateDelete}=useCollectionElementInformationsToUpdateDelete()
@@ -45,11 +49,13 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
 
 
   const udpateCollectionElementAttributesOnly = async (collectionElementDescriptionToUpdate, collectionElementEmailToUpdate, collectionElementCookingToUpdate, collectionElementRecommandationToUpdate, collectionUID)=>{
+    const token=localStorage.getItem('token')
     try {
       let response = await fetch(`http://${apiUrl}/admin/editElement/updateCollectionElementAttributes`,{
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
         body:JSON.stringify({
           descriptionToUpdate:collectionElementDescriptionToUpdate,
@@ -59,8 +65,17 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
           collectionUID:collectionUID,
         })
       })
-      let data= await response.json()
-      console.log(data)
+
+      if(response.status===401){
+        handleInvalidToken(navigate, setConnectionAttributes)
+      }
+
+      if(!response.ok){
+        throw new Error('netWork issue')
+      }
+      else {
+        console.log(reponse.message)
+      }
     } catch (error) {
       console.error('element attributes didn`t get updated ',{message: error})
     }

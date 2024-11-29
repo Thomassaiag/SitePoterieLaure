@@ -13,7 +13,7 @@ router.post('/createCollectionElementInformations',createCollectionElementInform
 
 router.post('/editElement/addNewPicture',uploadCollectionElementPicture.single('file'),addNewCollectionElementPicture)
 router.put('/editElement/deleteElementPicture',deleteCollectionElementPicture)
-router.put('/editElement/updateCollectionElementAttributes',updateCollectionElementAttributes)
+router.put('/editElement/updateCollectionElementAttributes',authenticateToken,updateCollectionElementAttributes)
 router.put('/editElement/updateCollectionElementInformations',updateCollectionElementInformations)
 router.delete('/editElement/deleteInformationInput',deleteCollectionElementInformationInput)
 
@@ -21,7 +21,7 @@ router.put('/updatePortrait',updatePortraitPicture.single('portraitPictureFile')
 
 router.put('/updatePortraitText',updatePortraitText)
 
-router.put('/deleteCollection',deleteCollection)
+router.put('/deleteCollection', authenticateToken, deleteCollection)
 
 
 module.exports=router

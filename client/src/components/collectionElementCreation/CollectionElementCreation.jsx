@@ -1,22 +1,23 @@
 import React, {useEffect, useState} from 'react'
-
+import { useNavigate } from 'react-router-dom'
 import '../collectionElement/CollectionElement.css'
 import './CollectionElementCreation.css'
 
+
+
 import { CollectionElementInformationsCreation } from '../collectionElementInformationsCreation/CollectionElementInformationsCreation'
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
+
 import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
-import { useNavigate } from 'react-router-dom'
-const {handleInvalidToken}=require('../../utils/auth')
+import { handleInvalidToken } from '../../utils/auth'
 
 
 const apiUrl=import.meta.env.VITE_API_URL
 
 
 export const CollectionElementCreation = ({newCollectionData}) => {
-
-  let navigate=useNavigate()
-  const {connectionAttributes, setConnectionAttributes}=useConnectionStatus()
+  const navigate=useNavigate()
+  const {setConnectionAttributes}=useConnectionStatus()
   const {currentInformations}=useCollectionElementInformations()
   const [collectionCreated, setCollectionCreated]=useState(false)
   const [collectionCreationIssue, setCollectionCreationIssue]=useState(false)
@@ -46,9 +47,10 @@ export const CollectionElementCreation = ({newCollectionData}) => {
       })
         
       if(response.status===401){
-          handleInvalidToken()
+        handleInvalidToken(navigate, setConnectionAttributes)
+        setCollectionCreationIssue(true)
       }
-      
+
       if(!response.ok){
         setCollectionCreationIssue(true)
         throw new Error('netWork issue')
