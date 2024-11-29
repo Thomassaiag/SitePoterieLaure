@@ -11,7 +11,7 @@ router.post('/createCollection',authenticateToken,upload.single('file'),createNe
 router.post('/createCollectionElement',createCollectionElement)
 router.post('/createCollectionElementInformations',createCollectionElementInformations)
 
-router.post('/editElement/addNewPicture',uploadCollectionElementPicture.single('file'),addNewCollectionElementPicture)
+router.post('/editElement/addNewPicture',authenticateToken, uploadCollectionElementPicture.single('file'),addNewCollectionElementPicture)
 router.put('/editElement/deleteElementPicture',authenticateToken,deleteCollectionElementPicture)
 router.put('/editElement/updateCollectionElementAttributes',authenticateToken,updateCollectionElementAttributes)
 router.put('/editElement/updateCollectionElementInformations',updateCollectionElementInformations)
