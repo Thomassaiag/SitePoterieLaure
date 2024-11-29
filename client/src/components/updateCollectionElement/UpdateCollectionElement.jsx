@@ -1,9 +1,9 @@
 import React, {Fragment, useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
+import { useCollectionElementInformations } from '../../contextProvider/CollectionElementInformationsContextProvider'
 import { UpdateCollectionElementInformations } from '../updateCollectionElementInformations/UpdateCollectionElementInformations'
-import { useCollectionElementInformationsToUpdate } from '../contextProvider/CollectionElementInformationsToUpdateContextProvider'
-import { useCollectionElementInformationsToUpdateDelete } from '../contextProvider/CollectionElementInformationsToUpdateDeleteContextProvider'
+import { useCollectionElementInformationsToUpdate } from '../../contextProvider/CollectionElementInformationsToUpdateContextProvider'
+import { useCollectionElementInformationsToUpdateDelete } from '../../contextProvider/CollectionElementInformationsToUpdateDeleteContextProvider'
 
 import { handleInvalidToken } from '../../utils/auth'
 

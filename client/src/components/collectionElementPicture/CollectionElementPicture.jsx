@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import './CollectionElementPicture.css'
 import { PopUpPicture } from '../popUpPicture/PopUpPicture'
 import { DeleteCollectionElement } from '../deleteCollectionElement/DeleteCollectionElement'
-import { useCollectionDeletionStatus } from '../contextProvider/CollectionDeletionStatusContextProvider'
-import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
+import { useCollectionDeletionStatus } from '../../contextProvider/CollectionDeletionStatusContextProvider'
+import { useConnectionStatus } from '../../contextProvider/ConnectionStatusContextProvider'
 import { handleInvalidToken } from '../../utils/auth'
 
 const apiUrl=import.meta.env.VITE_API_URL

@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import { Collection } from '../collection/Collection'
 import './Collections.css'
-import { useCollectionDeletionStatus } from '../contextProvider/CollectionDeletionStatusContextProvider'
+import { useCollectionDeletionStatus } from '../../contextProvider/CollectionDeletionStatusContextProvider'
 const apiUrl=import.meta.env.VITE_API_URL
 
 export const Collections =()=>{

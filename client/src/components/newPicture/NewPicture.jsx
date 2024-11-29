@@ -1,10 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import './NewPicture'
-import { useCollectionDeletionStatus } from '../contextProvider/CollectionDeletionStatusContextProvider'
+import { useCollectionDeletionStatus } from '../../contextProvider/CollectionDeletionStatusContextProvider'
 import { addInfo } from '../../data/logos'
 
-import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
+import { useConnectionStatus } from '../../contextProvider/ConnectionStatusContextProvider'
 import { handleInvalidToken } from '../../utils/auth'
 
 const apiUrl=import.meta.env.VITE_API_URL
@@ -37,7 +37,7 @@ export const NewPicture = ({collectionUID}) => {
         collectionPictureElement.append('file', newCollectionElementPicture)
         collectionPictureElement.append('collectionUID', collectionUID)
         const token=localStorage.getItem('token')
-        
+
         if(newCollectionElementPicture){
             try {
                 let response=await fetch(`http://${apiUrl}/admin/editElement/addNewPicture`,{

@@ -6,9 +6,9 @@ import { deleteInfo } from '../../data/logos'
 
 
 
-import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
-import { useCollectionElementInformationsToUpdate } from '../contextProvider/CollectionElementInformationsToUpdateContextProvider'
-import { useCollectionElementInformationsToUpdateDelete } from '../contextProvider/CollectionElementInformationsToUpdateDeleteContextProvider'
+import { useCollectionElementInformations } from '../../contextProvider/CollectionElementInformationsContextProvider'
+import { useCollectionElementInformationsToUpdate } from '../../contextProvider/CollectionElementInformationsToUpdateContextProvider'
+import { useCollectionElementInformationsToUpdateDelete } from '../../contextProvider/CollectionElementInformationsToUpdateDeleteContextProvider'
 
 export const UpdateCollectionElementInformations = ({collectionUID}) => {
     const inputRef=useRef(null)

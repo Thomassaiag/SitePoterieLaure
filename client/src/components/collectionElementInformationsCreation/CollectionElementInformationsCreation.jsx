@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import {nanoid} from  'nanoid'
-import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
+import { useCollectionElementInformations } from '../../contextProvider/CollectionElementInformationsContextProvider'
 import './CollectionElementInformationsCreation.css'
 import { addInfo } from '../../data/logos'
 import { deleteInfo } from '../../data/logos'

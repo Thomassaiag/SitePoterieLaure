@@ -6,8 +6,8 @@ import { CollectionElementInformations } from '../collectionElementInformations/
 import './CollectionElement.css'
 import { CollectionMainPic } from '../collectionMainPic/CollectionMainPic'
 import { UpdateCollectionElement } from '../updateCollectionElement/UpdateCollectionElement'
-import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
-import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
+import { useCollectionElementInformations } from '../../contextProvider/CollectionElementInformationsContextProvider'
+import { useConnectionStatus } from '../../contextProvider/ConnectionStatusContextProvider'
 
 import { nextCollection } from '../../data/logos'
 import { previousCollection } from '../../data/logos'

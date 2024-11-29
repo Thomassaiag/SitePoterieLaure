@@ -6,9 +6,9 @@ import './CollectionElementCreation.css'
 
 
 import { CollectionElementInformationsCreation } from '../collectionElementInformationsCreation/CollectionElementInformationsCreation'
-import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
+import { useCollectionElementInformations } from '../../contextProvider/CollectionElementInformationsContextProvider'
 
-import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
+import { useConnectionStatus } from '../../contextProvider/ConnectionStatusContextProvider'
 import { handleInvalidToken } from '../../utils/auth'
 
 

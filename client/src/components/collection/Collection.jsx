@@ -4,8 +4,8 @@ import './Collection.css'
 import { CollectionMainPic } from '../collectionMainPic/CollectionMainPic'
 import { DeleteCollectionElement } from '../deleteCollectionElement/DeleteCollectionElement'
 
-import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
-import { useCollectionDeletionStatus } from '../contextProvider/CollectionDeletionStatusContextProvider'
+import { useConnectionStatus } from '../../contextProvider/ConnectionStatusContextProvider'
+import { useCollectionDeletionStatus } from '../../contextProvider/CollectionDeletionStatusContextProvider'
 
 import {handleInvalidToken} from '../../utils/auth'
 
