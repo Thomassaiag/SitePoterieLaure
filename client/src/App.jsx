@@ -10,13 +10,13 @@ import { AdminPage } from './pages/AdminPage'
 import { ContactPage } from './pages/ContactPage'
 import { ConnectionPage } from './pages/ConnectionPage'
 import { AccountCreationPage } from './pages/AccountCreationPage'
-
+import { UserActivityTracker } from './hooks/useUserActivityTracker'
 
 function App() {
 
 
   return (
-    <>
+    <UserActivityTracker>
       <Routes>
         <Route path='/' element={<HomePage/>}/>
         <Route path='/collections' element={<CollectionsPage/>}/>
@@ -29,7 +29,7 @@ function App() {
         <Route path='/connection' element={<ConnectionPage/>}/>
         <Route path='/accountCreation' element={<AccountCreationPage/>}/>
       </Routes>
-    </>
+    </UserActivityTracker>
   )
   }
 
