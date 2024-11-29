@@ -21,13 +21,15 @@ export const Connection = () => {
         console.log(`adminConnection Connection=>${connectionAttributes.adminConnection}`)
         console.log(`connectedUserFirstName Connection=>${connectionAttributes.connectedUserFirstName}`)
         console.log(`invalidConnection Connection=>${connectionAttributes.invalidConnection}`)
+        console.log(`invalidToken Connection=>${connectionAttributes.invalidToken}`)
     },[connectionAttributes])
 
 
     const handleChange=(e)=>{
         setConnectionAttributes(prevConnectionAttributes=>({
             ...prevConnectionAttributes,
-            invalidConnection:true
+            invalidConnection:true,
+            invalidToken: false
         }))
         e.preventDefault()
         setCredentials({...credentials,
@@ -43,7 +45,7 @@ export const Connection = () => {
         }
     }
 
-    const handleClick=async (e)=>{
+    const handleConnect=async (e)=>{
         e.preventDefault()
         setLoginClicked(true)
         try {
@@ -74,7 +76,8 @@ export const Connection = () => {
                 const newConnectionAttributes={
                     invalidConnection:false,
                     connectedUserFirstName: user.userFirstName,
-                    adminConnection: user.adminStatus || false
+                    adminConnection: user.adminStatus || false,
+                    invalidToken: false
                 }
                 setConnectionAttributes(newConnectionAttributes)
                 localStorage.setItem('connectionAttributes',JSON.stringify(newConnectionAttributes))
@@ -90,7 +93,7 @@ export const Connection = () => {
         <div className='connectionContainer'>
             {connectionAttributes.invalidConnection && 
             // <div className='credentialContainer'>
-                <form className='credentialForm' onSubmit={handleClick}>
+                <form className='credentialForm' onSubmit={handleConnect}>
                     <div className='formInput'>
                         <div className='labelContainer'>
                             <label htmlFor='userEmail'>Votre Email :</label>
@@ -124,8 +127,12 @@ export const Connection = () => {
             {loginClicked && connectionAttributes.invalidConnection && <p>Compte Inconnu ou password Incorrect, veuillez réessayer ou créer un comte</p>}
             {!connectionAttributes.invalidConnection && !connectionAttributes.adminConnection && <p>Vous êtes Connecté.e</p>}
             {loginClicked && connectionAttributes.adminConnection && <p>Vous êtes Connecté.e en tant qu'administrateur</p>}
-            {connectionAttributes.invalidConnection && <div>
+            
+            {connectionAttributes.invalidConnection && !connectionAttributes.invalidToken && <div>
                 <p>Si vous n'avez pas de compte, vous pouvez en créer un : <Link classeName='accountCreationLink' to='/accountCreation'>Créer un compte</Link></p>
+            </div>}
+            {connectionAttributes.invalidConnection && connectionAttributes.invalidToken && <div>
+                <p>Vous avez été déconnecté.e</p>
             </div>}
             
         </div>

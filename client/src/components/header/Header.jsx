@@ -44,7 +44,8 @@ export const Header = () => {
       ...prevConnectionAttributes,
         adminConnection:false,
         connectedUserFirstName:'',
-        invalidConnection: true
+        invalidConnection: true,
+        invalidToken: false
     }))
     navigateToHomePage()
   }

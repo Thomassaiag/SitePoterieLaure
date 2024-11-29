@@ -5,10 +5,17 @@ import './CollectionElementCreation.css'
 
 import { CollectionElementInformationsCreation } from '../collectionElementInformationsCreation/CollectionElementInformationsCreation'
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
+import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
+import { useNavigate } from 'react-router-dom'
+
+
 const apiUrl=import.meta.env.VITE_API_URL
+
 
 export const CollectionElementCreation = ({newCollectionData}) => {
 
+  let navigate=useNavigate()
+  const {connectionAttributes, setConnectionAttributes}=useConnectionStatus()
   const {currentInformations}=useCollectionElementInformations()
   const [collectionCreated, setCollectionCreated]=useState(false)
   const [collectionCreationIssue, setCollectionCreationIssue]=useState(false)
@@ -37,9 +44,24 @@ export const CollectionElementCreation = ({newCollectionData}) => {
         body: newCollectionData
       })
         
-      if(!response.ok){
+      if(response.status===401){
+          localStorage.removeItem('token')
+          localStorage.removeItem('connectionAttributes')
+          setConnectionAttributes(prevConnectionAttributes=>({
+            ...prevConnectionAttributes,
+              adminConnection:false,
+              connectedUserFirstName:'',
+              invalidConnection: true,
+              invalidToken: true
+          }))
           setCollectionCreationIssue(true)
-          throw new Error('Network response was not OK')
+          navigate('/connection')
+          throw new Error('Token Expired, please login again')
+      }
+
+      if(!response.ok){
+        setCollectionCreationIssue(true)
+        throw new Error('netWork issue')
       }
       else {
         console.log('New Entry Created Successfuly')
