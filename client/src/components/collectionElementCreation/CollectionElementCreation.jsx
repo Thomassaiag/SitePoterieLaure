@@ -7,6 +7,7 @@ import { CollectionElementInformationsCreation } from '../collectionElementInfor
 import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
 import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
 import { useNavigate } from 'react-router-dom'
+const {handleInvalidToken}=require('../../utils/auth')
 
 
 const apiUrl=import.meta.env.VITE_API_URL
@@ -45,20 +46,9 @@ export const CollectionElementCreation = ({newCollectionData}) => {
       })
         
       if(response.status===401){
-          localStorage.removeItem('token')
-          localStorage.removeItem('connectionAttributes')
-          setConnectionAttributes(prevConnectionAttributes=>({
-            ...prevConnectionAttributes,
-              adminConnection:false,
-              connectedUserFirstName:'',
-              invalidConnection: true,
-              invalidToken: true
-          }))
-          setCollectionCreationIssue(true)
-          navigate('/connection')
-          throw new Error('Token Expired, please login again')
+          handleInvalidToken()
       }
-
+      
       if(!response.ok){
         setCollectionCreationIssue(true)
         throw new Error('netWork issue')
