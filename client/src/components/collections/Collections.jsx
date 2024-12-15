@@ -60,7 +60,7 @@ export const Collections =()=>{
               )
             }) 
             ) : (
-              <p>Loading...</p>
+              <p data-testid="loader">Loading...</p>
             )
           }
           </div>

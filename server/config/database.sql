@@ -2,17 +2,61 @@ CREATE DATABASE siteWebLaure;
 
 CREATE TABLE collection (
     collection_uid SERIAL,
-    collection_name VARCHAR(50),
+    ollection_uid INTEGER NOT NULL,
+    collection_title VARCHAR(50),
+    collection_description VARCHAR(50),
+    collection_picture_url VARCHAR(50),
+    collection_picture_alt VARCHAR(50),
+    collection_deletionflag BOOLEAN,
+    collection_email VARCHAR(50),
+    collection_recommandation VARCHAR(50),
+    collection_cooking VARCHAR(50),
     PRIMARY KEY (collection_uid)
 );
 
+
+CREATE TABLE collection_element_pictures (
+    collection_element_picture_uid SERIAL PRIMARY KEY,
+    collection_uid INTEGER NOT NULL,
+    collection_element_picture_url VARCHAR(50) NOT NULL,
+    collection_element_picture_alt VARCHAR(50) NOT NULL,
+    ollection_element_picture_alt BOOLEAN NOT NULL,
+    PRIMARY KEY (collection_element_picture_uid)
+    CONSTRAINT fk_collection FOREIGN KEY (collection_uid) REFERENCES collections(collection_uid) ON DELETE CASCADE
+);
+
+CREATE TABLE collection_element_informations (
+    collection_element_informations_uid SERIAL PRIMARY KEY,
+    collection_uid INTEGER NOT NULL,
+    collection_element_informations_text VARCHAR(50) NOT NULL,
+    PRIMARY KEY (collection_element_informations_uid)
+    CONSTRAINT fk_collection FOREIGN KEY (collection_uid) REFERENCES collections(collection_uid) ON DELETE CASCADE
+);
+
+
 CREATE TABLE user_account (
     user_uid SERIAL NOT NULL,
-    user_email VARCHAR(255),
-    user_password VARCHAR(255),
-    collection_element_information_text VARCHAR(255) NOT NULL,
+    user_email VARCHAR(50) NOT NULL,
+    user_password VARCHAR(50) NOT NULL,
+    collection_element_information_text VARCHAR(2000) NOT NULL,
     PRIMARY KEY (user_uid)
 );
+
+
+CREATE TABLE newsletter_contact (
+    contactuid SERIAL NOT NULL,
+    contact_firstname VARCHAR(50) NOT NULL,
+    contact_lastname VARCHAR(50) NOT NULL,
+    PRIMARY KEY (contactuid)
+);
+
+CREATE TABLE portrait (
+    portrait_uid SERIAL NOT NULL,
+    portrait_picture_url VARCHAR(50) NOT NULL,
+    portrait_picture_alt VARCHAR(50) NOT NULL,
+    PRIMARY KEY (portrait_uid)
+);
+
 
 
 INSERT INTO collection_element_informationTechnique (collection_uid, collection_element_information_text)

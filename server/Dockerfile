@@ -1,21 +1,20 @@
-# Use the official Node.js image as a base
+# utilisation de l'image Node version 20
 FROM node:20.10.0
 
-# Set the working directory inside the container
+# définition du répertoire dans le container
 WORKDIR /app/server
 
+#copy des fichiers package.json et packaeg.lock.json
 COPY package*.json ./
 
-# Install dependencies
+# Installation des dépendances
 RUN npm install
 
-# Copy all files from the server directory to the working directory
+# Copie de tous les fichiers du répertoire courant vers le répertoire du container précédemment défini
 COPY . .
 
-
-# Expose the port the app runs on
+# Exposition du port sur lequel le back fonctionne
 ENV PORT=14001
 
-
-# Command to run the application
+# Exécution des commandes
 CMD ["node", "server.js"]
