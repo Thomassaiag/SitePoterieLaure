@@ -1,11 +1,13 @@
 .adminHeaderContainer{
-    font-family: 'Questrial';
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin: 0 4rem 4rem 4rem ;
+  padding: 4rem;
+  background-color: rgba(228, 220, 209, 0.4);
 }
 
 .adminHeaderContainer :Link{
-  padding-left: 2rem;
-  padding-right: 2rem;
+  font-family: 'Questrial';
   color:black;
 }

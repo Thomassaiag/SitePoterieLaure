@@ -35,54 +35,54 @@ export const CollectionCreation = () => {
 
 
     return (
-    <div>
-        <form className='collectionCreationForm' onSubmit={handleSubmit}>
-            <div className='collectionCreationInput'>
-                <label htmlFor='collectionTitle'>Nom de la Collection : </label> 
-                <input
-                    id='collectionTitle'
-                    type="text"
-                    name="collectionTitle"
-                    onChange={handleTextChange}
-                    required
-                />
-            </div>
-            <br></br>
-            <div className='collectionCreationInput'>
-                <label htmlFor='collectionPicture'>Image principale pour la Collection : </label> 
-                <input
-                    id='collectionPicture'
-                    type='file'
-                    name='collectionPicture'
-                    accept="image/*"
-                    onChange={handleFileChange}
-                />
-            </div>
-            <br></br>
-            <div className='collectionCreationInput'>
-                <label htmlFor='collectionDescription'>Titre de la Collection : </label> 
-                <input
-                    id='collectionDescription'
-                    type='text'
-                    name='collectionDescription'
-                    onChange={handleTextChange}
-                    required
-                />
-            </div>
-            <br></br>
-            <br></br>
-            <button className='createCollectionButton' type='submit'>Créer La Collection</button>
-        </form>
-        <br />
-        {collectionCreated && 
-            <>
-                <br />
-                <CollectionElementCreation newCollectionData={newCollectionData}/> 
-            </>
-        }
 
-            {/* <CollectionElementCreation newCollectionData={newCollectionData}/>  */}
+        <div className='CollectionCreationContainer'>
+            <form className='collectionCreationForm' onSubmit={handleSubmit}>
+                <div className='collectionCreationInput'>
+                    <label htmlFor='collectionTitle'>Nom de la Collection : </label> 
+                    <input
+                        id='collectionTitle'
+                        type="text"
+                        name="collectionTitle"
+                        onChange={handleTextChange}
+                        required
+                    />
+                </div>
+                <br></br>
+                <div className='collectionCreationInput'>
+                    <label htmlFor='collectionPicture'>Image principale pour la Collection : </label> 
+                    <input
+                        id='collectionPicture'
+                        type='file'
+                        name='collectionPicture'
+                        accept="image/*"
+                        onChange={handleFileChange}
+                    />
+                </div>
+                <br></br>
+                <div className='collectionCreationInput'>
+                    <label htmlFor='collectionDescription'>Titre de la Collection : </label> 
+                    <input
+                        id='collectionDescription'
+                        type='text'
+                        name='collectionDescription'
+                        onChange={handleTextChange}
+                        required
+                    />
+                </div>
+                <br></br>
+                <br></br>
+                <button className='createCollectionButton' type='submit'>Ajouter les détails de la Collection</button>
+            </form>
+            <br />
+            {collectionCreated && 
+                <>
+                    <br />
+                    <CollectionElementCreation newCollectionData={newCollectionData}/> 
+                </>
+            }
+                {/* <CollectionElementCreation newCollectionData={newCollectionData}/>  */}
+        </div>
 
-    </div>
     )
 }

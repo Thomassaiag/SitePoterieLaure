@@ -1,7 +1,11 @@
-.collectionCreationForm{
-    margin-top: 2rem;
-    padding: 2rem 1rem 2rem 1rem;
+.CollectionCreationContainer{
+    font-family: 'Questrial';
+    margin: 0 4rem 0 4rem ;
+    padding: 4rem;
+    padding-right: 4rem;
+    background-color: rgba(228, 220, 209, 0.4);
 }
+
 
 .collectionCreationInput{
     display: flex;
@@ -18,10 +22,11 @@
 
 .createCollectionButton{
     font-family: "Questrial";
-    font-size: 19px;
+    font-size: 1.5rem;
     background-color: #E4DCD1;
     border-color: black;
     border-style: solid;
     width:30%;
     height: 100%;
+    float: right;
 }

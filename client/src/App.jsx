@@ -8,6 +8,9 @@ import { AdminPage } from './pages/AdminPage'
 import { ContactPage } from './pages/ContactPage'
 import { ConnectionPage } from './pages/ConnectionPage'
 import { AccountCreationPage } from './pages/AccountCreationPage'
+
+import {CollectionCreationPage} from './pages/CollectionCreationPage'
+
 import { UserActivityTracker } from './hooks/useUserActivityTracker'
 
 function App() {
@@ -23,7 +26,7 @@ function App() {
         <Route path='/collections/:id' element={<CollectionElementPage/>}/>
         <Route path='/contact' element={<ContactPage/>}/>
         <Route path='/admin' element={<AdminPage/>}/>
-        <Route path='/admin/creationcollection' element={<AdminPage/>}/>
+        <Route path='/admin/collectionCreation' element={<CollectionCreationPage/>}/>
         <Route path='/connection' element={<ConnectionPage/>}/>
         <Route path='/accountCreation' element={<AccountCreationPage/>}/>
       </Routes>
