@@ -1,15 +1,16 @@
-.inputContainer{
+.createCollectionButtonContainer{
     display: flex;
-    flex-direction: column;
+    margin: 2rem;
+
 }
 
-.collectionElementCreationButton{
+.createCollectionElementButton{
     font-family: "Questrial";
-    font-size: 19px;
+    font-size: 1.5rem;
     background-color: #E4DCD1;
     border-color: black;
     border-style: solid;
-    width:75%;
+    width:30%;
     height: 100%;
-    
+    margin-left: auto;
 }

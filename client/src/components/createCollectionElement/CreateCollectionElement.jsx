@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
-// import './CollectionElementCreation.css'
+import './CreateCollectionElement.css'
 import '../updateCollectionElement/UpdateCollectionElement'
 
 
@@ -199,9 +199,9 @@ export const CreateCollectionElement = ({newCollectionData}) => {
           </div>
         </div>
       </div>
-      <br></br>
-      <br></br>
-      <button className='collectionElementCreationButton'>Ajouter les élements de la nouvelle Collection</button>
+      <div className='createCollectionButtonContainer'>
+        <button className='createCollectionElementButton'>Ajouter les élements de la nouvelle Collection</button>
+      </div>
       {collectionCreated && <p>La collection a été créée avec succès</p>}
       {collectionCreationIssue && <p>La collection n'a été créée</p>}
     </form>

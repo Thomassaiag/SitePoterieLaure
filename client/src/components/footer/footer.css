@@ -1,6 +1,6 @@
-/* .footerWithScrollContainer{
-    margin-top: 3rem;
-} */
+.footerWithScrollContainer{
+    margin-top: auto;
+}
 
 .footerContainer{
     display: flex;

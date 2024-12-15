@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import "./footer.css"
+import "./Footer.css"
 import { ScrollToTop } from '../scrollToTop/ScrollToTop'
 
 
@@ -34,7 +34,7 @@ export const Footer = () => {
             <img src={logoEmail} alt="mail" onClick={handleClick}></img>
         </div>
         <div className='footerTextContainer'>
-            <p>Condition Générales de Vente</p>
+            <p>Conditions Générales de Vente</p>
             <p>/</p>
             <p>Mentions Légales</p>
             <p>/</p>

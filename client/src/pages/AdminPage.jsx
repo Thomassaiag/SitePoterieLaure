@@ -8,6 +8,9 @@ export const AdminPage = () => {
     <div>
         <Header/>
         <AdminHeader/>
+        <br/>
+        <br/>
+        <br/>
         <Footer className='footer'/>
     </div>
   )
