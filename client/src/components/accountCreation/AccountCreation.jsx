@@ -34,9 +34,7 @@ const [credentials, setCredentials]=useState({
         }
         else{
             try {
-                console.log(credentials.userEmail)
-                console.log(credentials.userPassword)
-                let response= await fetch(`http://${apiUrl}}/user/createUserAccount`,{
+                let response= await fetch(`http://${apiUrl}/user/createUserAccount`,{
                     method:'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -48,7 +46,6 @@ const [credentials, setCredentials]=useState({
                         userPassword:credentials.userPassword
                     })
                 })
-                let data= await response.json()
                 if(!response){
                     console.log("something went wrong")
                 }
@@ -57,9 +54,10 @@ const [credentials, setCredentials]=useState({
                     userEmail.value=""
                 }
                 else {
+                    let {token, user, message}= await response.json()
                     setInvalidCreation(false)
                     setButtonClicked(true)
-                    console.log(data)
+                    localStorage.setItem('token',token)
                 }
                 
             } catch (error) {

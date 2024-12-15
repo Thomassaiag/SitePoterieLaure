@@ -1,14 +1,23 @@
 import React, {useEffect, useState} from 'react'
-
+import { useNavigate } from 'react-router-dom'
 import '../collectionElement/CollectionElement.css'
 import './CollectionElementCreation.css'
 
+
+
 import { CollectionElementInformationsCreation } from '../collectionElementInformationsCreation/CollectionElementInformationsCreation'
-import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
+import { useCollectionElementInformations } from '../../contextProvider/CollectionElementInformationsContextProvider'
+
+import { useConnectionStatus } from '../../contextProvider/ConnectionStatusContextProvider'
+import { handleInvalidToken } from '../../utils/auth'
+
+
 const apiUrl=import.meta.env.VITE_API_URL
 
-export const CollectionElementCreation = ({newCollectionData}) => {
 
+export const CollectionElementCreation = ({newCollectionData}) => {
+  const navigate=useNavigate()
+  const {setConnectionAttributes}=useConnectionStatus()
   const {currentInformations}=useCollectionElementInformations()
   const [collectionCreated, setCollectionCreated]=useState(false)
   const [collectionCreationIssue, setCollectionCreationIssue]=useState(false)
@@ -27,15 +36,24 @@ export const CollectionElementCreation = ({newCollectionData}) => {
     e.preventDefault()
     setCollectionCreated(false)
     setCollectionCreationIssue(false)
+    const token=localStorage.getItem('token')
     try {
       const response=await fetch(`http://${apiUrl}/admin/createCollection`,{
         method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: newCollectionData
       })
         
+      if(response.status===401){
+        handleInvalidToken(navigate, setConnectionAttributes)
+        setCollectionCreationIssue(true)
+      }
+
       if(!response.ok){
-          setCollectionCreationIssue(true)
-          throw new Error('Network response was not OK')
+        setCollectionCreationIssue(true)
+        throw new Error('netWork issue')
       }
       else {
         console.log('New Entry Created Successfuly')

@@ -1,6 +1,7 @@
 import {React, useEffect} from 'react'
 import { Link, useNavigate,useLocation } from 'react-router-dom'
-import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
+import { useConnectionStatus } from '../../contextProvider/ConnectionStatusContextProvider'
+
 import "./header.css"
 import {nanoid} from  'nanoid'
 import { laureLogo } from '../../data/logos'
@@ -44,7 +45,8 @@ export const Header = () => {
       ...prevConnectionAttributes,
         adminConnection:false,
         connectedUserFirstName:'',
-        invalidConnection: true
+        invalidConnection: true,
+        invalidToken: false
     }))
     navigateToHomePage()
   }

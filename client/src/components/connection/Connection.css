@@ -66,4 +66,4 @@
 .accountCreationLink .accountCreationLink:link .accountCreationLink:visited .accountCreationLink:hover .accountCreationLink:active .accountCreationLink:focus {
     all: unset; /* Resets all inheritable and non-inheritable properties */
     display: inline; /* Reapply inline display to make it behave like a standard link */
-  }
+}

@@ -3,8 +3,8 @@ import React,{useState, useEffect} from 'react'
 import './CollectionElementPictures.css'
 import { CollectionElementPicture } from '../collectionElementPicture/CollectionElementPicture'
 import { NewPicture } from '../newPicture/NewPicture'
-import { useCollectionDeletionStatus } from '../contextProvider/CollectionDeletionStatusContextProvider'
-import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
+import { useCollectionDeletionStatus } from '../../contextProvider/CollectionDeletionStatusContextProvider'
+import { useConnectionStatus } from '../../contextProvider/ConnectionStatusContextProvider'
 const apiUrl=import.meta.env.VITE_API_URL
 
 export const CollectionElementPictures = ({collection_uid}) => {
