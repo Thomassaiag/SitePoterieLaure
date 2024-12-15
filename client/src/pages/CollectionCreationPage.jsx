@@ -1,7 +1,7 @@
 import React from 'react'
 import { Header } from '../components/header/Header'
 import { Footer } from '../components/footer/Footer'
-import { CollectionCreation } from '../components/collectionCreation/CollectionCreation'
+import { CreateCollection } from '../components/createcollection/CreateCollection'
 import { AdminHeader } from '../components/adminHeader/AdminHeader'
 
 export const CollectionCreationPage = () => {
@@ -9,7 +9,7 @@ export const CollectionCreationPage = () => {
     <div>
         <Header/>
         <AdminHeader/>
-        <CollectionCreation/>
+        <CreateCollection/>
         <Footer className='footer'/>
     </div>
   )

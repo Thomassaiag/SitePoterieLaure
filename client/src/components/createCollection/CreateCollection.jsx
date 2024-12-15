@@ -1,8 +1,8 @@
 import React,{useState, useEffect} from 'react'
-import { CollectionElementCreation } from '../collectionElementCreation/CollectionElementCreation'
-import './CollectionCreation.css'
+import { CreateCollectionElement } from '../CreatecollectionElement/CreateCollectionElement'
+import './CreateCollection.css'
 
-export const CollectionCreation = () => {
+export const CreateCollection = () => {
 
     const [collectionCreated, setCollectionCreated]=useState(false)
 
@@ -81,7 +81,7 @@ export const CollectionCreation = () => {
                     <CollectionElementCreation newCollectionData={newCollectionData}/> 
                 </>
             } */}
-                <CollectionElementCreation newCollectionData={newCollectionData}/> 
+                <CreateCollectionElement newCollectionData={newCollectionData}/> 
         </div>
 
     )
