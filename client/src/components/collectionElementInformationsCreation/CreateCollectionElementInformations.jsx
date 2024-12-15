@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react'
 import {nanoid} from  'nanoid'
 import { useCollectionElementInformations } from '../../contextProvider/CollectionElementInformationsContextProvider'
-import './CollectionElementInformationsCreation.css'
+import '../updateCollectionElementInformations/UpdateCollectionElementInformations.css'
 import { addInfo } from '../../data/logos'
 import { deleteInfo } from '../../data/logos'
 
 
-export const CollectionElementInformationsCreation = () => {
+export const CreateCollectionElementInformations = () => {
 
 
     const [inputIDList, setInputIDList]=useState([{id:nanoid()}])
@@ -73,23 +73,21 @@ export const CollectionElementInformationsCreation = () => {
                 const{id}=inputID
                 return (
                     <div className='collectionElementInformationUpdateCreateContainer' key={id}>
-                        <div className='collectionElementInformation'>
-                            <input 
-                                ref={inputRef}
-                                type='text'
-                                name={id}
-                                onChange={(e)=>handleChange(e,id)}
-                                value={currentInformations.informationInputText}
-                                required
-                                />
-                            <div className='deleteButtonContainer'>
-                                <img src={deleteInfo} alt="Delete Input" onClick={(e)=>deleteInformation(e, id)} style={{cursor:'pointer'}}></img>
-                            </div>
+                        <input className='collectionElementInformation'
+                            ref={inputRef}
+                            type='text'
+                            name={id}
+                            onChange={(e)=>handleChange(e,id)}
+                            value={currentInformations.informationInputText}
+                            required
+                            />
+                        <div className='deleteButtonContainer'>
+                            <img src={deleteInfo} alt="Delete Input" onClick={(e)=>deleteInformation(e, id)} style={{cursor:'pointer'}}></img>
                         </div>
                     </div>
                 )
             })}
-            <div className='AddInputButtonContainer'>
+            <div className='AddInputContainer'>
                 <p>Ajouter Une Information</p>
                 <img className='AddInputButton' src={addInfo} alt="Add Information Collection" onClick={addNewInformation} style={{cursor: 'pointer'}}/>
             </div>

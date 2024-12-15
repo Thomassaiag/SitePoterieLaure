@@ -5,7 +5,7 @@ import '../updateCollectionElement/UpdateCollectionElement'
 
 
 
-import { CollectionElementInformationsCreation } from '../collectionElementInformationsCreation/CollectionElementInformationsCreation'
+import { CreateCollectionElementInformations } from '../collectionElementInformationsCreation/CreateCollectionElementInformations'
 import { useCollectionElementInformations } from '../../contextProvider/CollectionElementInformationsContextProvider'
 
 import { useConnectionStatus } from '../../contextProvider/ConnectionStatusContextProvider'
@@ -146,7 +146,7 @@ export const CollectionElementCreation = ({newCollectionData}) => {
 
 
   return (
-    <form className='collectionElementUpdateCreateDescriptionContainer' onSubmit={handleSubmit}>
+    <form className='collectionElementUpdateCreatePresentationContainer' onSubmit={handleSubmit}>
       <div className='collectionElementLeftRightContainer'>
       <div className='collectionElementLeftContainer'>
         <label
@@ -162,12 +162,11 @@ export const CollectionElementCreation = ({newCollectionData}) => {
         />
       </div >
       <div className='collectionElementRightContainer'>
-        <label
-          htmlFor='collectionElementEmail'>
+        <label>
             <h2>Informations techniques</h2>
         </label>
         <div className='collectionElementInformationsContainer'>
-          <CollectionElementInformationsCreation/>
+          <CreateCollectionElementInformations/>
         </div>
         <br/>
         <div className='inputContainer'>
