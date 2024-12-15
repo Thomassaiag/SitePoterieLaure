@@ -13,6 +13,8 @@ import {CollectionCreationPage} from './pages/CollectionCreationPage'
 
 import { UserActivityTracker } from './hooks/useUserActivityTracker'
 
+import './App.css'
+
 function App() {
 
 

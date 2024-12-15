@@ -38,30 +38,27 @@ export const Collections =()=>{
         <p>Ici vous trouverez mes collections passées et actuelles</p>
         <p>Certaines ne sont plus en vente mais vous donneront un aperçu de mon approche artistique, mon univers. </p>
       </div>
-      <div className='collectionGridContainer'>
       <div className='collectionItemsContainer'>
-        {
-      
-          collectionData ? (
-            collectionData.map((collection)=>
-            {
-              const {collection_picture_url,collection_title, collection_picture_alt, collection_uid}=collection
-              return (
-                <div className='collectionItem' key={collection_uid}>
-                  <Collection  
-                    imageUrl={collection_picture_url} 
-                    title={collection_title} 
-                    imageAlt={collection_picture_alt}
-                    collectionUid={collection_uid}
-                  />
-                </div>
-              )
-            }) 
-            ) : (
-              <p>Loading...</p>
+      {      
+        collectionData ? (
+          collectionData.map((collection)=>
+          {
+            const {collection_picture_url,collection_title, collection_picture_alt, collection_uid}=collection
+            return (
+              <div className='collectionItem' key={collection_uid}>
+                <Collection  
+                  imageUrl={collection_picture_url} 
+                  title={collection_title} 
+                  imageAlt={collection_picture_alt}
+                  collectionUid={collection_uid}
+                />
+              </div>
             )
-          }
-        </div>
+          }) 
+          ) : (
+            <p>Loading...</p>
+          )
+        }
       </div>
     </div>
   )
