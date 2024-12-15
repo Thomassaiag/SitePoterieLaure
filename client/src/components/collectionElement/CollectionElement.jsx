@@ -141,8 +141,8 @@ export const CollectionElement = () => {
             <div className='collectionElementPicturesContainer'>
               <CollectionElementPictures collection_uid={newId}/>
             </div>
-            <div className='collectionElementInformationContainer'>
-              <div className='collectionElementLeftContainer'>
+            <div className='collectionElementPresentationContainer'>
+              <div className='collectionElementPresentationLeftContainer'>
                 <h2>En Quelques Mots</h2>
                 <p style={{textAlign:'justify'}}>
                   {collectionElementDescription.replace(/\\n/g,'\n').split('\n').map((line, index)=>{
@@ -154,7 +154,7 @@ export const CollectionElement = () => {
                   })}
                 </p>
               </div>
-              <div className='collectionElementRightContainer'>
+              <div className='collectionElementPresentationRightContainer'>
                 <h2 >Informations techniques</h2>
                 <CollectionElementInformations collection_uid={newId} fetchElementInformations={fetchElementInformations}/>
                 <p style={{textAlign:'left'}}>{collectionElementEmail}</p>

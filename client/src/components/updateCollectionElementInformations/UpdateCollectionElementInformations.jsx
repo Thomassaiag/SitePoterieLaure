@@ -84,7 +84,7 @@ export const UpdateCollectionElementInformations = ({collectionUID}) => {
             currentInformationsToUpdate.map((currentInformationToUpdate)=>{
                 let {collection_element_information_text, collection_element_information_uid}=currentInformationToUpdate
                 return(
-                    <div className='collectionElementInformationUpdateContainer' key={collection_element_information_uid}>
+                    <div className='collectionElementInformationUpdateCreateContainer' key={collection_element_information_uid}>
                         <input className='collectionElementInformation'
                             ref={inputRef}
                             name={collection_element_information_uid}

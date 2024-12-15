@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
-import '../collectionElement/CollectionElement.css'
-import './CollectionElementCreation.css'
+// import './CollectionElementCreation.css'
+import '../updateCollectionElement/UpdateCollectionElement'
 
 
 
@@ -146,10 +146,12 @@ export const CollectionElementCreation = ({newCollectionData}) => {
 
 
   return (
-    <form className='collectionElementInformationContainer' onSubmit={handleSubmit}>
+    <form className='collectionElementUpdateCreateDescriptionContainer' onSubmit={handleSubmit}>
+      <div className='collectionElementLeftRightContainer'>
       <div className='collectionElementLeftContainer'>
         <label
-          htmlFor='collectionElementDescription'>Collection Description  
+          htmlFor='collectionElementDescription'>
+            <h2>En Quelques Mots</h2>
         </label>
         <textarea id='collectionElementDescription'
           type='text'
@@ -161,9 +163,12 @@ export const CollectionElementCreation = ({newCollectionData}) => {
       </div >
       <div className='collectionElementRightContainer'>
         <label
-          htmlFor='collectionElementEmail'>Informations techniques  
+          htmlFor='collectionElementEmail'>
+            <h2>Informations techniques</h2>
         </label>
-        <CollectionElementInformationsCreation/>
+        <div className='collectionElementInformationsContainer'>
+          <CollectionElementInformationsCreation/>
+        </div>
         <br/>
         <div className='inputContainer'>
           <label htmlFor='collectionElementEmail'>Émail : </label>
@@ -197,6 +202,7 @@ export const CollectionElementCreation = ({newCollectionData}) => {
             required        
           />
           </div>
+      </div>
       </div>
       <br></br>
       <br></br>

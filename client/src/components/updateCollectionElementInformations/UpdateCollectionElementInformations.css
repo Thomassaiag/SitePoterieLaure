@@ -1,17 +1,17 @@
-.collectionElementInformationUpdateContainer{
+.collectionElementInformationUpdateCreateContainer{
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
 
-.collectionElementInformationUpdateContainer input{
+.collectionElementInformationUpdateCreateContainer input{
     height: 1rem;
     margin-right: 10px;
     
 }
 
-.collectionElementInformationUpdateContainer img,
+.collectionElementInformationUpdateCreateContainer img,
 .AddInputContainer img
 {
     height: 1rem;

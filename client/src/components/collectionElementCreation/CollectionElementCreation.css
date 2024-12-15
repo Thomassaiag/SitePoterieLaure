@@ -1,11 +1,3 @@
-/* .collectionElementInformationContainer{
-    padding-top: 2rem;
-}
-
-.collectionElementInformationContainer label{
-    font-size: 18px;
-}  */
-
 .inputContainer{
     display: flex;
     flex-direction: column;

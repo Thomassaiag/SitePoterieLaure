@@ -54,7 +54,7 @@
 
 
 /* information CSS */
-.collectionElementInformationContainer{
+.collectionElementPresentationContainer{
     display: grid;
     grid-template-columns: minmax(100px, 2fr) minmax(50px, 1fr);
     box-sizing: border-box;
@@ -66,29 +66,29 @@
 
 
 
-.collectionElementLeftContainer{
+.collectionElementPresentationLeftContainer{
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
     width: 100%;
 }
 
-.collectionElementLeftContainer h2,
-.collectionElementRightContainer h2
+.collectionElementPresentationLeftContainer h2,
+.collectionElementPresentationRightContainer h2
 {
     font-size: 1.5rem;
 }
 
 @media (max-width: 780px) {
-    .collectionElementLeftContainer h2,
-    .collectionElementRightContainer h2
+    .collectionElementPresentationLeftContainer h2,
+    .collectionElementPresentationRightContainer h2
     {
         font-size: 1rem;
     }
     
 }
 
-.collectionElementRightContainer{
+.collectionElementPresentationRightContainer{
     display: flex;
     flex-direction: column;
     align-items: start;

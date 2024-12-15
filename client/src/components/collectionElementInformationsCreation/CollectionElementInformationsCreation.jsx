@@ -72,17 +72,19 @@ export const CollectionElementInformationsCreation = () => {
             {inputIDList.map((inputID)=>{
                 const{id}=inputID
                 return (
-                    <div className='InputContainer'key={id}>
-                        <input 
-                            ref={inputRef}
-                            type='text'
-                            name={id}
-                            onChange={(e)=>handleChange(e,id)}
-                            value={currentInformations.informationInputText}
-                            required
-                            />
-                        <div className='deleteButtonContainer'>
-                            <img src={deleteInfo} alt="Delete Input" onClick={(e)=>deleteInformation(e, id)} style={{cursor:'pointer'}}></img>
+                    <div className='collectionElementInformationUpdateCreateContainer' key={id}>
+                        <div className='collectionElementInformation'>
+                            <input 
+                                ref={inputRef}
+                                type='text'
+                                name={id}
+                                onChange={(e)=>handleChange(e,id)}
+                                value={currentInformations.informationInputText}
+                                required
+                                />
+                            <div className='deleteButtonContainer'>
+                                <img src={deleteInfo} alt="Delete Input" onClick={(e)=>deleteInformation(e, id)} style={{cursor:'pointer'}}></img>
+                            </div>
                         </div>
                     </div>
                 )
