@@ -75,13 +75,13 @@ export const CollectionCreation = () => {
                 <button className='createCollectionButton' type='submit'>Ajouter les détails de la Collection</button>
             </form>
             <br />
-            {collectionCreated && 
+            {/* {collectionCreated && 
                 <>
                     <br />
                     <CollectionElementCreation newCollectionData={newCollectionData}/> 
                 </>
-            }
-                {/* <CollectionElementCreation newCollectionData={newCollectionData}/>  */}
+            } */}
+                <CollectionElementCreation newCollectionData={newCollectionData}/> 
         </div>
 
     )

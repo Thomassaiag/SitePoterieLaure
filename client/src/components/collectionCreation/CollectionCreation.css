@@ -7,7 +7,7 @@
 }
 
 
-.collectionCreationInput{
+.collectionCreationForm{
     display: flex;
     flex-direction: column;
 }
@@ -28,5 +28,5 @@
     border-style: solid;
     width:30%;
     height: 100%;
-    float: right;
+    margin-left: auto;
 }
