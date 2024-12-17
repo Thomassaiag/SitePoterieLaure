@@ -40,6 +40,12 @@ export const CollectionElement = () => {
 
   useEffect(()=>{
     fetchCollectionElement()
+    console.log(collectionElement)
+  },[])
+
+
+  useEffect(()=>{
+    console.log(connectionAttributes.adminConnection)
   },[])
 
   useEffect(()=>{

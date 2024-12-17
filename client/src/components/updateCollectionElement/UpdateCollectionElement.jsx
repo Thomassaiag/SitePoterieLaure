@@ -74,7 +74,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
         throw new Error('netWork issue')
       }
       else {
-        console.log(reponse.message)
+        console.log(response.message)
       }
     } catch (error) {
       console.error('element attributes didn`t get updated ',{message: error})
@@ -231,7 +231,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
             <textarea 
               id='collectionElementDescription'
               type='text'
-              value={collectionElementAttributesToUpdate.collectionElementDescriptionToUpdate}
+              value={collectionElementAttributesToUpdate.collectionElementDescriptionToUpdate || collectionElementDescription}
               onChange={handleChange}
               name='collectionElementDescriptionToUpdate'        
             />
@@ -246,7 +246,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
               <label htmlFor='collectionElementEmail'>Émail :</label>
               <input id='collectionElementEmail'
                 type='text'
-                value={collectionElementAttributesToUpdate.collectionElementEmailToUpdate}
+                value={collectionElementAttributesToUpdate.collectionElementEmailToUpdate || ''}
                 onChange={handleChange}
                 name='collectionElementEmailToUpdate'    
               />
@@ -254,7 +254,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
               <label htmlFor='collectionElementCooking'>Cuisson :</label>
               <input id='collectionElementCooking'
                 type='text'
-                value={collectionElementAttributesToUpdate.collectionElementCookingToUpdate}
+                value={collectionElementAttributesToUpdate.collectionElementCookingToUpdate || ''}
                 onChange={handleChange}
                 name='collectionElementCookingToUpdate'        
               />
@@ -262,7 +262,7 @@ export const UpdateCollectionElement = ({collectionElementDescription, collectio
               <label htmlFor='collectionElementRecommandation'>Recommandation :</label>
               <input id='collectionElementRecommandation'
                 type='text'
-                value={collectionElementAttributesToUpdate.collectionElementRecommandationToUpdate}
+                value={collectionElementAttributesToUpdate.collectionElementRecommandationToUpdate || ''}
                 onChange={handleChange}
                 name='collectionElementRecommandationToUpdate'        
               />

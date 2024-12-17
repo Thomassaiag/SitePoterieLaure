@@ -31,9 +31,13 @@ export const CollectionElementPictures = ({collection_uid}) => {
         setCollectionDeletionStatus(false)
     },[collection_uid,collectionDeletionStatus])
 
-    useEffect(()=>{
-        console.log('adminstatus',connectionAttributes.adminStatus)
-    },[connectionAttributes.adminStatus])
+    // useEffect(()=>{
+    //     console.log('adminstatus',connectionAttributes.adminStatus)
+    // },[connectionAttributes.adminStatus])
+
+        useEffect(()=>{
+        console.log('adminstatus',connectionAttributes.adminConnection)
+    },[])
 
 
     return (
