@@ -58,11 +58,6 @@ export const UpdateCollectionElementInformations = ({collectionUID}) => {
             }]
         })
     }
-    // useEffect(()=>{
-    //     if(inputRef.current){
-    //         inputRef.current.focus()
-    //     }
-    // },[currentInformationsToUpdate])
 
 
     useEffect(()=>{
@@ -86,7 +81,7 @@ export const UpdateCollectionElementInformations = ({collectionUID}) => {
                 return(
                     <div className='collectionElementInformationUpdateCreateContainer' key={collection_element_information_uid}>
                         <input className='collectionElementInformation'
-                            ref={inputRef}
+                            // ref={inputRef}
                             name={collection_element_information_uid}
                             value={collection_element_information_text}
                             onChange={(e)=>updateCollectionElementInformations(e)}
@@ -102,7 +97,6 @@ export const UpdateCollectionElementInformations = ({collectionUID}) => {
         <div className='AddInputContainer'>
             <p>Ajouter Une Information</p>
             <img  src={addInfo} alt="Add Information Collection" onClick={addInformationInput} style={{cursor: 'pointer'}}/>
-            {/* <img button onClick={addInformationInput}>Ajouter une information</button> */}
         </div>
     </>
   )

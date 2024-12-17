@@ -200,7 +200,7 @@ export const CreateCollectionElement = ({newCollectionData}) => {
         </div>
       </div>
       <div className='createCollectionButtonContainer'>
-        <button className='createCollectionElementButton'>Ajouter les élements de la nouvelle Collection</button>
+        <button className='createCollectionElementButton' style={{cursor: 'pointer'}}>Ajouter les élements de la nouvelle Collection</button>
       </div>
       {collectionCreated && <p>La collection a été créée avec succès</p>}
       {collectionCreationIssue && <p>La collection n'a été créée</p>}

@@ -119,7 +119,7 @@ export const Connection = () => {
                         />
                     </div>
                     <div>
-                        <button className='loginButton' >Login</button>
+                        <button className='loginButton' style={{cursor: 'pointer'}}>Login</button>
                     </div>
                 </form>
             // </div>

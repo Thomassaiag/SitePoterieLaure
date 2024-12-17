@@ -21,6 +21,7 @@ export const CollectionElement = () => {
  
   const [newId, setNewId]=useState(id)
 
+  //States initialisation
   const [collectionElement, setCollectionElement]=useState({})
   const [previousCollectionPicture, setPreviousCollectionPicture]=useState([])
   const [nextCollectionPicture, setNextCollectionPicture]=useState([])
@@ -34,19 +35,17 @@ export const CollectionElement = () => {
 
   const {connectionAttributes}=useConnectionStatus()
 
+  //fetch collection Uids to then fetch next/previous pictures
   useEffect(()=>{
     fetchAllCollectionUids()
   },[])
 
+  //fetch all collection element (description, email, cooking, recommandation)
   useEffect(()=>{
     fetchCollectionElement()
     console.log(collectionElement)
   },[])
 
-
-  useEffect(()=>{
-    console.log(connectionAttributes.adminConnection)
-  },[])
 
   useEffect(()=>{
     let {collection_element_title, collection_element_description, collection_element_email, collection_element_cooking, collection_element_recommandation }=collectionElement
@@ -58,47 +57,73 @@ export const CollectionElement = () => {
   },[collectionElement])
 
 
+  //fetch all collection element (description, email, cooking, recommandation)
   const fetchCollectionElement=async()=>{
     try {
       let response= await fetch(`http://${apiUrl}/collectionElement/${newId}`)
-      let jsonData= await response.json()
-      setCollectionElement(jsonData[0])
+      if(!response.ok){
+        throw new Error('netWork issue')
+      }else {
+        let jsonData= await response.json()
+        setCollectionElement(jsonData[0])
+      }
     } catch (error) {
-      
+      console.error('collection Element couldn\'t be fetched', {message:error})
     }
   }
 
-
+  //Fetch collection information only as on a separate table
   const fetchElementInformations=async(collectionUid)=>{
-    let response=await fetch(`http://${apiUrl}/collectionElement/${collectionUid}/information`)
-    let jsonData=await response.json()
-    setCurrentInformations(jsonData)
-}
-  
+    try {
+      let response=await fetch(`http://${apiUrl}/collectionElement/${collectionUid}/information`)
+      if(!response.ok){
+        throw new Error('netWork issue')
+      } else {
+        let jsonData=await response.json()
+        setCurrentInformations(jsonData)
+      }
+    } catch (error) {
+      console.error('collection Information couldn\'t be fetched', {message:error})
+    }
+  }
+
+  //fetch collection Uids to then fetch next/previous pictures
   const fetchAllCollectionUids=async()=>{
     try {
       let response=await fetch(`http://${apiUrl}/collections/allCollectionsUids`)
-      let jsonData= await response.json()
-      jsonData= await jsonData.map(element=>element.collection_uid)
-      setCollectionUids(jsonData)
+      
+      if(!response.ok){
+        throw new Error('netWork issue')
+        
+      } else {
+        let jsonData= await response.json()
+        jsonData= await jsonData.map(element=>element.collection_uid)
+        setCollectionUids(jsonData)
+      }
+
+          
     } catch (error) {
-      console.log(error)
+      console.error('collection UIDs couldn\'t be fetched', {message:error})
     }
   }
 
-
+  //fetch previous and next collection pictures based on current collection UID, after right or left click
   const fetchNextPreviousCollection=async()=>{
     try {
       let response= await fetch(`http://${apiUrl}/collections/${newId}/collection`)
-      let jsonData= await response.json()
-      console.log('jsonData => ',jsonData)
-      setPreviousCollectionPicture(jsonData[0])
-      setNextCollectionPicture(jsonData[1])
+      if(!response.ok){
+        throw new Error('netWork issue')
+      } else {
+        let jsonData= await response.json()
+        setPreviousCollectionPicture(jsonData[0])
+        setNextCollectionPicture(jsonData[1])
+      }
     } catch (error) {
-      
+      console.error('collection UIDs couldn\'t be fetched', {message:error})
     }
   }
 
+  //get previous collection UID
   const handleLeftClick=()=>{
     setNewId((prevId)=>{
       if(collectionUids.indexOf(parseInt(prevId))!=0){
@@ -110,6 +135,7 @@ export const CollectionElement = () => {
     })
   }
   
+  //get next collection UID
   const handleRightClick=()=>{
     setNewId((prevId)=>{
       if(collectionUids.indexOf(parseInt(prevId))!=collectionUids.length-1){
@@ -121,12 +147,13 @@ export const CollectionElement = () => {
     })
   }
   
+  //when collection Id changes, we fetch all new collection elements
   useEffect(()=>{
     navigate(`/collections/${newId}`)
     fetchCollectionElement()
   },[newId])
   
-
+  //when collection Id changes, we fetch new next & previous collection picture
    useEffect(()=>{
     fetchNextPreviousCollection()
   },[newId])

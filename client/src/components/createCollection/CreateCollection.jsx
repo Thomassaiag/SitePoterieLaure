@@ -72,7 +72,7 @@ export const CreateCollection = () => {
                 </div>
                 <br></br>
                 <br></br>
-                <button className='createCollectionButton' type='submit'>Ajouter les détails de la Collection</button>
+                <button className='createCollectionButton' type='submit' style={{cursor: 'pointer'}}>Ajouter les détails de la Collection</button>
             </form>
             <br />
             {/* {collectionCreated && 
