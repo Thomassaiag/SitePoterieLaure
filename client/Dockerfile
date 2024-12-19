@@ -1,6 +1,9 @@
 # Use the official Node.js image as a base
 FROM node:20.10.0
 
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
+
 WORKDIR /app/client
 
 COPY package*.json ./
