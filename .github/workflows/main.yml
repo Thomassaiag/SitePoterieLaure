@@ -65,6 +65,7 @@ jobs:
           tags: thomassaiag/siteweblaure-server:latest
           build-args: |
             JWT_SECRET=${{ secrets.JWT_SECRET }}
+            JWT_EXPIRATION='30m'
 
       #build and push client image
       - name: Build and push client image
