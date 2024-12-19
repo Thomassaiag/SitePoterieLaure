@@ -14,13 +14,13 @@
     padding-top: 2rem;
     color: #c7bdb1;
 }
-  
+
 .footerTextContainer{
     display: flex;
     align-items: center;
     justify-content: center;
 }
-  
+
 .footerTextContainer p{
     padding-left: 0.5rem;
 }
