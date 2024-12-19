@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import "./Footer2.css"
+import "./Footer.css"
 import { ScrollToTop } from '../scrollToTop/ScrollToTop'
 
 
