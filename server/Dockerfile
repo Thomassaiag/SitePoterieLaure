@@ -4,6 +4,9 @@ FROM node:20.10.0
 ARG JWT_SECRET
 ENV JWT_SECRET=$JWT_SECRET
 
+ARG JWT_EXPIRATION
+ENV JWT_EXPIRATION=&JWT_EXPIRATION
+
 # Set the working directory inside the container
 WORKDIR /app/server
 
