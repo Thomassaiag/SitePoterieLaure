@@ -1,6 +1,9 @@
 # Use the official Node.js image as a base
 FROM node:20.10.0
 
+ARG JWT_SECRET
+ENV JWT_SECRET=$JWT_SECRET
+
 # Set the working directory inside the container
 WORKDIR /app/server
 
