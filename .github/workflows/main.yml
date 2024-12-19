@@ -61,6 +61,8 @@ jobs:
         uses: docker/build-push-action@v4
         with: 
           context: ./server
+          build-args: |
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
           push: true
           tags: thomassaiag/siteweblaure-server:latest
 
