@@ -69,6 +69,7 @@ const deleteCollectionElementPicture=async(req, res, next)=>{
 //update Collection Attributes
 const updateCollectionElementAttributes=async(req, res,next)=>{
     try {
+        //We pass the paramater from the component and use it in the SQL Query
         let {descriptionToUpdate, emailToUpdate, cookingToUpdate, recommandationToUpdate, collectionUID}=req.body
 
         let collectionElementAttributesToUpdate=await pool.query(
@@ -87,6 +88,7 @@ const updateCollectionElementAttributes=async(req, res,next)=>{
         }
         else res.status(404).json({message: `collection ${collectionUID} Element NOT updated` })
     } catch (error) {
+        //if an error occur, we revert to the previous state of the query
         await pool.query('ROLLBACK')
         console.error(`Error updating collection Element Attribute=> ${error} `)
         return res.status(500).json({message:"Error updating collection Element Attribute"})

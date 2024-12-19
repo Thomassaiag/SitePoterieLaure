@@ -8,7 +8,7 @@ import {HomePageNavigationPicture} from '../homePageNavigationPicture/HomePageNa
 
 export const Presentation = () => {
   return (
-    <>
+    <div className='presentationMainContainer'>
       <div className='presentationPictureContainer'>
           <h1>Créations céramiques utilitaires et décoratives</h1>
           <br/>
@@ -19,18 +19,18 @@ export const Presentation = () => {
           navigationElements.map((navigationElement)=>{
             const {id, picture, picDescription, navigation, buttonName}=navigationElement
             return (
-              <div className='navigationElementContainer' key={id}>
-                <HomePageNavigationPicture 
+              // <div className='navigationElementContainer' key={id}>
+                <HomePageNavigationPicture className='navigationElementContainer' key={id}
                   picture={picture}
                   picDescription={picDescription}
                   navigation={navigation}
                   buttonName={buttonName}
                 />
-              </div>
+              /* </div> */
             )
           })
         }
       </div>
-    </>
+    </div>
   )
 }

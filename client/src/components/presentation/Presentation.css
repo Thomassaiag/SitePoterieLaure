@@ -1,4 +1,9 @@
 
+.presentationMainContainer{
+    display: flex;
+    flex-direction: column;
+}
+
 .presentationPictureContainer{
     height: 20rem;
     display: flex;
@@ -13,7 +18,6 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    width: 100%;
 }
 
 
@@ -32,7 +36,6 @@
 
 .welcomePagePicture{
     position: absolute;
-    width: 100%;
     height: 100%;
     object-fit: cover;
     z-index: -1;
@@ -42,7 +45,9 @@
 .navigationPicturesContainer{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-    width: 100%;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    justify-items: center;
 }
 
 .navigationPicturesContainer img{
@@ -52,7 +57,5 @@
 .navigationElementContainer{
     display: flex;
     flex-direction: column;
-    margin-left: 1rem;
-    margin-right: 1rem;
 }
 

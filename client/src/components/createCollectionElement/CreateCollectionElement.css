@@ -1,0 +1,16 @@
+.createCollectionButtonContainer{
+    display: flex;
+    margin: 2rem;
+
+}
+
+.createCollectionElementButton{
+    font-family: "Questrial";
+    font-size: 1.5rem;
+    background-color: #E4DCD1;
+    border-color: black;
+    border-style: solid;
+    width:30%;
+    height: 100%;
+    margin-left: auto;
+}

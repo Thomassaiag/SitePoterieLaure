@@ -6,9 +6,9 @@ import { deleteInfo } from '../../data/logos'
 
 
 
-import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
-import { useCollectionElementInformationsToUpdate } from '../contextProvider/CollectionElementInformationsToUpdateContextProvider'
-import { useCollectionElementInformationsToUpdateDelete } from '../contextProvider/CollectionElementInformationsToUpdateDeleteContextProvider'
+import { useCollectionElementInformations } from '../../contextProvider/CollectionElementInformationsContextProvider'
+import { useCollectionElementInformationsToUpdate } from '../../contextProvider/CollectionElementInformationsToUpdateContextProvider'
+import { useCollectionElementInformationsToUpdateDelete } from '../../contextProvider/CollectionElementInformationsToUpdateDeleteContextProvider'
 
 export const UpdateCollectionElementInformations = ({collectionUID}) => {
     const inputRef=useRef(null)
@@ -58,11 +58,6 @@ export const UpdateCollectionElementInformations = ({collectionUID}) => {
             }]
         })
     }
-    // useEffect(()=>{
-    //     if(inputRef.current){
-    //         inputRef.current.focus()
-    //     }
-    // },[currentInformationsToUpdate])
 
 
     useEffect(()=>{
@@ -84,16 +79,14 @@ export const UpdateCollectionElementInformations = ({collectionUID}) => {
             currentInformationsToUpdate.map((currentInformationToUpdate)=>{
                 let {collection_element_information_text, collection_element_information_uid}=currentInformationToUpdate
                 return(
-                    <div className='collectionElementInformationContainer' key={collection_element_information_uid}>
+                    <div className='collectionElementInformationUpdateCreateContainer' key={collection_element_information_uid}>
                         <input className='collectionElementInformation'
-                            ref={inputRef}
+                            // ref={inputRef}
                             name={collection_element_information_uid}
                             value={collection_element_information_text}
                             onChange={(e)=>updateCollectionElementInformations(e)}
                         />
-                        <div className='deleteButtonContainer'>
-                            <img src={deleteInfo} alt="Delete Input" onClick={(e)=>discardInformationInput(e,collection_element_information_uid)} style={{cursor: 'pointer'}}/>
-                        </div>
+                        <img src={deleteInfo} alt="Delete Input" onClick={(e)=>discardInformationInput(e,collection_element_information_uid)} style={{cursor: 'pointer'}}/>
                     </div>
                 )
             })
@@ -101,10 +94,9 @@ export const UpdateCollectionElementInformations = ({collectionUID}) => {
                 <p>Loading...</p>
             )
         }
-        <div className='AddInputButtonContainer'>
+        <div className='AddInputContainer'>
             <p>Ajouter Une Information</p>
-            <img className='AddInputButton' src={addInfo} alt="Add Information Collection" onClick={addInformationInput} style={{cursor: 'pointer'}}/>
-            {/* <img button onClick={addInformationInput}>Ajouter une information</button> */}
+            <img  src={addInfo} alt="Add Information Collection" onClick={addInformationInput} style={{cursor: 'pointer'}}/>
         </div>
     </>
   )

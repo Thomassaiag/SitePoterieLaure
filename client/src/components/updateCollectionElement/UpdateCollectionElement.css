@@ -1,32 +1,83 @@
+.collectionElementUpdateCreatePresentationContainer{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(228, 220, 209, 0.4);
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-family: "Questrial";
+}
+
+.collectionElementLeftRightContainer{
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: minmax(100px, 2fr) minmax(50px, 1fr);
+    box-sizing: border-box;
+    margin: 2rem;
+}
+
+
+.collectionElementLeftContainer textarea{
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.collectionElementInformationsContainer{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: flex-start;
+    justify-items: start;
+}
+
 #collectionElementDescription{
     width:100%;
     height: 30rem;
 }
 
-.collectionElementEmailCookingRecoContainer input{
-    display:block;
-    width:auto;
-    min-width:75%;
-}
-.collectionElementUpdateInformationContainer{
-    padding: 0;
-    margin: 0;
-    font-size: 12;
+.collectionElementEmailCookingRecoContainer{
+    display: flex;
+    flex-direction: column;
 
 }
+
+.collectionElementEmailCookingRecoContainer input,
+.collectionElementEmailCookingRecoContainer label
+{
+    max-width:40rem;
+}
+
+@media (max-width:630px ) {
+    .collectionElementInformationsContainer input,
+    .collectionElementInformationsContainer label,
+    .collectionElementEmailCookingRecoContainer input,
+    .collectionElementEmailCookingRecoContainer label,
+    .AddInputContainer p
+    {
+        width:4rem;
+        font-size: 10px;
+    }
+    
+}
+
+
 
 .updateCollectionButtonContainer{
-    padding-right: 1rem;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    height: 3rem;
 }
 
 .updateCollectionButton{
-    font-family: "Questrial";
-    font-size: 19px;
-    background-color: #E4DCD1;
+    font-family: "Somber";
+    font-size: 1.5rem;
+    background-color:transparent;
     border-color: black;
     border-style: solid;
-    width:30%;
+    width:auto;
     height: 100%;
+    margin-right: 2rem;
 }

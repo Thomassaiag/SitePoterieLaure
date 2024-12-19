@@ -8,7 +8,7 @@ export const PortraitPage = () => {
     <div>
         <Header/>
         <Portrait/>
-        <Footer/>
+        <Footer className='footer'/>
     </div>
   )
 }
