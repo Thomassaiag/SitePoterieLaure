@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react'
-import { CreateCollectionElement } from '../CreatecollectionElement/CreateCollectionElement'
+import { CreateCollectionElement } from '../createCollectionElement/CreateCollectionElement' 
 import './CreateCollection.css'
 
 export const CreateCollection = () => {
@@ -75,13 +75,13 @@ export const CreateCollection = () => {
                 <button className='createCollectionButton' type='submit' style={{cursor: 'pointer'}}>Ajouter les détails de la Collection</button>
             </form>
             <br />
-            {/* {collectionCreated && 
+            {collectionCreated && 
                 <>
                     <br />
-                    <CollectionElementCreation newCollectionData={newCollectionData}/> 
+                    <CreateCollectionElement newCollectionData={newCollectionData}/> 
                 </>
-            } */}
-                <CreateCollectionElement newCollectionData={newCollectionData}/> 
+            }
+                {/* <CreateCollectionElement newCollectionData={newCollectionData}/>  */}
         </div>
 
     )
