@@ -10,6 +10,7 @@ export const Collections =()=>{
 
   useEffect(()=>{
     window.scrollTo(0,0)
+    console.log(apiUrl)
   },[])
 
   const fetchCollections=async ()=>{
