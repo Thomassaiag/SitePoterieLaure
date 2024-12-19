@@ -2,8 +2,6 @@ li {
     list-style: none;
 }
 
-.collectionElementInformationsContainer{
+ul{
     padding: 0;
-    margin: 0;
-    font-size: 12;
 }

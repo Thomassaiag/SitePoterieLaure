@@ -49,11 +49,11 @@ export const ContactMessage = ({locationHash}) => {
         }
     },[locationHash])
 
+
     const sendMessage= async (e)=>{
         e.preventDefault()
         setMessageSent(false)
         setMessageSentIssue(false)
-        console.log(emailData)
         try {
             const response=await fetch(`http://${apiUrl}/contact/message`,{
                 method: 'POST',
@@ -68,8 +68,6 @@ export const ContactMessage = ({locationHash}) => {
                     senderMessage:emailData.senderMessage
                 })
             })
-            const data = await response.json()
-            
             if(!response.ok){
                 setMessageSentIssue(true)
                 throw new Error('NetWork response was not ok')
@@ -78,7 +76,6 @@ export const ContactMessage = ({locationHash}) => {
         } catch (err) {
             console.error(`Error sending Email => ${err}`)
             setMessageSentIssue(true)
-
         }
     }
 

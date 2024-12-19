@@ -4,28 +4,26 @@ const ConnectionStatus=createContext()
 
 export const ConnectionStatusContextProvider = ({children}) => {
 
+    //State initialiation with check for admin connection, userFirstame for greetings, invalid Connection
     const [connectionAttributes, setConnectionAttributes]=useState({
         adminConnection:false,
         connectedUserFirstName:'',
         invalidConnection: true
     })
 
-
+    //when component mounts we check if we already have someone logged
     useEffect(()=>{
         const storedConnectionAttributes=localStorage.getItem('connectionAttributes')
-        console.log(`storedConnectionAttributes => ${storedConnectionAttributes}`)
         if(storedConnectionAttributes){
             setConnectionAttributes(JSON.parse(storedConnectionAttributes))
         }
     },[])
 
+
+    //when connection attribute gets updated, we used localstorage to store the connectionAttributes object
     useEffect(()=>{
         localStorage.setItem('connectionAttributes',JSON.stringify(connectionAttributes))
     },[connectionAttributes])
-
-    useEffect(()=>{
-        console.log(localStorage)
-    },[])
 
     return (
     <>

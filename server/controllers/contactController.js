@@ -15,19 +15,16 @@ const sendMessage=async (req, res,next)=>{
             pass:process.env.MAILPASSWORD
         }
     })
-
     const mailOptions={
         from: senderEmail, 
         to: 'thomas.saiag@gmail.com',
         subject:object,
         text: `message from ${firstName} ${lastName} : ${senderMessage}`
     }
-
     try {
         await transporter.sendMail(mailOptions)
         res.status(200).send({message: 'Email sent successfuly'})
     }
-
     catch(error){
         console.error('Error sending email',error)
         res.status(400).send({message: 'Email not sent'})

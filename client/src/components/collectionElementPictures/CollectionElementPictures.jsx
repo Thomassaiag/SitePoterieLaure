@@ -3,8 +3,8 @@ import React,{useState, useEffect} from 'react'
 import './CollectionElementPictures.css'
 import { CollectionElementPicture } from '../collectionElementPicture/CollectionElementPicture'
 import { NewPicture } from '../newPicture/NewPicture'
-import { useCollectionDeletionStatus } from '../contextProvider/CollectionDeletionStatusContextProvider'
-import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
+import { useCollectionDeletionStatus } from '../../contextProvider/CollectionDeletionStatusContextProvider'
+import { useConnectionStatus } from '../../contextProvider/ConnectionStatusContextProvider'
 const apiUrl=import.meta.env.VITE_API_URL
 
 export const CollectionElementPictures = ({collection_uid}) => {
@@ -31,15 +31,19 @@ export const CollectionElementPictures = ({collection_uid}) => {
         setCollectionDeletionStatus(false)
     },[collection_uid,collectionDeletionStatus])
 
-    useEffect(()=>{
-        console.log('adminstatus',connectionAttributes.adminStatus)
-    },[connectionAttributes.adminStatus])
+    // useEffect(()=>{
+    //     console.log('adminstatus',connectionAttributes.adminStatus)
+    // },[connectionAttributes.adminStatus])
+
+        useEffect(()=>{
+        console.log('adminstatus',connectionAttributes.adminConnection)
+    },[])
 
 
     return (
         <>
             {connectionAttributes.adminConnection &&
-                <div className='collectionElementSinglePictureContainer'>
+                <div className='collectionElementNewPictureContainer'>
                     <NewPicture collectionUID={collection_uid}/>
                 </div>
             }

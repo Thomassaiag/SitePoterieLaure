@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react'
 import {nanoid} from  'nanoid'
-import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
-import './CollectionElementInformationsCreation.css'
+import { useCollectionElementInformations } from '../../contextProvider/CollectionElementInformationsContextProvider'
+import '../updateCollectionElementInformations/UpdateCollectionElementInformations.css'
 import { addInfo } from '../../data/logos'
 import { deleteInfo } from '../../data/logos'
 
 
-export const CollectionElementInformationsCreation = () => {
+export const CreateCollectionElementInformations = () => {
 
 
     const [inputIDList, setInputIDList]=useState([{id:nanoid()}])
@@ -72,8 +72,8 @@ export const CollectionElementInformationsCreation = () => {
             {inputIDList.map((inputID)=>{
                 const{id}=inputID
                 return (
-                    <div className='InputContainer'key={id}>
-                        <input 
+                    <div className='collectionElementInformationUpdateCreateContainer' key={id}>
+                        <input className='collectionElementInformation'
                             ref={inputRef}
                             type='text'
                             name={id}
@@ -87,7 +87,7 @@ export const CollectionElementInformationsCreation = () => {
                     </div>
                 )
             })}
-            <div className='AddInputButtonContainer'>
+            <div className='AddInputContainer'>
                 <p>Ajouter Une Information</p>
                 <img className='AddInputButton' src={addInfo} alt="Add Information Collection" onClick={addNewInformation} style={{cursor: 'pointer'}}/>
             </div>

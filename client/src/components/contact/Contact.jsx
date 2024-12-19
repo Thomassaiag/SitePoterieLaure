@@ -24,7 +24,7 @@ export const Contact = ({locationHash}) => {
         </div>
       </div>
       <Newsletter/>
-      <ContactMessage id='contactMessage'locationHash={locationHash}/>
+      <ContactMessage id='contactMessage' locationHash={locationHash}/>
 
     </div>
   )

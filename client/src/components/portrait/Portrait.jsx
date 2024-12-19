@@ -4,7 +4,7 @@ import './Portrait.css'
 import { UpdatePortrait } from '../updatePortrait/UpdatePortrait'
 import { laureLogo } from '../../data/logos'
 
-import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
+import { useConnectionStatus } from '../../contextProvider/ConnectionStatusContextProvider'
 const apiUrl=import.meta.env.VITE_API_URL
 
 export const Portrait= () => {

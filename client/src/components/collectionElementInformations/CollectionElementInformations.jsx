@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import './CollectionElementInformations.css'
-import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
-import { useCollectionElementInformationsToUpdate } from '../contextProvider/CollectionElementInformationsToUpdateContextProvider'
+import { useCollectionElementInformations } from '../../contextProvider/CollectionElementInformationsContextProvider'
+import { useCollectionElementInformationsToUpdate } from '../../contextProvider/CollectionElementInformationsToUpdateContextProvider'
 
 export const CollectionElementInformations = ({collection_uid, fetchElementInformations}) => {
 

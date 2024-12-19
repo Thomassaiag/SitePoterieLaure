@@ -4,9 +4,12 @@ import { Link } from 'react-router-dom'
 
 
 export const AdminHeader = () => {
+
+  // const [createCollectionClicked, setCreateCollectionClicked]=useState(false)
+
   return (
     <div className='adminHeaderContainer'>
-        <Link to='/admin/creationcollection'>Création Collecton</Link>
+        <Link to='/admin/collectionCreation'>Création Collection</Link>
         <Link to='/collections'>Effacer/Mettre à jour Une collection</Link>
     </div>
   )

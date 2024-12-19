@@ -1,5 +1,3 @@
-
-import './App.css'
 import {Routes, Route} from 'react-router-dom'
 import { HomePage } from './pages/HomePage'
 import { CollectionsPage } from './pages/CollectionsPage'
@@ -11,12 +9,17 @@ import { ContactPage } from './pages/ContactPage'
 import { ConnectionPage } from './pages/ConnectionPage'
 import { AccountCreationPage } from './pages/AccountCreationPage'
 
+import {CollectionCreationPage} from './pages/CollectionCreationPage'
+
+import { UserActivityTracker } from './hooks/useUserActivityTracker'
+
+import './App.css'
 
 function App() {
 
 
   return (
-    <>
+    <UserActivityTracker>
       <Routes>
         <Route path='/' element={<HomePage/>}/>
         <Route path='/collections' element={<CollectionsPage/>}/>
@@ -25,11 +28,11 @@ function App() {
         <Route path='/collections/:id' element={<CollectionElementPage/>}/>
         <Route path='/contact' element={<ContactPage/>}/>
         <Route path='/admin' element={<AdminPage/>}/>
-        <Route path='/admin/creationcollection' element={<AdminPage/>}/>
-        <Route path='connection/' element={<ConnectionPage/>}/>
+        <Route path='/admin/collectionCreation' element={<CollectionCreationPage/>}/>
+        <Route path='/connection' element={<ConnectionPage/>}/>
         <Route path='/accountCreation' element={<AccountCreationPage/>}/>
       </Routes>
-    </>
+    </UserActivityTracker>
   )
   }
 

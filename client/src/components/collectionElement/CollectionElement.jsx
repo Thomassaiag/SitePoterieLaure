@@ -6,8 +6,8 @@ import { CollectionElementInformations } from '../collectionElementInformations/
 import './CollectionElement.css'
 import { CollectionMainPic } from '../collectionMainPic/CollectionMainPic'
 import { UpdateCollectionElement } from '../updateCollectionElement/UpdateCollectionElement'
-import { useCollectionElementInformations } from '../contextProvider/CollectionElementInformationsContextProvider'
-import { useConnectionStatus } from '../contextProvider/ConnectionStatusContextProvider'
+import { useCollectionElementInformations } from '../../contextProvider/CollectionElementInformationsContextProvider'
+import { useConnectionStatus } from '../../contextProvider/ConnectionStatusContextProvider'
 
 import { nextCollection } from '../../data/logos'
 import { previousCollection } from '../../data/logos'
@@ -21,6 +21,7 @@ export const CollectionElement = () => {
  
   const [newId, setNewId]=useState(id)
 
+  //States initialisation
   const [collectionElement, setCollectionElement]=useState({})
   const [previousCollectionPicture, setPreviousCollectionPicture]=useState([])
   const [nextCollectionPicture, setNextCollectionPicture]=useState([])
@@ -34,13 +35,17 @@ export const CollectionElement = () => {
 
   const {connectionAttributes}=useConnectionStatus()
 
+  //fetch collection Uids to then fetch next/previous pictures
   useEffect(()=>{
     fetchAllCollectionUids()
   },[])
 
+  //fetch all collection element (description, email, cooking, recommandation)
   useEffect(()=>{
     fetchCollectionElement()
+    console.log(collectionElement)
   },[])
+
 
   useEffect(()=>{
     let {collection_element_title, collection_element_description, collection_element_email, collection_element_cooking, collection_element_recommandation }=collectionElement
@@ -52,47 +57,73 @@ export const CollectionElement = () => {
   },[collectionElement])
 
 
+  //fetch all collection element (description, email, cooking, recommandation)
   const fetchCollectionElement=async()=>{
     try {
       let response= await fetch(`http://${apiUrl}/collectionElement/${newId}`)
-      let jsonData= await response.json()
-      setCollectionElement(jsonData[0])
+      if(!response.ok){
+        throw new Error('netWork issue')
+      }else {
+        let jsonData= await response.json()
+        setCollectionElement(jsonData[0])
+      }
     } catch (error) {
-      
+      console.error('collection Element couldn\'t be fetched', {message:error})
     }
   }
 
-
+  //Fetch collection information only as on a separate table
   const fetchElementInformations=async(collectionUid)=>{
-    let response=await fetch(`http://${apiUrl}/collectionElement/${collectionUid}/information`)
-    let jsonData=await response.json()
-    setCurrentInformations(jsonData)
-}
-  
+    try {
+      let response=await fetch(`http://${apiUrl}/collectionElement/${collectionUid}/information`)
+      if(!response.ok){
+        throw new Error('netWork issue')
+      } else {
+        let jsonData=await response.json()
+        setCurrentInformations(jsonData)
+      }
+    } catch (error) {
+      console.error('collection Information couldn\'t be fetched', {message:error})
+    }
+  }
+
+  //fetch collection Uids to then fetch next/previous pictures
   const fetchAllCollectionUids=async()=>{
     try {
       let response=await fetch(`http://${apiUrl}/collections/allCollectionsUids`)
-      let jsonData= await response.json()
-      jsonData= await jsonData.map(element=>element.collection_uid)
-      setCollectionUids(jsonData)
+      
+      if(!response.ok){
+        throw new Error('netWork issue')
+        
+      } else {
+        let jsonData= await response.json()
+        jsonData= await jsonData.map(element=>element.collection_uid)
+        setCollectionUids(jsonData)
+      }
+
+          
     } catch (error) {
-      console.log(error)
+      console.error('collection UIDs couldn\'t be fetched', {message:error})
     }
   }
 
-
+  //fetch previous and next collection pictures based on current collection UID, after right or left click
   const fetchNextPreviousCollection=async()=>{
     try {
       let response= await fetch(`http://${apiUrl}/collections/${newId}/collection`)
-      let jsonData= await response.json()
-      console.log('jsonData => ',jsonData)
-      setPreviousCollectionPicture(jsonData[0])
-      setNextCollectionPicture(jsonData[1])
+      if(!response.ok){
+        throw new Error('netWork issue')
+      } else {
+        let jsonData= await response.json()
+        setPreviousCollectionPicture(jsonData[0])
+        setNextCollectionPicture(jsonData[1])
+      }
     } catch (error) {
-      
+      console.error('collection UIDs couldn\'t be fetched', {message:error})
     }
   }
 
+  //get previous collection UID
   const handleLeftClick=()=>{
     setNewId((prevId)=>{
       if(collectionUids.indexOf(parseInt(prevId))!=0){
@@ -104,6 +135,7 @@ export const CollectionElement = () => {
     })
   }
   
+  //get next collection UID
   const handleRightClick=()=>{
     setNewId((prevId)=>{
       if(collectionUids.indexOf(parseInt(prevId))!=collectionUids.length-1){
@@ -115,12 +147,13 @@ export const CollectionElement = () => {
     })
   }
   
+  //when collection Id changes, we fetch all new collection elements
   useEffect(()=>{
     navigate(`/collections/${newId}`)
     fetchCollectionElement()
   },[newId])
   
-
+  //when collection Id changes, we fetch new next & previous collection picture
    useEffect(()=>{
     fetchNextPreviousCollection()
   },[newId])
@@ -141,8 +174,8 @@ export const CollectionElement = () => {
             <div className='collectionElementPicturesContainer'>
               <CollectionElementPictures collection_uid={newId}/>
             </div>
-            <div className='collectionElementInformationContainer'>
-              <div className='collectionElementLeftContainer'>
+            <div className='collectionElementPresentationContainer'>
+              <div className='collectionElementPresentationLeftContainer'>
                 <h2>En Quelques Mots</h2>
                 <p style={{textAlign:'justify'}}>
                   {collectionElementDescription.replace(/\\n/g,'\n').split('\n').map((line, index)=>{
@@ -154,7 +187,7 @@ export const CollectionElement = () => {
                   })}
                 </p>
               </div>
-              <div className='collectionElementRightContainer'>
+              <div className='collectionElementPresentationRightContainer'>
                 <h2 >Informations techniques</h2>
                 <CollectionElementInformations collection_uid={newId} fetchElementInformations={fetchElementInformations}/>
                 <p style={{textAlign:'left'}}>{collectionElementEmail}</p>
@@ -162,14 +195,14 @@ export const CollectionElement = () => {
                 <p style={{textAlign:'left'}}>{collectionElementRecommandation}</p>
               </div>
             </div>
-            {connectionAttributes.adminConnection && 
-              <UpdateCollectionElement  className='collectionElementUpdateContainer' collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation} collectionUID={newId} fetchCollectionElement={fetchCollectionElement} fetchElementInformations={fetchElementInformations}/>
-            } 
           </div>
         ) : (
           <p>Loading Data</p>
         )
       }
+      {connectionAttributes.adminConnection && 
+        <UpdateCollectionElement collectionElementDescription={collectionElementDescription} collectionElementEmail={collectionElementEmail} collectionElementCooking={collectionElementCooking} collectionElementRecommandation={collectionElementRecommandation} collectionUID={newId} fetchCollectionElement={fetchCollectionElement} fetchElementInformations={fetchElementInformations}/>
+      } 
 
 
       <div className='navigationElementContainer'>

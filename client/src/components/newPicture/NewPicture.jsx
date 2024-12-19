@@ -1,15 +1,24 @@
-import React, {useEffect, useRef, useState, Fragment} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 import './NewPicture'
-import { useCollectionDeletionStatus } from '../contextProvider/CollectionDeletionStatusContextProvider'
+import { useCollectionDeletionStatus } from '../../contextProvider/CollectionDeletionStatusContextProvider'
 import { addInfo } from '../../data/logos'
+
+import { useConnectionStatus } from '../../contextProvider/ConnectionStatusContextProvider'
+import { handleInvalidToken } from '../../utils/auth'
+
 const apiUrl=import.meta.env.VITE_API_URL
 
 export const NewPicture = ({collectionUID}) => {
+    const navigate=useNavigate()
     const fileInputRef=useRef(null)
 
+    const {setConnectionAttributes}=useConnectionStatus()
     const[newCollectionElementPicture, setNewCollectionElementPicture]=useState()
     const[currentCollectionUID, setCurrentCollectionUID]=useState(collectionUID)
     const {collectionDeletionStatus, setCollectionDeletionStatus}=useCollectionDeletionStatus()
+    
+    
     const addNewCollectionElementPicture=(event)=>{
         event.stopPropagation()
         console.log("addition of a new picture")
@@ -27,22 +36,32 @@ export const NewPicture = ({collectionUID}) => {
         const collectionPictureElement= new FormData()
         collectionPictureElement.append('file', newCollectionElementPicture)
         collectionPictureElement.append('collectionUID', collectionUID)
+        const token=localStorage.getItem('token')
 
         if(newCollectionElementPicture){
-            let response=await fetch(`http://${apiUrl}/admin/editElement/addNewPicture`,{
-                method:'POST',
-                // headers: {
-                //     'Content-Type': 'application/json'
-                // },
-                body:collectionPictureElement
-            })
-            if(!response.ok){
-                throw new Error('Network response was not OK')
-            }
-            else {
-                setCollectionDeletionStatus(true)
-                let data=await response.json()
-                console.log(data)
+            try {
+                let response=await fetch(`http://${apiUrl}/admin/editElement/addNewPicture`,{
+                    method:'POST',
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body:collectionPictureElement
+                })
+
+                if(response.status===401){
+                    handleInvalidToken(navigate, setConnectionAttributes)
+                }
+                if(!response.ok){
+                    throw new Error('Network response was not OK')
+                }
+                else {
+                    setCollectionDeletionStatus(true)
+                    let data=await response.json()
+                    console.log(data)
+                }
+                
+            } catch (error) {
+                
             }
         }
         else console.log("no image was uploaded")        
@@ -56,13 +75,12 @@ export const NewPicture = ({collectionUID}) => {
     },[newCollectionElementPicture])
 
     return (
-        <>
+        <>  
             <div className='collectionPictureContainer' onClick={addNewCollectionElementPicture}>
                 <img className='collectionElementPicture' src={addInfo} alt='Ajouter une Photo' style={{cursor: 'pointer'}}/>
-            </div>
-            <div>
                 <p>Ajouter une Photo</p>
             </div>
+
             <form>
                 <input
                     type='file'
