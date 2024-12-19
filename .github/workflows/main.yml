@@ -85,7 +85,7 @@ jobs:
       #Copy Docker compose to server
       - name: Copy Docker compose file to server
         run: |
-          sshpass -p "${{ secrets.SSH_PASSWORD }}" scp -o StrictHostKeyChecking=no docker-compose.yml debian@188.165.238.74:~/ThomasS/SitePoterie/
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" scp -o StrictHostKeyChecking=no docker-compose.prod.yml debian@188.165.238.74:~/ThomasS/SitePoterie/
       
       
       #login to Docker Hub from Server
@@ -108,7 +108,7 @@ jobs:
           sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no debian@188.165.238.74 << EOF
             cd ~/ThomasS/SitePoterie
             docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
-            docker compose -f docker-compose.yml pull
-            docker compose -f docker-compose.yml down
-            docker compose -f docker-compose.yml up -d
+            docker compose -f docker-compose.prod.yml pull
+            docker compose -f docker-compose.prod.yml down
+            docker compose -f docker-compose.prod.yml up -d
           EOF
