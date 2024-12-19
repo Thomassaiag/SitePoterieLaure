@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import './PopUpPicture.css'
 import { deleteInfo } from '../../data/logos'
+import { nextCollection } from '../../data/logos'
+import { previousCollection } from '../../data/logos'
+
 const apiUrl=import.meta.env.VITE_API_URL
 
 export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose, collection_uid}) => {
@@ -73,7 +76,7 @@ export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose, collection_
       <div className='overlay'>
         <div className='popup'>
           <div className='chevronPictureContainer'>
-            <img src='/images/leftChevron.jpg' alt='previous picture' onClick={displayPreviousPicture} style={{cursor:'pointer'}}/>
+            <img src={previousCollection} alt='previous picture' onClick={displayPreviousPicture} style={{cursor:'pointer'}}/>
           </div>
           <div className='pictureContainer'>
             <div className='closePopUpContainer'>
@@ -84,7 +87,7 @@ export const PopUpPicture = ({imageUrl, imageAlt, imageUid, onClose, collection_
             <img className='popUpPicture' src={newImageUrl} alt={newImageAlt}/>
           </div>
           <div className='chevronPictureContainer'>
-            <img src='/images/rightChevron.jpg' alt='next picture' onClick={displayNextPicture} style={{cursor:'pointer'}}/>
+            <img src={nextCollection} alt='next picture' onClick={displayNextPicture} style={{cursor:'pointer'}}/>
           </div>
         </div>
       </div>
