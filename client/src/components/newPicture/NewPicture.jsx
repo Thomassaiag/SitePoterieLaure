@@ -76,8 +76,10 @@ export const NewPicture = ({collectionUID}) => {
 
     return (
         <>  
-            <img className='collectionElementPicture' src={addInfo} alt='Ajouter une Photo' style={{cursor: 'pointer'}}/>
-            <p>Ajouter une Photo</p>
+            <div className='collectionPictureContainer' onClick={addNewCollectionElementPicture}>
+                <img className='collectionElementPicture' src={addInfo} alt='Ajouter une Photo' style={{cursor: 'pointer'}}/>
+                <p>Ajouter une Photo</p>
+            </div>
 
             <form>
                 <input
