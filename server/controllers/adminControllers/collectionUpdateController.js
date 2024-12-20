@@ -12,9 +12,8 @@ const addNewCollectionElementPicture=async(req, res, next)=>{
         )
         if (collectionName){
             const collectionDirectory=collectionName.rows[0].collection_title
-            console.log('collection Directory =>',collectionDirectory)
             const collectionElementPictureAlt=`Image ${req.file.originalname}`
-            const collectionElementPictureUrl=`/images/${req.file.originalname}`
+            const collectionElementPictureUrl=`/images/Static_images/Collections/${req.file.originalname}`
             
             try{
                 const newCollectionElementPicture=await pool.query(

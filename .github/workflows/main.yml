@@ -76,6 +76,8 @@ jobs:
           tags: thomassaiag/siteweblaure-client:latest
           build-args: |
             VITE_API_URL=188.165.238.74:14001
+            COLLECTIONPICTUREPATH=/home/debian/ThomasS/SitePoterie/client/public/images/static_images/Collections
+            PORTRAITPICTURESPATH=/home/debian/ThomasS/SitePoterie/client/public/images/static_images/Portrait
 
 
   deploy:
