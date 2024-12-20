@@ -345,10 +345,19 @@ COPY public.collection (collection_uid, collection_title, collection_description
 
 COPY public.collection_element (collection_element_uid, collection_uid, collection_element_title, collection_element_description, collection_element_email, collection_element_recommandation, collection_element_cooking) FROM stdin;
 5	5	Collection 4	Description Collection 4	Email transparent	Il est recommandé de ne pas passer au lave vaisselle.	Grande Cuisson
-3	2	Lucie	Lucie, c'est pas marqué dans les livres	Email Lucie Transparent	Il est recommandé de ne pas passer Lucie au Lave Vaisselle	Monocuisson Lucie 2000°C
-2	1	Terremoto	Description Terremoto	Email pas Transparent	Il est recommandé de ne pas passer au lave vaisselle. (terremoto)	Monocuisson 2000°C
+2	1	Terremoto	Description Terremoto dfvccdsv	Email pas Transparent dfvcdvcfdv	Il est recommandé de ne pas passer au lave vaisselle. (terremoto)	Monocuisson 2000°C
+3	2	Lucie	Lucie, c'est pas marqué dans les livres erfefref	Email Lucie Transparent	Il est recommandé de ne pas passer Lucie au Lave Vaisselle	Monocuisson Lucie 2000°C
+21	\N	erfezfr	erfezfrez	ezfrezfr	fezff	ezfre
+23	\N	erfefr	erfrefezf	ezfrezrf	erfef	ezrfrezf
+26	\N	erfefrrezf	ezfrefefr	ezfef	efefr	ezfrezf
+29	\N	efrefrez	erfefrezf	ezfefr	feezrfez	ezrfe
 4	4	Porcelaine\n	Description Porcelaine	Email transparent	Il est recommandé de ne pas passer au lave vaisselle.	Moyenne Cuisson
+22	\N	ezfrefrefrezf	ezrfezfrezfr	ezrfezfrezrf	frezrfezfrezf	ezfrez
+24	\N	collection test	Description collection	Email	Recommandations	Cuisson
+27	\N	erfefr	jytujyju	fee	feffe	fryrhtyhefzezf
 1	3	Terracotta	Terracotta signifie littéralement "terre cuite" en italien, mais ce terme est aussi utilisé pour désigner une palette de couleur chaude qui varie du orange à la brique.\\nCette collection est la première à avoir été créée. Elle a été pensée autour de la faïence couleur terracotta orangée. C'est ensuite rajoutée une variation plus rouge, et de la chamotte. La chamotte est de la terre cuite réduite en grain, ajouté à la terre. Elle permet d'ajouter de la texture. Chaque objet est donc déclin‚ en 4 variations : orange lisse, orange chamotté, rouge lisse et rouge chamotté.\\nCette collection allie à la fois la rusticité de la terre cuite non émaillée et la modernité des formes. Elle a été pensée pour être àla fois intemporelle et accompagner tous intérieurs aussi bien lumineux que portés sur des couleurs intenses comme le noir.\\nLa faïence restant poreuse après cuisson chaque vase est émaillé à l'intérieur par un émail transparent pour garantir l'étanchéité de la terre.\\nAfin de limiter les coûts énergétiques et environnementaux, cette collection est cuite en monocuisson (une seule cuisson au lieu de deux)	Email transparent test	Il est recommandé de ne pas passer au lave vaisselle	Monocuisson 1050°C
+25	\N	erfezfr	ezrfefrezf	ezfrezfr	ezrfezfr	ezrfezrf
+28	\N	dfvdsvfdsv	dfvdsvdsv	dsvdsv	vdsfvdsfvdsv	dsvfdsf
 \.
 
 
@@ -358,8 +367,18 @@ COPY public.collection_element (collection_element_uid, collection_uid, collecti
 
 COPY public.collection_element_informations (collection_element_information_uid, collection_uid, collection_element_information_text) FROM stdin;
 47	1	Test Terremoto
-49	1	dsvfdvfvf
+50	\N	ezfrezfr
+51	\N	ezrfezfr
+52	\N	ezfrezf
+53	\N	information 1
+54	\N	Information 2
+55	\N	ezfrezf
 6	2	Faïence Lucie chamottée
+56	\N	erfef
+57	\N	yujyju
+58	\N	jyjuy
+59	\N	dfvdsvf
+60	\N	efezrf
 2	3	Faïence terracotta chamottée
 5	2	Faïence Lucie test
 1	3	Faïence terracotta lisse
@@ -408,7 +427,14 @@ COPY public.collection_element_pictures (collection_element_picture_uid, collect
 8	3	/images/Static_images/Collections/terracotta8.jpg	Image Terracotta 8	f
 9	3	/images/Static_images/Collections/terracotta9.jpg	Image Terracotta 9	f
 1	3	/images/Static_images/Collections/terracotta1.jpg	Image Terracotta 1	f
-19	1	/images/lucie.jpg	Image lucie.jpg	f
+19	1	/images/Static_images/Collections/lucie.jpg	Image lucie.jpg	f
+20	1	/images/Static_images/Collections/poterie2.jpeg	Image poterie2.jpeg	f
+21	2	/images/Static_images/Collections/poterie2.jpeg	Image poterie2.jpeg	t
+22	2	/images/Static_images/Collections/terracotta1.jpg	Image terracotta1.jpg	f
+23	1	/images/Static_images/Collections/logo-ada.png	Image logo-ada.png	f
+24	2	/images/Static_images/Collections/logo-ada.png	Image logo-ada.png	f
+25	4	/images/Static_images/Collections/IMG_20220515_132724.jpg	Image IMG_20220515_132724.jpg	f
+26	5	/images/Static_images/Collections/logo-ada.png	Image logo-ada.png	f
 \.
 
 
@@ -434,6 +460,7 @@ COPY public.newsletter_contact (contactuid, email) FROM stdin;
 18	t@t.com
 19	marh@erfe.fcom
 20	erfref@erferf.cil
+21	rferf@feezf.com
 \.
 
 
@@ -442,7 +469,7 @@ COPY public.newsletter_contact (contactuid, email) FROM stdin;
 --
 
 COPY public.portrait (portrait_uid, portrait_picture_url, portrait_picture_alt, portrait_description) FROM stdin;
-2	/images/Collections/lucie.jpg	Portrait Picture	Au cœur de l'histoire de l'entreprise LV Céramique se trouve une passion pour la créativité, \r\n    la simplicité, l'élégance, et un engagement profond envers la préservation de notre précieux environnement.\r\n    C'est l'histoire inspirante de Laure Videau, une femme qui a réinventé sa vie à travers une reconversion \r\n    audacieuse pour créer un univers où l'art de la céramique prend vie.\r\n\r\n    Laure Videau, artiste dans l'âme, a suivi le chemin de la céramique après avoir effectué une reconversion \r\n    remarquable. Lassée de la monotonie du monde corporatif, elle a trouvé sa véritable passion dans la création \r\n    de pièces céramiques uniques, où la simplicité et l'élégance sont les maîtres mots. C'est ainsi qu'est née LV Céramique, \r\n    un véritable hymne à la beauté épurée et à la créativité infinie.\r\n\r\n    La philosophie de Laure se traduit dans chacune de ses créations, où la simplicité transcende le quotidien \r\n    pour devenir une véritable œuvre d'art. Chaque pièce, façonnée à la main avec une minutie et une précision \r\n    inégalées, reflète l'esthétique épurée de Laure. Ses céramiques, qu'il s'agisse de bols, vases, ou objets de \r\n    décoration, incarnent une élégance naturelle qui s'intègre harmonieusement dans tous les espaces de vie.\\n\r\n    Mais LV Céramique ne se contente pas d'être une ode à la beauté et à l'élégance, c'est également un acte d'amour \r\n    envers notre planète. Laure Videau est profondément engagée dans la préservation de l'environnement. \r\n    Chaque pièce est créée avec une attention particulière à l'utilisation de matériaux durables et écologiques, \r\n    et les processus de production sont soigneusement conçus pour minimiser leur impact sur la planète.\r\n\r\n    Laure Videau incarne le parfait équilibre entre l'artiste et l'écologiste. Son travail dans le domaine de la \r\n    céramique est un hommage à la simplicité, à l'élégance, et à la nature. Avec LV Céramique, elle nous offre des \r\n    pièces uniques qui illuminent nos vies tout en contribuant à préserver la beauté naturelle de notre monde.\r\n    Rejoignez Laure Videau dans son voyage artistique et environnemental chez LV Céramique, où la simplicité \r\n    rencontre l'élégance, et où l'art devient un acte de préservation de notre planète.\r\n\r\n    Découvrez une collection exceptionnelle de céramiques, chaque pièce étant une invitation à vivre une vie plus \r\n    belle, plus simple et plus respectueuse de notre environnement.
+2	/images/Static_images/Portrait/logo-ada.png	Portrait Picture	Au cœur de l'histoire de l'entreprise LV Céramique se trouve une passion pour la créativité, \r\n    la simplicité, l'élégance, et un engagement profond envers la préservation de notre précieux environnement.\r\n    C'est l'histoire inspirante de Laure Videau, une femme qui a réinventé sa vie à travers une reconversion \r\n    audacieuse pour créer un univers où l'art de la céramique prend vie.\r\n\r\n    Laure Videau, artiste dans l'âme, a suivi le chemin de la céramique après avoir effectué une reconversion \r\n    remarquable. Lassée de la monotonie du monde corporatif, elle a trouvé sa véritable passion dans la création \r\n    de pièces céramiques uniques, où la simplicité et l'élégance sont les maîtres mots. C'est ainsi qu'est née LV Céramique, \r\n    un véritable hymne à la beauté épurée et à la créativité infinie.\r\n\r\n    La philosophie de Laure se traduit dans chacune de ses créations, où la simplicité transcende le quotidien \r\n    pour devenir une véritable œuvre d'art. Chaque pièce, façonnée à la main avec une minutie et une précision \r\n    inégalées, reflète l'esthétique épurée de Laure. Ses céramiques, qu'il s'agisse de bols, vases, ou objets de \r\n    décoration, incarnent une élégance naturelle qui s'intègre harmonieusement dans tous les espaces de vie.\\n\r\n    Mais LV Céramique ne se contente pas d'être une ode à la beauté et à l'élégance, c'est également un acte d'amour \r\n    envers notre planète. Laure Videau est profondément engagée dans la préservation de l'environnement. \r\n    Chaque pièce est créée avec une attention particulière à l'utilisation de matériaux durables et écologiques, \r\n    et les processus de production sont soigneusement conçus pour minimiser leur impact sur la planète.\r\n\r\n    Laure Videau incarne le parfait équilibre entre l'artiste et l'écologiste. Son travail dans le domaine de la \r\n    céramique est un hommage à la simplicité, à l'élégance, et à la nature. Avec LV Céramique, elle nous offre des \r\n    pièces uniques qui illuminent nos vies tout en contribuant à préserver la beauté naturelle de notre monde.\r\n    Rejoignez Laure Videau dans son voyage artistique et environnemental chez LV Céramique, où la simplicité \r\n    rencontre l'élégance, et où l'art devient un acte de préservation de notre planète.\r\n\r\n    Découvrez une collection exceptionnelle de céramiques, chaque pièce étant une invitation à vivre une vie plus \r\n    belle, plus simple et plus respectueuse de notre environnement.
 \.
 
 
@@ -479,6 +506,7 @@ COPY public.user_account (user_uid, user_email, user_password, user_firstname, u
 43	erferff@egreger.com	$2b$10$HGW9E0CwORrVMtSeq/xf2uL/.MdEJz4Irq3A9aQAE.fc996JRKJVe	erfefr	efrezfrezf	f
 44	eefrefrefrferff@egreger.com	$2b$10$26fy1vX4rw8.OIiAy5xIc.R8WwPGApRI.nEkdfqfW.TPXsRZxy6RW	erfefr	efrezfrezf	f
 45	eefrefrefrferfezferff@egreger.com	$2b$10$MmmDUIP6c/ruRwJPZwddhe3T.tsOGqpEUX4I3NQaX3tIkTvqFhBbu	erfefr	efrezfrezf	f
+46	erferf@efrezfr.ezfrezfr	$2b$10$mf2YQn1uGPIy0sJm/Bkdgehfy4R6978.hOgPq5asZKCsfWQMWmY4.	efrefr	erfefrez	f
 \.
 
 
@@ -486,35 +514,35 @@ COPY public.user_account (user_uid, user_email, user_password, user_firstname, u
 -- Name: collection_collection_uid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.collection_collection_uid_seq', 72, true);
+SELECT pg_catalog.setval('public.collection_collection_uid_seq', 81, true);
 
 
 --
 -- Name: collection_element_collection_element_uid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.collection_element_collection_element_uid_seq', 20, true);
+SELECT pg_catalog.setval('public.collection_element_collection_element_uid_seq', 29, true);
 
 
 --
 -- Name: collection_element_informatio_collection_element_informatio_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.collection_element_informatio_collection_element_informatio_seq', 49, true);
+SELECT pg_catalog.setval('public.collection_element_informatio_collection_element_informatio_seq', 60, true);
 
 
 --
 -- Name: collection_element_pictures_collection_element_pictures_uid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.collection_element_pictures_collection_element_pictures_uid_seq', 19, true);
+SELECT pg_catalog.setval('public.collection_element_pictures_collection_element_pictures_uid_seq', 26, true);
 
 
 --
 -- Name: newsletter_contact_contactuid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.newsletter_contact_contactuid_seq', 20, true);
+SELECT pg_catalog.setval('public.newsletter_contact_contactuid_seq', 21, true);
 
 
 --
@@ -528,7 +556,7 @@ SELECT pg_catalog.setval('public.portrait_portrait_uid_seq', 2, true);
 -- Name: user_account_user_uid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.user_account_user_uid_seq', 45, true);
+SELECT pg_catalog.setval('public.user_account_user_uid_seq', 46, true);
 
 
 --
