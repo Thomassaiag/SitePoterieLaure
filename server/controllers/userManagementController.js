@@ -62,7 +62,7 @@ const login=async(req, res, next)=>{
 //Account creation
 const createUserAccount=async (req, res, next)=>{
     const{userFirstName, userLastName, userEmail, userPassword}=req.body
-    let hashedPassword=await hashPassword(userPassword)
+    let hashedPassword=await hashPagissword(userPassword)
     try{
         const userEmailDB=await pool.query(
             'SELECT user_email FROM user_account WHERE user_email=$1',[userEmail]
