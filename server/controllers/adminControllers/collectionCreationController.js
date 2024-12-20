@@ -6,7 +6,7 @@ const createNewCollection= async(req, res, next)=>{
     const {collectionTitle, collectionDescription}=req.body
     console.log(collectionTitle)
     const collectionPictureAlt=`Image ${collectionTitle}`
-    const collectionPictureUrl=`/images/Collections/${req.file.originalname}`
+    const collectionPictureUrl=`/images/Static_images/Collections/${req.file.originalname}`
 
     try{
         const newCollection=await pool.query(

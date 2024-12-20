@@ -2,11 +2,15 @@
 FROM node:20.10.0
 
 ARG JWT_SECRET
-ENV JWT_SECRET=$JWT_SECRET
-
 ARG JWT_EXPIRATION
+
+
+ENV JWT_SECRET=$JWT_SECRET
 ENV JWT_EXPIRATION=$JWT_EXPIRATION
 
+
+
+RUN mkdir -p /app/server/collection
 # Set the working directory inside the container
 WORKDIR /app/server
 

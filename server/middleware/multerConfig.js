@@ -1,10 +1,14 @@
+const fs = require('fs');
 const multer=require('multer')
 require('dotenv').config()
 
 
 const collectionPath=process.env.COLLECTIONPICTUREPATH
-const collectionElementPath=process.env.COLLECTIONELEMENTPICTURESPATH
 const portraitPath=process.env.PORTRAITPICTURESPATH
+
+if (!fs.existsSync(collectionPath)){
+    fs.mkdirSync(collectionPath, {recursive: true})
+}
 
 const storage=multer.diskStorage({
     destination: function(req, file, cb){
@@ -15,12 +19,11 @@ const storage=multer.diskStorage({
     }
 })
 
-const upload=multer({storage:storage})
-
+const uploadCollectionPicture=multer({storage:storage})
 
 const storageCollectionElementPicture=multer.diskStorage({
     destination: function(req, file, cb){
-        cb(null, collectionElementPath);
+        cb(null, collectionPath);
     },
     filename:function(req, file, cb){
         cb(null, file.originalname)
@@ -29,6 +32,11 @@ const storageCollectionElementPicture=multer.diskStorage({
 
 const uploadCollectionElementPicture=multer({storage:storageCollectionElementPicture})
 
+
+
+if (!fs.existsSync(portraitPath)){
+    fs.mkdirSync(portraitPath, {recursive: true})
+}
 
 const storagePortraitPicture=multer.diskStorage({
     destination: function(req, file, cb){
@@ -41,4 +49,4 @@ const storagePortraitPicture=multer.diskStorage({
 
 const updatePortraitPicture=multer({storage:storagePortraitPicture})
 
-module.exports={upload, uploadCollectionElementPicture, updatePortraitPicture}
+module.exports={uploadCollectionPicture, uploadCollectionElementPicture, updatePortraitPicture}

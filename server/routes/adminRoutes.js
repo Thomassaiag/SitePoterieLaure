@@ -1,5 +1,5 @@
 const express=require('express')
-const {upload, uploadCollectionElementPicture, updatePortraitPicture}=require('../middleware/multerConfig')
+const {uploadCollectionPicture, uploadCollectionElementPicture, updatePortraitPicture}=require('../middleware/multerConfig')
 const {createNewCollection, createCollectionElement,createCollectionElementInformations}=require('../controllers/adminControllers/collectionCreationController')
 const {addNewCollectionElementPicture, deleteCollectionElementPicture, updateCollectionElementAttributes, updateCollectionElementInformations,deleteCollectionElementInformationInput}=require('../controllers/adminControllers/collectionUpdateController')
 const {deleteCollection}=require('../controllers/adminControllers/collectionDeletionController')
@@ -7,7 +7,7 @@ const {updatePortrait, updatePortraitText}=require('../controllers/adminControll
 const {authenticateToken}=require('../middleware/auth')
 const router=express.Router()
 
-router.post('/createCollection',authenticateToken,upload.single('file'),createNewCollection)
+router.post('/createCollection',authenticateToken,uploadCollectionPicture.single('file'),createNewCollection)
 router.post('/createCollectionElement',createCollectionElement)
 router.post('/createCollectionElementInformations',createCollectionElementInformations)
 

@@ -4,7 +4,7 @@ const {pool}=require('../../config/db')
 //update Portrait picture & text
 const updatePortrait=async(req, res, next)=>{
     const {portraitText}=req.body
-    const portraitPictureUrl=`/images/Collections/${req.file.originalname}`
+    const portraitPictureUrl=`/images/Static_images/Portrait/${req.file.originalname}`
     const portraitPictureAlt=`Portrait Picture`
 
     console.log(portraitPictureUrl)
