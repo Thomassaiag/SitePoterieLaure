@@ -13,30 +13,16 @@ export const Connection = () => {
     const {connectionAttributes, setConnectionAttributes}=useConnectionStatus()
     const [loginClicked, setLoginClicked]=useState(false)
 
-    useEffect(()=>{
-        console.log(credentials)
-    },[credentials])
-
-    useEffect(()=>{
-        console.log(`adminConnection Connection=>${connectionAttributes.adminConnection}`)
-        console.log(`connectedUserFirstName Connection=>${connectionAttributes.connectedUserFirstName}`)
-        console.log(`invalidConnection Connection=>${connectionAttributes.invalidConnection}`)
-        console.log(`invalidToken Connection=>${connectionAttributes.invalidToken}`)
-    },[connectionAttributes])
-
-
+    //update du state credentials à chaque frappe clavier
     const handleChange=(e)=>{
-        setConnectionAttributes(prevConnectionAttributes=>({
-            ...prevConnectionAttributes,
-            invalidConnection:true,
-            invalidToken: false
-        }))
         e.preventDefault()
         setCredentials({...credentials,
             [e.target.name]:e.target.value
         })
     }
-
+    
+    
+    //si mauvais login, on vide les champs
     const handleFocus=(e)=>{
         e.preventDefault()
         if(connectionAttributes.invalidConnection){
@@ -45,10 +31,18 @@ export const Connection = () => {
         }
     }
 
+
+    //Connection
     const handleConnect=async (e)=>{
         e.preventDefault()
         setLoginClicked(true)
+        // invalidConnection à false, ok par défaut
+        setConnectionAttributes(prevConnectionAttributes=>({
+            ...prevConnectionAttributes,
+            invalidConnection:false
+        }))
         try {
+            //fetch de la dv avec les infos de credentials
             let response= await fetch(`http://${apiUrl}/user/login`,{
                 method:'POST',
                 headers: {
@@ -64,6 +58,8 @@ export const Connection = () => {
             if(!response){
                 console.log("something went wrong")
             }
+
+            //retour de mauvais credential et mise à jour du state
             else if(response.status==400){
                 console.log("Invalid Connection")
                 setConnectionAttributes(prevConnectionAttributes=>({
@@ -72,9 +68,9 @@ export const Connection = () => {
                 }))
             }
             else {
+                // connection ok, validToken
                 let {user, token }= await response.json()
                 const newConnectionAttributes={
-                    invalidConnection:false,
                     connectedUserFirstName: user.userFirstName,
                     adminConnection: user.adminStatus || false,
                     invalidToken: false
@@ -92,7 +88,6 @@ export const Connection = () => {
     return (
         <div className='connectionContainer'>
             {connectionAttributes.invalidConnection && 
-            // <div className='credentialContainer'>
                 <form className='credentialForm' onSubmit={handleConnect}>
                     <div className='formInput'>
                         <div className='labelContainer'>
@@ -122,7 +117,6 @@ export const Connection = () => {
                         <button className='loginButton' style={{cursor: 'pointer'}}>Login</button>
                     </div>
                 </form>
-            // </div>
             }
             {loginClicked && connectionAttributes.invalidConnection && <p>Compte Inconnu ou password Incorrect, veuillez réessayer ou créer un comte</p>}
             {!connectionAttributes.invalidConnection && !connectionAttributes.adminConnection && <p>Vous êtes Connecté.e</p>}
