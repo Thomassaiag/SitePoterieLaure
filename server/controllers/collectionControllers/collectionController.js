@@ -3,6 +3,7 @@ const {pool}=require('../../config/db')
 
 //Get All Collections for collection page
 const getAllCollections=async (req, res, next)=>{
+    console.log('getAllCollections')
     try {
         const {rows} = await pool.query(
             `SELECT * FROM collection

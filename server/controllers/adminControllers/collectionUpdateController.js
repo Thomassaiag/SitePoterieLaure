@@ -4,6 +4,7 @@ const {pool}=require('../../config/db')
 //Add new picture to collection element pictures
 const addNewCollectionElementPicture=async(req, res, next)=>{
     const {collectionUID}=req.body
+    console.log('addNewCollectionElementPicture')
     try{
         const collectionName=await pool.query(
             `SELECT collection_title FROM collection
@@ -21,6 +22,7 @@ const addNewCollectionElementPicture=async(req, res, next)=>{
                     [collectionUID, collectionElementPictureUrl, collectionElementPictureAlt, false]
                 )
                 if(newCollectionElementPicture){
+                    console.log(newCollectionElementPicture)
                     return res.status(200).json({message:newCollectionElementPicture.rows[0]})
                 }
                 else {
@@ -45,6 +47,7 @@ const addNewCollectionElementPicture=async(req, res, next)=>{
 //Delete picture from collection element
 
 const deleteCollectionElementPicture=async(req, res, next)=>{
+    console.log('DeleteCollectionElementPicture')
     try {
         const {collectionElementPictureToDeleteID}=req.body
         console.log(`collectionElementPictureToDeleteID => ${collectionElementPictureToDeleteID}`)
@@ -58,7 +61,8 @@ const deleteCollectionElementPicture=async(req, res, next)=>{
             return res.status(200).json({message:`Picture ${collectionElementPictureToDeleteID} successfully deleted`})
         }
         else {
-            return res.status(201).json({message:"Picture didn't deleted"})
+            console.log("Picture didn't get deleted")
+            return res.status(201).json({message:"Picture didn't get deleted"})
         }
     } catch (err) {
         console.error('Error deleting collection Element Picture =>',err )
