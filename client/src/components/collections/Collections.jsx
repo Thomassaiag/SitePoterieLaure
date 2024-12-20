@@ -16,13 +16,15 @@ export const Collections =()=>{
   const fetchCollections=async ()=>{
     try {
       const response = await fetch(`http://${apiUrl}/collections`)
-      const JsonData=await response.json()
       if(!response.ok){
         const errorData= await response.json();
         throw new Error(errorData.message || "something went wrong when fetching Collections")
-      }
+        
+      } else {
+        const JsonData=await response.json()
         setCollectionData(JsonData)
         setCollectionDeletionStatus(false)
+      }
     }
     catch (error) {
       console.log(error.message)
