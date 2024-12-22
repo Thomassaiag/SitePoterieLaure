@@ -5,48 +5,35 @@ require('dotenv').config()
 
 const collectionPath=process.env.COLLECTIONPICTUREPATH
 const portraitPath=process.env.PORTRAITPICTURESPATH
+console.log(collectionPath)
+console.log(portraitPath)
+const createStorage=(path)=>{
 
-if (!fs.existsSync(collectionPath)){
-    fs.mkdirSync(collectionPath, {recursive: true})
+    try {
+        if (!fs.existsSync(path)){
+            fs.mkdirSync(path, {recursive: true})
+    }
+    } catch (error) {
+        console.error('failed to create path for collection', error)
+    }
+
+    return multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null, path);
+    },
+    filename:function(req, file, cb){
+        cb(null, file.originalname)
+    }
+})
 }
 
-const storage=multer.diskStorage({
-    destination: function(req, file, cb){
-        cb(null, collectionPath);
-    },
-    filename:function(req, file, cb){
-        cb(null, file.originalname)
-    }
-})
-
-const uploadCollectionPicture=multer({storage:storage})
-
-const storageCollectionElementPicture=multer.diskStorage({
-    destination: function(req, file, cb){
-        cb(null, collectionPath);
-    },
-    filename:function(req, file, cb){
-        cb(null, file.originalname)
-    }
-})
-
-const uploadCollectionElementPicture=multer({storage:storageCollectionElementPicture})
-
-
-
-if (!fs.existsSync(portraitPath)){
-    fs.mkdirSync(portraitPath, {recursive: true})
+if (!collectionPath || !portraitPath) {
+    throw new Error('Environment variables COLLECTIONPICTUREPATH and PORTRAITPICTURESPATH must be defined.');
 }
 
-const storagePortraitPicture=multer.diskStorage({
-    destination: function(req, file, cb){
-        cb(null, portraitPath);
-    },
-    filename:function(req, file, cb){
-        cb(null, file.originalname)
-    }
-})
 
-const updatePortraitPicture=multer({storage:storagePortraitPicture})
+const uploadCollectionPicture=multer({storage:createStorage(collectionPath)})
+const uploadCollectionElementPicture=multer({storage:createStorage(collectionPath)})
+const updatePortraitPicture=multer({storage:createStorage(portraitPath)})
 
 module.exports={uploadCollectionPicture, uploadCollectionElementPicture, updatePortraitPicture}

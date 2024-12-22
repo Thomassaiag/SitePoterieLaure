@@ -7,7 +7,7 @@ const updatePortrait=async(req, res, next)=>{
     const portraitPictureUrl=`/images/Static_images/Portrait/${req.file.originalname}`
     const portraitPictureAlt=`Portrait Picture`
 
-    console.log(portraitPictureUrl)
+    console.log('portraitPictureUrl=> ',portraitPictureUrl)
     try{
         const updatePortrait=await pool.query(
             `UPDATE portrait
