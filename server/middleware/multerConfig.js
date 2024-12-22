@@ -5,8 +5,11 @@ require('dotenv').config()
 
 const collectionPath=process.env.COLLECTIONPICTUREPATH
 const portraitPath=process.env.PORTRAITPICTURESPATH
-console.log(collectionPath)
-console.log(portraitPath)
+
+console.log('collectionpath1=> ',process.env.COLLECTIONPICTUREPATH)
+console.log('portraitPath1=> ',process.env.PORTRAITPICTURESPATH)
+console.log('collectionpath2 => ',collectionPath)
+console.log('portraitPath2 => ',portraitPath)
 const createStorage=(path)=>{
 
     try {
