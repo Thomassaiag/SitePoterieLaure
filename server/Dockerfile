@@ -3,18 +3,17 @@ FROM node:20.10.0
 
 ARG JWT_SECRET
 ARG JWT_EXPIRATION
-ARG COLLECTIONPICTUREPATH
-ARG PORTRAITPICTURESPATH
 
 
 ENV JWT_SECRET=$JWT_SECRET
 ENV JWT_EXPIRATION=$JWT_EXPIRATION
-ENV COLLECTIONPICTUREPATH=$COLLECTIONPICTUREPATH
-ENV PORTRAITPICTURESPATH=$PORTRAITPICTURESPATH
+ENV COLLECTIONPICTUREPATH=/app/uploads/collections
+ENV PORTRAITPICTURESPATH=/app/uploads/portraits
 
 
+RUN mkdir -p /app/uploads/collections
+RUN mkdir -p /app/uploads/portraits
 
-RUN mkdir -p /app/server/collection
 # Set the working directory inside the container
 WORKDIR /app/server
 
