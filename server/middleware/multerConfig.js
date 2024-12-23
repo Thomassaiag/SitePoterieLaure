@@ -20,6 +20,7 @@ const createStorage=(path)=>{
         console.error('failed to create path for collection', error)
     }
 
+    console.log('MULTER PATH => ',path)
     return multer.diskStorage({
     destination: function(req, file, cb){
         cb(null, path);

@@ -66,8 +66,8 @@ jobs:
           build-args: |
             JWT_SECRET=${{ secrets.JWT_SECRET }}
             JWT_EXPIRATION=30m
-            COLLECTIONPICTUREPATH=/home/debian/ThomasS/SitePoterie/client/public/images/static_images/Collections
-            PORTRAITPICTURESPATH=/home/debian/ThomasS/SitePoterie/client/public/images/static_images/Portrait
+            COLLECTIONPICTUREPATH=/home/debian/ThomasS/SitePoterie/client/public/images/Static_images/Collections
+            PORTRAITPICTURESPATH=/home/debian/ThomasS/SitePoterie/client/public/images/Static_images/Portrait
 
       #build and push client image
       - name: Build and push client image

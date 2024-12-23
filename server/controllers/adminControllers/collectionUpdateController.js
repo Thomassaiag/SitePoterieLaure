@@ -21,7 +21,7 @@ const addNewCollectionElementPicture=async(req, res, next)=>{
                     [collectionUID, collectionElementPictureUrl, collectionElementPictureAlt, false]
                 )
                 if(newCollectionElementPicture){
-                    console.log(newCollectionElementPicture)
+                    console.log('New picture')
                     return res.status(200).json({message:newCollectionElementPicture.rows[0]})
                 }
                 else {
