@@ -15,7 +15,6 @@ const login=async(req, res, next)=>{
         if(result.rowCount>0){
             console.log("user exists")
             let user=result.rows[0]
-            console.log(user)
             const hashedPasswordDB= await pool.query(
                 'SELECT user_password FROM user_account WHERE user_email=$1 ',[userEmail]
             )
@@ -53,7 +52,6 @@ const login=async(req, res, next)=>{
         }
 
     } catch (error) {
-       console.log()
        res.status(500).json({message: 'Error Login, server side'}) 
     }
 }
