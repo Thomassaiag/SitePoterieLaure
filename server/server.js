@@ -8,6 +8,8 @@ const app=express()
 
 app.use(express.json({ limit: '10mb' }))
 
+app.use('/images', express.static('/app/public/images'));
+
 app.use(cors({
     origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
