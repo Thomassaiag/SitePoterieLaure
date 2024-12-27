@@ -14,6 +14,7 @@ RUN npm ci
 
 COPY . .
 
+
 RUN npm run build
 
 ENV PORT=14000
