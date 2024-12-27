@@ -3,8 +3,8 @@ const multer=require('multer')
 require('dotenv').config()
 
 
-const collectionPath=process.env.COLLECTIONPICTUREPATH
-const portraitPath=process.env.PORTRAITPICTURESPATH
+const collectionPath=process.env.COLLECTIONPICTUREPATH || '/app/client/dist/images/Static_images/Collections'
+const portraitPath=process.env.PORTRAITPICTURESPATH || '/app/client/dist/images/Static_images/Portrait'
 
 console.log('collectionpath1=> ',process.env.COLLECTIONPICTUREPATH)
 console.log('portraitPath1=> ',process.env.PORTRAITPICTURESPATH)
