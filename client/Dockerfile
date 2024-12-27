@@ -14,6 +14,7 @@ RUN npm ci
 
 COPY . .
 
+RUN cp -r /app/client/public/images/Static_images /app/client/dist/images/Static_images
 
 RUN npm run build
 
