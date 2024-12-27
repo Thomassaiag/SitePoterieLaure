@@ -28,7 +28,7 @@ services:
     ports:
       - "14001:14001"
     volumes:
-      - uploaded-files:/app/client/public/images/Static_images
+      - uploaded-files:/app/client/dist/images/Static_images
     depends_on:
       - postgres
     networks:
@@ -41,7 +41,7 @@ services:
     ports:
       - "14000:14000"
     volumes:
-      - uploaded-files:/app/client/public/images/Static_images
+      - uploaded-files:/app/client/dist/images/Static_images
     depends_on:
       - server
     networks:
