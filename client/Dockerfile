@@ -14,9 +14,12 @@ RUN npm ci
 
 COPY . .
 
-RUN cp -r /app/client/public/images/Static_images /app/client/dist/images/Static_images
-
 RUN npm run build
+
+RUN mkdir -p /app/client/dist/images/Static_images
+
+# Copy static images from public/images/Static_images to dist/images/Static_images
+RUN cp -r /app/client/public/images/Static_images /app/client/dist/images/Static_images
 
 ENV PORT=14000
 
