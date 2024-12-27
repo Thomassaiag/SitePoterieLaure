@@ -7,12 +7,12 @@ ARG JWT_EXPIRATION
 
 ENV JWT_SECRET=$JWT_SECRET
 ENV JWT_EXPIRATION=$JWT_EXPIRATION
-ENV COLLECTIONPICTUREPATH=/app/public/images/Static_images/Collections
-ENV PORTRAITPICTURESPATH=/app/public/images/Static_images/Portrait
+ENV COLLECTIONPICTUREPATH=/app/client/public/images/Static_images/Collections
+ENV PORTRAITPICTURESPATH=/app/client/public/images/Static_images/Portrait
 
 
-RUN mkdir -p /app/public/images/Static_images/Collections
-RUN mkdir -p /app/public/images/Static_images/Portrait
+RUN mkdir -p /app/client/public/images/Static_images/Collections
+RUN mkdir -p /app/client/public/images/Static_images/Portrait
 
 # Set the working directory inside the container
 WORKDIR /app/server

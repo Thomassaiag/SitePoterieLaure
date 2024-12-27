@@ -1,5 +1,6 @@
 const express=require('express')
 const {connectToDatabase}=require('./config/db')
+const path = require('path');
 
 const routes=require ('./routes')
 const cors= require('cors')
@@ -8,7 +9,7 @@ const app=express()
 
 app.use(express.json({ limit: '10mb' }))
 
-app.use('/images', express.static('/app/public/images'));
+app.use('/images', express.static(path.join(__dirname, 'public')));
 
 app.use(cors({
     origin: '*',

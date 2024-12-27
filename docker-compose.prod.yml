@@ -23,12 +23,12 @@ services:
       - DBPASSWORD=${DBPASSWORD}
       - DBNAME=${DBNAME}
       - DBPORT=5432
-      - COLLECTIONPICTUREPATH=/app/public/images/Static_images/Collections
-      - PORTRAITPICTURESPATH=/app/public/images/Static_images/Portrait
+      - COLLECTIONPICTUREPATH=/app/client/public/images/Static_images/Collections
+      - PORTRAITPICTURESPATH=/app/client/public/images/Static_images/Portrait
     ports:
       - "14001:14001"
     volumes:
-      - uploaded-files:/app/public/images/Static_images
+      - uploaded-files:/app/client/public/images/Static_images
     depends_on:
       - postgres
     networks:
@@ -41,7 +41,7 @@ services:
     ports:
       - "14000:14000"
     volumes:
-      - uploaded-files:/app/public/images/Static_images
+      - uploaded-files:/app/client/public/images/Static_images
     depends_on:
       - server
     networks:
