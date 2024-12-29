@@ -12,7 +12,7 @@ node_modules
 public
 **.env
 
-!client/public/images/Static_imagesgit
+!client/public/images/Static_images
 !client/public/images/Collection_terracotta
 !client/public/images/Collections
 
