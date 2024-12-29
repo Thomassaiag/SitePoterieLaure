@@ -52,7 +52,6 @@ services:
 
 volumes:
   postgres-data:
-  uploaded-files:
 
 networks:
   laure-network:
