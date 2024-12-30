@@ -36,7 +36,8 @@ jobs:
 
       - name: Run Vite tests
         run: |
-          npm test ../client/src/components/collections/Collections.test.jsx
+          npm test ./../client/src/components/collections/Collections.test.jsx
+          
 
   build:
     needs: test
