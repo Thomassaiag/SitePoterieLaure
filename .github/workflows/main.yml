@@ -16,13 +16,33 @@ env:
 
 jobs:
 
-  #tests
+  test:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Run Vite tests
+        run: |
+          npm test ../client/src/components/collections/Collections.test.jsx
 
   build:
-    #needs: tests
+    needs: test
 
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
 
     steps:
       - uses: actions/checkout@v3
@@ -81,7 +101,6 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-
     if: github.ref=='refs/heads/main'
 
     steps:
