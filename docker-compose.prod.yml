@@ -41,7 +41,6 @@ services:
     ports:
       - "14000:14000"
     volumes:
-      volumes:
       - uploaded-files:/app/client/dist/images/Static_images
     depends_on:
       - server
