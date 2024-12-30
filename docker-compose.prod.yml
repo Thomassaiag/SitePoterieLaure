@@ -27,8 +27,8 @@ services:
       - PORTRAITPICTURESPATH=/app/client/dist/images/Static_images/Portrait
     ports:
       - "14001:14001"
-    # volumes:
-    #   - uploaded-files:/app/client/dist/images/Static_images
+    volumes:
+      - uploaded-files:/app/client/dist/images/Static_images
     depends_on:
       - postgres
     networks:
@@ -41,10 +41,8 @@ services:
     ports:
       - "14000:14000"
     volumes:
-      # Bind mount for Collections - prevents overwriting
-      - ./uploads/Collections:/app/client/dist/images/Static_images/Collections
-      # Bind mount for Portraits - prevents overwriting
-      - ./uploads/Portrait:/app/client/dist/images/Static_images/Portrait
+      volumes:
+      - uploaded-files:/app/client/dist/images/Static_images
     depends_on:
       - server
     networks:
@@ -52,6 +50,7 @@ services:
 
 volumes:
   postgres-data:
+  uploaded-files:
 
 networks:
   laure-network:
