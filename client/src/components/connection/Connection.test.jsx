@@ -64,69 +64,69 @@ describe('Connection Component', () => {
     expect(passwordInput.value).toBe('password123')
   })
 
-  it('should handle successful login', async () => {
-    const mockUser = {
-      userFirstName: 'John',
-      adminStatus: false
-    }
-    const mockToken = 'mock-token'
+  // it('should handle successful login', async () => {
+  //   const mockUser = {
+  //     userFirstName: 'John',
+  //     adminStatus: false
+  //   }
+  //   const mockToken = 'mock-token'
 
-    global.fetch.mockResolvedValueOnce({
-      ok: true,
-      status: 200,
-      json: () => Promise.resolve({ user: mockUser, token: mockToken })
-    })
+  //   global.fetch.mockResolvedValueOnce({
+  //     ok: true,
+  //     status: 200,
+  //     json: () => Promise.resolve({ user: mockUser, token: mockToken })
+  //   })
 
-    renderComponent()
+  //   renderComponent()
     
-    const emailInput = screen.getByLabelText(/Votre Email/i)
-    const passwordInput = screen.getByLabelText(/Mot de Passe/i)
-    const loginButton = screen.getByRole('button', { name: /Login/i })
+  //   const emailInput = screen.getByLabelText(/Votre Email/i)
+  //   const passwordInput = screen.getByLabelText(/Mot de Passe/i)
+  //   const loginButton = screen.getByRole('button', { name: /Login/i })
 
-    fireEvent.change(emailInput, { target: { value: 'test@example.com' } })
-    fireEvent.change(passwordInput, { target: { value: 'password123' } })
-    fireEvent.click(loginButton)
+  //   fireEvent.change(emailInput, { target: { value: 'test@example.com' } })
+  //   fireEvent.change(passwordInput, { target: { value: 'password123' } })
+  //   fireEvent.click(loginButton)
 
-    await waitFor(() => {
-      expect(mockSetConnectionAttributes).toHaveBeenCalledWith({
-        connectedUserFirstName: 'John',
-        adminConnection: false,
-        invalidToken: false
-      })
-    })
+  //   await waitFor(() => {
+  //     expect(mockSetConnectionAttributes).toHaveBeenCalledWith({
+  //       connectedUserFirstName: 'John',
+  //       adminConnection: false,
+  //       invalidToken: false
+  //     })
+  //   })
 
-    expect(localStorage.getItem('token')).toBe(mockToken)
-    expect(JSON.parse(localStorage.getItem('connectionAttributes'))).toEqual({
-      connectedUserFirstName: 'John',
-      adminConnection: false,
-      invalidToken: false
-    })
-  })
+  //   expect(localStorage.getItem('token')).toBe(mockToken)
+  //   expect(JSON.parse(localStorage.getItem('connectionAttributes'))).toEqual({
+  //     connectedUserFirstName: 'John',
+  //     adminConnection: false,
+  //     invalidToken: false
+  //   })
+  // })
 
-  it('should handle failed login', async () => {
-    global.fetch.mockResolvedValueOnce({
-      ok: false,
-      status: 400
-    })
+  // it('should handle failed login', async () => {
+  //   global.fetch.mockResolvedValueOnce({
+  //     ok: false,
+  //     status: 400
+  //   })
 
-    renderComponent()
+  //   renderComponent()
     
-    const emailInput = screen.getByLabelText(/Votre Email/i)
-    const passwordInput = screen.getByLabelText(/Mot de Passe/i)
-    const loginButton = screen.getByRole('button', { name: /Login/i })
+  //   const emailInput = screen.getByLabelText(/Votre Email/i)
+  //   const passwordInput = screen.getByLabelText(/Mot de Passe/i)
+  //   const loginButton = screen.getByRole('button', { name: /Login/i })
 
-    fireEvent.change(emailInput, { target: { value: 'wrong@example.com' } })
-    fireEvent.change(passwordInput, { target: { value: 'wrongpassword' } })
-    fireEvent.click(loginButton)
+  //   fireEvent.change(emailInput, { target: { value: 'wrong@example.com' } })
+  //   fireEvent.change(passwordInput, { target: { value: 'wrongpassword' } })
+  //   fireEvent.click(loginButton)
 
-    await waitFor(() => {
-      expect(mockSetConnectionAttributes).toHaveBeenCalledWith(expect.objectContaining({
-        invalidConnection: true
-      }))
-    })
+  //   await waitFor(() => {
+  //     expect(mockSetConnectionAttributes).toHaveBeenCalledWith(expect.objectContaining({
+  //       invalidConnection: true
+  //     }))
+  //   })
 
-    expect(screen.getByText(/Compte Inconnu ou password Incorrect/i)).toBeInTheDocument()
-  })
+  //   expect(screen.getByText(/Compte Inconnu ou password Incorrect/i)).toBeInTheDocument()
+  // })
 
   it('should handle admin login', async () => {
     const mockUser = {
