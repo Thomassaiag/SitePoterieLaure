@@ -31,10 +31,12 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
+        working-directory: ./client
         run: |
           npm install
 
       - name: Run Vite tests
+        working-directory: ./client
         run: |
           npm test
           
