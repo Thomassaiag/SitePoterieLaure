@@ -123,7 +123,7 @@ export const Connection = () => {
             {loginClicked && connectionAttributes.adminConnection && <p>Vous êtes Connecté.e en tant qu'administrateur</p>}
             
             {connectionAttributes.invalidConnection && !connectionAttributes.invalidToken && <div>
-                <p>Si vous n'avez pas de compte, vous pouvez en créer un : <Link classeName='accountCreationLink' to='/accountCreation'>Créer un compte</Link></p>
+                <p>Si vous n'avez pas de compte, vous pouvez en créer un : <Link className='accountCreationLink' to='/accountCreation'>Créer un compte</Link></p>
             </div>}
             {connectionAttributes.invalidConnection && connectionAttributes.invalidToken && <div>
                 <p>Vous avez été déconnecté.e</p>

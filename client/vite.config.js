@@ -7,5 +7,14 @@ export default defineConfig({
   server:{
     port:14000
   },
-  plugins: [react()]
+  plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/test/setup.js',
+    // Add these lines to help with module mocking
+    deps: {
+      inline: ['./src/components']
+    }
+  }
 })
