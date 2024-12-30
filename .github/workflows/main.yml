@@ -2,9 +2,9 @@ name: Site Web Laure CI/CD pipeline
 
 on:
   push:
-    branches: ['main']
+    branches: ['main', 'dev']
   pull_request:
-    branches: [main]
+    branches: [main, 'dev']
   workflow_dispatch:
 
 
@@ -45,7 +45,7 @@ jobs:
     needs: test
 
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
+    if: github.ref == 'refs/heads/main' && success()
 
     steps:
       - uses: actions/checkout@v3
@@ -104,7 +104,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref=='refs/heads/main'
+    if: github.ref=='refs/heads/main' && success()
 
     steps:
       - uses: actions/checkout@v3
