@@ -9,7 +9,8 @@ const app=express()
 
 app.use(express.json({ limit: '10mb' }))
 
-app.use('/images', express.static(path.join(__dirname, 'public')));
+app.use('/images', express.static('/app/server/uploads'));
+app.use('/images', express.static('/app/client/dist/images'));
 
 app.use(cors({
     origin: '*',
