@@ -25,6 +25,8 @@ RUN npm install
 # Copy all files from the server directory to the working directory
 COPY . .
 
+RUN mkdir -p /app/server/uploads/Collections
+RUN mkdir -p /app/server/uploads/Portrait
 
 # Expose the port the app runs on
 ENV PORT=14001
